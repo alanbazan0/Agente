@@ -12,50 +12,50 @@ using AgenteApp.Presenters;
 namespace AgenteApp.Droid
 {
 	[Activity (Label = "AgenteApp.Android", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity, ILoginView
+	public class MainActivity : Activity, IInicioSesionVista
 	{
-        private LoginPresenter presenter;
-        public string Username
+        private InicioSesionPresentador presenter;
+        public string NombreUsuario
         {
             get
             {
-                return FindViewById<EditText>(Resource.Id.userEditText).Text;
+                return FindViewById<EditText>(Resource.Id.usuarioEditText).Text;
             }
             set
             {
-                FindViewById<EditText>(Resource.Id.userEditText).Text = value;
+                FindViewById<EditText>(Resource.Id.usuarioEditText).Text = value;
             }
         }
-        public string Password
+        public string Contraseña
         {
             get
             {
-                return FindViewById<EditText>(Resource.Id.passwordEditText).Text;
+                return FindViewById<EditText>(Resource.Id.contrasenaEditText).Text;
             }
             set
             {
-                FindViewById<EditText>(Resource.Id.passwordEditText).Text = value;
+                FindViewById<EditText>(Resource.Id.contrasenaEditText).Text = value;
             }
         }
 
-        public void LoadMenu()
+        public void CargarMenu()
         {
             //Abrir Activity de menu
         }
 
-        public void Login()
+        public void InicioSesion()
         {
             presenter.Login();
         }
 
-        public void ShowMessage(string message)
+        public void MostrarMensaje(string message)
         {
             Toast.MakeText(this, message, ToastLength.Short).Show();
         }
 
         protected override void OnCreate (Bundle bundle)
 		{
-            presenter = new LoginPresenter(this);
+            presenter = new InicioSesionPresentador(this);
 
             base.OnCreate (bundle);
 
@@ -68,7 +68,7 @@ namespace AgenteApp.Droid
 
         private void MainActivity_Click(object sender, EventArgs e)
         {
-            Login();
+            InicioSesion();
         }
     }
 }

@@ -4,8 +4,8 @@ using System.Text;
 
 namespace AgenteApp.Models
 {
-    class Constants
+    class Constantes
     {
-        public static string BASE_ADDRESS="http://www.alanbazan.com.mx:80";
+        public static string DIRECCION_BASE="http://www.alanbazan.com.mx:80";
     }
 }

@@ -10,9 +10,9 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
         <EditText
-            android:id="@+id/userEditText"
+            android:id="@+id/usuarioEditText"
             android:width="200dp"
-            android:hint="@string/user"
+            android:hint="@string/usuario"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
@@ -22,10 +22,10 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
         <EditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/contrasenaEditText"
             android:width="200dp"
             android:password="true"
-            android:hint="@string/password"
+            android:hint="@string/contraseña"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
