@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using AgenteApp.Models;
 using System.Collections.Generic;
+using AgenteApp.Clases;
 
 namespace AgenteApp.DataAccess
 {
@@ -11,23 +11,31 @@ namespace AgenteApp.DataAccess
     {
         public ServicioDatos()
         {
-            HTTPParametros = new List<HTTPParametros>();
+            HTTPParametros = new List<ParametroHTTP>();
         }
 
 		public ServicioDatos(string direccionBase,string url)
 		{
             Url = url;
             DireccionBase = direccionBase;
-            HTTPParametros = new List<HTTPParametros>();
+            HTTPParametros = new List<ParametroHTTP>();
 		}
     
 
-        public void agregarParametros(string nombre, string valor)
+        public void AgregarParametro(string nombre, string valor)
         {
-            HTTPParametros.Add(new HTTPParametros(nombre, valor));        
+            HTTPParametros.Add(new ParametroHTTP(nombre, valor));        
         }
 
-        public async Task<T> EjecutarGET()
+        public async Task<T> Ejecutar()
+        {
+            if (Metodo == MetodoHTTP.POST)
+                return await EjecutarPOST();
+            else
+                return await EjecutarGET();
+        }
+
+        protected async Task<T> EjecutarGET()
 		{
 			T datos = default(T);
 			using (var cliente = new HttpClient())
@@ -40,7 +48,7 @@ namespace AgenteApp.DataAccess
 			return datos;
 		}
 
-		public async Task<T> EjecutarPOST()
+		protected async Task<T> EjecutarPOST()
 		{
 			T datos = default(T);
             try
@@ -57,7 +65,7 @@ namespace AgenteApp.DataAccess
                     datos = JsonConvert.DeserializeObject<T>(resultadoContenido);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 
@@ -71,7 +79,7 @@ namespace AgenteApp.DataAccess
             List<KeyValuePair<string, string>> parametros = new List<KeyValuePair<string, string>>();
 			for (int i = 0; i < HTTPParametros.Count; i++)
             {
-                HTTPParametros httpParametros = HTTPParametros[i];
+                ParametroHTTP httpParametros = HTTPParametros[i];
                 KeyValuePair<string, string> parametro = new KeyValuePair<string, string>(httpParametros.Nombre, httpParametros.Valor);
                 parametros.Add(parametro);
 
@@ -87,7 +95,7 @@ namespace AgenteApp.DataAccess
                 queryString = "?";
                 for (int i = 0; i < HTTPParametros.Count; i++)
                 {
-                    HTTPParametros parameter = HTTPParametros[i];
+                    ParametroHTTP parameter = HTTPParametros[i];
                     queryString += parameter.Nombre + "=" + parameter.Valor;
                     if(i< HTTPParametros.Count-1)
                         queryString+="&";
@@ -102,7 +110,7 @@ namespace AgenteApp.DataAccess
 			set;
 		}
 
-		public List<HTTPParametros> HTTPParametros
+		public List<ParametroHTTP> HTTPParametros
 		{
 			get;
 			set;
@@ -113,5 +121,6 @@ namespace AgenteApp.DataAccess
             get;
             set;
         }
+        public MetodoHTTP Metodo { get; set; }
     }
 }

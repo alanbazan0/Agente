@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using AgenteApp.Views;
-using AgenteApp.Models;
+using AgenteApp.Modelos;
 
 namespace AgenteApp.Presenters
 {
@@ -15,18 +15,17 @@ namespace AgenteApp.Presenters
             this.vista = vista;
         }
 
-        public async void Login()
+        public async void IniciarSesion()
         {
-            UsuarioServicioDatos AccesoDatos = new UsuarioServicioDatos();
-            usuario = await AccesoDatos.Encontrar(vista.NombreUsuario, vista.Contraseña);
+            UsuarioServicioDatos accesoDatos = new UsuarioServicioDatos();
+            usuario = await accesoDatos.Buscar(vista.NombreUsuario, vista.Contrasena);
          
             if(usuario!=null)
-            {
-                vista.MostrarMensaje("Access granted!");
+            {               
                 vista.CargarMenu();
             }
             else
-                vista.MostrarMensaje("Access denied!");
+                vista.MostrarMensaje("La combinación de usuario y contraseña es incorrecta.");
 
 
         }

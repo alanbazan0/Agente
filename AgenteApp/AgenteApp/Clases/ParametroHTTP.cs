@@ -1,9 +1,9 @@
 ﻿using System;
-namespace AgenteApp.Models
+namespace AgenteApp.Clases
 {
-    public class HTTPParametros
+    public class ParametroHTTP
     {
-        public HTTPParametros(string nombre, string valor)
+        public ParametroHTTP(string nombre, string valor)
         {
             Nombre = nombre;
             Valor = valor;

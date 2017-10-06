@@ -26,7 +26,7 @@ namespace AgenteApp.Droid
                 FindViewById<EditText>(Resource.Id.usuarioEditText).Text = value;
             }
         }
-        public string Contraseña
+        public string Contrasena
         {
             get
             {
@@ -43,9 +43,9 @@ namespace AgenteApp.Droid
             //Abrir Activity de menu
         }
 
-        public void InicioSesion()
+        public void IniciarSesion()
         {
-            presenter.Login();
+            presenter.IniciarSesion();
         }
 
         public void MostrarMensaje(string message)
@@ -68,7 +68,7 @@ namespace AgenteApp.Droid
 
         private void MainActivity_Click(object sender, EventArgs e)
         {
-            InicioSesion();
+            IniciarSesion();
         }
     }
 }

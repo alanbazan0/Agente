@@ -7,8 +7,8 @@ namespace AgenteApp.Views
     public interface IInicioSesionVista
     {
         string NombreUsuario { get; set; }
-        string Contraseña { get; set; }
-        void InicioSesion();
+        string Contrasena { get; set; }
+        void IniciarSesion();
         void CargarMenu();
         void MostrarMensaje(string mensaje);
     }

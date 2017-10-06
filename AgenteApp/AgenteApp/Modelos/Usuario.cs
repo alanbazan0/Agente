@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AgenteApp.Models
+namespace AgenteApp.Modelos
 {
     public class Usuario
     {
         public string NombreUsuario { get; set; }
-        public string Contraseña { get; set; }
+        public string Contrasena { get; set; }
         public string Nombre { get; set; }
-        public string Correo { get; set; }
+      
     }
 }

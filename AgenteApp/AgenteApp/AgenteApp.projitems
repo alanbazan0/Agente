@@ -11,10 +11,14 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccesoDatos\ServicioDatos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccesoDatos\UsuarioServicioDatos.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Constantes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Modelos\HTTPParametros.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Clases\Constantes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Clases\MetodoHTTP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Clases\ParametroHTTP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Usuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\InicioSesionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Clases\" />
   </ItemGroup>
 </Project>
