@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@android:color/white"
     android:gravity="center_vertical">
     <LinearLayout
         android:layout_height="wrap_content"
@@ -12,7 +13,9 @@
         <EditText
             android:id="@+id/usuarioEditText"
             android:width="200dp"
+            android:background="@drawable/backgroundEditText"
             android:hint="@string/usuario"
+            android:textColorHint="#A9A9A9"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
@@ -22,9 +25,11 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
         <EditText
+            android:background="@drawable/backgroundEditText"
             android:id="@+id/contrasenaEditText"
             android:width="200dp"
             android:password="true"
+            android:textColorHint="#A9A9A9"
             android:hint="@string/contraseña"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
@@ -37,6 +42,7 @@
         <Button
             android:id="@+id/loginButton"
             android:text="@string/login"
+            android:background="@android:color/holo_orange_light"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>

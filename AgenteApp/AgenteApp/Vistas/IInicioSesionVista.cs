@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgenteApp.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,7 +10,7 @@ namespace AgenteApp.Views
         string NombreUsuario { get; set; }
         string Contrasena { get; set; }
         void IniciarSesion();
-        void CargarMenu();
+        void MostrarMenu(Usuario usuario);
         void MostrarMensaje(string mensaje);
     }
 }

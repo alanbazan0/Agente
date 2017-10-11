@@ -11,9 +11,9 @@ namespace AgenteApp.Presenters
         {
         }
 
-        public async Task<Usuario> Buscar(string nombreUsuario, string contrasena)
+        public async Task<Usuario> Consultar(string nombreUsuario, string contrasena)
         {
-            ServicioDatos<Usuario> servicioDatos = new ServicioDatos<Usuario>(Constantes.DIRECCION_BASE, "/api/usuarios/buscar.php");
+            ServicioDatos<Usuario> servicioDatos = new ServicioDatos<Usuario>(Constantes.DIRECCION_BASE, "/api/usuarios/consultar.php");
             servicioDatos.AgregarParametro("nombreUsuario", nombreUsuario);
             servicioDatos.AgregarParametro("contrasena", contrasena);
             servicioDatos.Metodo = MetodoHTTP.POST;

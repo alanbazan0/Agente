@@ -9,10 +9,13 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AgenteApp", "AgenteApp\Agen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenteApp.WF", "AgenteApp.WF\AgenteApp.WF.csproj", "{221E3E9E-69DD-474C-84CE-D91D39082C87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenteApp.UWP", "AgenteApp.UWP\AgenteApp.UWP.csproj", "{AB47C69A-9510-4188-ACD3-8ACBE7926C66}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AgenteApp\AgenteApp\AgenteApp.projitems*{13259fda-461f-4801-ba35-f6d5ef819caf}*SharedItemsImports = 4
 		AgenteApp\AgenteApp\AgenteApp.projitems*{221e3e9e-69dd-474c-84ce-d91d39082c87}*SharedItemsImports = 4
+		AgenteApp\AgenteApp\AgenteApp.projitems*{ab47c69a-9510-4188-acd3-8acbe7926c66}*SharedItemsImports = 4
 		AgenteApp\AgenteApp\AgenteApp.projitems*{cbbe0e0c-5783-4194-8254-c8baf13dc9c5}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +93,30 @@ Global
 		{221E3E9E-69DD-474C-84CE-D91D39082C87}.Release|x64.Build.0 = Release|Any CPU
 		{221E3E9E-69DD-474C-84CE-D91D39082C87}.Release|x86.ActiveCfg = Release|Any CPU
 		{221E3E9E-69DD-474C-84CE-D91D39082C87}.Release|x86.Build.0 = Release|Any CPU
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|ARM.ActiveCfg = Debug|ARM
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|ARM.Build.0 = Debug|ARM
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|ARM.Deploy.0 = Debug|ARM
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|iPhone.ActiveCfg = Debug|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|x64.ActiveCfg = Debug|x64
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|x64.Build.0 = Debug|x64
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|x64.Deploy.0 = Debug|x64
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|x86.ActiveCfg = Debug|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|x86.Build.0 = Debug|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Debug|x86.Deploy.0 = Debug|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|Any CPU.ActiveCfg = Release|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|ARM.ActiveCfg = Release|ARM
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|ARM.Build.0 = Release|ARM
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|ARM.Deploy.0 = Release|ARM
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|iPhone.ActiveCfg = Release|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|iPhoneSimulator.ActiveCfg = Release|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|x64.ActiveCfg = Release|x64
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|x64.Build.0 = Release|x64
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|x64.Deploy.0 = Release|x64
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|x86.ActiveCfg = Release|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|x86.Build.0 = Release|x86
+		{AB47C69A-9510-4188-ACD3-8ACBE7926C66}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

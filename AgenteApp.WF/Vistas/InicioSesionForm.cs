@@ -1,4 +1,5 @@
-﻿using AgenteApp.Presenters;
+﻿using AgenteApp.Modelos;
+using AgenteApp.Presenters;
 using AgenteApp.Views;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace AgenteApp.WF
+namespace AgenteApp.WF.Vistas
 {
     public partial class InicioSesionForm : Form, IInicioSesionVista
     {
@@ -35,9 +36,12 @@ namespace AgenteApp.WF
 
     
 
-        public void CargarMenu()
+        public void MostrarMenu(Usuario usuario)
         {
-           
+            MenuForm form = new MenuForm();
+            form.Usuario = usuario;
+            form.Show();
+            Hide();
         }
 
         public void IniciarSesion()
@@ -53,6 +57,17 @@ namespace AgenteApp.WF
         private void inicarSesionButton_Click(object sender, EventArgs e)
         {
             IniciarSesion();
+        }
+
+        private void tituloLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contrasenaTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                IniciarSesion();
         }
     }
 }

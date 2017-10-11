@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="AgenteApp.UWP.InicioSesionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AgenteApp.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Text="Inicio de sesión" FontSize="36" Margin="4" TextAlignment="Center"/>
+            <TextBlock x:Name="mensajeBlockText" Text="Mensaje" FontSize="20" Margin="50" Foreground="Red" TextAlignment="Center"/>
+            <TextBlock Text="Ingrese sus credenciales a continuación" Margin="0,0,0,20"
+               TextWrapping="Wrap" Width="400"
+               TextAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="nombreUsuarioTextBox" PlaceholderText="Usuario" Margin="8" Width="250" />
+            <PasswordBox  x:Name="contrasenaPasswordBox"  PlaceholderText="Contraseña" Margin="8" Width="250" />
+
+            <Button x:Name="iniciarSesionButton" Content="Iniciar sesión" Background="#ff9900" Foreground="White"
+        Click="iniciarSesionButton_Click" Width="110" HorizontalAlignment="Center" Margin="0,20"/>
+            <Border x:Name="bannerBorder" Background="#6b6b6b"
+               Margin="0,20" Height="100" >
+                <TextBlock x:Name="textoBanerTextBlock" Text="Bastiaan Software Center" Foreground="White"
+             Margin="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+            </Border>
+
+        </StackPanel>
+    </Grid>
+</Page>

@@ -41,6 +41,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.Ribbon35, Version=3.5.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Forms.Ribbon35.3.5.8.0\lib\net35\System.Windows.Forms.Ribbon35.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,15 +55,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InicioSesionForm.cs">
+    <Compile Include="Temas\DarkSkin.cs" />
+    <Compile Include="Vistas\InicioSesionForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InicioSesionForm.Designer.cs">
+    <Compile Include="Vistas\InicioSesionForm.Designer.cs">
       <DependentUpon>InicioSesionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="InicioSesionForm.resx">
+    <Compile Include="Vistas\LlamadaEntranteUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Vistas\LlamadaEntranteUserControl.Designer.cs">
+      <DependentUpon>LlamadaEntranteUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\MenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\MenuForm.Designer.cs">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Vistas\InicioSesionForm.resx">
       <DependentUpon>InicioSesionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -72,6 +88,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vistas\LlamadaEntranteUserControl.resx">
+      <DependentUpon>LlamadaEntranteUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -88,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="imgPlay.ico" />
+    <Content Include="Updates.txt" />
   </ItemGroup>
   <Import Project="..\AgenteApp\AgenteApp\AgenteApp.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

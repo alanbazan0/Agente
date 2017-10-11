@@ -18,11 +18,11 @@ namespace AgenteApp.Presenters
         public async void IniciarSesion()
         {
             UsuarioServicioDatos accesoDatos = new UsuarioServicioDatos();
-            usuario = await accesoDatos.Buscar(vista.NombreUsuario, vista.Contrasena);
+            usuario = await accesoDatos.Consultar(vista.NombreUsuario, vista.Contrasena);
          
             if(usuario!=null)
             {               
-                vista.CargarMenu();
+                vista.MostrarMenu(usuario);
             }
             else
                 vista.MostrarMensaje("La combinación de usuario y contraseña es incorrecta.");

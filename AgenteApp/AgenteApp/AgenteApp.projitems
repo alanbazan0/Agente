@@ -9,14 +9,18 @@
     <Import_RootNamespace>AgenteApp</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AccesoDatos\ServicioDatos.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AccesoDatos\UsuarioServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiciosDatos\MenuServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiciosDatos\ServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiciosDatos\UsuarioServicioDatos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Constantes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\MetodoHTTP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\ParametroHTTP.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\OpcionMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Usuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\InicioSesionPresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\MenuPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\IMenuVista.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Clases\" />

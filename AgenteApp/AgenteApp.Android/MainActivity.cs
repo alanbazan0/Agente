@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using AgenteApp.Views;
 using AgenteApp.Presenters;
+using AgenteApp.Modelos;
 
 namespace AgenteApp.Droid
 {
@@ -38,9 +39,10 @@ namespace AgenteApp.Droid
             }
         }
 
-        public void CargarMenu()
+        public void MostrarMenu(Usuario usuario)
         {
             //Abrir Activity de menu
+            
         }
 
         public void IniciarSesion()
@@ -59,7 +61,7 @@ namespace AgenteApp.Droid
 
             base.OnCreate (bundle);
 
-			// Set our view from the "main" layout resource
+			
 			SetContentView (Resource.Layout.Main);
 
             FindViewById<Button>(Resource.Id.loginButton).Click += MainActivity_Click;
