@@ -19,8 +19,8 @@ namespace AgenteApp.WF.Vistas
         {
             set
             {
+                idUsuarioLabel.Text = value.Id;
                 nombreUsuarioLabel.Text = value.Nombre;
-                nombreUsuarioAccesoLabel.Text = value.NombreUsuario;
             }
         }
 

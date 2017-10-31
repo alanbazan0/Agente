@@ -6,9 +6,10 @@ namespace AgenteApp.Modelos
 {
     public class Usuario
     {
-        public string NombreUsuario { get; set; }
-        public string Contrasena { get; set; }
-        public string Nombre { get; set; }
-      
+        private string id;
+        private string nombre;
+        public string Id { get { return id; } set { id = value; } }
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+
     }
 }

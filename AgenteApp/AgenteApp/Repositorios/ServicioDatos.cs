@@ -7,14 +7,14 @@ using AgenteApp.Clases;
 
 namespace AgenteApp.DataAccess
 {
-    public class ServicioDatos<T>
+    public class Repositorio<T>
     {
-        public ServicioDatos()
+        public Repositorio()
         {
             HTTPParametros = new List<ParametroHTTP>();
         }
 
-		public ServicioDatos(string direccionBase,string url)
+		public Repositorio(string direccionBase,string url)
 		{
             Url = url;
             DireccionBase = direccionBase;

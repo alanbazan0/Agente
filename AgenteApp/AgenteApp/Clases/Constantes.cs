@@ -6,6 +6,8 @@ namespace AgenteApp.Clases
 {
     class Constantes
     {
-        public static string DIRECCION_BASE= "https://bastiaan.000webhostapp.com";
+        //public static string DIRECCION_BASE= "http://alanbazan.com.mx";
+        public static string DIRECCION_BASE = "http://127.0.0.1:7000";
+
     }
 }

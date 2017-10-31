@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Navigation;
 using AgenteApp.Modelos;
 using AgenteApp.Presenters;
 using AgenteApp.UWP.Vistas;
+using NavigationMenuSample;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -49,7 +50,7 @@ namespace AgenteApp.UWP
 
         public void MostrarMenu(Usuario usuario)
         {
-            Frame.Navigate(typeof(MenuPage), usuario);
+            Frame.Navigate(typeof(AppShell), usuario);
         }
 
         private void iniciarSesionButton_Click(object sender, RoutedEventArgs e)

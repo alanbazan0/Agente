@@ -46,8 +46,8 @@
             this.lineaMenuPanel = new System.Windows.Forms.Panel();
             this.usuarioPanel = new System.Windows.Forms.Panel();
             this.datosUsuarioPanel = new System.Windows.Forms.Panel();
-            this.nombreUsuarioAccesoLabel = new System.Windows.Forms.Label();
             this.nombreUsuarioLabel = new System.Windows.Forms.Label();
+            this.idUsuarioLabel = new System.Windows.Forms.Label();
             this.usuarioPictureBox = new System.Windows.Forms.PictureBox();
             this.contenedorSuperiorMenuPanel = new System.Windows.Forms.Panel();
             this.menuButton = new System.Windows.Forms.Button();
@@ -257,8 +257,8 @@
             // 
             // datosUsuarioPanel
             // 
-            this.datosUsuarioPanel.Controls.Add(this.nombreUsuarioAccesoLabel);
             this.datosUsuarioPanel.Controls.Add(this.nombreUsuarioLabel);
+            this.datosUsuarioPanel.Controls.Add(this.idUsuarioLabel);
             this.datosUsuarioPanel.Controls.Add(this.usuarioPictureBox);
             this.datosUsuarioPanel.Location = new System.Drawing.Point(2, -3);
             this.datosUsuarioPanel.Name = "datosUsuarioPanel";
@@ -268,25 +268,25 @@
             // 
             // nombreUsuarioAccesoLabel
             // 
-            this.nombreUsuarioAccesoLabel.AutoSize = true;
-            this.nombreUsuarioAccesoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreUsuarioAccesoLabel.ForeColor = System.Drawing.Color.White;
-            this.nombreUsuarioAccesoLabel.Location = new System.Drawing.Point(4, 79);
-            this.nombreUsuarioAccesoLabel.Name = "nombreUsuarioAccesoLabel";
-            this.nombreUsuarioAccesoLabel.Size = new System.Drawing.Size(50, 15);
-            this.nombreUsuarioAccesoLabel.TabIndex = 17;
-            this.nombreUsuarioAccesoLabel.Text = "Usuario";
+            this.nombreUsuarioLabel.AutoSize = true;
+            this.nombreUsuarioLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nombreUsuarioLabel.ForeColor = System.Drawing.Color.White;
+            this.nombreUsuarioLabel.Location = new System.Drawing.Point(4, 79);
+            this.nombreUsuarioLabel.Name = "nombreUsuarioAccesoLabel";
+            this.nombreUsuarioLabel.Size = new System.Drawing.Size(50, 15);
+            this.nombreUsuarioLabel.TabIndex = 17;
+            this.nombreUsuarioLabel.Text = "Usuario";
             // 
             // nombreUsuarioLabel
             // 
-            this.nombreUsuarioLabel.AutoSize = true;
-            this.nombreUsuarioLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreUsuarioLabel.ForeColor = System.Drawing.Color.White;
-            this.nombreUsuarioLabel.Location = new System.Drawing.Point(4, 62);
-            this.nombreUsuarioLabel.Name = "nombreUsuarioLabel";
-            this.nombreUsuarioLabel.Size = new System.Drawing.Size(57, 15);
-            this.nombreUsuarioLabel.TabIndex = 16;
-            this.nombreUsuarioLabel.Text = "Usuario";
+            this.idUsuarioLabel.AutoSize = true;
+            this.idUsuarioLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.idUsuarioLabel.ForeColor = System.Drawing.Color.White;
+            this.idUsuarioLabel.Location = new System.Drawing.Point(4, 62);
+            this.idUsuarioLabel.Name = "nombreUsuarioLabel";
+            this.idUsuarioLabel.Size = new System.Drawing.Size(57, 15);
+            this.idUsuarioLabel.TabIndex = 16;
+            this.idUsuarioLabel.Text = "Usuario";
             // 
             // usuarioPictureBox
             // 
@@ -392,8 +392,8 @@
         private System.Windows.Forms.Button opcionMenu1Button;
         private System.Windows.Forms.Panel usuarioPanel;
         private System.Windows.Forms.Panel datosUsuarioPanel;
-        private System.Windows.Forms.Label nombreUsuarioAccesoLabel;
         private System.Windows.Forms.Label nombreUsuarioLabel;
+        private System.Windows.Forms.Label idUsuarioLabel;
         private System.Windows.Forms.PictureBox usuarioPictureBox;
         private System.Windows.Forms.Panel opcionPanel;
     }

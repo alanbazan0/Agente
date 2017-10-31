@@ -17,7 +17,7 @@ namespace AgenteApp.Presenters
 
         public async void IniciarSesion()
         {
-            UsuarioServicioDatos accesoDatos = new UsuarioServicioDatos();
+            UsuarioRepositorio accesoDatos = new UsuarioRepositorio();
             usuario = await accesoDatos.Consultar(vista.NombreUsuario, vista.Contrasena);
          
             if(usuario!=null)

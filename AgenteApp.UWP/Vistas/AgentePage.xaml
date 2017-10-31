@@ -1,0 +1,219 @@
+﻿<Page
+    x:Class="NavigationMenuSample.Views.AgentePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctl="using:NavigationMenuSample.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentContainer.Margin" Value="24,0"/>
+                        <Setter Target="HeaderTextBlock.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
+                        <Setter Target="AltHeaderTextBlock.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ContentContainer.Margin" Value="12,0"/>
+                        <Setter Target="HeaderTextBlock.Style" Value="{StaticResource NarrowPageTitleTextBlockStyle}"/>
+                        <Setter Target="AltHeaderTextBlock.Style" Value="{StaticResource NarrowPageTitleTextBlockStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b">
+            <AppBarButton Icon="Find" Label="Consultar cliente" Foreground="White" Click="AppBarButton_Click"/>
+            <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>-->
+            <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
+            <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Save" Label="Guardar tipificación"/>
+                <AppBarButton Icon="Mail" Label="Correo electrónico"/>
+                <AppBarButton Icon="Message"  Label="SMS"/>
+                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
+                <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
+                <AppBarButton Icon="Pause" Label="Hold"/>
+                <AppBarButton Icon="Refresh" Label="Reconectar"/>
+                <AppBarButton Icon="Redo" Label="Reanudar llamada"/>
+                <AppBarButton Icon="DisconnectDrive" Label="Llamada cortada"/>
+                <AppBarButton Icon="PhoneBook" Label="Recuperar datos de llamadas"/>
+
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <ctl:PageHeader>
+                    <ctl:PageHeader.HeaderContent>
+                        <TextBlock x:Name="HeaderTextBlock" Text="Llamada" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                    </ctl:PageHeader.HeaderContent>
+                </ctl:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <ctl:PageHeader x:Name="pageTitleContainer" Visibility="Collapsed">
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+
+        <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <StackPanel>
+                    <Pivot x:Name="rootPivot" >
+                        <PivotItem Header="Clientes" HorizontalAlignment="Center">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="50" >
+                                    <TextBox x:Name="nombreCompletoCriterioTextBox" PlaceholderText="Nombre completo" Margin="8" Width="250" />
+                                    <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
+                                    <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />
+                                </StackPanel>
+                                <ListView x:Name="clientesListView"    
+                                          
+                                         >      
+                                    <ListView.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  Padding="0" Margin="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="150" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <!--<ColumnDefinition Width="000" />-->
+                                                </Grid.ColumnDefinitions>
+                                                <!--<Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                </Grid.RowDefinitions>-->
+                                                <TextBlock Grid.Column="0" Text="Id" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="1" Text="Primer nombre" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="2" Text="Segundo nombre" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="3" Text="Apellido paterno" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="4" Text="Apellido materno" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="5" Text="RFC" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="6" Text="NSS" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="7" Text="CURP" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="8" Text="Correo electrónico" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="9" Text="Código postal" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="10" Text="Número exterior" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="11" Text="Número interior" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="12" Text="Calle" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="13" Text="Colonia" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="14" Text="Estado" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="15" Text="País" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.HeaderTemplate>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="0" Margin="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="100" />
+                                                    <ColumnDefinition Width="150" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <!--<ColumnDefinition Width="000" />-->
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding id}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding nombre}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding segundoNombre}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding apellidoPaterno}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="4" Text="{Binding apellidoMaterno}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="5" Text="{Binding rfc}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="6" Text="{Binding nss}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="7" Text="{Binding curp}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="8" Text="{Binding correoElectronico}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="9" Text="{Binding codigoPostal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="10" Text="{Binding numeroExterior}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="11" Text="{Binding numeroInterior}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="12" Text="{Binding calle}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="13" Text="{Binding colonia}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="14" Text="{Binding estado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="15" Text="{Binding pais}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                            
+                        </PivotItem>
+                        <PivotItem Header="Tipificación">
+                            <!--Pivot content goes here-->
+                            <TextBlock Text="Content of pivot item 2."/>
+                        </PivotItem>
+                        <PivotItem Header="Call back">
+                            <!--Pivot content goes here-->
+                            <TextBlock Text="Content of pivot item 3."/>
+                        </PivotItem>
+                        <PivotItem Header="Encuesta de satisfacción">
+                            <!--Pivot content goes here-->
+                            <TextBlock Text="Content of pivot item 4."/>
+                        </PivotItem>
+                        <PivotItem Header="Historial de eventos">
+                            <!--Pivot content goes here-->
+                            <TextBlock Text="Content of pivot item 5."/>
+                        </PivotItem>
+                    </Pivot>
+                </StackPanel>
+               
+               
+                
+            </StackPanel>
+        </Grid>
+
+        <CommandBar x:Name="bottombar" Grid.Row="2" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <AppBarButton Icon="Edit" Label="Edit"/>
+            <AppBarButton Icon="Delete" Label="Delete"/>
+            <AppBarSeparator/>
+            <AppBarToggleButton Icon="Sort" Label="Sort"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Menu Item 1"/>
+                <AppBarButton Label="Menu Item 2"/>
+                <AppBarButton Label="Menu Item 3"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Grid>
+</Page>
