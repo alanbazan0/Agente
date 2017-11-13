@@ -26,7 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\MenuServicioDatos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RepositorioBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ServicioDatos.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\UsuarioServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\UsuariosRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Constantes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\MetodoHTTP.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\ParametroHTTP.cs" />

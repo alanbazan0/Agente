@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AgenteApp.Views;
 using AgenteApp.Modelos;
+using AgenteApp.Clases;
 
 namespace AgenteApp.Presenters
 {
@@ -18,14 +19,19 @@ namespace AgenteApp.Presenters
         public async void IniciarSesion()
         {
             UsuarioRepositorio accesoDatos = new UsuarioRepositorio();
-            usuario = await accesoDatos.Consultar(vista.NombreUsuario, vista.Contrasena);
-         
-            if(usuario!=null)
-            {               
-                vista.MostrarMenu(usuario);
+            Resultado<Usuario> resultado = await accesoDatos.Consultar(vista.NombreUsuario, vista.Contrasena);
+            if(resultado.mensajeError==string.Empty)
+            {
+                usuario = resultado.valor;
+                if (usuario != null)
+                {
+                    vista.MostrarMenu(usuario);
+                }
+                else
+                    vista.MostrarMensaje("La combinación de usuario y contraseña es incorrecta.");
             }
             else
-                vista.MostrarMensaje("La combinación de usuario y contraseña es incorrecta.");
+                vista.MostrarMensaje(resultado.mensajeError);
 
 
         }

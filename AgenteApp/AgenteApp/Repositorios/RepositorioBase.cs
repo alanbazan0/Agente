@@ -27,71 +27,7 @@ namespace AgenteApp.DataAccess
             HTTPParametros.Add(new ParametroHTTP(nombre, valor));        
         }
 
-        //public async Task<Resultado<T>> Ejecutar()
-        //{
-        //    //T datos = default(T);
-        //    Resultado<T> datos = new Resultado<T>();
-        //    try
-        //    {
-        //        using (var cliente = new HttpClient())
-        //        {
-        //            cliente.BaseAddress = new Uri(DireccionBase);
-        //            //string queryString = GetQueryString(Parameters);
-        //            List<KeyValuePair<string, string>> parametros = GetParametros();
-        //            var contenido = new FormUrlEncodedContent(parametros);
-
-        //            var resultado = await cliente.PostAsync(Url, contenido);
-        //            string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-        //            datos = JsonConvert.DeserializeObject<Resultado<T>>(resultadoContenido);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-
-        //    }
-
-        //    return datos;
-        //}
-
-  //      protected async Task<T> EjecutarGET()
-		//{
-		//	T datos = default(T);
-		//	using (var cliente = new HttpClient())
-		//	{
-  //              cliente.BaseAddress = new Uri(DireccionBase);
-  //              string queryString = GetQueryString();
-  //              var result = await cliente.GetStringAsync(Url);
-  //              datos = JsonConvert.DeserializeObject<T>(result);
-		//	}
-		//	return datos;
-		//}
-
-		//protected async Task<T> EjecutarPOST()
-		//{
-		//	T datos = default(T);
-  //          try
-  //          {
-  //              using (var cliente = new HttpClient())
-  //              {
-  //                  cliente.BaseAddress = new Uri(DireccionBase);
-  //                  //string queryString = GetQueryString(Parameters);
-  //                  List<KeyValuePair<string, string>> parametros = GetParametros();
-  //                  var contenido = new FormUrlEncodedContent(parametros);
-
-  //                  var resultado = await cliente.PostAsync(Url, contenido);
-  //                  string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-  //                  datos = JsonConvert.DeserializeObject<T>(resultadoContenido);
-  //              }
-  //          }
-  //          catch (Exception ex)
-  //          {
-
-                
-  //          }
-			
-		//	return datos;
-		//}
+      
 
         protected List<KeyValuePair<string, string>> GetParametros()
         {
@@ -106,23 +42,7 @@ namespace AgenteApp.DataAccess
             return parametros;
         }
 	
-		//private string GetQueryString()
-  //      {
-  //          string queryString= string.Empty;
-  //          if(HTTPParametros.Count>0)
-  //          {
-  //              queryString = "?";
-  //              for (int i = 0; i < HTTPParametros.Count; i++)
-  //              {
-  //                  ParametroHTTP parameter = HTTPParametros[i];
-  //                  queryString += parameter.Nombre + "=" + parameter.Valor;
-  //                  if(i< HTTPParametros.Count-1)
-  //                      queryString+="&";
-  //              }
-  //          }
-  //          return queryString;
-  //      }
-
+	
 		public string Url
 		{
 			get;

@@ -221,6 +221,7 @@
                         </PivotItem>
                         <PivotItem Header="Tipificación">
                             <!--Pivot content goes here-->
+                         
                             <TextBlock Text="Content of pivot item 2."/>
                         </PivotItem>
                         <PivotItem Header="Call back">
