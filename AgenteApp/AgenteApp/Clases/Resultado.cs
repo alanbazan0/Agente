@@ -9,7 +9,5 @@ namespace AgenteApp.Clases
         public string mensajeError { get; set; }
         public T valor { get; set; }
 
-        //public string MensajeError { get { return mensajeError; } }
-        //public T Valor { get { return valor; } }
     }
 }

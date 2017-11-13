@@ -2,9 +2,11 @@
 using AgenteApp.Modelos;
 using AgenteApp.Repositorios;
 using AgenteApp.Vistas;
+
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AgenteApp.Presentadores
@@ -12,6 +14,8 @@ namespace AgenteApp.Presentadores
     public class AgentePresentador
     {
         IAgenteVista vista;
+        List<CampoGrid> campos;
+        List<CriterioSeleccion> criteriosSeleccion;
 
         public AgentePresentador(IAgenteVista vista)
         {
@@ -20,21 +24,54 @@ namespace AgenteApp.Presentadores
 
         public async void ConsultarClientes()
         {
-            var criteriosSeleccion = vista.CriteriosSeleccion;
+            List<Filtro> filtros = vista.Filtros;
             ClientesRepositorio repositorio = new ClientesRepositorio();
-            Resultado<List<Cliente>> resuldato = await repositorio.Consultar(criteriosSeleccion);
-            if(resuldato.mensajeError=="")
+            Resultado<List<Objeto>> resultado = await repositorio.Consultar(filtros,Constantes.VERSION);
+            if(resultado.mensajeError==string.Empty)
             {
-                vista.Clientes = resuldato.valor;
+                vista.Clientes = resultado.valor;
             }
-            //if (resuldato.mensajeError == string.Empty)
-            //{
-            //    //List<Cliente> clientes = resuldato.valor;
-            //    vista.Clientes = resuldato.valor;
-            //}
-            //else
-            //    vista.MostrarMensaje("Error",resuldato.MensajeError);
-           
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        public void CrearCatalogoClientes()
+        {
+            CrearCriteriosSeleccion();
+            CrearColumnasGrid();
+        }
+
+        private async void CrearColumnasGrid()
+        {
+            CamposGrid1Repositorio repositorio = new CamposGrid1Repositorio();
+            Resultado<List<CampoGrid>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+
+            if (resultado.mensajeError == string.Empty)
+            {
+                campos = resultado.valor.Where(item => item.presentacion == "1").ToList();
+                vista.CrearColumnasGrid1(campos);
+
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        private async void CrearCriteriosSeleccion()
+        {
+            CriteriosSeleccionRepositorio repositorio = new CriteriosSeleccionRepositorio();
+            Resultado<List<CriterioSeleccion>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+
+            if (resultado.mensajeError == string.Empty)
+            {
+                criteriosSeleccion = resultado.valor;
+                foreach (CriterioSeleccion criterioSeleccion in criteriosSeleccion)
+                {
+                    if (criterioSeleccion.presentacion == "1")
+                        vista.CrearCriterioSeleccion(criterioSeleccion);
+                }
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
         }
     }
 }

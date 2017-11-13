@@ -10,7 +10,9 @@ namespace AgenteApp.Vistas
     {
         void ConsultarClientes();
         void MostrarMensaje(string titulo, string mensaje);
-        object CriteriosSeleccion { get;  }
-        List<Cliente> Clientes { set; }
+        List<Filtro> Filtros { get;  }
+        List<Objeto> Clientes { set; }
+        void CrearCriterioSeleccion(CriterioSeleccion criterioSeleccion);
+        void CrearColumnasGrid1(List<CampoGrid> campos);
     }
 }

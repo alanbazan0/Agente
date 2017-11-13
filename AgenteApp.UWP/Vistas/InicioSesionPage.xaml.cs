@@ -40,16 +40,19 @@ namespace AgenteApp.UWP
 
         public void IniciarSesion()
         {
+            progressRing.IsActive = true;
             presentador.IniciarSesion();
         }
 
         public void MostrarMensaje(string mensaje)
         {
+            progressRing.IsActive = false;
             mensajeBlockText.Text = mensaje;
         }
 
         public void MostrarMenu(Usuario usuario)
         {
+            progressRing.IsActive = false;
             Frame.Navigate(typeof(AppShell), usuario);
         }
 

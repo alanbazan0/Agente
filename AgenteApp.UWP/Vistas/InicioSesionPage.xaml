@@ -19,6 +19,7 @@
 
             <Button x:Name="iniciarSesionButton" Content="Iniciar sesión" Background="#ff9900" Foreground="White"
         Click="iniciarSesionButton_Click" Width="110" HorizontalAlignment="Center" Margin="0,20"/>
+            <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
             <Border x:Name="bannerBorder" Background="#6b6b6b"
                Margin="0,20" Height="100" >
                 <TextBlock x:Name="textoBanerTextBlock" Text="Bastiaan Software Center" Foreground="White"

@@ -11,8 +11,17 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Resultado.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\ResultadoCliente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Componentes\ICriterioSeleccionComponente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Componentes\TipoComponente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Fabricas\ICriterioSeleccionFabrica.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Cliente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\CampoGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\CriterioSeleccion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Filtro.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Objeto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CriteriosSeleccionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\MenuServicioDatos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RepositorioBase.cs" />
