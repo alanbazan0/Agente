@@ -27,6 +27,7 @@ namespace AgenteApp.UWP.Vistas
         {
             this.InitializeComponent();
         }
+         
 
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

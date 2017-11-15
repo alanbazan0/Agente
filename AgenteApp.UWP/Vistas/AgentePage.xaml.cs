@@ -50,7 +50,7 @@ namespace NavigationMenuSample.Views
                 {
                     if(componente.Filtro.valor != string.Empty)
                         filtros.Add(componente.Filtro);
-                }
+                } 
                    
                 return filtros;
             }
@@ -61,7 +61,7 @@ namespace NavigationMenuSample.Views
             set
             {
                 progressRing.IsActive = false;
-                clientesListView.ItemsSource = value;
+                clientesListView.ItemsSource = value; 
             }
         }
 
@@ -74,7 +74,7 @@ namespace NavigationMenuSample.Views
             {
                 topbar.Visibility = Visibility.Collapsed;
                 pageTitleContainer.Visibility = Visibility.Visible;
-                bottombar.Visibility = Visibility.Visible;
+                bottombar.Visibility = Visibility.Visible; 
             }
             else
             {

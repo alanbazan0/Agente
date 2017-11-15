@@ -26,7 +26,7 @@ namespace AgenteApp.UWP.Vistas
         public CorreoPage()
         {
             this.InitializeComponent();
-            this.Loaded += CommandBarPage_Loaded;
+            this.Loaded += CommandBarPage_Loaded; 
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)

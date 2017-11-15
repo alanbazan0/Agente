@@ -21,7 +21,7 @@
                 <AppBarButton Icon="Mail" Label="Correo electrónico"/>
                 <AppBarButton Icon="Message"  Label="SMS"/>
                 <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
-                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso"/> 
                 <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
                 <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
                 <AppBarButton Icon="Pause" Label="Hold"/>
