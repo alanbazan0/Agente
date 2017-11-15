@@ -108,12 +108,18 @@
     <Compile Include="Vistas\AgentePage.xaml.cs" />
     <Compile Include="Views\DrillInPage.xaml.cs" />
     <Compile Include="Views\LandingPage.xaml.cs" />
+    <Compile Include="Vistas\CorreoPage.xaml.cs">
+      <DependentUpon>CorreoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\InicioSesionPage.xaml.cs">
       <DependentUpon>InicioSesionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Vistas\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\SMSPage.xaml.cs">
+      <DependentUpon>SMSPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -173,11 +179,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Vistas\CorreoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vistas\InicioSesionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\SMSPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

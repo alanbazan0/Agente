@@ -91,6 +91,14 @@ namespace NavigationMenuSample.Views
             ConsultarClientes();
         }
 
+        private void AppSMSButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.SMSPage));
+        }
+        private void AppCorreoButton_Click( object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.CorreoPage));
+        }
         public void ConsultarClientes()
         {
             progressRing.IsActive = true;
@@ -159,6 +167,8 @@ namespace NavigationMenuSample.Views
             xamlItemTemplate.AppendLine(@"</DataTemplate>");
             var itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlItemTemplate.ToString()) as DataTemplate;
             clientesListView.ItemTemplate = itemTemplate;
-        }       
+        }
+
+
     }
 }

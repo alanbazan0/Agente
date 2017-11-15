@@ -46,8 +46,8 @@
             <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Save" Label="Guardar tipificación"/>
-                <AppBarButton Icon="Mail" Label="Correo electrónico"/>
-                <AppBarButton Icon="Message"  Label="SMS"/>
+                <AppBarButton Icon="Mail" Label="Correo electrónico" Click="AppCorreoButton_Click"/>
+                <AppBarButton Icon="Message"  Label="SMS" Click="AppSMSButton_Click"/>
                 <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
                 <AppBarButton Icon="Document" Label="Solicitud de receso"/>
                 <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
@@ -226,7 +226,16 @@
                         </PivotItem>
                         <PivotItem Header="Call back">
                             <!--Pivot content goes here-->
-                            <TextBlock Text="Content of pivot item 3."/>
+                            <StackPanel HorizontalAlignment="Stretch" Height="600" >
+                                <TextBox x:Name="nombreClienteTextBox" PlaceholderText="Cliente" Margin="15" Width="350" />
+                                <TextBox x:Name="emailClienteTextBox" PlaceholderText="Email" Margin="8,0,8,8" Width="350" />
+                                <TextBlock Text="Fecha en la que se le llamara" Margin="8,10,8,15"  Width="350" />
+                                <DatePicker HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" MinWidth="250" Width="350"/>
+                                <TextBox x:Name="horaClienteTextBox" PlaceholderText="Hora en la que se le llamara" Margin="8" Width="350" />
+                                <TextBox x:Name="comentariosClienteTextBox" PlaceholderText="Comentarios" Margin="8" Width="350" Height="200" />
+                                <Button x:Name="iniciarSesionButton" Content="Guardar" Background="#ff9900" Foreground="White"
+                                Width="110" HorizontalAlignment="Center" Margin="0,20"/>
+                            </StackPanel>
                         </PivotItem>
                         <PivotItem Header="Encuesta de satisfacción">
                             <!--Pivot content goes here-->
