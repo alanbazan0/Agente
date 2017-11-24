@@ -33,6 +33,7 @@ namespace NavigationMenuSample.Views
     {
         AgentePresentador presentador;
         CriterioSeleccionFabrica criteriosSeleccionFabrica;
+        Usuario usuario;
         public AgentePage()
         {
             this.InitializeComponent();
@@ -99,6 +100,10 @@ namespace NavigationMenuSample.Views
         {
             this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.CorreoPage));
         }
+        private void ApprRecesoButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.RecesoPage), usuario);
+        }
         public void ConsultarClientes()
         {
             progressRing.IsActive = true;
@@ -114,7 +119,12 @@ namespace NavigationMenuSample.Views
                 await dialog.ShowAsync();
             }
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            usuario = (Usuario)e.Parameter;
 
+        }
         public void CrearCriterioSeleccion(CriterioSeleccion criterioSeleccion)
         {
             ICriterioSeleccionComponente componente = criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);

@@ -19,6 +19,7 @@ using NavigationMenuSample.Views;
 using AgenteApp.UWP;
 using Windows.UI.ViewManagement;
 using Windows.UI;
+using AgenteApp.Modelos;
 
 namespace NavigationMenuSample
 {
@@ -170,14 +171,15 @@ namespace NavigationMenuSample
 
             // Place our app shell in the current Window
             Window.Current.Content = shell;
-
+            Usuario usuario = (Usuario)e.Parameter;
             if (shell.AppFrame.Content == null)
             {
                 // When the navigation stack isn't restored, navigate to the first page
                 // suppressing the initial entrance animation.
-                shell.AppFrame.Navigate(typeof(AgentePage), null, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                shell.AppFrame.Navigate(typeof(AgentePage), usuario, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
             }
 
+            
             // Ensure the current window is active
             Window.Current.Activate();
         }
