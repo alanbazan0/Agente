@@ -252,7 +252,7 @@ namespace NavigationMenuSample
 
             // Place our app shell in the current Window
             Window.Current.Content = shell;
-
+            Usuario usuario = (Usuario)e.Parameter;
             if (shell.AppFrame.Content == null)
             {
                 // When the navigation stack isn't restored, navigate to the first page
@@ -260,6 +260,7 @@ namespace NavigationMenuSample
                 shell.AppFrame.Navigate(typeof(AgentePage), usuario, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
             }
 
+            
             // Ensure the current window is active
             Window.Current.Activate();
         }

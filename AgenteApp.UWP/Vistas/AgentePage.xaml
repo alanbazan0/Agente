@@ -51,7 +51,7 @@
                 <AppBarButton Icon="Mail" Label="Encuesta de satisfacción" />
                 <!--<AppBarButton Icon="Message"  Label="Historial de eventos" Click="AppSMSButton_Click"/>-->
                 <AppBarButton Icon="Cancel" Label="Colgar llamada" Click="AppBarCallEndButton_Click"/>
-                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso" Click="ApprRecesoButton_Click"/>
                 <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
                 <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
                 <AppBarButton Icon="Pause" Label="Hold"/>

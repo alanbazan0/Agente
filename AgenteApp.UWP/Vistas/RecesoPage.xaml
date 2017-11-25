@@ -5,9 +5,161 @@
     xmlns:local="using:AgenteApp.UWP.Vistas"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctl="using:NavigationMenuSample.Controls"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Grid_Loaded">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
+            <AppBarButton Icon="Message" Label="Enviar sms" Foreground="White"/>
+            <AppBarButton Icon="ClosePane" Label="Cerrar" Foreground="White" Click="AppCerrarButton_Click"/>
+            <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>-->
+            <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
+            <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Save" Label="Guardar tipificación"/>
+                <AppBarButton Icon="Mail" Label="Correo electrónico"/>
+                <AppBarButton Icon="Message"  Label="SMS"/>
+                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
+                <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
+                <AppBarButton Icon="Pause" Label="Hold"/>
+                <AppBarButton Icon="Refresh" Label="Reconectar"/>
+                <AppBarButton Icon="Redo" Label="Reanudar llamada"/>
+                <AppBarButton Icon="DisconnectDrive" Label="Llamada cortada"/>
+                <AppBarButton Icon="PhoneBook" Label="Recuperar datos de llamadas"/>
 
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <ctl:PageHeader>
+                    <ctl:PageHeader.HeaderContent>
+                        <TextBlock x:Name="HeaderTextBlock" Text="Solicitud de recesos" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                    </ctl:PageHeader.HeaderContent>
+                </ctl:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+        <ctl:PageHeader x:Name="pageTitleContainer" Visibility="Collapsed">
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+        <StackPanel >
+            <TextBox x:Name="contacoSMSTetBox" PlaceholderText="Contacto" Margin="785,15" Width="350" />
+
+            <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="auto" >
+
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo receso" Margin="15,0,0,0"/>
+                <TextBlock x:Name="timerReceso" TextWrapping="Wrap" FontSize="30" Text="00:00:00"  VariableSizedWrapGrid.RowSpan="2" Margin="15,0,-15,57" />
+
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo acomulado"   VariableSizedWrapGrid.ColumnSpan="2" Margin="38,0,-38,0" />
+                <TextBlock x:Name="timerAcomulado" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="38,0,-38,57" />
+
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Ingreso al sistema" VariableSizedWrapGrid.ColumnSpan="3" Margin="43,0,-43,0" />
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="43,0,-43,57" />
+            </VariableSizedWrapGrid>
+            <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="150" >
+
+                <Button x:Name = "btnAutorizar"  Background="#ff9900" Foreground="White" Content="Autorizar" Click = "clickAutorizar"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.RowSpan="2" Margin="15,0,-15,57" />
+
+              
+                <Button x:Name = "btnRegresarReceso"  Background="#ff9900" Foreground="White" Content="Regresar de receso" Click = "clickRegresarReceso"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"  Margin="301,-102,-139,109"/>
+
+                <Button x:Name = "btnSolicitar" Background="#ff9900" Foreground="White" Content="Solicitar" Click = "clickSolicitar"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="545,88,-140,-31"/>
+                <Button x:Name = "btnTomarReceso"  Background="#ff9900" Foreground="White" Content="Tomar receso" Click = "clickTomarReceso"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"  Margin="-186,-12,363,21"/>
+
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Motivo de receso" VariableSizedWrapGrid.ColumnSpan="1" VariableSizedWrapGrid.RowSpan="2" Margin="-204,-39,204,99" />
+                <ComboBox  x:Name="tipoRecesoComboBox"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  VariableSizedWrapGrid.ColumnSpan="1" VariableSizedWrapGrid.RowSpan="1"  Margin="-201,-90,111,90"  >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                                <TextBlock Text="{Binding RCorto}" />
+                                <TextBlock Text="{Binding Id}" Visibility="Collapsed"/>
+                                <TextBlock Text="{Binding RDescripcion}" Visibility="Collapsed" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+            </VariableSizedWrapGrid>
+            <ListView x:Name="clientesListView"  >
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid  Padding="0" Margin="15,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="TIPO RECESO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                <TextBlock Text="FECHA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="HORA INCIAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="FECHA FINAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                <TextBlock Text="HORA FINAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="DURACION"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="7" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="TIEMPO ACOMULADO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0" Margin="15,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Orden}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="1" Text="{Binding DescTipoReceso}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="2" Text="{Binding FechaInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="3" Text="{Binding HoraInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="4" Text="{Binding FechaFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="5" Text="{Binding HoraFin}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="6" Text="{Binding TiempoAcomulado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+            </StackPanel>
+
+        </StackPanel>
+        <StackPanel >
+            <Button Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        </StackPanel>
+        <TimePicker HorizontalAlignment="Left" Margin="1146,-62,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

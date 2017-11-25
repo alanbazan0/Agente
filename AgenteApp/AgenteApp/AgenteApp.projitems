@@ -21,13 +21,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Cliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CampoGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CriterioSeleccion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\EstatusUsuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Campo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Filtro.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\MovimientoPersonal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CampoFormulario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Objeto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoRecesos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaTelefonoRepositorio.cs" />
@@ -37,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\MenuServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RecesoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RepositorioBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ServicioDatos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\UsuariosRepositorio.cs" />
@@ -51,5 +56,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IFormulario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IMenuVista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\IReceso.cs" />
   </ItemGroup>
 </Project>
