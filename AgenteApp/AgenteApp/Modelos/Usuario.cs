@@ -8,8 +8,10 @@ namespace AgenteApp.Modelos
     {
         private string id;
         private string nombre;
+        private string extension;
         public string Id { get { return id; } set { id = value; } }
         public string Nombre { get { return nombre; } set { nombre = value; } }
+        public string Extension { get { return extension; } set { extension = value; } }
 
     }
 }

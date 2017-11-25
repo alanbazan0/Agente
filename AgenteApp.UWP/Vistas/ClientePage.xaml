@@ -1,0 +1,86 @@
+﻿<Page
+    x:Class="AgenteApp.UWP.Vistas.ClientePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctl="using:NavigationMenuSample.Controls"
+    xmlns:local="using:AgenteApp.UWP.Vistas"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
+            <AppBarButton Icon="Save" Label="Guardar" Foreground="White" Click="AppGuardarClienteButton_Click"/>
+            <AppBarButton Icon="ClosePane" Label="Salir" Foreground="White" Click="AppCerrarButton_Click"/>
+            <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>-->
+            <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
+            <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Save" Label="Guardar tipificación"/>
+                <AppBarButton Icon="Mail" Label="Encuesta de satisfacción" />
+                <!--<AppBarButton Icon="Message"  Label="Historial de eventos" Click="AppSMSButton_Click"/>-->
+                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
+                <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
+                <AppBarButton Icon="Pause" Label="Hold"/>
+                <AppBarButton Icon="Refresh" Label="Reconectar"/>
+                <AppBarButton Icon="Redo" Label="Reanudar llamada"/>
+                <AppBarButton Icon="DisconnectDrive" Label="Llamada cortada"/>
+                <AppBarButton Icon="PhoneBook" Label="Recuperar datos de llamadas"/>
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <ctl:PageHeader>
+                    <ctl:PageHeader.HeaderContent>
+                        <TextBlock x:Name="HeaderTextBlock" Text="Datos del cliente" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                    </ctl:PageHeader.HeaderContent>
+                </ctl:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+        <ctl:PageHeader x:Name="pageTitleContainer" Visibility="Collapsed">
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+        <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+        </StackPanel>
+        <Grid Margin="24,45,24,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <VariableSizedWrapGrid Grid.Row="0"  Margin="10,14,10,10"  x:Name="formularioComponentes"  Orientation="Horizontal"  ItemHeight="40" ItemWidth="210"  >
+                <!--<TextBox x:Name="nombreCompletoCriterioTextBox" PlaceholderText="Nombre completo" Margin="8" Width="250" />
+                    <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
+                    <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
+            </VariableSizedWrapGrid>
+            <VariableSizedWrapGrid Grid.Row="1"  Margin="10,14,10,10"  x:Name="formularioTelefono"  Orientation="Horizontal"  ItemHeight="40" ItemWidth="210"  >
+                <TextBlock Text="Id de cliente" Margin="8" />
+                <TextBox x:Name="idClienteReg" PlaceholderText="idCliente" Margin="8" IsEnabled="False"/>
+                <TextBlock Text="Razon social" Margin="8" />
+                <TextBox x:Name="razonSocial" PlaceholderText="Razon social" Margin="8"  />
+                <TextBlock Text="Tipo de telefono" Margin="8" />
+                <ComboBox x:Name="tipoTelefonoTextBox" PlaceholderText="Tipo de telefono" HorizontalAlignment="Stretch" 
+                          VerticalAlignment="Stretch"  VariableSizedWrapGrid.ColumnSpan="1" 
+                          VariableSizedWrapGrid.RowSpan="1"  Margin=""   >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                                <TextBlock Text="{Binding Id}" />
+                                <TextBlock Text="{Binding Descripcion}" Visibility="Collapsed"/>                                
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </VariableSizedWrapGrid>
+            <ListView x:Name="clientesListView"  Grid.Row="1">
+
+            </ListView>
+        </Grid>
+        
+
+
+    </Grid>
+</Page>

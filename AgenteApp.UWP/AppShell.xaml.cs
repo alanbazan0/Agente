@@ -19,6 +19,12 @@ using NavigationMenuSample.Views;
 using AgenteApp.UWP;
 using Windows.UI.ViewManagement;
 using Windows.UI;
+using AgenteApp.Modelos;
+
+//usings Linphone
+using Linphone;
+using Windows.System.Threading;
+using Windows.ApplicationModel.Core;
 
 namespace NavigationMenuSample
 {
@@ -26,7 +32,7 @@ namespace NavigationMenuSample
     /// The "chrome" layer of the app that provides top-level navigation with
     /// proper keyboarding navigation.
     /// </summary>
-    public sealed partial class AppShell : Page
+    public sealed partial class AppShell :  Page
     {
         private bool isPaddingAdded = false;
         // Declare the top level nav items
@@ -60,8 +66,12 @@ namespace NavigationMenuSample
         /// adds callbacks for Back requests and changes in the SplitView's DisplayMode, and
         /// provide the nav menu list with the data to display.
         /// </summary>
+        /// 
+        
+
         public AppShell()
-        {
+        {            
+            
             this.InitializeComponent();
 
             this.Loaded += (sender, args) =>
@@ -88,7 +98,78 @@ namespace NavigationMenuSample
 
 
             NavMenuList.ItemsSource = navlist;
+
+            //AQUI ES DONDE SE COLOCARAN LAS CLASES PARA LINPHONE 
+            //string rc_path = null;
+            //LinphoneWrapper.setNativeLogHandler();
+
+            //Core.SetLogLevelMask(0xFF);
+            //CoreListener listener = Factory.Instance.CreateCoreListener();
+            //listener.OnGlobalStateChanged = OnGlobal;
+            //LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
+            //LinphoneCore.NetworkReachable = true;
+            //MainPage = new MainPage(); AQUI CAMBIARIA POR EL FRAM.Navegate
+
+
+
         }
+//     /*   #region linphone
+//        private void LinphoneCoreIterate(ThreadPoolTimer timer)
+//        {
+//            while (true)
+//            {
+//#if WINDOWS_UWP
+//                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+//                () => {
+//                    LinphoneCore.Iterate();
+//                });
+//#else
+//                Device.BeginInvokeOnMainThread(() =>
+//                {
+//                    LinphoneCore.Iterate();
+//                });
+//                Thread.Sleep(50);
+//#endif
+//            }
+//        }
+
+//        private void OnGlobal(Core lc, GlobalState gstate, string message)
+//        {
+//#if WINDOWS_UWP
+//            Debug.WriteLine("Global state changed: " + gstate);
+//#else
+//            Console.WriteLine("Global state changed: " + gstate);
+//#endif
+//        }
+
+//       /* protected override void OnStart()
+//        {
+//            // Handle when your app starts
+//#if WINDOWS_UWP
+//            TimeSpan period = TimeSpan.FromSeconds(1);
+//            ThreadPoolTimer PeriodicTimer = ThreadPoolTimer.CreatePeriodicTimer(LinphoneCoreIterate, period);
+//#else
+//            Thread iterate = new Thread(LinphoneCoreIterate);
+//            iterate.IsBackground = false;
+//            iterate.Start();
+//#endif
+//        }
+
+//        protected override void OnSleep()
+//        {
+//            // Handle when your app sleeps
+//        }
+
+//        protected override void OnResume()
+//        {
+//            // Handle when your app resumes
+//        }*/
+//        #endregion linphone    */
+
+
+
+
+
 
         public Frame AppFrame { get { return this.frame; } }
 
@@ -114,10 +195,11 @@ namespace NavigationMenuSample
                 TogglePaneButton.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
             }
         }
-
+        //metodo donde viene a caer despues del llamado de Frame.Navegate
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            Object usuario =  e.Parameter;
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -175,7 +257,7 @@ namespace NavigationMenuSample
             {
                 // When the navigation stack isn't restored, navigate to the first page
                 // suppressing the initial entrance animation.
-                shell.AppFrame.Navigate(typeof(AgentePage), null, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                shell.AppFrame.Navigate(typeof(AgentePage), usuario, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
             }
 
             // Ensure the current window is active

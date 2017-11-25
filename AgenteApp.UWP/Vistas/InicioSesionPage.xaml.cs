@@ -53,7 +53,7 @@ namespace AgenteApp.UWP
         public void MostrarMenu(Usuario usuario)
         {
             progressRing.IsActive = false;
-            Frame.Navigate(typeof(AppShell), usuario);
+            this.Frame.Navigate(typeof(AppShell), usuario);
         }
 
         private void iniciarSesionButton_Click(object sender, RoutedEventArgs e)

@@ -19,7 +19,7 @@
                         <Setter Target="HeaderTextBlock.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
                         <Setter Target="AltHeaderTextBlock.Style" Value="{StaticResource PageTitleTextBlockStyle}"/>
                     </VisualState.Setters>
-                </VisualState> 
+                </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowSnapPoint}" />
@@ -33,6 +33,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
@@ -40,15 +41,16 @@
         </Grid.RowDefinitions>
         <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b">
             <AppBarButton Icon="Find" Label="Consultar cliente" Foreground="White" Click="AppBarButton_Click"/>
+            <AppBarButton Icon="Up" Label="Alta de cliente" Foreground="White" Click="AppBarAltaClienteButton_Click"/>
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
             <AppBarSeparator Foreground="White"/>-->
             <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
             <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Save" Label="Guardar tipificación"/>
-                <AppBarButton Icon="Mail" Label="Correo electrónico" Click="AppCorreoButton_Click"/>
-                <AppBarButton Icon="Message"  Label="SMS" Click="AppSMSButton_Click"/>
-                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
+                <AppBarButton Icon="Mail" Label="Encuesta de satisfacción" />
+                <!--<AppBarButton Icon="Message"  Label="Historial de eventos" Click="AppSMSButton_Click"/>-->
+                <AppBarButton Icon="Cancel" Label="Colgar llamada" Click="AppBarCallEndButton_Click"/>
                 <AppBarButton Icon="Document" Label="Solicitud de receso"/>
                 <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
                 <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
@@ -76,25 +78,50 @@
 
         <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                <StackPanel>    
+                <StackPanel>
                     <Pivot x:Name="rootPivot" >
                         <PivotItem Header="Clientes" HorizontalAlignment="Left">
-                            <Grid>                              
+                            <Grid>
+                                
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                                     <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
                                 </StackPanel>
-                                <VariableSizedWrapGrid  Grid.Row="0" Margin="10"  x:Name="criteriosSeleccionStackPanel"  Orientation="Horizontal"  ItemHeight="40" ItemWidth="210"  >
+                                <VariableSizedWrapGrid Grid.Column="1" Margin="5"  x:Name="LamadaEntrante"  Orientation="Horizontal"  ItemHeight="50" ItemWidth="150" Grid.RowSpan="2"  >
+                                    <TextBlock Text="Tiempo de llamada" Margin="8"  />
+                                    <TextBox x:Name="timpoLlamadaTextBox" PlaceholderText="00:00:00" Margin="8" />
+                                    <TextBlock Text="Estado"   Margin="8"  />
+                                    <TextBox x:Name="EstadoTextBox" PlaceholderText="Estado" Margin="8" />
+                                    <TextBlock Text="Ciudad"   Margin="8"  />
+                                    <TextBox x:Name="ciudadTextBox" PlaceholderText="Ciudad" Margin="8" />
+                                    <TextBlock Text="Tipo de telefono"   Margin="8"  />
+                                    <TextBox x:Name="tipoTelefonoTextBox" PlaceholderText="Tipo Telefono" Margin="8" />
+                                    <TextBlock Text="Tipo de llamada"   Margin="8"  />
+                                    <TextBox x:Name="tipoLlamadaTextBox" PlaceholderText="Tipo de llamada" Margin="8" />
+                                    <TextBlock Text="Fecha de llamada"   Margin="8"  />
+                                    <TextBox x:Name="FechaLlamadaTextBox" PlaceholderText="Fecha de llamada" Margin="8" />
+                                    <TextBlock Text="Hora de llamada"   Margin="8"  />
+                                    <TextBox x:Name="HoraLlamadaTextBox" PlaceholderText="Hora de llamada" Margin="8" />
+                                    <TextBlock Text="No. Telefonico"   Margin="8"  />
+                                    <TextBox x:Name="NoTelTextBox" PlaceholderText="Numero Telefonico" Margin="8" />
+                                    <TextBlock Text="Id de la llamada"   Margin="8"  />
+                                    <TextBox x:Name="idLlamadaTextBox" PlaceholderText="Id de la llamada" Margin="8" />
+                                    <TextBlock Text="No. extension"   Margin="8"  />
+                                    <TextBox x:Name="NoExtensionTextBox" PlaceholderText="Numero de extension" Margin="8" />
+                                    <TextBlock Text="Estatus"   Margin="8"  />
+                                    <TextBox x:Name="estatusTextBox" PlaceholderText="Estatus" Margin="8" />
+                                </VariableSizedWrapGrid>
+                                <VariableSizedWrapGrid  Grid.Row="2" Margin="10"  x:Name="criteriosSeleccionStackPanel"  Orientation="Horizontal"  ItemHeight="40" ItemWidth="210"  >
                                     <!--<TextBox x:Name="nombreCompletoCriterioTextBox" PlaceholderText="Nombre completo" Margin="8" Width="250" />
                                     <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
                                     <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
                                 </VariableSizedWrapGrid>
-                                <ListView x:Name="clientesListView"  Grid.Row="1"    
-                                          
-                                         >      
+                                <ListView x:Name="clientesListView"  Grid.Row="3"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
                                     <!--<ListView.HeaderTemplate>
                                         <DataTemplate>
                                             <Grid  Padding="0" Margin="0">
@@ -115,11 +142,15 @@
                                                     <ColumnDefinition Width="200" />
                                                     <ColumnDefinition Width="200" />
                                                     <ColumnDefinition Width="200" />
-                                                    --><!--<ColumnDefinition Width="000" />--><!--
+                                                    -->
+                                    <!--<ColumnDefinition Width="000" />-->
+                                    <!--
                                                 </Grid.ColumnDefinitions>
-                                                --><!--<Grid.RowDefinitions>
+                                                -->
+                                    <!--<Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"></RowDefinition>
-                                                </Grid.RowDefinitions>--><!--
+                                                </Grid.RowDefinitions>-->
+                                    <!--
                                                 <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0">
                                                     <TextBlock Text="Id" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                                 </Border>
@@ -191,7 +222,9 @@
                                                     <ColumnDefinition Width="200" />
                                                     <ColumnDefinition Width="200" />
                                                     <ColumnDefinition Width="200" />
-                                                    --><!--<ColumnDefinition Width="000" />--><!--
+                                                    -->
+                                    <!--<ColumnDefinition Width="000" />-->
+                                    <!--
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"></RowDefinition>
@@ -217,11 +250,21 @@
                                     </ListView.ItemTemplate>-->
                                 </ListView>
                             </Grid>
-                            
+
+                        </PivotItem>
+                        <PivotItem Header="CRM">
+                            <!--Pivot content goes here-->
+
+                            <TextBlock Text="Content of pivot item 2."/>
                         </PivotItem>
                         <PivotItem Header="Tipificación">
                             <!--Pivot content goes here-->
-                         
+
+                            <TextBlock Text="Content of pivot item 2."/>
+                        </PivotItem>
+                        <PivotItem Header="Correo electronico">
+                            <!--Pivot content goes here-->
+
                             <TextBlock Text="Content of pivot item 2."/>
                         </PivotItem>
                         <PivotItem Header="Call back">
@@ -237,19 +280,24 @@
                                 Width="110" HorizontalAlignment="Center" Margin="0,20"/>
                             </StackPanel>
                         </PivotItem>
-                        <PivotItem Header="Encuesta de satisfacción">
-                            <!--Pivot content goes here-->
-                            <TextBlock Text="Content of pivot item 4."/>
+                        <PivotItem Header="SMS">
+                            <StackPanel>
+                                <TextBox x:Name="numeroClienteSMSTextBox" PlaceholderText="Numero de cliente" Margin="15" Width="350" />
+                                <TextBox x:Name="contactoSMSTextBox" PlaceholderText="Contacto" Margin="15" Width="350" />
+                                <TextBox x:Name="telefonoSMSTextBox" PlaceholderText="Telefono" Margin="15" Width="350" />
+                                <DatePicker x:Name="fechaSMSTextBox" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Language="ES" MinWidth="250" Width="350"/>
+                                <TimePicker x:Name="horaSMSTextBox"  HorizontalAlignment="Center" Margin="15" Width="350" />
+                                <ComboBox x:Name="tipificacionSMSTextBox" HorizontalAlignment="Center" PlaceholderText="Tipificación" Margin="15" Width="350" />
+                                <ComboBox x:Name="tramiteSMSTextBox" HorizontalAlignment="Center" PlaceholderText="Tramite" Margin="15" Width="350" />
+                                <TextBox x:Name="asuntoSMSTextBox" PlaceholderText="Mensaje" Margin="15" Width="350" Height="150"/>
+                            </StackPanel>
                         </PivotItem>
-                        <PivotItem Header="Historial de eventos">
-                            <!--Pivot content goes here-->
-                            <TextBlock Text="Content of pivot item 5."/>
-                        </PivotItem>
+
                     </Pivot>
                 </StackPanel>
-               
-               
-                
+
+
+
             </StackPanel>
         </Grid>
 

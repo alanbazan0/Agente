@@ -13,7 +13,7 @@ namespace AgenteApp.UWP.Fabricas
     {
         public ICriterioSeleccionComponente CrearComponente(CriterioSeleccion criterioSeleccion)
         {
-            ICriterioSeleccionComponente componente = null;
+         ICriterioSeleccionComponente componente = null;
             TipoComponente tipoComponente = TipoComponente.Texto;
             switch (tipoComponente)
             {

@@ -97,9 +97,11 @@
     </Compile>
     <Compile Include="AppShell.xaml.cs" />
     <Compile Include="Componentes\CriterioSeleccionTextBox.cs" />
+    <Compile Include="Componentes\FormularioTextBox.cs" />
     <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="Controls\PageHeader.xaml.cs" />
     <Compile Include="Fabricas\CriterioSeleccionFabrica.cs" />
+    <Compile Include="Fabricas\FormularioFabrica.cs" />
     <Compile Include="NavMenuItem.cs" />
     <Compile Include="SystemInformationHelpers.cs" />
     <Compile Include="Triggers\IsTenFootTrigger.cs" />
@@ -108,8 +110,8 @@
     <Compile Include="Vistas\AgentePage.xaml.cs" />
     <Compile Include="Views\DrillInPage.xaml.cs" />
     <Compile Include="Views\LandingPage.xaml.cs" />
-    <Compile Include="Vistas\CorreoPage.xaml.cs">
-      <DependentUpon>CorreoPage.xaml</DependentUpon>
+    <Compile Include="Vistas\ClientePage.xaml.cs">
+      <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\InicioSesionPage.xaml.cs">
       <DependentUpon>InicioSesionPage.xaml</DependentUpon>
@@ -120,9 +122,6 @@
     </Compile>
     <Compile Include="Vistas\RecesoPage.xaml.cs">
       <DependentUpon>RecesoPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\SMSPage.xaml.cs">
-      <DependentUpon>SMSPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -182,7 +181,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vistas\CorreoPage.xaml">
+    <Page Include="Vistas\ClientePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,10 +190,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\MenuPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Vistas\SMSPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,6 +210,12 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>10.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xam.Plugin.Connectivity">
+      <Version>4.0.0.171-beta</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>2.5.0.91635</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
