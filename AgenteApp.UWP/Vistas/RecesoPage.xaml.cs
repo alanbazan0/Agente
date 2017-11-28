@@ -90,6 +90,11 @@ namespace AgenteApp.UWP.Vistas
                     string tiempo = string.Format("{0:D2}:{1:D2}:{2:D2}",t.Hours,t.Minutes,t.Seconds);
                     value[i].Orden = "" + (i + 1);
                     value[i].TiempoAcomulado = tiempo;
+
+                    if (value[i].IdReceso.Equals("SBSC"))
+                    {
+                        horaInicio.Text=value[i].HoraInicial;
+                    }
                 }
                 timerAcomulado.Text=string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
                 segAcum = t.Seconds; minAcum = t.Minutes;  horAcum = t.Hours;

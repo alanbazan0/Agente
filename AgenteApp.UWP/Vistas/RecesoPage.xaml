@@ -18,7 +18,7 @@
             <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
             <CommandBar.SecondaryCommands>
                 <AppBarButton Icon="Save" Label="Guardar tipificación"/>
-                <AppBarButton Icon="Mail" Label="Correo electrónico"/>
+                <AppBarButton Icon="Mail" Label="Bandeja decorreos"/>
                 <AppBarButton Icon="Message"  Label="SMS"/>
                 <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
                 <AppBarButton Icon="Document" Label="Solicitud de receso"/>
@@ -56,7 +56,7 @@
                 <TextBlock x:Name="timerAcomulado" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="38,0,-38,57" />
 
                 <TextBlock TextWrapping="Wrap" FontSize="30" Text="Ingreso al sistema" VariableSizedWrapGrid.ColumnSpan="3" Margin="43,0,-43,0" />
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="43,0,-43,57" />
+                <TextBlock x:Name="horaInicio" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="43,0,-43,57" />
             </VariableSizedWrapGrid>
             <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="150" >
 

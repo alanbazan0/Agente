@@ -64,7 +64,7 @@
                 <TextBlock Text="Tipo de telefono" Margin="8" />
                 <ComboBox x:Name="tipoTelefonoTextBox" PlaceholderText="Tipo de telefono" HorizontalAlignment="Stretch" 
                           VerticalAlignment="Stretch"  VariableSizedWrapGrid.ColumnSpan="1" 
-                          VariableSizedWrapGrid.RowSpan="1"  Margin=""   >
+                          VariableSizedWrapGrid.RowSpan="1"    >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
