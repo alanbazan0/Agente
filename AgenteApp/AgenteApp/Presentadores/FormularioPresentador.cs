@@ -36,13 +36,13 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
-        public async void guardarTelefonoCliente(string idCliente, string numTel, Portabilidad portabilidad)
+        public async void guardarTelefonoCliente(ClienteTelefono clienteTelefono)
         {
             ClientesAltaTelefonoRepositorio repositorio = new ClientesAltaTelefonoRepositorio();
-            Resultado<string> resultado = await repositorio.Insertar(idCliente, numTel, portabilidad);
+            Resultado<string> resultado = await repositorio.Insertar(clienteTelefono);
             if (resultado.mensajeError == string.Empty)
             {
-                vista.idCliente = resultado.valor;
+                vista.MostrarMensaje("Alta", "El cliente se guardo correctamente");
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);

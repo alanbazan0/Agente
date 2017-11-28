@@ -199,7 +199,7 @@ namespace NavigationMenuSample
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            Object usuario =  e.Parameter;
+            
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

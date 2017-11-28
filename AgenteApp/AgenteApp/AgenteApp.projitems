@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Fabricas\IFormularioFabrica.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Cliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CampoGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\ClienteTelefono.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CriterioSeleccion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\EstatusUsuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Campo.cs" />
