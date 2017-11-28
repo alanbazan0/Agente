@@ -45,5 +45,36 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+        public async Task<Resultado<List<Objeto>>> ConsultarNumTel(string numero, int version)
+        {
+            Resultado<List<Objeto>> datos = new Resultado<List<Objeto>>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Clientes.php";
+            AgregarParametro("accion", "consultarDinamicamenteTelefono");
+            AgregarParametro("numero", numero);
+            AgregarParametro("version", version.ToString());
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Objeto>>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
     }
 }

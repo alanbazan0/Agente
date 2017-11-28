@@ -49,6 +49,7 @@ namespace NavigationMenuSample.Views
         int min = 0;
         int hor = 0;
         int segunds = 0;
+        List<CampoGrid> camposGloba;
         public Core LinphoneCore { get; set; }
         /*private Core LinphoneCore
         {
@@ -154,6 +155,10 @@ namespace NavigationMenuSample.Views
 "  </html>  ";
             webCorreo.NavigateToString(a);
             //webCorreo.Source=(new Uri("http://www.contoso.com", UriKind.Absolute));
+
+            NoTelTextBox.Text = "8711897006";
+            ConsultarPortabilidad(NoTelTextBox.Text);
+            ConsultarClientesTel(NoTelTextBox.Text);
         }
         private void LinphoneCoreIterate(ThreadPoolTimer timer)
         {
@@ -277,6 +282,7 @@ namespace NavigationMenuSample.Views
                      OnCallClicked();
                     NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
                     ConsultarPortabilidad(NoTelTextBox.Text);
+                    ConsultarClientesTel(NoTelTextBox.Text);
                     //PRIMERO ME TRAIGO LA PORTABILIDAD Y LUEGO CONSULTO A BTCLIENTESTEL PARA VER SI YA EXISTE EN LA BASE DE DATOS
                     //consultar la tabla de BTCLIENTESTEL
                     // call.Text = "Answer Call (" + lcall.RemoteAddressAsString + ")";
@@ -436,6 +442,9 @@ namespace NavigationMenuSample.Views
         {
             //var cliente = clientesListView.SelectedItem;
             var cliente = e.ClickedItem;
+            
+
+            
             if (cliente != null)
             {
                 Object[] parameter = new Object[2];
@@ -448,6 +457,7 @@ namespace NavigationMenuSample.Views
 
         public void CrearColumnasGrid1(List<CampoGrid> campos)
         {
+            camposGloba = campos;
             StringBuilder xamlHeaderTemplate = new StringBuilder();
             xamlHeaderTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
             xamlHeaderTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"">");           
@@ -508,12 +518,14 @@ namespace NavigationMenuSample.Views
                 MostrarMensaje("Error", "Es necesario el numero telefonico para dar de alta al usuario");
         
         }
+
         private string GetDateString()
         {
             DateTime dateTime = DateTime.Now;
             string text = dateTime.ToString("dd/MM/yyyy");// + "-" + dateTime.TimeOfDay.ToString();
             return text;
         }
+
         private string GetTimeString()
         {
             DateTime dateTime = DateTime.Now;
@@ -521,6 +533,7 @@ namespace NavigationMenuSample.Views
             text = text.Remove(text.IndexOf('.'));
             return text;
         }
+
         void dispatcherTimer_Tick(object sender, object e)
         {
             ShowTime();
@@ -566,7 +579,13 @@ namespace NavigationMenuSample.Views
 
         public void ConsultarPortabilidad(string numero)
         {
-            presentador.ConsultarPortabilidad(NoTelTextBox.Text);
+            presentador.ConsultarPortabilidad(numero);
+        }
+
+        public void ConsultarClientesTel(string numero)
+        {
+            progressRing.IsActive = true;
+            presentador.ConsultarClientesTel(numero);
         }
 
         void clickCorreo (object sender, RoutedEventArgs e)

@@ -13,16 +13,14 @@ namespace AgenteApp.Repositorios
     class ClientesAltaTelefonoRepositorio : RepositorioBase
     {
         // metodo de insertar para conectar y mandar a insertar el cliente....
-        public async Task<Resultado<string>> Insertar(string idCliente, string numTel, Portabilidad portabilidad)
+        public async Task<Resultado<string>> Insertar(ClienteTelefono clienteTelefono)
         {
             Resultado<string> datos = new Resultado<string>();
             //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
             DireccionBase = Constantes.DIRECCION_BASE;
-            Url = "/BastiaanSoftwareCenter/php/repositorios/Clientes.php";
-            AgregarParametro("accion", "InsertarNumeroTelefonico");
-            AgregarParametro("idCliente", idCliente);
-            AgregarParametro("numTel", numTel);
-            AgregarParametro("datos", JsonConvert.SerializeObject(portabilidad));
+            Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
+            AgregarParametro("accion", "insertar");
+            AgregarParametro("clientetelefono", JsonConvert.SerializeObject(clienteTelefono));
             //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
             try
             {

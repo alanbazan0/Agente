@@ -34,6 +34,7 @@ namespace AgenteApp.UWP.Vistas
         FormularioPresentador presentador;
         FormularioFabrica formularioClienteFabrica;
         Portabilidad parametroPortabilidad;
+        ClienteTelefono clienteTelefono;
         string numTelefonico;
         public ClientePage()
         {
@@ -42,6 +43,7 @@ namespace AgenteApp.UWP.Vistas
             presentador = new FormularioPresentador(this);
             formularioClienteFabrica = new FormularioFabrica();
             //this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            clienteTelefono = new ClienteTelefono();
             presentador.TipoTelefono();
 
         }
@@ -97,9 +99,12 @@ namespace AgenteApp.UWP.Vistas
                     presentador.CrearFormulario();
                     numTelefonico = (string)person[1];
                     parametroPortabilidad = (Portabilidad)person[2];
+                    noTelefonicoClienteTextBox.Text = numTelefonico;
+                    razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
                 }
                 else
                 {
+                    presentador.CrearFormulario();
                     //entra en modo cambio
                 }
 
@@ -119,9 +124,10 @@ namespace AgenteApp.UWP.Vistas
         {
             set
             {
-                string IdCliente = value;
-                presentador.guardarTelefonoCliente(IdCliente,numTelefonico, parametroPortabilidad);
+               string IdCliente = value;
+                GuardarTelefonoCliente(IdCliente);
             }
+            
         }
 
         public List<TipoTelefono> TipoTelefono
@@ -145,11 +151,11 @@ namespace AgenteApp.UWP.Vistas
                 await dialog.ShowAsync();
             }
         }
+
         public void CrearFormularioClientes(CampoFormulario campoFormulario)
         {
             IFormularioComponente componente = formularioClienteFabrica.CrearComponente(campoFormulario); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
             formularioComponentes.Children.Add(componente as UIElement);
-
         }
 
         private void AppGuardarClienteButton_Click(object sender, RoutedEventArgs e)
@@ -161,6 +167,19 @@ namespace AgenteApp.UWP.Vistas
         {
             progressRing.IsActive = true;
             presentador.GuardarClientes();
+        }
+        public void GuardarTelefonoCliente(string IdCliente)
+        {
+            clienteTelefono.id = IdCliente;
+            clienteTelefono.nir = parametroPortabilidad.IdMunicipio;
+            clienteTelefono.serie = parametroPortabilidad.IdConsecutivo;
+            clienteTelefono.telefonoCliente = numTelefonico;
+            clienteTelefono.numeracion = "0";
+            clienteTelefono.compania = parametroPortabilidad.DescripcionPortabilidad;
+            TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
+            clienteTelefono.tipoTelefono = itemboxTTelefono.Id;
+
+            presentador.guardarTelefonoCliente(clienteTelefono);
         }
         
 

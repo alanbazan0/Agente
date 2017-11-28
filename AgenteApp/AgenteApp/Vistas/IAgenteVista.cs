@@ -9,6 +9,7 @@ namespace AgenteApp.Vistas
     public interface IAgenteVista
     {
         void ConsultarClientes();
+        void ConsultarClientesTel(string numero);
         void MostrarMensaje(string titulo, string mensaje);
         List<Filtro> Filtros { get;  }
         List<Objeto> Clientes { set; }

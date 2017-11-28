@@ -34,6 +34,20 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
+
+        public async void ConsultarClientesTel(string numero)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            ClientesRepositorio repositorio = new ClientesRepositorio();
+            Resultado<List<Objeto>> resultado = await repositorio.ConsultarNumTel(numero, Constantes.VERSION);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.Clientes = resultado.valor;
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
         public async void ConsultarPortabilidad(string numero)
         {
             //List<Filtro> filtros = vista.Filtros;

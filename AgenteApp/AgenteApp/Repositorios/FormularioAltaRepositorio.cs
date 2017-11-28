@@ -43,7 +43,7 @@ namespace AgenteApp.Repositorios
         {
             Resultado<List<TipoTelefono>> datos = null;
             DireccionBase = Constantes.DIRECCION_BASE;
-            Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Telefonos.php";
             AgregarParametro("accion", "ConsultarCatalogoTipoTelefono");            
             try
             {
