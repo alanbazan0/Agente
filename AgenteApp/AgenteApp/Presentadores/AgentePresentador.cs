@@ -61,6 +61,19 @@ namespace AgenteApp.Presentadores
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
 
+        public async void ConsultarIdLlamada(string extension)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            AsteriskRepositorio repositorio = new AsteriskRepositorio();
+            Resultado<string> resultado  = await repositorio.Consultar(extension);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.setIdLlamada = resultado.valor;
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
         public void CrearCatalogoClientes()
         {
             CrearCriteriosSeleccion();
