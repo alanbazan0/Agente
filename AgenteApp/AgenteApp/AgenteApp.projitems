@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Cliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CampoGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\ClienteTelefono.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Correos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CriterioSeleccion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\EstatusUsuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Campo.cs" />
@@ -32,12 +33,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CorreoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaTelefonoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesPortabilidadRepositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CorreoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CriteriosSeleccionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioAltaRepositorio.cs" />
@@ -54,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\InicioSesionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\MenuPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAgenteVista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICorreo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IFormulario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IMenuVista.cs" />
