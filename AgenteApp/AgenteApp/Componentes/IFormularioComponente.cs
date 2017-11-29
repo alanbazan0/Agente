@@ -11,5 +11,6 @@ namespace AgenteApp.Componentes
     {
         CampoFormulario CampoFormulario { get; set; }
         Campo Campo { get; }
+        string Valor { get; set; }
     }
 }

@@ -39,10 +39,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaTelefonoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaRepositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\AsteriskRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesPortabilidadRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CorreoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CriteriosSeleccionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesRepositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioActualizacionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\MenuServicioDatos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RecesoRepositorio.cs" />

@@ -20,21 +20,57 @@ namespace AgenteApp.Presentadores
         {
             this.vista = vista;
         }
-        public void CrearFormulario()
+        public void CrearFormulario(ModoVentana modo)
         {
-            CrearFormularioAlta();
+            if (modo == ModoVentana.ALTA)
+                CrearFormularioAlta();
+            else
+                CrearForumularioActualizacion();
         }
-        public async void GuardarClientes()
+
+        private async void CrearForumularioActualizacion()
         {
-            List<Campo> campos = vista.Campos;
-            ClientesAltaRepositorio repositorio = new ClientesAltaRepositorio();
-            Resultado<string> resultado = await repositorio.Insertar(campos, Constantes.VERSION);
+            FormularioActualizacionRepositorio repositorio = new FormularioActualizacionRepositorio();
+            Resultado<List<CampoFormulario>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+
             if (resultado.mensajeError == string.Empty)
             {
-                vista.idCliente = resultado.valor;                
+                campoFromulario = resultado.valor;
+                foreach (CampoFormulario campoFromulario in campoFromulario)
+                {
+                    if (campoFromulario.presentacion == "1")
+                        vista.CrearFormularioClientes(campoFromulario);
+                }
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        public async void GuardarClientes(ModoVentana modo)
+        {
+
+            List<Campo> campos = vista.Campos;
+            ClientesRepositorio repositorio = new ClientesRepositorio();
+            if (modo == ModoVentana.ALTA)
+            {
+                Resultado<string> resultado = await repositorio.Insertar(campos, Constantes.VERSION);
+                if (resultado.mensajeError == string.Empty)
+                {
+                    vista.idCliente = resultado.valor;
+                }
+                else
+                    vista.MostrarMensaje("Error", resultado.mensajeError);
+            }
+            else
+            {
+                Resultado<string> resultado = await repositorio.Actualizar(campos, Constantes.VERSION);
+                if (resultado.mensajeError == string.Empty)
+                {
+                    vista.MostrarMensaje("Notificación", "Se actualizó el registro correctamente. Id cliente: " + resultado.valor);
+                }
+                else
+                    vista.MostrarMensaje("Error", resultado.mensajeError);
+            }
         }
         public async void guardarTelefonoCliente(ClienteTelefono clienteTelefono)
         {
@@ -76,6 +112,27 @@ namespace AgenteApp.Presentadores
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        public async void TraerDatosCliente(int idCliente)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            ClientesRepositorio repositorio = new ClientesRepositorio();
+            Resultado<Objeto> resultado = await repositorio.ConsultarPorIdCliente(idCliente, Constantes.VERSION);
+            if (resultado.mensajeError == string.Empty)
+            {
+                AsignarValores(resultado.valor);
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        private void AsignarValores(Objeto registro)
+        {
+            foreach (var campo in campoFromulario)
+            {
+                vista.AsignarValor(campo, registro);
+            }
         }
     }
 }

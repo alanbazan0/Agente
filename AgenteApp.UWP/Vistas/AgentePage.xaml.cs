@@ -29,6 +29,7 @@ using Windows.System.Threading;
 using Windows.ApplicationModel.Core;
 using System.Diagnostics;
 using Windows.UI.Core;
+using System.Reflection;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -89,7 +90,9 @@ namespace NavigationMenuSample.Views
                 listener.OnGlobalStateChanged = OnGlobal;
                 LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
                 LinphoneCore.NetworkReachable = true;
-
+                LinphoneCore.MicEnabled = true;
+                LinphoneCore.MicGainDb = 90.0F;
+                //LinphoneCore.MicGainDb = 90.0;
 
 
                 Listener = Factory.Instance.CreateCoreListener();
@@ -160,9 +163,9 @@ namespace NavigationMenuSample.Views
             webCorreo.NavigateToString(a);
             //webCorreo.Source=(new Uri("http://www.contoso.com", UriKind.Absolute));
 
-            NoTelTextBox.Text = "8711897006";
-            ConsultarPortabilidad(NoTelTextBox.Text);
-            ConsultarClientesTel(NoTelTextBox.Text);
+            //NoTelTextBox.Text = "8711897006";
+            //ConsultarPortabilidad(NoTelTextBox.Text);
+            //ConsultarClientesTel(NoTelTextBox.Text);
         }
         private void LinphoneCoreIterate(ThreadPoolTimer timer)
         {
@@ -286,8 +289,7 @@ namespace NavigationMenuSample.Views
                     
                      OnCallClicked();
                     NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
-                    ConsultarPortabilidad(NoTelTextBox.Text);
-                    ConsultarClientesTel(NoTelTextBox.Text);
+                    ConsultarDatos(NoTelTextBox.Text);
                     //PRIMERO ME TRAIGO LA PORTABILIDAD Y LUEGO CONSULTO A BTCLIENTESTEL PARA VER SI YA EXISTE EN LA BASE DE DATOS
                     //consultar la tabla de BTCLIENTESTEL
                     // call.Text = "Answer Call (" + lcall.RemoteAddressAsString + ")";
@@ -307,6 +309,13 @@ namespace NavigationMenuSample.Views
                 dispatcherTimer.Stop();
                 //call_stats.Text = "";
             }
+        }
+
+        private void ConsultarDatos(string noTelefonico)
+        {
+           // ConsultarIdLlamada(noTelefonico);
+            ConsultarPortabilidad(noTelefonico);
+            ConsultarClientesTel(noTelefonico);
         }
 
         private void OnCallClicked()
@@ -398,6 +407,14 @@ namespace NavigationMenuSample.Views
             }
         }
 
+        public string setIdLlamada
+        {
+            set
+            {
+                idLlamadaTextBox.Text = value;
+            }
+        }
+
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
         {
             double? diagonal = DisplayInformation.GetForCurrentView().DiagonalSizeInInches;
@@ -456,14 +473,16 @@ namespace NavigationMenuSample.Views
             //var cliente = clientesListView.SelectedItem;
             var cliente = e.ClickedItem;
             
-
-            
             if (cliente != null)
             {
-                Object[] parameter = new Object[2];
-                parameter[0] = ModoVentana.CAMBIOS;
-                parameter[1] = cliente;
-                this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parameter);
+                var numero = camposGloba.Where(a => a.campoId == "BTCLIENTENUMERO")
+                                        .Select(a => a.id)
+                                        .First();
+                string alias = "C" + numero.ToString();
+                int idCliente = Int32.Parse((string)cliente.GetType().GetProperty(alias).GetValue(cliente, null));
+                
+                var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente };
+                this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
             }
 
         }
@@ -521,11 +540,10 @@ namespace NavigationMenuSample.Views
         {
             if (!NoTelTextBox.Text.Equals(string.Empty))
             {
-                Object[] parameter = new object[3];
-                parameter[0] = ModoVentana.ALTA;
-                parameter[1] = NoTelTextBox.Text;
-                parameter[2] = portabilidadParametros;
-                this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parameter);
+                var parametros = new { modo = ModoVentana.ALTA,
+                                       telCliente = NoTelTextBox.Text,
+                                       portabilidad = portabilidadParametros  };
+                this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
             }
             else
                 MostrarMensaje("Error", "Es necesario el numero telefonico para dar de alta al usuario");
@@ -593,6 +611,10 @@ namespace NavigationMenuSample.Views
         public void ConsultarPortabilidad(string numero)
         {
             presentador.ConsultarPortabilidad(numero);
+        }
+        public void ConsultarIdLlamada(string extension)
+        {
+            presentador.ConsultarIdLlamada(extension);
         }
 
         public void ConsultarClientesTel(string numero)

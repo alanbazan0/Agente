@@ -253,7 +253,7 @@
                             </Grid>
 
                         </PivotItem>
-                        <PivotItem Header="CRM">
+                        <PivotItem Header="CRM" BorderBrush="OrangeRed">
                             <!--Pivot content goes here-->
 
                             <TextBlock Text="Content of pivot item 2."/>

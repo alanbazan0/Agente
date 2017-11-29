@@ -17,5 +17,6 @@ namespace AgenteApp.Vistas
         void CrearCriterioSeleccion(CriterioSeleccion criterioSeleccion);
         void CrearColumnasGrid1(List<CampoGrid> campos);
         void ConsultarPortabilidad(string numero);
+        string setIdLlamada { set; }
     }
 }

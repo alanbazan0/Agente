@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Reflection;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -35,6 +36,7 @@ namespace AgenteApp.UWP.Vistas
         FormularioFabrica formularioClienteFabrica;
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
+        private ModoVentana modo;
         string numTelefonico;
         public ClientePage()
         {
@@ -47,6 +49,7 @@ namespace AgenteApp.UWP.Vistas
             presentador.TipoTelefono();
 
         }
+
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
         {
             double? diagonal = DisplayInformation.GetForCurrentView().DiagonalSizeInInches;
@@ -75,13 +78,7 @@ namespace AgenteApp.UWP.Vistas
                 List<Campo> campos = new List<Campo>();
                 foreach (IFormularioComponente componente in formularioComponentes.Children)
                 {
-                    if (componente.Campo.valor != string.Empty)
-                        campos.Add(componente.Campo);
-                    else
-                    {
-                        componente.Campo.valor = " ";
-                        campos.Add(componente.Campo);
-                    }
+                    campos.Add(componente.Campo);
                 }
                 return campos;
             }
@@ -90,21 +87,26 @@ namespace AgenteApp.UWP.Vistas
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            Object[] person = (object[]) e.Parameter;
+            var parametros =  e.Parameter;
 
-            if (person != null)
+            if (parametros != null)
             {
-                if ((ModoVentana)person[0] == ModoVentana.ALTA)
+                modo = (ModoVentana)parametros.GetType().GetProperty("modo").GetValue(parametros, null);
+                presentador.CrearFormulario(modo);
+
+                if (modo == ModoVentana.ALTA)
                 {
-                    presentador.CrearFormulario();
-                    numTelefonico = (string)person[1];
-                    parametroPortabilidad = (Portabilidad)person[2];
+                    
+                    numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null); 
+                    parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
+
                     noTelefonicoClienteTextBox.Text = numTelefonico;
                     razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
                 }
                 else
                 {
-                    presentador.CrearFormulario();
+                    int idCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
+                    presentador.TraerDatosCliente(idCliente);
                     //entra en modo cambio
                 }
 
@@ -117,6 +119,8 @@ namespace AgenteApp.UWP.Vistas
             {
                 progressRing.IsActive = false;
                 clientesListView.ItemsSource = value;
+
+                //Y AQUI HAY QUE MANDAR EL LLENADO DE LOS NUMEROS TELEFONICOS  /////////////////////////////////////////////////////////////////////////
             }
         }
 
@@ -156,6 +160,10 @@ namespace AgenteApp.UWP.Vistas
         {
             IFormularioComponente componente = formularioClienteFabrica.CrearComponente(campoFormulario); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
             formularioComponentes.Children.Add(componente as UIElement);
+            //if (campoFormulario.campoId == "BTCLIENTENUMERO")
+            //{
+            //    (componente as UIElement).IsEnabled = false;
+            //}
         }
 
         private void AppGuardarClienteButton_Click(object sender, RoutedEventArgs e)
@@ -166,7 +174,7 @@ namespace AgenteApp.UWP.Vistas
         public void GuardarClientes()
         {
             progressRing.IsActive = true;
-            presentador.GuardarClientes();
+            presentador.GuardarClientes(modo);
         }
         public void GuardarTelefonoCliente(string IdCliente)
         {
@@ -181,7 +189,18 @@ namespace AgenteApp.UWP.Vistas
 
             presentador.guardarTelefonoCliente(clienteTelefono);
         }
-        
 
+        public void AsignarValor(CampoFormulario campo, Objeto registro)
+        {
+            var componente = formularioComponentes.Children.Where(a => (a as IFormularioComponente).CampoFormulario.tablaId == campo.tablaId 
+                                                                   && (a as IFormularioComponente).CampoFormulario.campoId == campo.campoId)
+                                       .Select(a => a)
+                                       .First();
+            string alias = "C" + campo.id.ToString();
+
+            (componente as IFormularioComponente).Valor =  (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
+
+
+        }
     }
 }

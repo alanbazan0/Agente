@@ -21,5 +21,7 @@ namespace AgenteApp.Componentes
             };
         }
         public CampoFormulario CampoFormulario { get { return campoFormulario; } set { campoFormulario = value; } }
+
+        public string Valor { get { return Text; } set { Text = value; } }
     }
 }
