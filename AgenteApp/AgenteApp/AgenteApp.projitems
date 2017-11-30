@@ -37,7 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaTelefonoRepositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesTelefonoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\AsteriskRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesPortabilidadRepositorio.cs" />

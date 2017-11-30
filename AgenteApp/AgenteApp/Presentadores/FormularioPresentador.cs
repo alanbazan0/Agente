@@ -66,7 +66,7 @@ namespace AgenteApp.Presentadores
                 Resultado<string> resultado = await repositorio.Actualizar(campos, Constantes.VERSION);
                 if (resultado.mensajeError == string.Empty)
                 {
-                    vista.MostrarMensaje("Notificación", "Se actualizó el registro correctamente. Id cliente: " + resultado.valor);
+                    vista.ActualizarTelefonoCliente(resultado.valor);
                 }
                 else
                     vista.MostrarMensaje("Error", resultado.mensajeError);
@@ -74,7 +74,7 @@ namespace AgenteApp.Presentadores
         }
         public async void guardarTelefonoCliente(ClienteTelefono clienteTelefono)
         {
-            ClientesAltaTelefonoRepositorio repositorio = new ClientesAltaTelefonoRepositorio();
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
             Resultado<string> resultado = await repositorio.Insertar(clienteTelefono);
             if (resultado.mensajeError == string.Empty)
             {
@@ -101,6 +101,7 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
+
         public async void TipoTelefono()
         {
             FormularioAltaRepositorio repositorio = new FormularioAltaRepositorio();
@@ -122,6 +123,29 @@ namespace AgenteApp.Presentadores
             if (resultado.mensajeError == string.Empty)
             {
                 AsignarValores(resultado.valor);
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        public async void traerDatosTelefono(int idCliente)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado <ClienteTelefono> resultado = await repositorio.ConsultarTelefonoIdCliente(idCliente);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.ClienteTelefono = resultado.valor;
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        public async void ActualizarTelefonoCliente(ClienteTelefono clienteTelefono)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<string> resultado = await repositorio.Actualizar(clienteTelefono);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.MostrarMensaje("Notificación", "Se actualizó el registro correctamente el cliente");
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
