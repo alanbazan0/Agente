@@ -13,9 +13,10 @@ namespace AgenteApp.Vistas
         List<Campo> Campos { get; }
         List<Objeto> Clientes { set; }
         List<TipoTelefono> TipoTelefono { set; }
+        ClienteTelefono ClienteTelefono { set; }
         void CrearFormularioClientes(CampoFormulario campoFormulario);
         string idCliente { set;  }
-
+        void ActualizarTelefonoCliente(string idCliente);
         void AsignarValor(CampoFormulario campo, Objeto registro);
     }
 }

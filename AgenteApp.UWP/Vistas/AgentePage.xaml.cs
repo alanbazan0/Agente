@@ -427,12 +427,12 @@ namespace NavigationMenuSample.Views
         {
             ConsultarClientes();
         }
-
        
         private void ApprRecesoButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.RecesoPage), usuario);
         }
+
         public void ConsultarClientes()
         {
             progressRing.IsActive = true;
@@ -468,7 +468,7 @@ namespace NavigationMenuSample.Views
                 string alias = "C" + numero.ToString();
                 int idCliente = Int32.Parse((string)cliente.GetType().GetProperty(alias).GetValue(cliente, null));
                 
-                var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente };
+                var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente, portabilidad = portabilidadParametros };
                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
             }
 

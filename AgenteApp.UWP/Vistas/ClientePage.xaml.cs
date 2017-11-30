@@ -93,13 +93,10 @@ namespace AgenteApp.UWP.Vistas
             {
                 modo = (ModoVentana)parametros.GetType().GetProperty("modo").GetValue(parametros, null);
                 presentador.CrearFormulario(modo);
-
+                parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
                 if (modo == ModoVentana.ALTA)
                 {
-                    
                     numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null); 
-                    parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
-
                     noTelefonicoClienteTextBox.Text = numTelefonico;
                     razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
                 }
@@ -107,7 +104,8 @@ namespace AgenteApp.UWP.Vistas
                 {
                     int idCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
                     presentador.TraerDatosCliente(idCliente);
-                    //entra en modo cambio
+                    presentador.traerDatosTelefono(idCliente);
+                    
                 }
 
             }
@@ -142,10 +140,21 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
+        public ClienteTelefono ClienteTelefono
+        {
+            set
+            {
+                noTelefonicoClienteTextBox.Text = value.Numeracion;
+                razonSocialTextBox.Text = value.Compania;
+                tipoTelefonoTextBox.SelectedIndex = Int32.Parse(value.TipoTelefono);
+            }
+        }
+
         private void AppCerrarButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(NavigationMenuSample.Views.AgentePage));  //AgenteApp.UWP.Vistas.AgentePage));
         }
+
         public async void MostrarMensaje(string titulo, string mensaje)
         {
             progressRing.IsActive = false;
@@ -176,17 +185,17 @@ namespace AgenteApp.UWP.Vistas
             progressRing.IsActive = true;
             presentador.GuardarClientes(modo);
         }
+
         public void GuardarTelefonoCliente(string IdCliente)
         {
-            clienteTelefono.id = IdCliente;
-            clienteTelefono.nir = parametroPortabilidad.IdMunicipio;
-            clienteTelefono.serie = parametroPortabilidad.IdConsecutivo;
-            clienteTelefono.telefonoCliente = numTelefonico;
-            clienteTelefono.numeracion = "0";
-            clienteTelefono.compania = parametroPortabilidad.DescripcionPortabilidad;
+            clienteTelefono.Id = IdCliente;
+            clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
+            clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
+            clienteTelefono.Numeracion = numTelefonico;
+            clienteTelefono.TelefonoCliente = "0";
+            clienteTelefono.Compania = parametroPortabilidad.DescripcionPortabilidad;
             TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
-            clienteTelefono.tipoTelefono = itemboxTTelefono.Id;
-
+            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
             presentador.guardarTelefonoCliente(clienteTelefono);
         }
 
@@ -201,6 +210,19 @@ namespace AgenteApp.UWP.Vistas
             (componente as IFormularioComponente).Valor =  (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
 
 
+        }
+
+        public void ActualizarTelefonoCliente(string idCliente)
+        {
+            clienteTelefono.Id = idCliente;
+            clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
+            clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
+            clienteTelefono.Numeracion = noTelefonicoClienteTextBox.Text;
+            clienteTelefono.TelefonoCliente = "0";
+            clienteTelefono.Compania =razonSocialTextBox.Text;
+            TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
+            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
+            presentador.ActualizarTelefonoCliente(clienteTelefono);
         }
     }
 }
