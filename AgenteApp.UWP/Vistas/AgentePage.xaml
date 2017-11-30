@@ -80,7 +80,7 @@
         <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <StackPanel>
-                    <Pivot x:Name="rootPivot" >
+                    <Pivot x:Name="rootPivot" HeaderFocusVisualPlacement="ItemHeaders" >
                         <PivotItem Header="Clientes" HorizontalAlignment="Left">
                             <Grid>
                                 
@@ -433,7 +433,7 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
-                                    <ListView x:Name="correosListView" Margin="15,0,0,0" >
+                                    <ListView x:Name="correosListView" Margin="15,0,0,0"  IsItemClickEnabled="True" ItemClick="correosListView_ItemClick">
                                         <ListView.HeaderTemplate>
                                             <DataTemplate>
                                                 <Grid  Padding="0" >

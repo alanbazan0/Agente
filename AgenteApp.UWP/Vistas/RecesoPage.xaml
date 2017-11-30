@@ -44,9 +44,7 @@
                 <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
-        <StackPanel >
-            <TextBox x:Name="contacoSMSTetBox" PlaceholderText="Contacto" Margin="785,15" Width="350" />
-
+        <StackPanel Margin="0,50,0,0">
             <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="auto" >
 
                 <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo receso" Margin="15,0,0,0"/>
@@ -154,10 +152,6 @@
             <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                 <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
             </StackPanel>
-
-        </StackPanel>
-        <StackPanel >
-            <Button Content="Button" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </StackPanel>
         <TimePicker HorizontalAlignment="Left" Margin="1146,-62,0,0" VerticalAlignment="Top"/>
