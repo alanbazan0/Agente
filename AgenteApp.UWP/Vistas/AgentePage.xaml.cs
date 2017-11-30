@@ -39,10 +39,11 @@ namespace NavigationMenuSample.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AgentePage : Page, IAgenteVista
+    public sealed partial class AgentePage : Page, IAgenteVista,ICorreo
     {
         Usuario usuario;
         AgentePresentador presentador;
+        CorreoPresentador correosPresentador;
         CriterioSeleccionFabrica criteriosSeleccionFabrica;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
@@ -66,7 +67,10 @@ namespace NavigationMenuSample.Views
             this.InitializeComponent();
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
+
             presentador = new AgentePresentador(this);
+            correosPresentador = new CorreoPresentador(this);
+
             criteriosSeleccionFabrica = new CriterioSeleccionFabrica();
             usuario = null;
             dispatcherTimer = new DispatcherTimer();
@@ -199,6 +203,7 @@ namespace NavigationMenuSample.Views
         public void onRegister(NavigationEventArgs e)
         {
             usuario = (Usuario)e.Parameter;
+            consultarCorreoEntrada();
             try
             {
                 NoExtensionTextBox.Text = usuario.Extension;
@@ -391,6 +396,14 @@ namespace NavigationMenuSample.Views
                 tipoLlamadaTextBox.Text = value[0].TipoLlamadaPortabilidad;
 
                 portabilidadParametros = value[0];
+            }
+        }
+
+        public List<Correos> correos
+        {
+            set
+            {
+                correosListView.ItemsSource = value;
             }
         }
 
@@ -631,6 +644,11 @@ namespace NavigationMenuSample.Views
         private void webCorreo_Loaded(object sender, EventArgs e)
         {
             webCorreo.NavigateToString("<html><body><h1>test</h1></body></html>");
+        }
+
+        public void consultarCorreoEntrada()
+        {
+            correosPresentador.consultarCorreoEntrada(usuario.Id);
         }
     }
 }
