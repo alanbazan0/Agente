@@ -11,7 +11,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
             <AppBarButton Icon="Save" Label="Guardar" Foreground="White" Click="AppGuardarClienteButton_Click"/>
-            <AppBarButton Icon="ClosePane" Label="Salir" Foreground="White" Click="AppCerrarButton_Click"/>
+            <!--<AppBarButton Icon="ClosePane" Label="Salir" Foreground="White" Click="AppCerrarButton_Click"/>-->
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
             <AppBarSeparator Foreground="White"/>-->
             <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->

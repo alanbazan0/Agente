@@ -32,6 +32,7 @@ using Windows.UI.Core;
 using System.Reflection;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
+using Windows.ApplicationModel.Activation;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -94,8 +95,8 @@ namespace NavigationMenuSample.Views
                 listener.OnGlobalStateChanged = OnGlobal;
                 LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
                 LinphoneCore.NetworkReachable = true;
-                LinphoneCore.MicEnabled = true;
-                LinphoneCore.MicGainDb = 90.0F;
+                //LinphoneCore.MicEnabled = true;
+                //LinphoneCore.MicGainDb = 90.0F;
                 //LinphoneCore.MicGainDb = 90.0;
 
 
@@ -113,9 +114,12 @@ namespace NavigationMenuSample.Views
             HeaderTextBlock.Text += " - En linea";
             FechaLlamadaTextBox.Text = GetDateString();
 
-            //NoTelTextBox.Text = "8711897006";
-            //ConsultarPortabilidad(NoTelTextBox.Text);
-            //ConsultarClientesTel(NoTelTextBox.Text);
+            NoTelTextBox.Text = "8711897006";
+            ConsultarPortabilidad(NoTelTextBox.Text);
+            ConsultarClientesTel(NoTelTextBox.Text);
+
+           // SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+
         }
         private void LinphoneCoreIterate(ThreadPoolTimer timer)
         {
@@ -281,9 +285,8 @@ namespace NavigationMenuSample.Views
                 if (call.State == CallState.IncomingReceived)
                 {
                     LinphoneCore.AcceptCall(call);
-
-                    HeaderTextBlock.Text = "Llamada - Iniciada";
-                    timpoLlamadaTextBox.Text = "00:00:00";
+                    LimpiarDatos();
+                    
                     HoraLlamadaTextBox.Text = GetTimeString();
                     dispatcherTimer.Start();
                 }
@@ -655,5 +658,18 @@ namespace NavigationMenuSample.Views
             }*/
             await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
+
+        private void LimpiarDatos()
+        {
+             seg = 0;
+             min = 0;
+             hor = 0;
+             segunds = 0;
+            HeaderTextBlock.Text = "Llamada - Iniciada";
+            timpoLlamadaTextBox.Text = "00:00:00";
+        }
+   
+
+        
     }
 }
