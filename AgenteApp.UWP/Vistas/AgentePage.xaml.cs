@@ -109,60 +109,6 @@ namespace NavigationMenuSample.Views
             { }
             HeaderTextBlock.Text += " - En linea";
             FechaLlamadaTextBox.Text = GetDateString();
-            // webCorreo.NavigateToString("<html><body><h1>test</h1></body></html>");
-           string a = "  <html> "+
-"  <table cellpadding='0' cellspacing='0' border='0' align='center' width='80%' style='font-family:Helvetica,Arial; font-size:16px; background:#132020; color:#132020'>  " +
-"  <tbody>  " +
-"  <tr>  " +
-"  <td height='76px' valign='middle' style='padding-left:27px'><a href='//www.gob.mx/' target='_blank' rel='noopener noreferrer' style='vertical-align:middle'><img data-imagetype='External' src='https://hlda.imss.gob.mx/hlda/resources/img/logoGobmxCorreo.bmp' width='126' height='39' alt='gob.mx'></a></td>  " +
-"  <td height='76px' valign='middle' align='right' style='padding-right:27px'><span style='color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 16px; font-family: Helvetica, Arial, serif, EmojiFont; margin: 0px; padding: 0px; line-height: 16px;'>&nbsp;</span></td>  " +
-"  </tr>  " +
-"  </tbody>  " +
-"  </table>  " +
-"  <table cellpadding='0' cellspacing='0' border='0' align='center' width='80%' bgcolor='#ffffff' style='font-family:Helvetica,Arial; background:#ffffff'>  " +
-"  <tbody>  " +
-"  <tr>  " +
-"  <td width='560px;' valign='top' align='left' bgcolor='#ffffff' style='font-family:Helvetica,Arial; font-size:16px; color:#5a5a5a; background:#fff; padding:38px 27px 76px'>  " +
-"  <table cellpadding='0' cellspacing='0' border='0' width='100%' style='color:#717171; font:normal 16px Helvetica,Arial; margin:0px; padding:0'>  " +
-"  <tbody>  " +
-"  <tr>  " +
-"  <td align='center' style='padding:15px 0px'>  " +
-"  <h4 style='color:#5a5a5a; margin:0px; padding:0px; line-height:30px; font-size:24px; font-family:Helvetica,Arial'>  " +
-"  Contraseña de acceso al reporte de semanas cotizadas</h4>  " +
-"  <br>  " +
-"  <br>  " +
-"  </td>  " +
-"  </tr>  " +
-"  <tr>  " +
-"  <td align='justify' style='padding:15px 0px'><span class='x_style2'>Estimado(a) <strong>HERNANDEZ CEDILLO ISRAEL IGNACIO</strong>: <br>  " +
-"  <br>  " +
-"  Anexo a este mensaje de correo electrónico puedes encontrar el documento en formato PDF que contiene tu contraseña de acceso.<br>  " +
-"  <br>  " +
-"  </span></td>  " +
-"  </tr>  " +
-"  <tr>  " +
-"  <td align='justify' style='padding:15px 0px; text-align:justify'>  " +
-"  <p style='color:#5a5a5a; font-weight:normal; margin:0px; padding:0px; font-style:italic; line-height:20px; font-size:12px; font-family:Helvetica,Arial'>  " +
-"  Para abrir el documento se requiereAcrobat Reader, que puedes descargar gratuitamente<a href='http://www.adobe.com/es/products/acrobat/readstep2.html' target='_blank' rel='noopener noreferrer'> aquí</a>. </p>  " +
-"  </td>  " +
-"  </tr>  " +
-"  </tbody>  " +
-"  </table>  " +
-"  </td>  " +
-"  </tr>  " +
-"  </tbody>  " +
-"  </table>  " +
-"  <table cellpadding='0' cellspacing='0' border='0' align='center' width='80%' style='font-family:Helvetica,Arial; font-size:16px; background:#132020; color:#132020'>  " +
-"  <tbody>  " +
-"  <tr>  " +
-"  <td align='left' height='76px' valign='middle' style='padding-left:27px'><img data-imagetype='External' src='https://hlda.imss.gob.mx/hlda/resources/img/pieLogoGobmxCorreo.bmp' width='63' height='19' alt='gob.mx'></td>  " +
-"  <td height='76px' valign='middle' align='right' style='padding-right:27px'><img data-imagetype='External' src='https://hlda.imss.gob.mx/hlda/resources/img/pieGobmxCorreo.bmp' width='86' height='35' alt='gob.mx'></td>  " +
-"  </tr>  " +
-"  </tbody>  " +
-"  </table>  " +
-"  </html>  ";
-            webCorreo.NavigateToString(a);
-            //webCorreo.Source=(new Uri("http://www.contoso.com", UriKind.Absolute));
 
             NoTelTextBox.Text = "8711897006";
             ConsultarPortabilidad(NoTelTextBox.Text);
@@ -406,7 +352,7 @@ namespace NavigationMenuSample.Views
         {
             set
             {
-                correosListView.ItemsSource = value;
+                correosListView.ItemsSource = value;                
             }
         }
 
@@ -489,7 +435,27 @@ namespace NavigationMenuSample.Views
             }
 
         }
+        
+        private void correosListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //var cliente = clientesListView.SelectedItem;
+            var correos = e.ClickedItem;
 
+            if (correos != null)
+            {
+                var contenido= (string)correos.GetType().GetProperty("Contenido").GetValue(correos, null);
+                byte[] datos = Convert.FromBase64String(contenido);
+                string htmlCadena = Encoding.UTF8.GetString(datos);
+                webCorreo.NavigateToString(htmlCadena);
+                /* var numero = camposGloba.Where(a => a.c == "BTCLIENTENUMERO").Select(a => a.id).First();
+                 string alias = "C" + numero.ToString();
+                 int idCliente = Int32.Parse((string)correos.GetType().GetProperty(alias).GetValue(correos, null));
+
+                 var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente };
+                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);*/
+            }
+
+        }
         public void CrearColumnasGrid1(List<CampoGrid> campos)
         {
             camposGloba = campos;
