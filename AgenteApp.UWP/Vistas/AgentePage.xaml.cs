@@ -30,6 +30,8 @@ using Windows.ApplicationModel.Core;
 using System.Diagnostics;
 using Windows.UI.Core;
 using System.Reflection;
+using Windows.ApplicationModel.Email;
+using Windows.Storage;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -67,6 +69,7 @@ namespace NavigationMenuSample.Views
             this.InitializeComponent();
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
+            webCorreo.NavigateToString("<html></html>");
 
             presentador = new AgentePresentador(this);
             correosPresentador = new CorreoPresentador(this);
@@ -77,9 +80,10 @@ namespace NavigationMenuSample.Views
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             presentador.CrearCatalogoClientes();
+
             indicadores.Visibility = Visibility.Collapsed;
             contactos.Visibility = Visibility.Collapsed;
-            
+            correosSalida.Visibility = Visibility.Collapsed;
             try
             {
                 string rc_path = null;
@@ -349,7 +353,13 @@ namespace NavigationMenuSample.Views
         {
             set
             {
-                correosListView.ItemsSource = value;                
+                correosListView.ItemsSource = value;
+                if(!value[0].Contenido.Equals(""))
+                { 
+                    byte[] datos = Convert.FromBase64String(value[0].Contenido);
+                    string htmlCadena = Encoding.UTF8.GetString(datos);
+                    webCorreo.NavigateToString(htmlCadena);
+                }
             }
         }
 
@@ -607,6 +617,17 @@ namespace NavigationMenuSample.Views
             indicadores.Visibility = Visibility.Visible;
             contactos.Visibility = Visibility.Collapsed;
         }
+        void clickCorreoE(object sender, RoutedEventArgs e)
+        {
+            correosEntrada.Visibility = Visibility.Visible;
+            correosSalida.Visibility = Visibility.Collapsed;
+        }
+        void clickCorreoS(object sender, RoutedEventArgs e)
+        {
+            correosSalida.Visibility = Visibility.Visible;
+            correosEntrada.Visibility = Visibility.Collapsed;
+            SendEmailButton();
+        }
         private void webCorreo_Loaded(object sender, EventArgs e)
         {
             webCorreo.NavigateToString("<html><body><h1>test</h1></body></html>");
@@ -615,6 +636,24 @@ namespace NavigationMenuSample.Views
         public void consultarCorreoEntrada()
         {
             correosPresentador.consultarCorreoEntrada(usuario.Id);
+        }
+        private async void SendEmailButton()
+        {
+            EmailMessage emailMessage = new EmailMessage();
+            emailMessage.To.Add(new EmailRecipient("***@***.com"));
+            string messageBody = "Hello World";
+            emailMessage.Body = messageBody;
+            /*StorageFolder MyFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFile attachmentFile = await MyFolder.GetFileAsync("MyTestFile.txt");
+            if (attachmentFile != null)
+            {
+                var stream = Windows.Storage.Streams.RandomAccessStreamReference.CreateFromFile(attachmentFile);
+                var attachment = new Windows.ApplicationModel.Email.EmailAttachment(
+                         attachmentFile.Name,
+                         stream);
+                emailMessage.Attachments.Add(attachment);
+            }*/
+            await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
     }
 }

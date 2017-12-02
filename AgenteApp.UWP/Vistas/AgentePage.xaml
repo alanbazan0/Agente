@@ -433,47 +433,94 @@
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1">
-                                    <ListView x:Name="correosListView" Margin="15,0,0,0"  IsItemClickEnabled="True" ItemClick="correosListView_ItemClick">
-                                        <ListView.HeaderTemplate>
-                                            <DataTemplate>
-                                                <Grid  Padding="0" >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="50" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="200" />
-                                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name = "btnCorreosE" Background="#ebebeb" Foreground="#5e777c" Content="Correos de entrada" Click="clickCorreoE"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,0,0,0" />
+                                    <Button x:Name = "btnCorreosS" Background="#ebebeb" Foreground="#5e777c" Content="Correos de salida"  Click="clickCorreoS" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15,0,0,0"/>
+                                    <StackPanel x:Name="correosEntrada">
+                                        <ListView x:Name="correosListView" Margin="15,0,0,0"  IsItemClickEnabled="True" ItemClick="correosListView_ItemClick">
+                                            <ListView.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  Padding="0" >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="50" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="200" />
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                        <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                    </Border>
-                                                    <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                        <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                    </Border>
-                                                    <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                        <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                    </Border>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListView.HeaderTemplate>
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Padding="0" Margin="0,0,0,0">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="50" />
-                                                        <ColumnDefinition Width="250" />
-                                                        <ColumnDefinition Width="200" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Image Grid.Column="0"  Source="../Assets/Contacto.png" Height="30" />
-                                                    <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Titulo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                    <TextBlock Grid.Column="2" FontSize="12" Text="{Binding Fecha}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+                                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                            <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                            <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                            <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.HeaderTemplate>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Padding="0" Margin="0,0,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="50" />
+                                                            <ColumnDefinition Width="250" />
+                                                            <ColumnDefinition Width="200" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Image Grid.Column="0"  Source="../Assets/Contacto.png" Height="30" />
+                                                        <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Titulo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="2" FontSize="12" Text="{Binding Fecha}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                    <StackPanel x:Name="correosSalida">
+                                        <ListView x:Name="correosSalidaListView" Margin="15,0,0,0"  IsItemClickEnabled="True" ItemClick="correosListView_ItemClick">
+                                            <ListView.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  Padding="0" >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="50" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="200" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                            <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                            <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                            <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.HeaderTemplate>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Padding="0" Margin="0,0,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="50" />
+                                                            <ColumnDefinition Width="250" />
+                                                            <ColumnDefinition Width="200" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Image Grid.Column="0"  Source="../Assets/Contacto.png" Height="30" />
+                                                        <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Titulo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="2" FontSize="12" Text="{Binding Fecha}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </StackPanel>
+                                
                                 <StackPanel Grid.Column="2">
                                     <WebView x:Name = "webCorreo" Height="800"  Source="http://www.contoso.com" Margin="0,0,0,0" />                                    
                                 </StackPanel>
@@ -508,6 +555,7 @@
                         </PivotItem>
 
                     </Pivot>
+                        
                 </StackPanel>
 
 
