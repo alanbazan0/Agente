@@ -3,6 +3,7 @@ using AgenteApp.DataAccess;
 using AgenteApp.Modelos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -13,6 +14,7 @@ namespace AgenteApp.Repositorios
 {
     public class CamposGrid1Repositorio : RepositorioBase
     {
+        
         public async Task<Resultado<List<CampoGrid>>> ConsultarPorVersion(int version)
         {
             Resultado<List<CampoGrid>> datos = null;
