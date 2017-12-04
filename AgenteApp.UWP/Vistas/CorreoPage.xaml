@@ -64,7 +64,7 @@
                     </ctl:PageHeader.HeaderContent>
                 </ctl:PageHeader>
             </CommandBar.Content>
-            <AppBarButton Icon="MailForward" Label="Consultar cliente" Foreground="White" Click="ResponderCorreo_Click"/>
+            <AppBarButton Icon="MailForward" Label="Responder correo" Foreground="White" Click="ResponderCorreo_Click"/>
         </CommandBar>
 
         <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
