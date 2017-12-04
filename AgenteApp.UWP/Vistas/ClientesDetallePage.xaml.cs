@@ -74,8 +74,8 @@ namespace NavigationMenuSample.Views
             var parametros = new
             {
                 modo = this.modo,
-                //telCliente = NoTelTextBox.Text,
-                // portabilidad = portabilidadParametros
+                telCliente = this.numTelefonico,
+                portabilidad = portabilidadParametros
             };
             this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
            

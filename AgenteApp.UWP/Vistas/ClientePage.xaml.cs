@@ -98,12 +98,14 @@ namespace AgenteApp.UWP.Vistas
                 parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
                 if (modo == ModoVentana.ALTA)
                 {
+                    this.HeaderTextBlock.Text = "Identificación del cliente / alta cliente";
                     numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null); 
                     noTelefonicoClienteTextBox.Text = numTelefonico;
                     razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
                 }
                 else
                 {
+                    this.HeaderTextBlock.Text = "Identificación del cliente / actualizar cliente";
                     int idCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
                     presentador.TraerDatosCliente(idCliente);
                     presentador.traerDatosTelefono(idCliente);
@@ -148,7 +150,7 @@ namespace AgenteApp.UWP.Vistas
             {
                 noTelefonicoClienteTextBox.Text = value.Numeracion;
                 razonSocialTextBox.Text = value.Compania;
-                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value.TipoTelefono);
+                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value.TipoTelefono)-1;
             }
         }
 

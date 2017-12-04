@@ -16,20 +16,7 @@
             <AppBarSeparator Foreground="White"/>-->
             <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
             <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Save" Label="Guardar tipificación"/>
-                <AppBarButton Icon="Mail" Label="Encuesta de satisfacción" />
-                <!--<AppBarButton Icon="Message"  Label="Historial de eventos" Click="AppSMSButton_Click"/>-->
-                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
-                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
-                <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
-                <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
-                <AppBarButton Icon="Pause" Label="Hold"/>
-                <AppBarButton Icon="Refresh" Label="Reconectar"/>
-                <AppBarButton Icon="Redo" Label="Reanudar llamada"/>
-                <AppBarButton Icon="DisconnectDrive" Label="Llamada cortada"/>
-                <AppBarButton Icon="PhoneBook" Label="Recuperar datos de llamadas"/>
-            </CommandBar.SecondaryCommands>
+            
             <CommandBar.Content>
                 <ctl:PageHeader>
                     <ctl:PageHeader.HeaderContent>

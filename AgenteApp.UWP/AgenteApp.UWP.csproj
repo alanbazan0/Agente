@@ -136,6 +136,9 @@
     <Compile Include="Vistas\ResponCorreo.xaml.cs">
       <DependentUpon>ResponCorreo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\SmsPage.xaml.cs">
+      <DependentUpon>SmsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -224,10 +227,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vistas\SmsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LinphoneSDK">
-      <Version>3.12.0.211</Version>
+      <Version>3.12.0.273</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.1</Version>

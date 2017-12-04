@@ -109,9 +109,9 @@ namespace NavigationMenuSample.Views
             HeaderTextBlock.Text += " - En linea";
             FechaLlamadaTextBox.Text = GetDateString();
 
-            numTelefonico = NoTelTextBox.Text = "8711897006";
-            ConsultarPortabilidad(NoTelTextBox.Text);
-            ConsultarClientesTel(NoTelTextBox.Text);
+            //numTelefonico = NoTelTextBox.Text = "8711897006";
+            //ConsultarPortabilidad(NoTelTextBox.Text);
+            //ConsultarClientesTel(NoTelTextBox.Text);
 
            // SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
@@ -352,12 +352,12 @@ namespace NavigationMenuSample.Views
             set
             {
                 correosListView.ItemsSource = value;
-                if(!value[0].Contenido.Equals(""))
-                { 
-                    byte[] datos = Convert.FromBase64String(value[0].Contenido);
-                    string htmlCadena = Encoding.UTF8.GetString(datos);
-                    webCorreo.NavigateToString(htmlCadena);
-                }
+                //if(!value[0].Contenido.Equals(""))
+                //{ 
+                //    byte[] datos = Convert.FromBase64String(value[0].Contenido);
+                //    string htmlCadena = Encoding.UTF8.GetString(datos);
+                //    webCorreo.NavigateToString(htmlCadena);
+                //}
             }
         }
 
@@ -397,7 +397,7 @@ namespace NavigationMenuSample.Views
        
         private void ApprRecesoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.RecesoPage), usuario);
+            this.Frame.Navigate(typeof(RecesoPage), usuario);
         }
 
         public void ConsultarClientes()

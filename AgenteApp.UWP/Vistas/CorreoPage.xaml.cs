@@ -57,11 +57,14 @@ namespace NavigationMenuSample.Views
             set
             {
                 correosListView.ItemsSource = value;
-                if (!value[0].Contenido.Equals(""))
+                if (value == null)
                 {
-                    byte[] datos = Convert.FromBase64String(value[0].Contenido);
-                    string htmlCadena = Encoding.UTF8.GetString(datos);
-                    webCorreo.NavigateToString(htmlCadena);
+                    if (!value[0].Contenido.Equals(""))
+                    {
+                        byte[] datos = Convert.FromBase64String(value[0].Contenido);
+                        string htmlCadena = Encoding.UTF8.GetString(datos);
+                        webCorreo.NavigateToString(htmlCadena);
+                    }
                 }
             }
         }
