@@ -20,6 +20,7 @@ using AgenteApp.UWP;
 using Windows.UI.ViewManagement;
 using Windows.UI;
 using AgenteApp.Modelos;
+using AgenteApp.Clases;
 
 //usings Linphone
 using Linphone;
@@ -44,6 +45,12 @@ namespace NavigationMenuSample
                     Symbol = Symbol.Phone,
                     Label = "Llamada",
                     DestPage = typeof(AgentePage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.AddFriend,
+                    Label = "Identificación del cliente",
+                    DestPage = typeof(ClientesDetallePage)
                 },
                 new NavMenuItem()
                 {
@@ -296,16 +303,25 @@ namespace NavigationMenuSample
 
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
 
+
             if (item != null)
             {
                 item.IsSelected = true;
                 if (item.DestPage != null &&
                     item.DestPage != this.AppFrame.CurrentSourcePageType)
                 {
-                    this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                    if (item.Label.Equals("Identificación del cliente"))
+                    {
+                        var parametros = new { modo = ModoVentana.ALTA, telCliente = "8711897006"/*, idCliente = idCliente, portabilidad = portabilidadParametros*/ };
+                        item.Arguments = parametros;
+                        this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                    }
+                    else
+                        this.AppFrame.Navigate(item.DestPage, item.Arguments);
 
                     //Page destPage = (Page) Activator.CreateInstance(item.DestPage);
                     //this.AppFrame.Content = destPage;
+                    
 
                 }
             }

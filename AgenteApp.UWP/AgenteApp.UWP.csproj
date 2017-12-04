@@ -117,6 +117,9 @@
     <Compile Include="Vistas\ClientePage.xaml.cs">
       <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ClientesDetallePage.xaml.cs">
+      <DependentUpon>ClientesDetallePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\InicioSesionPage.xaml.cs">
       <DependentUpon>InicioSesionPage.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\ClientePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\ClientesDetallePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

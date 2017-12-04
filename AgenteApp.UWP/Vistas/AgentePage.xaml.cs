@@ -50,19 +50,14 @@ namespace NavigationMenuSample.Views
         CriterioSeleccionFabrica criteriosSeleccionFabrica;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
+        public string numTelefonico;
         int seg = 0;
         int min = 0;
         int hor = 0;
         int segunds = 0;
         List<CampoGrid> camposGloba;
         public Core LinphoneCore { get; set; }
-        /*private Core LinphoneCore
-        {
-            get
-            {
-                return ((AppShell)AppShell.Current).LinphoneCore;
-            }
-        }*/
+       
         private CoreListener Listener;
 
         public AgentePage()
@@ -114,7 +109,7 @@ namespace NavigationMenuSample.Views
             HeaderTextBlock.Text += " - En linea";
             FechaLlamadaTextBox.Text = GetDateString();
 
-            NoTelTextBox.Text = "8711897006";
+            numTelefonico = NoTelTextBox.Text = "8711897006";
             ConsultarPortabilidad(NoTelTextBox.Text);
             ConsultarClientesTel(NoTelTextBox.Text);
 
@@ -157,7 +152,7 @@ namespace NavigationMenuSample.Views
         public void onRegister(NavigationEventArgs e)
         {
             usuario = (Usuario)e.Parameter;
-            consultarCorreoEntrada();
+            //consultarCorreoEntrada();
             try
             {
                 NoExtensionTextBox.Text = usuario.Extension;
@@ -242,7 +237,7 @@ namespace NavigationMenuSample.Views
                 {
                     
                      OnCallClicked();
-                    NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
+                    numTelefonico = NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
                     ConsultarDatos(NoTelTextBox.Text);
                     //PRIMERO ME TRAIGO LA PORTABILIDAD Y LUEGO CONSULTO A BTCLIENTESTEL PARA VER SI YA EXISTE EN LA BASE DE DATOS
                     //consultar la tabla de BTCLIENTESTEL
@@ -411,7 +406,7 @@ namespace NavigationMenuSample.Views
             presentador.ConsultarClientes();
         }
 
-        public async void MostrarMensaje(string titulo, string mensaje)
+        public async void MostrarMensajeAsync(string titulo, string mensaje)
         {
             progressRing.IsActive = false;
             if (mensaje != null)
@@ -525,7 +520,7 @@ namespace NavigationMenuSample.Views
                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
             }
             else
-                MostrarMensaje("Error", "Es necesario el numero telefonico para dar de alta al usuario");
+                MostrarMensajeAsync("Error", "Es necesario el numero telefonico para dar de alta al usuario");
         
         }
 

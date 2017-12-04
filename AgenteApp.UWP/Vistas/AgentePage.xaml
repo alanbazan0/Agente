@@ -82,8 +82,7 @@
                 <StackPanel>
                     <Pivot x:Name="rootPivot" HeaderFocusVisualPlacement="ItemHeaders" >
                         <PivotItem Header="Clientes" HorizontalAlignment="Left">
-                            <Grid>
-                                
+                            <Grid>                                
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                     <RowDefinition Height="Auto"></RowDefinition>
@@ -251,7 +250,6 @@
                                     </ListView.ItemTemplate>-->
                                 </ListView>
                             </Grid>
-
                         </PivotItem>
                         <PivotItem Header="CRM" BorderBrush="OrangeRed">
                             <!--Pivot content goes here-->
