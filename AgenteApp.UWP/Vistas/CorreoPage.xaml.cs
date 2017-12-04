@@ -127,8 +127,7 @@ namespace NavigationMenuSample.Views
         }
         private void ResponderCorreo_Click(object sender, RoutedEventArgs e)
         {
-            SendEmailButton();
-
+            this.Frame.Navigate(typeof(ResponCorreo), usuario);
         }
         private async void SendEmailButton()
         {
