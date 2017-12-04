@@ -153,11 +153,11 @@ namespace NavigationMenuSample.Views
         {
             base.OnNavigatedFrom(e);            
             onRegister(e);
+            consultarCorreoEntrada();
         }
         public void onRegister(NavigationEventArgs e)
         {
             usuario = (Usuario)e.Parameter;
-            consultarCorreoEntrada();
             try
             {
                 NoExtensionTextBox.Text = usuario.Extension;

@@ -56,10 +56,17 @@ namespace NavigationMenuSample
                     Symbol = Symbol.People,
                     Label = "Drill In Page",
                     DestPage = typeof(DrillInPage)
+                },
+                 new NavMenuItem()
+                {
+                    Symbol = Symbol.Mail,
+                    Label = "Bandeja de correos",
+                    DestPage = typeof(CorreoPage)
                 }
             });
 
         public static AppShell Current = null;
+        private static Usuario usa;
 
         /// <summary>
         /// Initializes a new instance of the AppShell, sets the static 'Current' reference,
@@ -67,7 +74,7 @@ namespace NavigationMenuSample
         /// provide the nav menu list with the data to display.
         /// </summary>
         /// 
-        
+
 
         public AppShell()
         {            
@@ -187,6 +194,8 @@ namespace NavigationMenuSample
             // Place our app shell in the current Window
             Window.Current.Content = shell;
             Usuario usuario = (Usuario)e.Parameter;
+            usa = usuario;
+
             if (shell.AppFrame.Content == null)
             {
                 // When the navigation stack isn't restored, navigate to the first page
@@ -293,8 +302,10 @@ namespace NavigationMenuSample
             {
                 i.IsSelected = false;
             }
-
+            
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
+            item.Arguments = usa;
+
 
             if (item != null)
             {

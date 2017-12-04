@@ -63,7 +63,7 @@
               
                 <Button x:Name = "btnRegresarReceso"  Background="#ff9900" Foreground="White" Content="Regresar de receso" Click = "clickRegresarReceso"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"  Margin="301,-102,-139,109"/>
 
-                <Button x:Name = "btnSolicitar" Background="#ff9900" Foreground="White" Content="Solicitar" Click = "clickSolicitar"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="545,88,-140,-31"/>
+                <Button x:Name = "btnSolicitar" Background="#ff9900" Foreground="White" Content="Solicitar" Click = "clickSolicitar"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="545,88,-140,-31"/>
                 <Button x:Name = "btnTomarReceso"  Background="#ff9900" Foreground="White" Content="Tomar receso" Click = "clickTomarReceso"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"  Margin="-186,-12,363,21"/>
 
                 <TextBlock TextWrapping="Wrap" FontSize="30" Text="Motivo de receso" VariableSizedWrapGrid.ColumnSpan="1" VariableSizedWrapGrid.RowSpan="2" Margin="-204,-39,204,99" />
