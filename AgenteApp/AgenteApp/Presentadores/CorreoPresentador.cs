@@ -12,7 +12,7 @@ namespace AgenteApp.Presentadores
     {
         ICorreo  vista;
         List<CampoGrid> campos;
-        List<CriterioSeleccion> criteriosSeleccion;
+        List<Componente> criteriosSeleccion;
 
         public CorreoPresentador(ICorreo vista)
         {

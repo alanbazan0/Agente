@@ -14,7 +14,7 @@ namespace AgenteApp.Repositorios
     public class ClientesRepositorio : RepositorioBase
     {
         //public async Task<Resultado<List<Cliente>>> Consultar(List<Filtro> filtros, int version)
-        public async Task<Resultado<List<Objeto>>> Consultar(List<Filtro> filtros, int version)
+        public async Task<Resultado<List<Objeto>>> Consultar(List<Campo> filtros, int version)
         {
             Resultado<List<Objeto>> datos = new Resultado<List<Objeto>>();
             //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
