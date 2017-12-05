@@ -3,7 +3,7 @@ using AgenteApp.DataAccess;
 using AgenteApp.Modelos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Plugin.Connectivity;
+
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
