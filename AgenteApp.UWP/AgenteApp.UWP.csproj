@@ -209,6 +209,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\CorreoPage.xaml">
+    </Page>
     <Page Include="Vistas\ClientesDetallePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
