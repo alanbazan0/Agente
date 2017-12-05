@@ -120,6 +120,9 @@
     <Compile Include="Vistas\ClientesDetallePage.xaml.cs">
       <DependentUpon>ClientesDetallePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ConfiguraciónPage.xaml.cs">
+      <DependentUpon>ConfiguraciónPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\CorreoPage.xaml.cs">
       <DependentUpon>CorreoPage.xaml</DependentUpon>
     </Compile>
@@ -200,6 +203,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\ClientePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\ConfiguraciónPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
