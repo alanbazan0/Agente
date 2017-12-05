@@ -1,6 +1,4 @@
-﻿using AgenteApp.Presentadores;
-using AgenteApp.Vistas;
-using AgenteApp.Clases;
+﻿using AgenteApp.Vistas;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +6,6 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,33 +14,26 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using AgenteApp.Modelos;
-using Windows.UI.Popups;
-using Newtonsoft.Json.Linq;
-using AgenteApp.UWP.Fabricas;
-using AgenteApp.Componentes;
+using AgenteApp.Presentadores;
 using System.Text;
-//usings Linphone
-//using Xamarin.Forms;
-using Linphone;
-using Windows.System.Threading;
-using Windows.ApplicationModel.Core;
-using System.Diagnostics;
-using Windows.UI.Core;
 using System.Reflection;
 using Windows.ApplicationModel.Email;
-using Windows.Storage;
-using Windows.ApplicationModel.Activation;
+
+// La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace NavigationMenuSample.Views
 {
-
+    /// <summary>
+    /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
+    /// </summary>
     public sealed partial class CorreoPage : Page, ICorreo
     {
         Usuario usuario;
+        String correoCliente;
         CorreoPresentador correosPresentador;
         public CorreoPage()
         {
-           this.InitializeComponent();
+            this.InitializeComponent();
             webCorreo.NavigateToString("<html></html>");
             correosPresentador = new CorreoPresentador(this);
 
@@ -67,7 +57,7 @@ namespace NavigationMenuSample.Views
                     }
                 }
             }
-        }
+        } 
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -112,10 +102,13 @@ namespace NavigationMenuSample.Views
         {
             //var cliente = clientesListView.SelectedItem;
             var correos = e.ClickedItem;
-
+            
             if (correos != null)
             {
                 var contenido = (string)correos.GetType().GetProperty("Contenido").GetValue(correos, null);
+                string correo = (string)correos.GetType().GetProperty("Correo").GetValue(correos, null);
+                string[]  saludos = correo.Split('<');
+                correoCliente = saludos[1].Replace(">", "");
                 byte[] datos = Convert.FromBase64String(contenido);
                 string htmlCadena = Encoding.UTF8.GetString(datos);
                 webCorreo.NavigateToString(htmlCadena);
