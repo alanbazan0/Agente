@@ -11,13 +11,13 @@ using System.Text;
 
 namespace AgenteApp.Presentadores
 {
-    public class AgentePresentador
+    public class ClientesDetallePresentador
     {
-        IAgenteVista vista;
+        IClientesVista vista;
         List<CampoGrid> campos;
         List<CriterioSeleccion> criteriosSeleccion;
 
-        public AgentePresentador(IAgenteVista vista)
+        public ClientesDetallePresentador(IClientesVista vista)
         {
             this.vista = vista;
         }

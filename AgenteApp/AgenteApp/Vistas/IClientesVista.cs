@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AgenteApp.Vistas
 {
-    public interface IAgenteVista
+    public interface IClientesVista
     {
         void ConsultarClientes();
         void ConsultarClientesTel(string numero);

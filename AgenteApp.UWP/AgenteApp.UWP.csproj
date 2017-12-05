@@ -117,6 +117,12 @@
     <Compile Include="Vistas\ClientePage.xaml.cs">
       <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ClientesDetallePage.xaml.cs">
+      <DependentUpon>ClientesDetallePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\CorreoPage.xaml.cs">
+      <DependentUpon>CorreoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\InicioSesionPage.xaml.cs">
       <DependentUpon>InicioSesionPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +132,12 @@
     </Compile>
     <Compile Include="Vistas\RecesoPage.xaml.cs">
       <DependentUpon>RecesoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ResponCorreo.xaml.cs">
+      <DependentUpon>ResponCorreo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\SmsPage.xaml.cs">
+      <DependentUpon>SmsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +203,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Vistas\CorreoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vistas\ClientesDetallePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Vistas\InicioSesionPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -200,6 +220,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\RecesoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\ResponCorreo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\SmsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

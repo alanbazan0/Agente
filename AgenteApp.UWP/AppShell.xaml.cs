@@ -20,6 +20,7 @@ using AgenteApp.UWP;
 using Windows.UI.ViewManagement;
 using Windows.UI;
 using AgenteApp.Modelos;
+using AgenteApp.Clases;
 
 //usings Linphone
 using Linphone;
@@ -47,19 +48,69 @@ namespace NavigationMenuSample
                 },
                 new NavMenuItem()
                 {
+                    Symbol = Symbol.AddFriend,
+                    Label = "Identificación del cliente",
+                    DestPage = typeof(ClientesDetallePage)
+                },
+                new NavMenuItem()
+                {
                     Symbol = Symbol.Contact,
-                    Label = "Basic Page",
+                    Label = "CRM",
                     DestPage = typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
-                    Symbol = Symbol.People,
-                    Label = "Drill In Page",
-                    DestPage = typeof(DrillInPage)
+                    Symbol = Symbol.BackToWindow,
+                    Label = "Call Back",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Mail,
+                    Label = "Bandeja de correos",
+                    DestPage = typeof(CorreoPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Send,
+                    Label = "SMS",
+                    DestPage = typeof(SmsPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Queja",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Tipificación",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Llamar",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Receso",
+                    DestPage = typeof(RecesoPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Chat interno",
+                    DestPage = typeof(BasicPage)
                 }
+
             });
 
         public static AppShell Current = null;
+        private static Usuario usa;
 
         /// <summary>
         /// Initializes a new instance of the AppShell, sets the static 'Current' reference,
@@ -67,7 +118,7 @@ namespace NavigationMenuSample
         /// provide the nav menu list with the data to display.
         /// </summary>
         /// 
-        
+
 
         public AppShell()
         {            
@@ -187,6 +238,8 @@ namespace NavigationMenuSample
             // Place our app shell in the current Window
             Window.Current.Content = shell;
             Usuario usuario = (Usuario)e.Parameter;
+            usa = usuario;
+
             if (shell.AppFrame.Content == null)
             {
                 // When the navigation stack isn't restored, navigate to the first page
@@ -293,8 +346,11 @@ namespace NavigationMenuSample
             {
                 i.IsSelected = false;
             }
-
+            
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
+            item.Arguments = usa;
+
+
 
             if (item != null)
             {
@@ -302,10 +358,29 @@ namespace NavigationMenuSample
                 if (item.DestPage != null &&
                     item.DestPage != this.AppFrame.CurrentSourcePageType)
                 {
-                    this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                    switch (item.Label)
+                    {
+                        case "Identificación del cliente":
+                            var parametros = new { modo = ModoVentana.ALTA, telCliente = "8711897006"/*, idCliente = idCliente, portabilidad = portabilidadParametros*/ };
+                            item.Arguments = parametros;
+                            this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                            break;
+                        case "Receso":
+                            item.Arguments = usa;
+                            this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                            break;
+                        default:
+                            this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                            break;
+                    }
+
+
+                    
+                        
 
                     //Page destPage = (Page) Activator.CreateInstance(item.DestPage);
                     //this.AppFrame.Content = destPage;
+                    
 
                 }
             }

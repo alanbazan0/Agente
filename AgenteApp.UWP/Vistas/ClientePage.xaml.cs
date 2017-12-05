@@ -50,20 +50,7 @@ namespace AgenteApp.UWP.Vistas
             presentador.TipoTelefono();
 
         }
-        /*private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame == null)
-                return;
 
-            // Navigate back if possible, and if the event has not 
-            // already been handled .
-            if (rootFrame.CanGoBack && e.Handled == false)
-            {
-                e.Handled = true;
-                rootFrame.GoBack();
-            }
-        }*/
 
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -111,12 +98,14 @@ namespace AgenteApp.UWP.Vistas
                 parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
                 if (modo == ModoVentana.ALTA)
                 {
+                    this.HeaderTextBlock.Text = "Identificación del cliente / alta cliente";
                     numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null); 
                     noTelefonicoClienteTextBox.Text = numTelefonico;
                     razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
                 }
                 else
                 {
+                    this.HeaderTextBlock.Text = "Identificación del cliente / actualizar cliente";
                     int idCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
                     presentador.TraerDatosCliente(idCliente);
                     presentador.traerDatosTelefono(idCliente);
@@ -161,7 +150,7 @@ namespace AgenteApp.UWP.Vistas
             {
                 noTelefonicoClienteTextBox.Text = value.Numeracion;
                 razonSocialTextBox.Text = value.Compania;
-                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value.TipoTelefono);
+                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value.TipoTelefono)-1;
             }
         }
 

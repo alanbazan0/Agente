@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="NavigationMenuSample.Views.SmsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AgenteApp.UWP.Vistas"
+    xmlns:ctl="using:NavigationMenuSample.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b">
+            <AppBarButton Icon="Send" Label="Envíar sms" Foreground="White" Click="AppBarSendMessageButton_Click"/>
+            <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>-->
+            <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
+            <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
+            <CommandBar.SecondaryCommands>
+                
+
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <ctl:PageHeader>
+                    <ctl:PageHeader.HeaderContent>
+                        <TextBlock x:Name="HeaderTextBlock" Text="SMS" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                    </ctl:PageHeader.HeaderContent>
+                </ctl:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <ctl:PageHeader x:Name="pageTitleContainer" Visibility="Collapsed">
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+        <StackPanel Grid.Row="1" >
+            <TextBox x:Name="numeroClienteSMSTextBox" PlaceholderText="Numero de cliente" Margin="15" Width="350" />
+            <TextBox x:Name="contactoSMSTextBox" PlaceholderText="Contacto" Margin="15" Width="350" />
+            <TextBox x:Name="telefonoSMSTextBox" PlaceholderText="Telefono" Margin="15" Width="350" />
+            <DatePicker x:Name="fechaSMSTextBox" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Language="ES" MinWidth="250" Width="350"/>
+            <TimePicker x:Name="horaSMSTextBox"  HorizontalAlignment="Center" Margin="15" Width="350" />
+            <ComboBox x:Name="tipificacionSMSTextBox" HorizontalAlignment="Center" PlaceholderText="Tipificación" Margin="15" Width="350" />
+            <ComboBox x:Name="tramiteSMSTextBox" HorizontalAlignment="Center" PlaceholderText="Tramite" Margin="15" Width="350" />
+            <TextBox x:Name="asuntoSMSTextBox" PlaceholderText="Mensaje" Margin="15" Width="350" Height="150"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

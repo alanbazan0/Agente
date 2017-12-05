@@ -50,19 +50,14 @@ namespace NavigationMenuSample.Views
         CriterioSeleccionFabrica criteriosSeleccionFabrica;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
+        public string numTelefonico;
         int seg = 0;
         int min = 0;
         int hor = 0;
         int segunds = 0;
         List<CampoGrid> camposGloba;
         public Core LinphoneCore { get; set; }
-        /*private Core LinphoneCore
-        {
-            get
-            {
-                return ((AppShell)AppShell.Current).LinphoneCore;
-            }
-        }*/
+       
         private CoreListener Listener;
 
         public AgentePage()
@@ -114,9 +109,9 @@ namespace NavigationMenuSample.Views
             HeaderTextBlock.Text += " - En linea";
             FechaLlamadaTextBox.Text = GetDateString();
 
-            NoTelTextBox.Text = "8711897006";
-            ConsultarPortabilidad(NoTelTextBox.Text);
-            ConsultarClientesTel(NoTelTextBox.Text);
+            //numTelefonico = NoTelTextBox.Text = "8711897006";
+            //ConsultarPortabilidad(NoTelTextBox.Text);
+            //ConsultarClientesTel(NoTelTextBox.Text);
 
            // SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
@@ -153,11 +148,11 @@ namespace NavigationMenuSample.Views
         {
             base.OnNavigatedFrom(e);            
             onRegister(e);
+            consultarCorreoEntrada();
         }
         public void onRegister(NavigationEventArgs e)
         {
             usuario = (Usuario)e.Parameter;
-            consultarCorreoEntrada();
             try
             {
                 NoExtensionTextBox.Text = usuario.Extension;
@@ -242,7 +237,7 @@ namespace NavigationMenuSample.Views
                 {
                     
                      OnCallClicked();
-                    NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
+                    numTelefonico = NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
                     ConsultarDatos(NoTelTextBox.Text);
                     //PRIMERO ME TRAIGO LA PORTABILIDAD Y LUEGO CONSULTO A BTCLIENTESTEL PARA VER SI YA EXISTE EN LA BASE DE DATOS
                     //consultar la tabla de BTCLIENTESTEL
@@ -357,12 +352,12 @@ namespace NavigationMenuSample.Views
             set
             {
                 correosListView.ItemsSource = value;
-                if(!value[0].Contenido.Equals(""))
-                { 
-                    byte[] datos = Convert.FromBase64String(value[0].Contenido);
-                    string htmlCadena = Encoding.UTF8.GetString(datos);
-                    webCorreo.NavigateToString(htmlCadena);
-                }
+                //if(!value[0].Contenido.Equals(""))
+                //{ 
+                //    byte[] datos = Convert.FromBase64String(value[0].Contenido);
+                //    string htmlCadena = Encoding.UTF8.GetString(datos);
+                //    webCorreo.NavigateToString(htmlCadena);
+                //}
             }
         }
 
@@ -402,7 +397,7 @@ namespace NavigationMenuSample.Views
        
         private void ApprRecesoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.RecesoPage), usuario);
+            this.Frame.Navigate(typeof(RecesoPage), usuario);
         }
 
         public void ConsultarClientes()
@@ -411,7 +406,7 @@ namespace NavigationMenuSample.Views
             presentador.ConsultarClientes();
         }
 
-        public async void MostrarMensaje(string titulo, string mensaje)
+        public async void MostrarMensajeAsync(string titulo, string mensaje)
         {
             progressRing.IsActive = false;
             if (mensaje != null)
@@ -525,7 +520,7 @@ namespace NavigationMenuSample.Views
                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
             }
             else
-                MostrarMensaje("Error", "Es necesario el numero telefonico para dar de alta al usuario");
+                MostrarMensajeAsync("Error", "Es necesario el numero telefonico para dar de alta al usuario");
         
         }
 
