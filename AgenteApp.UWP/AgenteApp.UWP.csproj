@@ -100,12 +100,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppShell.xaml.cs" />
-    <Compile Include="Componentes\CriterioSeleccionTextBox.cs" />
-    <Compile Include="Componentes\FormularioTextBox.cs" />
+    <Compile Include="Componentes\TextoComponente.cs" />
     <Compile Include="Controls\NavMenuListView.cs" />
     <Compile Include="Controls\PageHeader.xaml.cs" />
-    <Compile Include="Fabricas\CriterioSeleccionFabrica.cs" />
-    <Compile Include="Fabricas\FormularioFabrica.cs" />
+    <Compile Include="Fabricas\ComponenteFabrica.cs" />
     <Compile Include="NavMenuItem.cs" />
     <Compile Include="SystemInformationHelpers.cs" />
     <Compile Include="Triggers\IsTenFootTrigger.cs" />

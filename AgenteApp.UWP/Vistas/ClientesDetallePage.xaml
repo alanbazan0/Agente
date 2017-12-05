@@ -47,7 +47,7 @@
                     <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                         <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
                     </StackPanel>
-                    <VariableSizedWrapGrid  Grid.Row="1" Margin="10"  x:Name="criteriosSeleccionDetalleCliente"  Orientation="Horizontal"  ItemHeight="40" ItemWidth="210"  >
+                    <VariableSizedWrapGrid  Grid.Row="1" Margin="10"  x:Name="criteriosSeleccionDetalleCliente"  Orientation="Horizontal"  ItemHeight="50" ItemWidth="300"  >
                         <!--<TextBox x:Name="nombreCompletoCriterioTextBox" PlaceholderText="Nombre completo" Margin="8" Width="250" />
                                     <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
                                     <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgenteApp.Modelos
 {
-    public class CriterioSeleccion
+    class CampoLabel
     {
         public string id { get; set; }
         public string campoId { get; set; }

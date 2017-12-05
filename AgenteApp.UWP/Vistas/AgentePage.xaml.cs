@@ -47,7 +47,7 @@ namespace NavigationMenuSample.Views
         Usuario usuario;
         AgentePresentador presentador;
         CorreoPresentador correosPresentador;
-        CriterioSeleccionFabrica criteriosSeleccionFabrica;
+        ComponenteFabrica criteriosSeleccionFabrica;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
         public string numTelefonico;
@@ -70,7 +70,7 @@ namespace NavigationMenuSample.Views
             presentador = new AgentePresentador(this);
             correosPresentador = new CorreoPresentador(this);
 
-            criteriosSeleccionFabrica = new CriterioSeleccionFabrica();
+            criteriosSeleccionFabrica = new ComponenteFabrica();
             usuario = null;
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
@@ -310,12 +310,12 @@ namespace NavigationMenuSample.Views
 
         }
         
-        public List<Filtro> Filtros
+        public List<Campo> Filtros
         {
             get
             {
-                List<Filtro> filtros = new List<Filtro>();
-                foreach (ICriterioSeleccionComponente componente in criteriosSeleccionStackPanel.Children)
+                List<Campo> filtros = new List<Campo>();
+                foreach (IComponente componente in criteriosSeleccionStackPanel.Children)
                 {
                     if(componente.Filtro.valor != string.Empty)
                         filtros.Add(componente.Filtro);
@@ -416,9 +416,9 @@ namespace NavigationMenuSample.Views
             }
         }
         
-        public void CrearCriterioSeleccion(CriterioSeleccion criterioSeleccion)
+        public void CrearCriterioSeleccion(Componente criterioSeleccion)
         {
-            ICriterioSeleccionComponente componente = criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            IComponente componente = criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
             criteriosSeleccionStackPanel.Children.Add(componente as UIElement);
         }
 

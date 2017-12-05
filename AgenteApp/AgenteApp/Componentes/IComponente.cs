@@ -1,4 +1,5 @@
 ﻿using AgenteApp.Modelos;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace AgenteApp.Componentes
 {
-    public interface ICriterioSeleccionComponente
+    public interface IComponente 
     {
-        CriterioSeleccion CriterioSeleccion { get; set; }
-        Filtro Filtro { get; }
+        Componente Componente { get; set; }
+        string Titulo { set; }
+        Campo Filtro { get; }
+        string Valor { set; }
     }
 }
