@@ -13,9 +13,9 @@ namespace AgenteApp.Repositorios
 {
     class FormularioAltaRepositorio:RepositorioBase
     {
-        public async Task<Resultado<List<CampoFormulario>>> ConsultarPorVersion(int version)
+        public async Task<Resultado<List<Componente>>> ConsultarPorVersion(int version)
         {
-            Resultado<List<CampoFormulario>> datos = null;
+            Resultado<List<Componente>> datos = null;
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/CamposFormularioAlta.php";
             AgregarParametro("accion", "consultarPorVersion");
@@ -29,7 +29,7 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-                    datos = JsonConvert.DeserializeObject<Resultado<List<CampoFormulario>>>(resultadoContenido);
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Componente>>>(resultadoContenido);
                 }
             }
             catch (Exception ex)

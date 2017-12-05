@@ -6,8 +6,8 @@ using System.Text;
 
 namespace AgenteApp.Fabricas
 {
-    public interface ICriterioSeleccionFabrica
+    public interface IComponenteFabrica
     {
-        ICriterioSeleccionComponente CrearComponente(CriterioSeleccion criterioSeleccion); 
+        IComponente CrearComponente(Componente criterioSeleccion); 
     }
 }

@@ -13,7 +13,7 @@ namespace AgenteApp.Presentadores
     class FormularioPresentador
     {
         IFormulario vista;
-        List<CampoFormulario> campoFromulario;
+        List<Componente> campoFromulario;
         List<TipoTelefono> tipoTelefono;
 
         public FormularioPresentador(IFormulario vista)
@@ -31,12 +31,12 @@ namespace AgenteApp.Presentadores
         private async void CrearForumularioActualizacion()
         {
             FormularioActualizacionRepositorio repositorio = new FormularioActualizacionRepositorio();
-            Resultado<List<CampoFormulario>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+            Resultado<List<Componente>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
 
             if (resultado.mensajeError == string.Empty)
             {
                 campoFromulario = resultado.valor;
-                foreach (CampoFormulario campoFromulario in campoFromulario)
+                foreach (Componente campoFromulario in campoFromulario)
                 {
                     if (campoFromulario.presentacion == "1")
                         vista.CrearFormularioClientes(campoFromulario);
@@ -87,12 +87,12 @@ namespace AgenteApp.Presentadores
         private async void CrearFormularioAlta()
         {
             FormularioAltaRepositorio repositorio = new FormularioAltaRepositorio();
-            Resultado<List<CampoFormulario>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+            Resultado<List<Componente>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
 
             if (resultado.mensajeError == string.Empty)
             {
                 campoFromulario = resultado.valor;
-                foreach (CampoFormulario campoFromulario in campoFromulario)
+                foreach (Componente campoFromulario in campoFromulario)
                 {
                     if (campoFromulario.presentacion == "1")
                         vista.CrearFormularioClientes(campoFromulario);

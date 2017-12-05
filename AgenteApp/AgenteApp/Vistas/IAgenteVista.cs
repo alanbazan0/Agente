@@ -11,10 +11,10 @@ namespace AgenteApp.Vistas
         void ConsultarClientes();
         void ConsultarClientesTel(string numero);
         void MostrarMensajeAsync(string titulo, string mensaje);
-        List<Filtro> Filtros { get;  }
+        List<Campo> Filtros { get;  }
         List<Objeto> Clientes { set; }
         List<Portabilidad> Portabilidad {  set; }
-        void CrearCriterioSeleccion(CriterioSeleccion criterioSeleccion);
+        void CrearCriterioSeleccion(Componente criterioSeleccion);
         void CrearColumnasGrid1(List<CampoGrid> campos);
         void ConsultarPortabilidad(string numero);
         string setIdLlamada { set; }
