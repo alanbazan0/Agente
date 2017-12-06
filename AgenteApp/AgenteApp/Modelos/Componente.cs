@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AgenteApp.Modelos
 {
-    public class CampoFormulario
+    public class Componente
     {
         public string id { get; set; }
         public string campoId { get; set; }
@@ -14,6 +14,5 @@ namespace AgenteApp.Modelos
         public string tablaId { get; set; }
         public string tipoDato { get; set; }
         public string tamano { get; set; }
-        public object Children { get; internal set; }
     }
 }

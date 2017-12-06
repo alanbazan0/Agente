@@ -26,6 +26,7 @@ using AgenteApp.Clases;
 using Linphone;
 using Windows.System.Threading;
 using Windows.ApplicationModel.Core;
+using AgenteApp.UWP.Vistas;
 
 namespace NavigationMenuSample
 {
@@ -80,7 +81,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "Queja",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(ConfiguraciónPage)
                 },
                 new NavMenuItem()
                 {

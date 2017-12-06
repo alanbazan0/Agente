@@ -34,8 +34,8 @@ namespace NavigationMenuSample.Views
     {
         Usuario usuario;
         ClientesDetallePresentador presentador;
-        FormularioFabrica formularioClienteFabrica;
-        CriterioSeleccionFabrica criteriosSeleccionFabrica;
+        //FormularioFabrica formularioClienteFabrica;
+        ComponenteFabrica componenteFabrica;
         List<CampoGrid> camposGlobal;
         Portabilidad portabilidadParametros;
         List<CampoGrid> camposGloba;
@@ -46,18 +46,18 @@ namespace NavigationMenuSample.Views
 
             this.InitializeComponent();
             presentador = new ClientesDetallePresentador(this);
-            criteriosSeleccionFabrica = new CriterioSeleccionFabrica();
+            componenteFabrica = new ComponenteFabrica();
             this.Loaded += CommandBarPage_Loaded;
-            formularioClienteFabrica = new FormularioFabrica();
+            //formularioClienteFabrica = new FormularioFabrica();
             presentador.CrearCatalogoClientes();
         }
 
-        public List<Filtro> Filtros
+        public List<Campo> Filtros
         {
             get
             {
-                List<Filtro> filtros = new List<Filtro>();
-                foreach (ICriterioSeleccionComponente componente in criteriosSeleccionDetalleCliente.Children)
+                List<Campo> filtros = new List<Campo>();
+                foreach (IComponente componente in criteriosSeleccionDetalleCliente.Children)
                 {
                     if (componente.Filtro.valor != string.Empty)
                         filtros.Add(componente.Filtro);
@@ -104,9 +104,9 @@ namespace NavigationMenuSample.Views
         }
         public string setIdLlamada { set => throw new NotImplementedException(); }
 
-        public void CrearCriterioSeleccion(CriterioSeleccion criterioSeleccion)
+        public void CrearCriterioSeleccion(Componente criterioSeleccion)
         {
-            ICriterioSeleccionComponente componente = criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            IComponente componente = componenteFabrica.CrearComponente(criterioSeleccion);
             criteriosSeleccionDetalleCliente.Children.Add(componente as UIElement);
         }
         private void clientesListView_ItemClick(object sender, ItemClickEventArgs e)

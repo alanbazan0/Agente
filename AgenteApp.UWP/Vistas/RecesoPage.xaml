@@ -45,41 +45,49 @@
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
         <StackPanel Margin="0,50,0,0">
-            <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="auto" >
-
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo receso" Margin="15,0,0,0"/>
-                <TextBlock x:Name="timerReceso" TextWrapping="Wrap" FontSize="30" Text="00:00:00"  VariableSizedWrapGrid.RowSpan="2" Margin="15,0,-15,57" />
-
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo acomulado"   VariableSizedWrapGrid.ColumnSpan="2" Margin="38,0,-38,0" />
-                <TextBlock x:Name="timerAcomulado" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="38,0,-38,57" />
-
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Ingreso al sistema" VariableSizedWrapGrid.ColumnSpan="3" Margin="43,0,-43,0" />
-                <TextBlock x:Name="horaInicio" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="43,0,-43,57" />
-            </VariableSizedWrapGrid>
             <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="150" >
 
-                <Button x:Name = "btnAutorizar"  Background="#ff9900" Foreground="White" Content="Autorizar" Click = "clickAutorizar"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.RowSpan="2" Margin="15,0,-15,57" />
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo receso" Margin="15,0,0,0"/>
+                <TextBlock x:Name="timerReceso" TextWrapping="Wrap" FontSize="30" Text="00:00:00"  VariableSizedWrapGrid.RowSpan="2" Margin="15,0,-15,0" />
 
-              
-                <Button x:Name = "btnRegresarReceso"  Background="#ff9900" Foreground="White" Content="Regresar de receso" Click = "clickRegresarReceso"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"  Margin="301,-102,-139,109"/>
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo acomulado"   VariableSizedWrapGrid.ColumnSpan="2" Margin="38,0,-38,0" />
+                <TextBlock x:Name="timerAcomulado" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="38,0,-38,0" />
 
-                <Button x:Name = "btnSolicitar" Background="#ff9900" Foreground="White" Content="Solicitar" Click = "clickSolicitar"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="545,88,-140,-31"/>
-                <Button x:Name = "btnTomarReceso"  Background="#ff9900" Foreground="White" Content="Tomar receso" Click = "clickTomarReceso"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VariableSizedWrapGrid.ColumnSpan="2"  Margin="-186,-12,363,21"/>
-
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Motivo de receso" VariableSizedWrapGrid.ColumnSpan="1" VariableSizedWrapGrid.RowSpan="2" Margin="-204,-39,204,99" />
-                <ComboBox  x:Name="tipoRecesoComboBox"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  VariableSizedWrapGrid.ColumnSpan="1" VariableSizedWrapGrid.RowSpan="1"  Margin="-201,-90,111,90"  >
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
-                                <TextBlock Text="{Binding RCorto}" />
-                                <TextBlock Text="{Binding Id}" Visibility="Collapsed"/>
-                                <TextBlock Text="{Binding RDescripcion}" Visibility="Collapsed" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Ingreso al sistema" VariableSizedWrapGrid.ColumnSpan="3" Margin="43,0,-43,0" />
+                <TextBlock x:Name="horaInicio" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="43,0,62,0" />
             </VariableSizedWrapGrid>
+            <StackPanel>
+                <Grid Margin="0,-50,0,15" >
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="520"/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <Button x:Name = "btnAutorizar"         Grid.Column="0" Background="#ff9900" Foreground="White" Content="Autorizar"           Click = "clickAutorizar"      Width="220"  Margin="15" />
+                    <Button x:Name = "btnRegresarReceso"    Grid.Column="1" Background="#ff9900" Foreground="White" Content="Regresar de receso"  Click = "clickRegresarReceso" Width="220"  Margin="43,0,0,0"/>
+                    <Button x:Name = "btnSolicitar"         Grid.Column="2" Grid.Row="2" Background="#ff9900" Foreground="White" Content="Solicitar"           Click = "clickSolicitar"      Width="220"  Margin="15,5,0,0"/>
+                    <Button x:Name = "btnTomarReceso"       Grid.Column="1" Background="#ff9900" Foreground="White" Content="Tomar receso"        Click = "clickTomarReceso"    Width="220"  Margin="43,0,0,0"/>
+                    <TextBlock TextWrapping="Wrap"          Grid.Column="2" FontSize="30" Text="Motivo de receso"  Margin="15,0,0,19" />
+                    <ComboBox  x:Name="tipoRecesoComboBox"  Grid.Column="2" Grid.Row="1"     Width="220" Margin="15,-15,0,0"  >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Width="Auto" Height="Auto">
+                                    <TextBlock Text="{Binding RCorto}" />
+                                    <TextBlock Text="{Binding Id}" Visibility="Collapsed"/>
+                                    <TextBlock Text="{Binding RDescripcion}" Visibility="Collapsed" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+
+            </StackPanel>
             <ListView x:Name="clientesListView"  >
                 <ListView.HeaderTemplate>
                     <DataTemplate>
@@ -94,28 +102,28 @@
                                 <ColumnDefinition Width="200" />
                             </Grid.ColumnDefinitions>
 
-                            <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                            <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
                                 <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                            <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
                                 <TextBlock Text="TIPO RECESO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                            <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
                                 <TextBlock Text="FECHA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                            <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
                                 <TextBlock Text="HORA INCIAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                            <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
                                 <TextBlock Text="FECHA FINAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                            <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
                                 <TextBlock Text="HORA FINAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                            <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
                                 <TextBlock Text="DURACION"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
-                            <Border  Grid.Column="7" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                            <Border  Grid.Column="7" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
                                 <TextBlock Text="TIEMPO ACOMULADO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             </Border>
 

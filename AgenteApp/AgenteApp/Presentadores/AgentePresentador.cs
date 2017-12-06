@@ -15,7 +15,7 @@ namespace AgenteApp.Presentadores
     {
         IAgenteVista vista;
         List<CampoGrid> campos;
-        List<CriterioSeleccion> criteriosSeleccion;
+        List<Componente> criteriosSeleccion;
 
         public AgentePresentador(IAgenteVista vista)
         {
@@ -24,7 +24,7 @@ namespace AgenteApp.Presentadores
 
         public async void ConsultarClientes()
         {
-            List<Filtro> filtros = vista.Filtros;
+            List<Campo> filtros = vista.Filtros;
             ClientesRepositorio repositorio = new ClientesRepositorio();
             Resultado<List<Objeto>> resultado = await repositorio.Consultar(filtros,Constantes.VERSION);
             if(resultado.mensajeError==string.Empty)
@@ -98,12 +98,12 @@ namespace AgenteApp.Presentadores
         private async void CrearCriteriosSeleccion()
         {
             CriteriosSeleccionRepositorio repositorio = new CriteriosSeleccionRepositorio();
-            Resultado<List<CriterioSeleccion>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+            Resultado<List<Componente>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
 
             if (resultado.mensajeError == string.Empty)
             {
                 criteriosSeleccion = resultado.valor;
-                foreach (CriterioSeleccion criterioSeleccion in criteriosSeleccion)
+                foreach (Componente criterioSeleccion in criteriosSeleccion)
                 {
                     if (criterioSeleccion.presentacion == "1")
                         vista.CrearCriterioSeleccion(criterioSeleccion);

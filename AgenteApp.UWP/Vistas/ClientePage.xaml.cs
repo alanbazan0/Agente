@@ -33,7 +33,8 @@ namespace AgenteApp.UWP.Vistas
     public sealed partial class ClientePage : Page, IFormulario
     {
         FormularioPresentador presentador;
-        FormularioFabrica formularioClienteFabrica;
+        ComponenteFabrica componenteFabrica;
+
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
         private ModoVentana modo;
@@ -44,7 +45,7 @@ namespace AgenteApp.UWP.Vistas
             this.Loaded += CommandBarPage_Loaded;
             //Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested +=            App_BackRequested;
             presentador = new FormularioPresentador(this);
-            formularioClienteFabrica = new FormularioFabrica();
+            componenteFabrica = new ComponenteFabrica();
             //this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             clienteTelefono = new ClienteTelefono();
             presentador.TipoTelefono();
@@ -78,9 +79,9 @@ namespace AgenteApp.UWP.Vistas
             get
             {
                 List<Campo> campos = new List<Campo>();
-                foreach (IFormularioComponente componente in formularioComponentes.Children)
+                foreach (IComponente componente in formularioComponentes.Children)
                 {
-                    campos.Add(componente.Campo);
+                    campos.Add(componente.Filtro);
                 }
                 return campos;
             }
@@ -171,10 +172,10 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
-        public void CrearFormularioClientes(CampoFormulario campoFormulario)
+        public void CrearFormularioClientes(Componente componente)
         {
-            IFormularioComponente componente = formularioClienteFabrica.CrearComponente(campoFormulario); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
-            formularioComponentes.Children.Add(componente as UIElement);
+            IComponente componenteVista = componenteFabrica.CrearComponente(componente); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            formularioComponentes.Children.Add(componenteVista as UIElement);
             //if (campoFormulario.campoId == "BTCLIENTENUMERO")
             //{
             //    (componente as UIElement).IsEnabled = false;
@@ -205,15 +206,15 @@ namespace AgenteApp.UWP.Vistas
             presentador.guardarTelefonoCliente(clienteTelefono);
         }
 
-        public void AsignarValor(CampoFormulario campo, Objeto registro)
+        public void AsignarValor(Componente campo, Objeto registro)
         {
-            var componente = formularioComponentes.Children.Where(a => (a as IFormularioComponente).CampoFormulario.tablaId == campo.tablaId 
-                                                                   && (a as IFormularioComponente).CampoFormulario.campoId == campo.campoId)
+            var componente = formularioComponentes.Children.Where(a => (a as IComponente).Componente.tablaId == campo.tablaId 
+                                                                   && (a as IComponente).Componente.campoId == campo.campoId)
                                        .Select(a => a)
                                        .First();
             string alias = "C" + campo.id.ToString();
 
-            (componente as IFormularioComponente).Valor =  (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
+            (componente as IComponente).Valor =  (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
 
 
         }

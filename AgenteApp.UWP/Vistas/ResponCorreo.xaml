@@ -60,19 +60,38 @@
             <CommandBar.Content>
                 <ctl:PageHeader>
                     <ctl:PageHeader.HeaderContent>
-                        <TextBlock x:Name="HeaderTextBlock" Text="Responder correos" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                        <TextBlock x:Name="HeaderTextBlock" Text="Correo electronico" Style="{StaticResource PageTitleTextBlockStyle}"/>
                     </ctl:PageHeader.HeaderContent>
                 </ctl:PageHeader>
-            </CommandBar.Content>            
+            </CommandBar.Content>
         </CommandBar>
 
         <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <StackPanel>
-                        <TextBox x:Name="correotxt" HorizontalAlignment="Center" PlaceholderText="Correo" Margin="15" Width="350" />
-                        <TextBox x:Name="asuntotxt" HorizontalAlignment="Center" PlaceholderText="Asunto" Margin="15" Width="350" />
-                        <TextBox x:Name="contenidotxt" PlaceholderText="Mensaje" Margin="15" Width="350" Height="150"/>
-                        <Button x:Name = "btnTomarReceso" HorizontalAlignment="Center"  Background="#ff9900" Foreground="White" Content="Enviar"  Margin="290,0,0,0"/>
+                    <Grid  HorizontalAlignment="Left" Margin="0,30,0,0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="0" Grid.Row="0" Text="Para:" HorizontalAlignment="Left"     Margin="15" Width="50"  />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="CC:" HorizontalAlignment="Left"       Margin="15" Width="50"/>
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="Asunto:" HorizontalAlignment="Left"   Margin="15" Width="50"/>
+                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Contenido" HorizontalAlignment="Left" Margin="15" Width="auto"/>
+
+                        <TextBox x:Name="correotxt"      Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
+                        <TextBox x:Name="asuntotxt_Copy" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
+                        <TextBox x:Name="asuntotxt"      Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
+                        <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="3" Margin="15" Width="600" Height="150"/>
+                    </Grid>
+
                 </StackPanel>
             </StackPanel>
         </Grid>
