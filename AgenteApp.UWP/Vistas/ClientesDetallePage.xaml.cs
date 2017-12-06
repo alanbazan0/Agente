@@ -89,6 +89,7 @@ namespace NavigationMenuSample.Views
                 clientesListView.ItemsSource = value;
             }
         }
+        
         public List<Portabilidad> Portabilidad
         {
             set
@@ -103,6 +104,14 @@ namespace NavigationMenuSample.Views
             }
         }
         public string setIdLlamada { set => throw new NotImplementedException(); }
+        List<Objeto> IClientesVista.ClientesCriterio
+        {
+            set
+            {
+                progressRing.IsActive = false;
+                clientesCriterioListView.ItemsSource = value;
+            }
+        }
 
         public void CrearCriterioSeleccion(Componente criterioSeleccion)
         {
@@ -155,7 +164,7 @@ namespace NavigationMenuSample.Views
             camposGlobal = campos;
             StringBuilder xamlHeaderTemplate = new StringBuilder();
             xamlHeaderTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
-            xamlHeaderTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"">");
+            xamlHeaderTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible"" >");
             xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
@@ -176,7 +185,7 @@ namespace NavigationMenuSample.Views
 
             StringBuilder xamlItemTemplate = new StringBuilder();
             xamlItemTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
-            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"">");
+            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible"" >");
             xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
@@ -197,6 +206,55 @@ namespace NavigationMenuSample.Views
             xamlItemTemplate.AppendLine(@"</DataTemplate>");
             var itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlItemTemplate.ToString()) as DataTemplate;
             clientesListView.ItemTemplate = itemTemplate;
+        }
+
+        public void CrearColumnasGrid2(List<CampoGrid> campos)
+        {
+            camposGlobal = campos;
+            StringBuilder xamlHeaderTemplate = new StringBuilder();
+            xamlHeaderTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
+            xamlHeaderTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible""  >");
+            xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
+            foreach (CampoGrid campo in campos)
+            {
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""200""/>");
+            }
+            xamlHeaderTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
+            for (int i = 0; i < campos.Count; i++)
+            {
+                CampoGrid campo = campos[i];
+                xamlHeaderTemplate.AppendLine(@"<Border  Grid.Column=""" + i.ToString() + @""" CornerRadius=""0"" BorderBrush=""Black"" Background=""#ff9900"" BorderThickness=""0 0 0 0"">");
+                xamlHeaderTemplate.AppendLine(@"<TextBlock Text=""" + campo.titulo + @""" Foreground=""White"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
+                xamlHeaderTemplate.AppendLine(@"</Border>");
+            }
+            xamlHeaderTemplate.AppendLine(@"</Grid>");
+            xamlHeaderTemplate.AppendLine(@"</DataTemplate>");
+            var headerTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlHeaderTemplate.ToString()) as DataTemplate;
+            clientesCriterioListView.HeaderTemplate = headerTemplate;
+
+            StringBuilder xamlItemTemplate = new StringBuilder();
+            xamlItemTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
+            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0""  ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible"" >");
+            xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
+            foreach (CampoGrid campo in campos)
+            {
+                xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""200""/>");
+            }
+            xamlItemTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
+            //xamlItemTemplate.AppendLine(@"<Grid.RowDefinitions>");
+            //xamlItemTemplate.AppendLine(@"<RowDefinition Height = ""Auto""></RowDefinition>");
+            //xamlItemTemplate.AppendLine(@"</Grid.RowDefinitions>");                                    
+            for (int i = 0; i < campos.Count; i++)
+            {
+                CampoGrid campo = campos[i];
+                xamlItemTemplate.AppendLine(@"<Border  Grid.Column=""" + i.ToString() + @""" CornerRadius=""0"" BorderBrush=""Black"" BorderThickness=""0 0 0 0"">");
+                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.id + @"}"" Foreground=""Black"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
+                xamlItemTemplate.AppendLine(@"</Border>");
+            }
+            xamlItemTemplate.AppendLine(@"</Grid>");
+            xamlItemTemplate.AppendLine(@"</DataTemplate>");
+            var itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlItemTemplate.ToString()) as DataTemplate;
+            clientesCriterioListView.ItemTemplate = itemTemplate;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -235,6 +293,9 @@ namespace NavigationMenuSample.Views
         public void ConsultarClientes()
         {
             progressRing.IsActive = true;
+            clientesListView.Visibility = Visibility.Collapsed;
+            clientesCriterioListView.Visibility = Visibility.Visible;
+            presentador.CrearColumnasGridCriterio();
             presentador.ConsultarClientes();
         }
 

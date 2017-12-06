@@ -131,6 +131,9 @@
     <Compile Include="Vistas\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\RecepcionLlamadaPage.xaml.cs">
+      <DependentUpon>RecepcionLlamadaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\RecesoPage.xaml.cs">
       <DependentUpon>RecesoPage.xaml</DependentUpon>
     </Compile>
@@ -221,6 +224,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\RecepcionLlamadaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
