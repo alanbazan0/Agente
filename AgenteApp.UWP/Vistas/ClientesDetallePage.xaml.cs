@@ -117,7 +117,10 @@ namespace NavigationMenuSample.Views
         {
             IComponente componente = componenteFabrica.CrearComponente(criterioSeleccion);
             criteriosSeleccionDetalleCliente.Children.Add(componente as UIElement);
+           
         }
+
+        
         private void clientesListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //var cliente = clientesListView.SelectedItem;
@@ -164,7 +167,7 @@ namespace NavigationMenuSample.Views
             camposGlobal = campos;
             StringBuilder xamlHeaderTemplate = new StringBuilder();
             xamlHeaderTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
-            xamlHeaderTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible"" >");
+            xamlHeaderTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible""   >");
             xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
@@ -185,7 +188,7 @@ namespace NavigationMenuSample.Views
 
             StringBuilder xamlItemTemplate = new StringBuilder();
             xamlItemTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
-            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible"" >");
+            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible""  >");
             xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
@@ -318,6 +321,11 @@ namespace NavigationMenuSample.Views
         public void ConsultarPortabilidad(string numero)
         {
             presentador.ConsultarPortabilidad(numero);
+        }
+
+        private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }

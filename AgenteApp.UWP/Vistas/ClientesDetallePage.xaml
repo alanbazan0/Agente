@@ -52,7 +52,7 @@
                                     <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
                                     <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
                     </VariableSizedWrapGrid>
-                    <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
+                    <ScrollViewer  ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
                         <ListView x:Name="clientesListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
                         </ListView>
                     </ScrollViewer>
@@ -60,14 +60,9 @@
                         <ListView x:Name="clientesCriterioListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick" Visibility="Collapsed">
                         </ListView>
                     </ScrollViewer>
-
                 </Grid>
             </StackPanel>
         </Grid>
-
-
-
-
 
     </Grid>
 </Page>

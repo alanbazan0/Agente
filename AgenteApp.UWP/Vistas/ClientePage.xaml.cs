@@ -175,11 +175,26 @@ namespace AgenteApp.UWP.Vistas
         public void CrearFormularioClientes(Componente componente)
         {
             IComponente componenteVista = componenteFabrica.CrearComponente(componente); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            
+            if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE")
+            {
+                (componenteVista as UIElement).KeyDown += ClientePage_KeyDownName;
+            }
             formularioComponentes.Children.Add(componenteVista as UIElement);
-            //if (campoFormulario.campoId == "BTCLIENTENUMERO")
-            //{
-            //    (componente as UIElement).IsEnabled = false;
-            //}
+            
+        }
+
+        private void ClientePage_KeyDownName(object sender, KeyRoutedEventArgs e)
+        {
+
+            //hay que programar el evento onkeypress in the tap button 
+            if (e.Key == Windows.System.VirtualKey.Tab)
+            {
+                var componente = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEPNOMBRE")
+                                           .Select(a => a)
+                                           .First();
+                var boxname = (componente as UIElement).GetType().GetProperty("textBox").GetValue((componente as UIElement), null);
+            }
         }
 
         private void AppGuardarClienteButton_Click(object sender, RoutedEventArgs e)
