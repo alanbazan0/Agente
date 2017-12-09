@@ -392,7 +392,7 @@ namespace NavigationMenuSample.Views
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            ConsultarClientes();
+            //ConsultarClientes();
         }
        
         private void ApprRecesoButton_Click(object sender, RoutedEventArgs e)
