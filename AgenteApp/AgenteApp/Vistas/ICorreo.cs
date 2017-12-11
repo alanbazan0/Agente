@@ -9,5 +9,8 @@ namespace AgenteApp.Vistas
     {
         List<Correos> correos { set; }
         void consultarCorreoEntrada();
+        void consultarCorreoEntradaDia();
+        void consultarCorreoEntradaMes();
+        void consultarCorreoEntradaSemana();
     }
 }

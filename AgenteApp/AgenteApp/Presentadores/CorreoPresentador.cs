@@ -30,5 +30,38 @@ namespace AgenteApp.Presentadores
             else
             { } //vista.MostrarMensaje("Error", resultado.mensajeError);
         }
+        public async void consultarCorreoEntradaDia(string nombre)
+        {
+            CorreoRepositorio repositorio = new CorreoRepositorio();
+            Resultado<List<Correos>> resultado = await repositorio.consultarCorreoEntradaDia(nombre);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.correos = resultado.valor;
+            }
+            else
+            { } //vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        public async void consultarCorreoEntradaMes(string nombre)
+        {
+            CorreoRepositorio repositorio = new CorreoRepositorio();
+            Resultado<List<Correos>> resultado = await repositorio.consultarCorreoEntradaMes(nombre);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.correos = resultado.valor;
+            }
+            else
+            { } //vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        public async void consultarCorreoEntradaSemana(string nombre)
+        {
+            CorreoRepositorio repositorio = new CorreoRepositorio();
+            Resultado<List<Correos>> resultado = await repositorio.consultarCorreoEntradaSemana(nombre);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.correos = resultado.valor;
+            }
+            else
+            { } //vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace NavigationMenuSample.Views
             webCorreo.NavigateToString("<html></html>");
             correosPresentador = new CorreoPresentador(this);
 
-            indicadores.Visibility = Visibility.Collapsed;
+            calendario.Visibility = Visibility.Collapsed;
             contactos.Visibility = Visibility.Collapsed;
             correosSalida.Visibility = Visibility.Collapsed;
         }
@@ -122,8 +122,24 @@ namespace NavigationMenuSample.Views
 
         }
         private void ResponderCorreo_Click(object sender, RoutedEventArgs e)
-        {
+        {         
             this.Frame.Navigate(typeof(ResponCorreo), usuario);
+        }
+        private void acomulados(object sender, TappedRoutedEventArgs e)
+        {
+            consultarCorreoEntrada();
+        }
+        private void diaActual(object sender, TappedRoutedEventArgs e)
+        {
+            consultarCorreoEntradaDia();
+        }
+        private void semanaActual(object sender, TappedRoutedEventArgs e)
+        {
+            consultarCorreoEntradaSemana();
+        }
+        private void mesActual(object sender, TappedRoutedEventArgs e)
+        {
+            consultarCorreoEntradaMes();
         }
         private async void SendEmailButton()
         {
@@ -144,5 +160,19 @@ namespace NavigationMenuSample.Views
             await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
 
+        public void consultarCorreoEntradaDia()
+        {
+            correosPresentador.consultarCorreoEntradaDia(usuario.Id);
+        }
+
+        public void consultarCorreoEntradaMes()
+        {
+            correosPresentador.consultarCorreoEntradaMes(usuario.Id);
+        }
+
+        public void consultarCorreoEntradaSemana()
+        {
+            correosPresentador.consultarCorreoEntradaSemana(usuario.Id);
+        }
     }
 }
