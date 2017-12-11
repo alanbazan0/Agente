@@ -29,7 +29,7 @@ namespace AgenteApp.Presentadores
             Resultado<List<Objeto>> resultado = await repositorio.Consultar(filtros,Constantes.VERSION);
             if(resultado.mensajeError==string.Empty)
             {
-                vista.Clientes = resultado.valor;
+                vista.ClientesCriterio = resultado.valor;
             }
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
@@ -79,6 +79,10 @@ namespace AgenteApp.Presentadores
             CrearCriteriosSeleccion();
             CrearColumnasGrid();
         }
+        public void CrearColumnasGridCriterio()
+        {
+            CrearColumnasGrid2();
+        }
 
         private async void CrearColumnasGrid()
         {
@@ -89,6 +93,20 @@ namespace AgenteApp.Presentadores
             {
                 campos = resultado.valor.Where(item => item.presentacion == "1").ToList();
                 vista.CrearColumnasGrid1(campos);
+
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+        private async void CrearColumnasGrid2()
+        {
+            CamposGrid2Repositorio repositorio = new CamposGrid2Repositorio();
+            Resultado<List<CampoGrid>> resultado = await repositorio.ConsultarPorVersion(Constantes.VERSION);
+
+            if (resultado.mensajeError == string.Empty)
+            {
+                campos = resultado.valor.Where(item => item.presentacion == "1").ToList();
+                vista.CrearColumnasGrid2(campos);
 
             }
             else

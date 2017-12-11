@@ -3,22 +3,19 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Linphone;
 
 namespace AgenteApp.Vistas
 {
-    public interface IClientesVista
+    public interface IRecepcionLlamadaVista
     {
-        void ConsultarClientes();
         void ConsultarClientesTel(string numero);
         void MostrarMensajeAsync(string titulo, string mensaje);
-        List<Campo> Filtros { get;  }
+        List<Campo> Filtros { get; }
         List<Objeto> Clientes { set; }
-        List<Objeto> ClientesCriterio { set; }
-        List<Portabilidad> Portabilidad {  set; }
-        void CrearCriterioSeleccion(Componente criterioSeleccion);
-        void CrearColumnasGrid1(List<CampoGrid> campos);
-        void CrearColumnasGrid2(List<CampoGrid> campos);
+        List<Portabilidad> Portabilidad { set; }
         void ConsultarPortabilidad(string numero);
         string setIdLlamada { set; }
+
     }
 }
