@@ -6,7 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="backgroundColor">#FF808080</SolidColorBrush>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <VisualStateManager.VisualStateGroups>
@@ -79,7 +83,7 @@
                         <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                             <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
                         </StackPanel>
-                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="botonesLlmada"  Orientation="Horizontal" Width="Auto"  ItemHeight="49" ItemWidth="201" >
+                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="botonesLlmada"  Orientation="Horizontal" Width="Auto"  ItemHeight="49" ItemWidth="150" >
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
@@ -88,7 +92,7 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
                                    
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" x:Name="btColagar" Background="White" Height="50" Width="200" Click="Contestar">
+                                <Button Grid.Column="0" x:Name="btColagar" Background="White" Height="50" Width="150" Click="Colgar">
                                     <StackPanel>
                                         <TextBlock Text="Colgar" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -105,7 +109,7 @@
                                     
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Column="0" x:Name="btpausar" Background="White" Height="50" Width="200" >
+                                <Button Grid.Column="0" x:Name="btpausar" Background="White" Height="50" Width="150"  Click="Pausar">
                                     <StackPanel>
                                         <TextBlock Text="Pausar" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -117,12 +121,24 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="numTranfer" PlaceholderText="numero destino" HorizontalAlignment="Center" Width="140"/>
+
+                            </Grid>
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"></ColumnDefinition>
                                     
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Column="0" x:Name="btTrasferir" Background="White" Height="50" Width="200"  >
+                                <Button Grid.Column="0" x:Name="btTrasferir" Background="White" Height="50" Width="150"  >
                                     <StackPanel>
-                                        <TextBlock Text="Transferir" Foreground="Gray" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Transferir" Foreground="Gray" HorizontalAlignment="Center" />
+                                        
                                     </StackPanel>
                                 </Button>
                                 
@@ -137,7 +153,7 @@
                                 </Grid.ColumnDefinitions>
 
 
-                                <Button Grid.Column="0" x:Name="btConeferencia" Background="White" Height="50" Width="200"  >
+                                <Button Grid.Column="0" x:Name="btConeferencia" Background="White" Height="50" Width="150"  >
                                     <StackPanel>
                                         <TextBlock Text="Conferencia" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -298,7 +314,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" ></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Coincidencias encontradas con número telefónico" Margin="8" FontSize="39" TextAlignment="Center" Foreground="Gray"  />
+                                <TextBlock Grid.Column="0" x:Name="lbCoincidencias" Text="Coincidencias encontradas con número telefónico" Margin="8" FontSize="39" TextAlignment="Center" Foreground="Gray"  />
                                 
                             </Grid>
                         </VariableSizedWrapGrid>
@@ -310,7 +326,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="700"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="8715426878"   Margin="8"  FontSize="39" TextAlignment="Center"  Foreground="Gray"  />
+                                <TextBlock Grid.Column="0" x:Name="lbTelefono" Text="0000000000"   Margin="8"  FontSize="39" TextAlignment="Center"  Foreground = "{StaticResource backgroundColor}" />
                             </Grid>
                         </VariableSizedWrapGrid>
                     </Grid>

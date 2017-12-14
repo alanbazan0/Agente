@@ -9,15 +9,16 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using AgenteApp.Modelos;
-using Windows.UI.Popups;
 using Newtonsoft.Json.Linq;
 using AgenteApp.UWP.Fabricas;
 using AgenteApp.Componentes;
@@ -42,12 +43,10 @@ namespace NavigationMenuSample.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RecepcionLlamadaPage : Page, IRecepcionLlamadaVista, ICorreo
+    public sealed partial class RecepcionLlamadaPage : Page, IRecepcionLlamadaVista
     {
         Usuario usuario;
         RecepcionLlamadaPresentador presentador;
-        //AgentePresentador presentador;
-        CorreoPresentador correosPresentador;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
         SoftphoneEmbebed telefono;
@@ -56,13 +55,8 @@ namespace NavigationMenuSample.Views
         int min = 0;
         int hor = 0;
         int segunds = 0;
-        List<CampoGrid> camposGloba;
-        public List<Campo> Filtros => throw new NotImplementedException();
-        public List<Objeto> Clientes { set => throw new NotImplementedException(); }
-        public List<Portabilidad> Portabilidad { set => throw new NotImplementedException(); }
-        public string setIdLlamada { set => throw new NotImplementedException(); }
-        public List<Correos> correos { set => throw new NotImplementedException(); }
-        
+        Call LlamadaPausada;
+
         private CoreListener Listener;
 
         public RecepcionLlamadaPage()
@@ -132,21 +126,24 @@ namespace NavigationMenuSample.Views
             {
                 if (state == CallState.IncomingReceived)
                 {
-                    //Contestar();
+                    Contestar();
                 }
-                else
-                {
-                    //HeaderTextBlock.Text = "Recepción de llamada - Disponible";
-                }
+                
+
+
             }
-            //else
-            //{
-            //    call.Text = "Start Call";
-            //    call_stats.Text = "";
-            //}
+            else
+            {
+                HeaderTextBlock.Text = "Recepción de llamada - Disponible";               
+                HoraLlamadaTextBox.Text = "00:00:00";
+                dispatcherTimer.Stop();
+                LimpiarDatos();
+            }
+
+           
         }
 
-        private void Contestar(object sender, RoutedEventArgs e)
+        private void Contestar()
         {
             if (telefono.LinphoneCore.CallsNb == 0)
             {
@@ -160,11 +157,78 @@ namespace NavigationMenuSample.Views
                 {
                     telefono.LinphoneCore.AcceptCall(call);
                     HeaderTextBlock.Text = "Recepción de llamada - En llamada";
+                    lbTelefono.Text =numTelefonico = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
+                    LimpiarDatos();
+                    HoraLlamadaTextBox.Text = GetTimeString();
+                    dispatcherTimer.Start();
+                    ConsultarDatos(NoTelTextBox.Text);
                 }
-                //else
-                //{
-                //    LinphoneCore.TerminateAllCalls();
-                //}
+
+            }
+        }
+
+        private void Colgar(object sender, RoutedEventArgs e)
+        {
+            if (telefono.LinphoneCore.CallsNb == 0)
+            {
+
+            }
+            else
+            {
+                Call call;
+                if (telefono.LinphoneCore.CurrentCall != null)
+                {
+                    call = telefono.LinphoneCore.CurrentCall;
+                    if (call.State == CallState.StreamsRunning)
+                    {
+                        telefono.LinphoneCore.TerminateAllCalls();
+                        HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+                        HoraLlamadaTextBox.Text = "00:00:00";
+                        dispatcherTimer.Stop();
+                        LimpiarDatos();
+                    }
+                }
+                else
+                {
+                    if (LlamadaPausada.State == CallState.Paused)
+                    {
+                        telefono.LinphoneCore.TerminateAllCalls();
+                        HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+                        HoraLlamadaTextBox.Text = "00:00:00";
+                        dispatcherTimer.Stop();
+                        LimpiarDatos();
+                    }
+
+                }
+                
+            }
+        }
+
+        private void Pausar(object sender, RoutedEventArgs e)
+        {
+            if (telefono.LinphoneCore.CallsNb == 0)
+            {
+
+            }
+            else
+            {
+
+                if(telefono.LinphoneCore.CurrentCall!=null)
+                    LlamadaPausada = telefono.LinphoneCore.CurrentCall;
+
+
+                if (LlamadaPausada.State == CallState.StreamsRunning)
+                {
+                    telefono.LinphoneCore.PauseCall(LlamadaPausada);
+                    HeaderTextBlock.Text = "Recepción de llamada - Pausa";
+                }
+                else if (LlamadaPausada.State == CallState.Paused)
+                {
+                    telefono.LinphoneCore.ResumeCall(LlamadaPausada);
+                    HeaderTextBlock.Text = "Recepción de llamada - En llamada";
+                    LlamadaPausada = null;
+                }
+
             }
         }
 
@@ -292,8 +356,11 @@ namespace NavigationMenuSample.Views
             min = 0;
             hor = 0;
             segunds = 0;
-            HeaderTextBlock.Text = "Recepción de llamada - En llamada";
             timpoLlamadaTextBox.Text = "00:00:00";
+            EstadoTextBox.Text = "";
+            ciudadTextBox.Text = "";
+            tipoTelefonoTextBox.Text = "";
+            tipoLlamadaTextBox.Text = "";
         }
 
         private string GetTimeString()
@@ -307,7 +374,7 @@ namespace NavigationMenuSample.Views
         private void ConsultarDatos(string noTelefonico)
         {
             progressRing.IsActive = true;
-            // ConsultarIdLlamada(noTelefonico);
+            ConsultarIdLlamada(NoExtensionTextBox.Text);
             ConsultarPortabilidad(noTelefonico);
             ConsultarClientesTel(noTelefonico);
         }
@@ -335,6 +402,42 @@ namespace NavigationMenuSample.Views
                 await dialog.ShowAsync();
             }
         }
+
+        public List<Objeto> Clientes
+        {
+            set
+            {
+                progressRing.IsActive = false;
+                Resources["backgroundColor"] = new SolidColorBrush(Colors.Green);
+     ;
+            }
+        }
+
+        public List<Portabilidad> Portabilidad
+        {
+            set
+            {
+                try
+                {
+                    EstadoTextBox.Text = value[0].EstadoPortabilidad;
+                    ciudadTextBox.Text = value[0].MunicipioPortabilidad;
+                    tipoTelefonoTextBox.Text = value[0].RedPortabilidad;
+                    tipoLlamadaTextBox.Text = value[0].TipoLlamadaPortabilidad;
+                    portabilidadParametros = value[0];
+                }
+                catch { }
+            }
+        }
+
+        public string setIdLlamada
+        {
+            set
+            {
+                idLlamadaTextBox.Text = value;
+            }
+        }
+
+        
 
     }
 }

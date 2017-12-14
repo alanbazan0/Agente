@@ -24,12 +24,10 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
-    <Capability Name="privateNetworkClientServer" />
-    <iot:Capability Name="systemManagement" />
-    <uap:Capability Name="removableStorage" />
+    <uap:Capability Name="picturesLibrary" />
+    <uap:Capability Name="contacts" />
     <uap:Capability Name="voipCall" />
-    <iot:Capability Name="lowLevelDevices" />
-    <uap3:Capability Name="remoteSystem" />
+    <uap:Capability Name="removableStorage" />
     <DeviceCapability Name="microphone" />
   </Capabilities>
 </Package>

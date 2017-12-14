@@ -63,7 +63,7 @@ namespace AgenteApp.Clases
         {
             // Handle when your app starts
 #if WINDOWS_UWP
-            TimeSpan period = TimeSpan.FromMilliseconds(500);
+            TimeSpan period = TimeSpan.FromSeconds(1);
             ThreadPoolTimer PeriodicTimer = ThreadPoolTimer.CreatePeriodicTimer(LinphoneCoreIterate, period);
 #else
             Thread iterate = new Thread(LinphoneCoreIterate);

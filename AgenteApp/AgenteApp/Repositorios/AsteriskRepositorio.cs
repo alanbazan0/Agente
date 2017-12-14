@@ -20,7 +20,7 @@ namespace AgenteApp.Repositorios
             //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/Asterisk.php";         
-            AgregarParametro("accion", "consultarIdLlamada");
+            AgregarParametro("accion", "consultar");
             AgregarParametro("extension", extension);
             //AgregarParametro("version", version.ToString());
             //AgregarParametro("campos", JsonConvert.SerializeObject(campos));

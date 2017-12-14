@@ -22,18 +22,7 @@ namespace AgenteApp.Presentadores
             this.vista = vista;
         }
 
-        public async void ConsultarClientes()
-        {
-            List<Campo> filtros = vista.Filtros;
-            ClientesRepositorio repositorio = new ClientesRepositorio();
-            Resultado<List<Objeto>> resultado = await repositorio.Consultar(filtros, Constantes.VERSION);
-            if (resultado.mensajeError == string.Empty)
-            {
-                vista.Clientes = resultado.valor;
-            }
-            else
-                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
-        }
+        
 
         public async void ConsultarClientesTel(string numero)
         {
