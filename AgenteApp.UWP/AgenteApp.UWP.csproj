@@ -132,6 +132,9 @@
     <Compile Include="Vistas\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\QuejasPage.xaml.cs">
+      <DependentUpon>QuejasPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\RecepcionLlamadaPage.xaml.cs">
       <DependentUpon>RecepcionLlamadaPage.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vistas\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\QuejasPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

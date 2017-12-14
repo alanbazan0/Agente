@@ -73,8 +73,11 @@
                         <Grid.ColumnDefinitions >
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions >
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
                             <RowDefinition Height="auto" />
@@ -84,12 +87,17 @@
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Para:" HorizontalAlignment="Left"     Margin="15" Width="50"  />
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="CC:" HorizontalAlignment="Left"       Margin="15" Width="50"/>
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="Asunto:" HorizontalAlignment="Left"   Margin="15" Width="50"/>
-                        <TextBlock Grid.Column="0" Grid.Row="3" Text="Contenido" HorizontalAlignment="Left" Margin="15" Width="auto"/>
+                        <Button Grid.Column="1"    Grid.Row="3"  Background="#ff9900" Foreground="White" Click = "adjunta_Click" Content="Adjuntar archivo..."  HorizontalAlignment="Left"   Margin="15" Width="auto"/>
+                        <TextBlock x:Name="nombreArchivo" Grid.Column="1" Grid.Row="3" Text="" HorizontalAlignment="Left" Margin="158.5,20,0,10" Width="auto"/>
+                        <TextBlock Grid.Column="0" Grid.Row="4" Text="Contenido" HorizontalAlignment="Left" Margin="15" Width="auto"/>
 
                         <TextBox x:Name="correotxt"      Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
                         <TextBox x:Name="asuntotxt_Copy" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
                         <TextBox x:Name="asuntotxt"      Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
-                        <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="3" Margin="15" Width="600" Height="150"/>
+                        <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="4" Margin="15" Width="600" Height="150"/>
+
+                        <Button Grid.Column="1"    Grid.Row="5"  Background="#ff9900" Foreground="White"  Content="Enviar"  HorizontalAlignment="Right"   Margin="15" Width="auto"/>
+
                     </Grid>
 
                 </StackPanel>

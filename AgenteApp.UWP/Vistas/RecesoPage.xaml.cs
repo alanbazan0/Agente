@@ -35,15 +35,21 @@ namespace NavigationMenuSample.Views
 
         int seg = 0;
         int segAcum = 0;
+        int segConex = 0;
         int min = 0;
         int minAcum = 0;
+        int minConex = 0;
         int hor = 0;
         int horAcum = 0;
+        int horConex = 0;
         int segunds = 0;
         int segundos = 0;
 
+        int segundosConexion = 0;
+
         private DispatcherTimer dispatcherTimer;
         private DispatcherTimer acomuladoTimer;
+        private DispatcherTimer conexionTimer;
 
         String estatusAgente="";
         String duracionReceso = "";
@@ -94,6 +100,11 @@ namespace NavigationMenuSample.Views
                     if (value[i].IdReceso.Equals("SBSC"))
                     {
                         horaInicio.Text=value[i].HoraInicial;
+                        TimeSpan ts = Convert.ToDateTime(DateTime.Now.ToString()) - Convert.ToDateTime(value[i].HoraInicial);
+                        string tc = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+                        segConex = ts.Seconds; minConex = ts.Minutes; horConex = ts.Hours;
+                        tiempoConexion.Text = tc;
+                        
                     }
                 }
                 timerAcomulado.Text=string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
@@ -174,6 +185,11 @@ namespace NavigationMenuSample.Views
             acomuladoTimer = new DispatcherTimer();
             acomuladoTimer.Tick += dispatcherTimer_Tick2;
             acomuladoTimer.Interval = new TimeSpan(0, 0, 1);
+
+            conexionTimer = new DispatcherTimer();
+            conexionTimer.Tick += dispatcherTimer_Tick3;
+            conexionTimer.Interval = new TimeSpan(0, 0, 1);
+            conexionTimer.Start();
         }
         void dispatcherTimer_Tick(object sender, object e)
         {
@@ -182,6 +198,10 @@ namespace NavigationMenuSample.Views
         void dispatcherTimer_Tick2(object sender, object e)
         {
             mostrarTime();
+        }
+        void dispatcherTimer_Tick3(object sender, object e)
+        {
+            timepoCOnexionTick();
         }
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
@@ -291,6 +311,43 @@ namespace NavigationMenuSample.Views
                 Shor = horAcum.ToString();
             }
             timerAcomulado.Text = Shor + ":" + Smin + ":" + Sseg;
+        }
+
+        private void timepoCOnexionTick()
+        {
+            if (minConex == 60)
+            {
+                horConex += 1;
+                minConex = 0;
+            }
+            if (segConex == 60)
+            {
+                minConex += 1;
+                segConex = 0;
+            }
+            segConex += 1;
+            String Sseg = "0";
+            if (segConex < 10)
+            { Sseg += segConex.ToString(); }
+            else
+            {
+                Sseg = segConex.ToString();
+            }
+            String Smin = "0";
+            if (minConex < 10)
+            { Smin += minConex.ToString(); }
+            else
+            {
+                Smin = minConex.ToString();
+            }
+            String Shor = "0";
+            if (horConex < 10)
+            { Shor += horConex.ToString(); }
+            else
+            {
+                Shor = horConex.ToString();
+            }
+            tiempoConexion.Text = Shor + ":" + Smin + ":" + Sseg;
         }
 
         private void ShowTime()
