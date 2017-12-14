@@ -40,6 +40,39 @@
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
         <StackPanel Grid.Row="1" >
+            <Grid Margin="15,0,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="No. Cliente:" HorizontalAlignment="Left"     Margin="15,15,15,15" Width="auto"/>
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="RFC:" HorizontalAlignment="Left"       Margin="15" Width="auto"/>
+                <TextBlock Grid.Column="4" Grid.Row="0" Text="CURP:" HorizontalAlignment="Left"   Margin="-140,15,15,15" Width="auto"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="NSS" HorizontalAlignment="Left" Margin="15,0,0,0" Width="auto"/>
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="Nombre completo" HorizontalAlignment="Left" Margin="15,0,0,0" Width="auto"/>
+
+                <TextBox x:Name="correotxt"      Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="15" Width="200" />
+                <TextBox x:Name="asuntotxt_Copy" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" Margin="-80,15,15,15" Width="200" />
+                <TextBox x:Name="asuntotxt"      Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center"  Margin="235,15,15,15"  Width="200" Grid.ColumnSpan="2" />
+                <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="15,3,18,27" Width="200" />
+                <TextBox x:Name="NombreComtxt"   Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="21,3,18,27" Width="431" />
+            </Grid>
+            <Grid  Padding="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                    <TextBlock Text=""  FontSize="10"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                </Border>
+            </Grid>
             <TextBox x:Name="numeroClienteSMSTextBox" PlaceholderText="Numero de cliente" Margin="15" Width="350" />
             <TextBox x:Name="contactoSMSTextBox" PlaceholderText="Contacto" Margin="15" Width="350" />
             <TextBox x:Name="telefonoSMSTextBox" PlaceholderText="Telefono" Margin="15" Width="350" />

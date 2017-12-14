@@ -45,19 +45,33 @@
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
         <StackPanel Margin="0,50,0,0">
-            <VariableSizedWrapGrid MaximumRowsOrColumns="3" ItemHeight="50" ItemWidth="250" Height="150" >
 
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo receso" Margin="15,0,0,0"/>
-                <TextBlock x:Name="timerReceso" TextWrapping="Wrap" FontSize="30" Text="00:00:00"  VariableSizedWrapGrid.RowSpan="2" Margin="15,0,-15,0" />
+            <Grid Margin="15,0,0,0" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock TextWrapping="Wrap" FontSize="30" Grid.Column="0"  Text="Tiempo receso" Margin="0,0,0,0"/>
+                <TextBlock x:Name="timerReceso" TextWrapping="Wrap" FontSize="30" Text="00:00:00"  Grid.Column="0" Grid.Row="2" Margin="0,0,0,0" />
 
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo acomulado"   VariableSizedWrapGrid.ColumnSpan="2" Margin="38,0,-38,0" />
-                <TextBlock x:Name="timerAcomulado" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="2" VariableSizedWrapGrid.RowSpan="2" Margin="38,0,-38,0" />
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Tiempo acomulado"   Grid.Column="1" Margin="0,0,0,0" />
+                <TextBlock x:Name="timerAcomulado" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           Grid.Column="1" Grid.Row="2" Margin="0,0,0,0" />
 
-                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Ingreso al sistema" VariableSizedWrapGrid.ColumnSpan="3" Margin="43,0,-43,0" />
-                <TextBlock x:Name="horaInicio" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           VariableSizedWrapGrid.ColumnSpan="3" VariableSizedWrapGrid.RowSpan="2" Margin="43,0,62,0" />
-            </VariableSizedWrapGrid>
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Ingreso al sistema" Grid.Column="2" Margin="0,0,0,0" />
+                <TextBlock x:Name="horaInicio" TextWrapping="Wrap" FontSize="30" Text="00:00:00"          Grid.Column="2" Grid.Row="2" Margin="0,0,0,0" />
+
+                <TextBlock TextWrapping="Wrap" FontSize="30" Text="Timpo conexion" Grid.Column="3" Margin="0,0,0,0" />
+                <TextBlock x:Name="tiempoConexion" TextWrapping="Wrap" FontSize="30" Text="00:00:00"           Grid.Column="3" Grid.Row="2" Margin="0,0,0,0" />
+
+            </Grid>
             <StackPanel>
-                <Grid Margin="0,-50,0,15" >
+                <Grid Margin="0,0,0,15" >
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="520"/>
