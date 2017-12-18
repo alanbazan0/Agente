@@ -31,6 +31,8 @@ namespace NavigationMenuSample.Views
         Usuario usuario;
         String correoCliente;
         CorreoPresentador correosPresentador;
+        string correo="";
+        string NomCLinete="";
         public CorreoPage()
         {
             this.InitializeComponent();
@@ -124,7 +126,8 @@ namespace NavigationMenuSample.Views
             if (correos != null)
             {
                 var contenido = (string)correos.GetType().GetProperty("Contenido").GetValue(correos, null);
-                string correo = (string)correos.GetType().GetProperty("Correo").GetValue(correos, null);
+                correo = (string)correos.GetType().GetProperty("Correo").GetValue(correos, null);
+                NomCLinete = (string)correos.GetType().GetProperty("NUmCLinete").GetValue(correos, null);
                 string[] saludos = correo.Split('<');
                 correoCliente = saludos[1].Replace(">", "");
                 byte[] datos = Convert.FromBase64String(contenido);
@@ -142,6 +145,15 @@ namespace NavigationMenuSample.Views
         private void ResponderCorreo_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(ResponCorreo), usuario);
+        }
+        private void AltaCorreo_Click(object sender, RoutedEventArgs e)
+        {
+            String searchString = "<";
+            int startIndex = correo.IndexOf(searchString)+1;
+            searchString = ">" + searchString.Substring(1);
+            int endIndex = correo.IndexOf(searchString)-1;
+            String substring = correo.Substring(startIndex, endIndex + searchString.Length - startIndex);
+            this.Frame.Navigate(typeof(AltaCorreoClientePage), substring);
         }
         private void acomulados(object sender, TappedRoutedEventArgs e)
         {

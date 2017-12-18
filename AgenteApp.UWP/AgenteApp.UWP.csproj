@@ -113,6 +113,9 @@
     <Compile Include="Vistas\AgentePage.xaml.cs" />
     <Compile Include="Views\DrillInPage.xaml.cs" />
     <Compile Include="Views\LandingPage.xaml.cs" />
+    <Compile Include="Vistas\AltaCorreoClientePage.xaml.cs">
+      <DependentUpon>AltaCorreoClientePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\ClientePage.xaml.cs">
       <DependentUpon>ClientePage.xaml</DependentUpon>
     </Compile>
@@ -206,6 +209,10 @@
     <Page Include="Views\LandingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vistas\AltaCorreoClientePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\ClientePage.xaml">
       <SubType>Designer</SubType>

@@ -239,5 +239,39 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+
+        public async Task<Resultado<string>> insertarAltaClienteCorreo(string nombre, string nombre2, string paterno, string materno,string correo, string rfc,string curp)
+        {
+            Resultado<string> datos = new Resultado<string>();
+
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Correo.php";
+            AgregarParametro("accion", "insertarAltaClienteCorreo");
+            AgregarParametro("nombre", nombre);
+            AgregarParametro("nombre2", nombre2);
+            AgregarParametro("paterno", paterno);
+            AgregarParametro("materno", materno);
+            AgregarParametro("correo", correo);
+            AgregarParametro("rfc", rfc);
+            AgregarParametro("curp", curp);
+
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<string>>(resultadoContenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+            }
+            return datos;
+        }
     }
 }

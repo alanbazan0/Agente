@@ -81,7 +81,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "Queja",
-                    DestPage = typeof(ConfiguraciónPage)
+                    DestPage = typeof(QuejasPage)
                 },
                 new NavMenuItem()
                 {
