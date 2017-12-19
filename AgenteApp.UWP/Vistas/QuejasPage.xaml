@@ -4,11 +4,48 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AgenteApp.UWP.Vistas"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+    xmlns:ctl="using:NavigationMenuSample.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
+            <AppBarButton Icon="Message" Label="Enviar sms" Foreground="White"/>
+            <AppBarButton Icon="ClosePane" Label="Cerrar" Foreground="White"/>
+            <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>-->
+            <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
+            <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Save" Label="Guardar tipificación"/>
+                <AppBarButton Icon="Mail" Label="Bandeja decorreos"/>
+                <AppBarButton Icon="Message"  Label="SMS"/>
+                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
+                <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
+                <AppBarButton Icon="Pause" Label="Hold"/>
+                <AppBarButton Icon="Refresh" Label="Reconectar"/>
+                <AppBarButton Icon="Redo" Label="Reanudar llamada"/>
+                <AppBarButton Icon="DisconnectDrive" Label="Llamada cortada"/>
+                <AppBarButton Icon="PhoneBook" Label="Recuperar datos de llamadas"/>
+
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <ctl:PageHeader>
+                    <ctl:PageHeader.HeaderContent>
+                        <TextBlock x:Name="HeaderTextBlock" Text="QUEJA" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                    </ctl:PageHeader.HeaderContent>
+                </ctl:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+        <ctl:PageHeader x:Name="pageTitleContainer" Visibility="Collapsed">
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
         <StackPanel>
+            
             <Grid Margin="15,50,0,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -34,6 +71,37 @@
                 <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="15,3,18,27" Width="200" />
                 <TextBox x:Name="NombreComtxt"   Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="21,3,18,27" Width="431" />
             </Grid>
+                <Grid  Padding="0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                        <TextBlock Text=""  FontSize="10"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                    </Border>
+                </Grid>          
+                <Grid  HorizontalAlignment="Left" Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions >
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Motivo:" HorizontalAlignment="Left"   Margin="15" Width="50"/>
+                             <TextBlock Grid.Column="0" Grid.Row="4" Text="Observaciones" HorizontalAlignment="Left" Margin="15" Width="auto"/>
+                            <TextBox x:Name="MotivoBtxt"      Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
+                            <TextBox x:Name="observacionesBtxt"   Grid.Column="1" Grid.Row="4" Margin="15" Width="600" Height="150"/>
+                            <Button Grid.Column="1"    Grid.Row="5"  Background="#ff9900" Foreground="White"  Content="Enviar"  HorizontalAlignment="Right"   Margin="15" Width="auto"/>
+
+                </Grid>
          </StackPanel>
     </Grid>
 </Page>

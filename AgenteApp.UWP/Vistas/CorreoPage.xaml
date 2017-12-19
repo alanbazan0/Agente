@@ -62,6 +62,7 @@
                     </ctl:PageHeader.HeaderContent>
                 </ctl:PageHeader>
             </CommandBar.Content>
+            <AppBarButton Icon="AddFriend" Label="Alta cliente" Foreground="White" Click="AltaCorreo_Click"/>
             <AppBarButton Icon="MailForward" Label="Responder correo" Foreground="White" Click="ResponderCorreo_Click"/>
         </CommandBar>
 
@@ -91,9 +92,9 @@
                 <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="15,3,18,27" Width="200" />
                 <TextBox x:Name="NombreComtxt"   Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="21,3,18,27" Width="431" />
 
-                <Button x:Name = "btnCorreosE"     Grid.Column="5" Grid.Row="0" Background="#ebebeb" Foreground="#5e777c" Content="Correos de entrada" Click="clickCorreoE"  HorizontalAlignment="Stretch" Width="200" Margin="8,0,-4,30" />
-                <Button x:Name = "btnCorreosS"     Grid.Column="5" Grid.Row="1" Background="#ebebeb" Foreground="#5e777c" Content="Correos de salida"  Click="clickCorreoS" HorizontalAlignment="Stretch"  Width="200" Margin="8,9,-4,21"/>
-                <Button x:Name = "btnCorreosTodos" Grid.Column="5" Background="#ebebeb" Foreground="#5e777c" Content="Correos todos"  Click="clickCorreoS" HorizontalAlignment="Stretch"  Width="200" Margin="8,36,-4,56" Grid.RowSpan="2"/>
+                <Button x:Name = "btnCorreosE"     Grid.Column="5" Grid.Row="0" Background="#ebebeb" Foreground="#5e777c" Content="Correos de entrada" Click="clickCorreoE"  HorizontalAlignment="Stretch" Width="200" Margin="11,0,-4,30" />
+                <Button x:Name = "btnCorreosS"     Grid.Column="5" Background="#ebebeb" Foreground="#5e777c" Content="Correos de salida"  Click="clickCorreoS" HorizontalAlignment="Stretch"  Width="200" Margin="11,37,-5,65" Grid.RowSpan="2"/>
+                <Button x:Name = "btnCorreosTodos" Grid.Column="5" Background="#ebebeb" Foreground="#5e777c" Content="Correos todos"  Click="clickCorreoS" HorizontalAlignment="Stretch"  Width="200" Margin="11,15,-7,25" Grid.Row="1"/>
 
 
             </Grid>
@@ -110,7 +111,7 @@
             </StackPanel>
         </StackPanel>
 
-        <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
+        <Grid x:Name="ContentContainer" Grid.Row="1"  Margin="24,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <StackPanel>
                     <Grid >
@@ -282,7 +283,7 @@
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 <Image Grid.Column="0"  Source="../Assets/Contacto.png" Height="30" />
-                                                <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Correo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Titulo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                                 <TextBlock Grid.Column="2" FontSize="12" Text="{Binding Asunto}" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                                 <TextBlock Grid.Column="3" FontSize="12" Text="{Binding Fecha}"  TextAlignment="Center" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                             </Grid>
