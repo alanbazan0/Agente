@@ -55,6 +55,11 @@ namespace NavigationMenuSample.Views
         int min = 0;
         int hor = 0;
         int segunds = 0;
+        
+        
+        string extension;
+        string IdLlamada;
+        Boolean pausado = false;
         Call LlamadaPausada;
 
         private CoreListener Listener;
@@ -74,7 +79,6 @@ namespace NavigationMenuSample.Views
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             HeaderTextBlock.Text = "Recepción de llamada - Disponible";
             FechaLlamadaTextBox.Text = GetDateString();
-
             try
             {
                 Listener = Factory.Instance.CreateCoreListener();
@@ -157,7 +161,7 @@ namespace NavigationMenuSample.Views
                 {
                     telefono.LinphoneCore.AcceptCall(call);
                     HeaderTextBlock.Text = "Recepción de llamada - En llamada";
-                    lbTelefono.Text =numTelefonico = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
+                    numTelefonico = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
                     LimpiarDatos();
                     HoraLlamadaTextBox.Text = GetTimeString();
                     dispatcherTimer.Start();
@@ -213,7 +217,7 @@ namespace NavigationMenuSample.Views
             else
             {
 
-                if(telefono.LinphoneCore.CurrentCall!=null)
+                if (telefono.LinphoneCore.CurrentCall != null)
                     LlamadaPausada = telefono.LinphoneCore.CurrentCall;
 
 
@@ -221,16 +225,52 @@ namespace NavigationMenuSample.Views
                 {
                     telefono.LinphoneCore.PauseCall(LlamadaPausada);
                     HeaderTextBlock.Text = "Recepción de llamada - Pausa";
+                    InsertarPausa();
                 }
                 else if (LlamadaPausada.State == CallState.Paused)
                 {
                     telefono.LinphoneCore.ResumeCall(LlamadaPausada);
                     HeaderTextBlock.Text = "Recepción de llamada - En llamada";
                     LlamadaPausada = null;
+                    ActualizarPausa();
                 }
-
+                ConsultarPausas();
             }
         }
+
+
+        private void EntroCusor(object sender, RoutedEventArgs e)
+        {
+           // numTranfer.Visibility = Visibility.Visible;
+            //numTranfer.Focus(FocusState.Keyboard);
+        }
+
+        private void SalioCursor(object sender, RoutedEventArgs e)
+        {
+            //numTranfer.Visibility = Visibility.Collapsed;
+        }
+
+        private void Transferir(object sender, RoutedEventArgs e)
+        {
+            
+                if (telefono.LinphoneCore.CallsNb == 0)
+                {
+
+                }
+                else
+                {
+                    Call call = telefono.LinphoneCore.CurrentCall;
+                    if (call.State == CallState.StreamsRunning)
+                    {
+                        //telefono.LinphoneCore.TransferCall(call, numTranfer.Text);
+                        //HeaderTextBlock.Text = "Recepción de llamada - Diponible";
+                    }
+                }
+  
+
+        }
+
+
 
         private void OnStats(Core lc, Call call, CallStats stats)
         {
@@ -249,7 +289,7 @@ namespace NavigationMenuSample.Views
             try
             {
                 usuario = (Usuario)e.Parameter;
-                NoExtensionTextBox.Text = usuario.Extension;
+                extension = NoExtensionTextBox.Text = usuario.Extension;
                 string password = Constantes.PASS_CALL + usuario.Extension;
                 var authInfo = Factory.Instance.CreateAuthInfo(usuario.Extension, null, password, null, null, Constantes.DIRECCION_ELAXTIC);
                 telefono.LinphoneCore.AddAuthInfo(authInfo);
@@ -383,35 +423,6 @@ namespace NavigationMenuSample.Views
         {
             presentador.ConsultarPortabilidad(numero);
         }
-        public void ConsultarIdLlamada(string extension)
-        {
-            presentador.ConsultarIdLlamada(extension);
-        }
-
-        public void ConsultarClientesTel(string numero)
-        {           
-            presentador.ConsultarClientesTel(numero);
-        }
-
-        public async void MostrarMensajeAsync(string titulo, string mensaje)
-        {
-            progressRing.IsActive = false;
-            if (mensaje != null)
-            {
-                var dialog = new MessageDialog(mensaje, titulo);
-                await dialog.ShowAsync();
-            }
-        }
-
-        public List<Objeto> Clientes
-        {
-            set
-            {
-                progressRing.IsActive = false;
-                Resources["backgroundColor"] = new SolidColorBrush(Colors.Green);
-     ;
-            }
-        }
 
         public List<Portabilidad> Portabilidad
         {
@@ -429,15 +440,118 @@ namespace NavigationMenuSample.Views
             }
         }
 
+        public Pausas Pausa
+        {
+            get
+            {
+                Pausas PausAux = new Pausas();
+                PausAux.Extencion = extension;
+                PausAux.IdLlamada = IdLlamada;
+                PausAux.IdAgente = usuario.Id;
+                PausAux.Telefono = numTelefonico;
+                PausAux.IdPausa = "0";
+                PausAux.InicioPausa = GetDateString();
+                PausAux.Finalpausa = GetDateString();
+                PausAux.Duracion = "0";
+                lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
+                return PausAux;
+
+            }
+            set
+            {
+                 
+
+            }
+        }
+
+
+        public void ConsultarIdLlamada(string extension)
+        {
+            presentador.ConsultarIdLlamada(extension);
+        }
+
         public string setIdLlamada
         {
             set
             {
-                idLlamadaTextBox.Text = value;
+                IdLlamada = idLlamadaTextBox.Text = value;
+            }
+        }
+
+        public void ConsultarClientesTel(string numero)
+        {           
+            presentador.ConsultarClientesTel(numero);
+        }
+
+        public List<ClienteTelefono> Clientes
+        {
+            set
+            {
+                progressRing.IsActive = false;
+                if (value.Count > 0)
+                {
+                    lbCoincidencias.Foreground = new SolidColorBrush(Colors.Green);
+                    lbCoincidencias.Text = "Coincidencias encontradas con número telefónico: "+numTelefonico;
+                }
+                else
+                {
+                    lbCoincidencias.Foreground = new SolidColorBrush(Colors.Red);
+                    lbCoincidencias.Text = "Coincidencias no encontradas con número telefónico: " + numTelefonico;
+                }
             }
         }
 
         
+             private void PruebaPausar(object sender, RoutedEventArgs e)
+        {
+            
+                if (pausado==false)
+                {
+
+                    pausado = true;
+                    InsertarPausa();
+                }
+                else
+                {
+                pausado = false;
+                ActualizarPausa();
+                }
+            ConsultarPausas();
+        }
+
+
+        public void InsertarPausa()
+        {
+            presentador.InsertarPausa();
+        }     
+
+        public void ActualizarPausa()
+        {
+            presentador.ActulizarPausa();
+        }
+
+        public void ConsultarPausas()
+        {
+            presentador.ConsultarPausa();
+        }
+
+        public async void MostrarMensajeAsync(string titulo, string mensaje)
+        {
+            progressRing.IsActive = false;
+            if (mensaje != null)
+            {
+                var dialog = new MessageDialog(mensaje, titulo);
+                await dialog.ShowAsync();
+            }
+        }
+
+        public List<Pausas> Pausas
+        {
+            set
+            {
+                TiempoEsperaListView.ItemsSource = value;
+            }
+        }
 
     }
 }

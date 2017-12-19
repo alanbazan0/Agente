@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Campo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\MovimientoPersonal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Objeto.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Pausas.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoRecesos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioActualizacionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\MenuServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\PausaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RecesoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RepositorioBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ServicioDatos.cs" />

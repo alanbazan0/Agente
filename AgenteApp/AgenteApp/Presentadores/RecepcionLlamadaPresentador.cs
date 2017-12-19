@@ -22,13 +22,11 @@ namespace AgenteApp.Presentadores
             this.vista = vista;
         }
 
-        
-
         public async void ConsultarClientesTel(string numero)
         {
             //List<Filtro> filtros = vista.Filtros;
-            ClientesRepositorio repositorio = new ClientesRepositorio();
-            Resultado<List<Objeto>> resultado = await repositorio.ConsultarNumTel(numero, Constantes.VERSION);
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<List<ClienteTelefono>> resultado = await repositorio.ConsultarNumTel(numero);
             if (resultado.mensajeError == string.Empty)
             {
                 vista.Clientes = resultado.valor;
@@ -58,6 +56,40 @@ namespace AgenteApp.Presentadores
             if (resultado.mensajeError == string.Empty)
             {
                 vista.setIdLlamada = resultado.valor;
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+
+        public async void InsertarPausa()
+        {
+            PausaRepositorio repositorio = new PausaRepositorio();
+            Resultado<string> resultado = await repositorio.InsertarPausa(vista.Pausa);
+            if (resultado.mensajeError != string.Empty)
+            {
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+            }
+                
+        }
+
+        public async void ActulizarPausa()
+        {
+            PausaRepositorio repositorio = new PausaRepositorio();
+            Resultado<string> resultado = await repositorio.ActulizarPausa(vista.Pausa);
+            if (resultado.mensajeError != string.Empty)
+            {
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+            }
+               
+        }
+
+        public async void ConsultarPausa()
+        {
+            PausaRepositorio repositorio = new PausaRepositorio();
+            Resultado<List<Pausas>> resultado = await repositorio.ConsultarPausa(vista.Pausa);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.Pausas = resultado.valor;
             }
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);

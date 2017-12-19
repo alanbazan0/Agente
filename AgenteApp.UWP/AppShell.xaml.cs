@@ -62,6 +62,18 @@ namespace NavigationMenuSample
                 new NavMenuItem()
                 {
                     Symbol = Symbol.BackToWindow,
+                    Label = "Tranferir",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.BackToWindow,
+                    Label = "Conferenciar",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.BackToWindow,
                     Label = "Regresar llamada",
                     DestPage = typeof(BasicPage)
                 },

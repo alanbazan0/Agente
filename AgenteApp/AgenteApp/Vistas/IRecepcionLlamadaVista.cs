@@ -10,11 +10,18 @@ namespace AgenteApp.Vistas
     public interface IRecepcionLlamadaVista
     {
         void ConsultarClientesTel(string numero);
-        void MostrarMensajeAsync(string titulo, string mensaje);
-        List<Objeto> Clientes { set; }
-        List<Portabilidad> Portabilidad { set; }
+        List<ClienteTelefono> Clientes { set; }            
         void ConsultarPortabilidad(string numero);
+        List<Portabilidad> Portabilidad { set; }
+        void ConsultarIdLlamada(string extension);
         string setIdLlamada { set; }
+        void InsertarPausa();
+        void ActualizarPausa();
+        void ConsultarPausas();
+        Pausas Pausa { get; set; }
+        List<Pausas> Pausas { set; }
+        
+        void MostrarMensajeAsync(string titulo, string mensaje);
 
     }
 }

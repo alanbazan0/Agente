@@ -6,11 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    <Page.Resources>
-        <ResourceDictionary>
-            <SolidColorBrush x:Key="backgroundColor">#FF808080</SolidColorBrush>
-        </ResourceDictionary>
-    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <VisualStateManager.VisualStateGroups>
@@ -115,17 +111,7 @@
                                     </StackPanel>
                                 </Button>
                             </Grid>
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                                </Grid.ColumnDefinitions>
-                                <TextBox x:Name="numTranfer" PlaceholderText="numero destino" HorizontalAlignment="Center" Width="140"/>
-
-                            </Grid>
+                            
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
@@ -135,9 +121,9 @@
                                     
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Column="0" x:Name="btTrasferir" Background="White" Height="50" Width="150"  >
+                                <Button Grid.Column="0" x:Name="btTrasferir" Background="White" Height="50" Width="150" Click="PruebaPausar" >
                                     <StackPanel>
-                                        <TextBlock Text="Transferir" Foreground="Gray" HorizontalAlignment="Center" />
+                                        <TextBlock Text="" Foreground="Gray" HorizontalAlignment="Center" />
                                         
                                     </StackPanel>
                                 </Button>
@@ -155,7 +141,7 @@
 
                                 <Button Grid.Column="0" x:Name="btConeferencia" Background="White" Height="50" Width="150"  >
                                     <StackPanel>
-                                        <TextBlock Text="Conferencia" Foreground="Gray" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
                             </Grid>
@@ -306,7 +292,7 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="Concidencias1"  Orientation="Horizontal" Width="Auto"  ItemHeight="100" ItemWidth="7000" >
+                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="Concidencias1"  Orientation="Horizontal" Width="Auto"  ItemHeight="50" ItemWidth="7000" >
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" ></RowDefinition>
@@ -314,21 +300,63 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" ></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" x:Name="lbCoincidencias" Text="Coincidencias encontradas con número telefónico" Margin="8" FontSize="39" TextAlignment="Center" Foreground="Gray"  />
+                                <TextBlock Grid.Column="0" x:Name="lbCoincidencias" Text="Coincidencias encontradas con número telefónico" Margin="8" FontSize="23" TextAlignment="Center" Foreground="White"  />
                                 
                             </Grid>
                         </VariableSizedWrapGrid>
-                        <VariableSizedWrapGrid Grid.Column="1" Grid.Row="1" Margin="5"  x:Name="Concidencias2"  Orientation="Horizontal" Width="Auto"  ItemHeight="100" ItemWidth="7000"  >
-                        <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="700"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" x:Name="lbTelefono" Text="0000000000"   Margin="8"  FontSize="39" TextAlignment="Center"  Foreground = "{StaticResource backgroundColor}" />
-                            </Grid>
-                        </VariableSizedWrapGrid>
+                        <ListView Grid.Column="0" Grid.Row="2"  x:Name="TiempoEsperaListView"  >
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid  Padding="0" Margin="15,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="200" />
+                                        </Grid.ColumnDefinitions>
+
+                                    <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                            <TextBlock Text="SECUENCIA"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                    </Border>
+                                    <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                            <TextBlock Text="FECHA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                    </Border>
+                                    <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                            <TextBlock Text="FECHA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                    </Border>
+                                    <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                        <TextBlock Text="DURACION"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                    </Border>
+                                    <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                            <TextBlock Text="ACUMULADO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                    </Border>
+
+                                    </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="0" Margin="15,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="200" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding IdPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding InicioPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding Finalpausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </Grid>
                 </StackPanel>
             </StackPanel>
