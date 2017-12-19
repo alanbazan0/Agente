@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.UI.Popups;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -44,10 +45,14 @@ namespace AgenteApp.UWP
             presentador.IniciarSesion();
         }
 
-        public void MostrarMensaje(string mensaje)
+        public async void MostrarMensaje(string mensaje)
         {
             progressRing.IsActive = false;
-            mensajeBlockText.Text = mensaje;
+            if (mensaje != null)
+            {
+                var dialog = new MessageDialog(mensaje, "Error");
+                await dialog.ShowAsync();
+            }
         }
 
         public void MostrarMenu(Usuario usuario)

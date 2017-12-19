@@ -79,7 +79,7 @@
                                 <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                                     <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
                                 </StackPanel>
-                                <VariableSizedWrapGrid Grid.Column="1" Margin="5"  x:Name="LamadaEntrante"  Orientation="Horizontal" Width="Auto"  ItemHeight="50" ItemWidth="300" Grid.RowSpan="2"  >
+                                <VariableSizedWrapGrid Grid.Column="1" Margin="5"  x:Name="LamadaEntrante"  Orientation="Horizontal" Width="Auto"  ItemHeight="50" ItemWidth="300" >
                                     <Grid >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"></RowDefinition>   
@@ -89,7 +89,7 @@
                                             <ColumnDefinition Width="150"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Column="0" Text="Tiempo de llamada" Margin="8"  />
-                                        <TextBox Grid.Column="1" x:Name="timpoLlamadaTextBox" PlaceholderText="00:00:00" HorizontalAlignment="Stretch" Margin="8" />
+                                        <TextBox Grid.Column="1" x:Name="timpoLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="00:00:00" HorizontalAlignment="Stretch" Margin="8" />
                                     </Grid>
                                     
                                     <TextBlock Text="Estado"   Margin="8"  />

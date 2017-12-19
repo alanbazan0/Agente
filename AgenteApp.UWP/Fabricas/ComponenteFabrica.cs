@@ -22,7 +22,7 @@ namespace AgenteApp.UWP.Fabricas
                     textBox.Titulo = componente.titulo;
                    // textBox.Width = 600;
                     //textBox.Height = 40;
-                    componenteVista = textBox;                 
+                    componenteVista = textBox;
                     break;
                 default:
                     break;
@@ -30,5 +30,7 @@ namespace AgenteApp.UWP.Fabricas
             componenteVista.Componente = componente;
             return componenteVista;
         }
+
+       
     }
 }

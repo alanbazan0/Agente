@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Visible" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
         <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
 
         <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                <Grid>
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -52,15 +52,17 @@
                                     <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
                                     <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
                     </VariableSizedWrapGrid>
-                    <ListView x:Name="clientesListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
-                    </ListView>
+                    <ScrollViewer  ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
+                        <ListView x:Name="clientesListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
+                        </ListView>
+                    </ScrollViewer>
+                    <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
+                        <ListView x:Name="clientesCriterioListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick" Visibility="Collapsed">
+                        </ListView>
+                    </ScrollViewer>
                 </Grid>
             </StackPanel>
         </Grid>
-
-
-
-
 
     </Grid>
 </Page>

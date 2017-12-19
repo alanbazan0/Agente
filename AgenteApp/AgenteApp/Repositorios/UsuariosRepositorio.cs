@@ -42,6 +42,7 @@ namespace AgenteApp.Presenters
             catch (Exception ex)
             {
                 Console.Out.WriteLine(ex.Message);
+                datos.mensajeError="Error al iniciar sesion. \r\nDetalle Error:\r\n"+ex.Message;
 
             }
             return datos;

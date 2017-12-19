@@ -11,19 +11,16 @@ using System.Threading.Tasks;
 
 namespace AgenteApp.Repositorios
 {
-    public class AsteriskRepositorio : RepositorioBase
+    public class CamposGrid2Repositorio : RepositorioBase
     {
-        //public async Task<Resultado<List<Cliente>>> Consultar(List<Filtro> filtros, int version)
-        public async Task<Resultado<string>> Consultar(string extension)
+        
+        public async Task<Resultado<List<CampoGrid>>> ConsultarPorVersion(int version)
         {
-            Resultado<string> datos = new Resultado<string>();
-            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            Resultado<List<CampoGrid>> datos = null;
             DireccionBase = Constantes.DIRECCION_BASE;
-            Url = "/BastiaanSoftwareCenter/php/repositorios/Asterisk.php";         
-            AgregarParametro("accion", "consultar");
-            AgregarParametro("extension", extension);
-            //AgregarParametro("version", version.ToString());
-            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            Url = "/BastiaanSoftwareCenter/php/repositorios/CamposGrid2.php";         
+            AgregarParametro("accion", "consultarPorVersion");
+            AgregarParametro("version", version.ToString());
             try
             {
                 using (var cliente = new HttpClient())
@@ -33,14 +30,12 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-                    datos = JsonConvert.DeserializeObject<Resultado<string>>(resultadoContenido);                    
-                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+                    datos = JsonConvert.DeserializeObject<Resultado<List<CampoGrid>>>(resultadoContenido);
                 }
             }
             catch (Exception ex)
             {
-                Console.Out.WriteLine(ex.Message);
-
+                System.Console.WriteLine(ex.Message);
             }
             return datos;
         }

@@ -44,8 +44,8 @@ namespace NavigationMenuSample
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Phone,
-                    Label = "Llamada",
-                    DestPage = typeof(AgentePage)
+                    Label = "Recepción de llamada",
+                    DestPage = typeof(RecepcionLlamadaPage)
                 },
                 new NavMenuItem()
                 {
@@ -57,18 +57,30 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "CRM",
+                    DestPage = typeof(AgentePage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.BackToWindow,
+                    Label = "Tranferir",
                     DestPage = typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.BackToWindow,
-                    Label = "Call Back",
+                    Label = "Conferenciar",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.BackToWindow,
+                    Label = "Regresar llamada",
                     DestPage = typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Mail,
-                    Label = "Bandeja de correos",
+                    Label = "Correo electrónico",
                     DestPage = typeof(CorreoPage)
                 },
                 new NavMenuItem()
@@ -81,7 +93,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "Queja",
-                    DestPage = typeof(ConfiguracionPage)
+                    DestPage = typeof(QuejasPage)
                 },
                 new NavMenuItem()
                 {
@@ -245,7 +257,7 @@ namespace NavigationMenuSample
             {
                 // When the navigation stack isn't restored, navigate to the first page
                 // suppressing the initial entrance animation.
-                shell.AppFrame.Navigate(typeof(AgentePage), usuario, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                shell.AppFrame.Navigate(typeof(RecepcionLlamadaPage), usuario, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
             }
 
             

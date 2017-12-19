@@ -42,7 +42,7 @@ namespace NavigationMenuSample.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AgentePage : Page, IAgenteVista,ICorreo
+    public sealed partial class AgentePage : Page, IAgenteVista
     {
         Usuario usuario;
         AgentePresentador presentador;
@@ -56,9 +56,9 @@ namespace NavigationMenuSample.Views
         int hor = 0;
         int segunds = 0;
         List<CampoGrid> camposGloba;
-        public Core LinphoneCore { get; set; }
+        //public Core LinphoneCore { get; set; }
        
-        private CoreListener Listener;
+        //private CoreListener Listener;
 
         public AgentePage()
         {
@@ -68,7 +68,7 @@ namespace NavigationMenuSample.Views
             webCorreo.NavigateToString("<html></html>");
 
             presentador = new AgentePresentador(this);
-            correosPresentador = new CorreoPresentador(this);
+            //correosPresentador = new CorreoPresentador(this);
 
             criteriosSeleccionFabrica = new ComponenteFabrica();
             usuario = null;
@@ -80,32 +80,32 @@ namespace NavigationMenuSample.Views
             indicadores.Visibility = Visibility.Collapsed;
             contactos.Visibility = Visibility.Collapsed;
             correosSalida.Visibility = Visibility.Collapsed;
-            try
-            {
-                string rc_path = null;
-                LinphoneWrapper.setNativeLogHandler();
+            //try
+            //{
+            //    string rc_path = null;
+            //    LinphoneWrapper.setNativeLogHandler();
 
-                Core.SetLogLevelMask(0xFF);
-                CoreListener listener = Factory.Instance.CreateCoreListener();
-                listener.OnGlobalStateChanged = OnGlobal;
-                LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
-                LinphoneCore.NetworkReachable = true;
-                //LinphoneCore.MicEnabled = true;
-                //LinphoneCore.MicGainDb = 90.0F;
-                //LinphoneCore.MicGainDb = 90.0;
+            //    Core.SetLogLevelMask(0xFF);
+            //    CoreListener listener = Factory.Instance.CreateCoreListener();
+            //    listener.OnGlobalStateChanged = OnGlobal;
+            //    LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
+            //    LinphoneCore.NetworkReachable = true;
+            //    //LinphoneCore.MicEnabled = true;
+            //    //LinphoneCore.MicGainDb = 90.0F;
+            //    //LinphoneCore.MicGainDb = 90.0;
 
 
-                Listener = Factory.Instance.CreateCoreListener();
-                Listener.OnRegistrationStateChanged = OnRegistration;
-                Listener.OnCallStateChanged = OnCall;
-                Listener.OnCallStatsUpdated = OnStats;
+            //    Listener = Factory.Instance.CreateCoreListener();
+            //    Listener.OnRegistrationStateChanged = OnRegistration;
+            //    Listener.OnCallStateChanged = OnCall;
+            //    Listener.OnCallStatsUpdated = OnStats;
                 
                 
-                LinphoneCore.AddListener(Listener);
+            //    LinphoneCore.AddListener(Listener);
                 
-            }
-            catch (Exception ex)
-            { }
+            //}
+            //catch (Exception ex)
+            //{ }
             HeaderTextBlock.Text += " - En linea";
             FechaLlamadaTextBox.Text = GetDateString();
 
@@ -116,24 +116,24 @@ namespace NavigationMenuSample.Views
            // SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
 
         }
-        private void LinphoneCoreIterate(ThreadPoolTimer timer)
-        {
-            while (true)
-            {
-#if WINDOWS_UWP
-                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
-                () => {
-                    LinphoneCore.Iterate();
-                });
-#else
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    LinphoneCore.Iterate();
-                });
-                Thread.Sleep(50);
-#endif
-            }
-        }
+//        private void LinphoneCoreIterate(ThreadPoolTimer timer)
+//        {
+//            while (true)
+//            {
+//#if WINDOWS_UWP
+//                CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+//                () => {
+//                    LinphoneCore.Iterate();
+//                });
+//#else
+//                Device.BeginInvokeOnMainThread(() =>
+//                {
+//                    LinphoneCore.Iterate();
+//                });
+//                Thread.Sleep(50);
+//#endif
+//            }
+//        }
 
         private void OnGlobal(Core lc, GlobalState gstate, string message)
         {
@@ -153,48 +153,48 @@ namespace NavigationMenuSample.Views
         public void onRegister(NavigationEventArgs e)
         {
             usuario = (Usuario)e.Parameter;
-            try
-            {
-                NoExtensionTextBox.Text = usuario.Extension;
-                string password = Constantes.PASS_CALL + usuario.Extension;
-                var authInfo = Factory.Instance.CreateAuthInfo(usuario.Extension, null, password, null, null, Constantes.DIRECCION_ELAXTIC);
-                LinphoneCore.AddAuthInfo(authInfo);
+            //try
+            //{
+            //    NoExtensionTextBox.Text = usuario.Extension;
+            //    string password = Constantes.PASS_CALL + usuario.Extension;
+            //    var authInfo = Factory.Instance.CreateAuthInfo(usuario.Extension, null, password, null, null, Constantes.DIRECCION_ELAXTIC);
+            //    LinphoneCore.AddAuthInfo(authInfo);
 
-                var proxyConfig = LinphoneCore.CreateProxyConfig();
-                var identity = Factory.Instance.CreateAddress("sip:sample@domain.tld");
-                identity.Username = usuario.Extension;
-                identity.Domain = Constantes.DIRECCION_ELAXTIC;
-                proxyConfig.Edit();
-                proxyConfig.IdentityAddress = identity;
-                proxyConfig.ServerAddr = Constantes.DIRECCION_ELAXTIC;
-                proxyConfig.Route = Constantes.DIRECCION_ELAXTIC;
-                proxyConfig.RegisterEnabled = true;
-                proxyConfig.Done();
-                LinphoneCore.AddProxyConfig(proxyConfig);
-                LinphoneCore.DefaultProxyConfig = proxyConfig;
+            //    var proxyConfig = LinphoneCore.CreateProxyConfig();
+            //    var identity = Factory.Instance.CreateAddress("sip:sample@domain.tld");
+            //    identity.Username = usuario.Extension;
+            //    identity.Domain = Constantes.DIRECCION_ELAXTIC;
+            //    proxyConfig.Edit();
+            //    proxyConfig.IdentityAddress = identity;
+            //    proxyConfig.ServerAddr = Constantes.DIRECCION_ELAXTIC;
+            //    proxyConfig.Route = Constantes.DIRECCION_ELAXTIC;
+            //    proxyConfig.RegisterEnabled = true;
+            //    proxyConfig.Done();
+            //    LinphoneCore.AddProxyConfig(proxyConfig);
+            //    LinphoneCore.DefaultProxyConfig = proxyConfig;
 
-                LinphoneCore.RefreshRegisters();
+            //    LinphoneCore.RefreshRegisters();
                 
-                OnStart();
+            //    OnStart();
                 
 
-            }
-            catch (Exception ex)
-            { }
+            //}
+            //catch (Exception ex)
+            //{ }
         }
 
-        protected  void OnStart()
-        {
-            // Handle when your app starts
-#if WINDOWS_UWP
-            TimeSpan period = TimeSpan.FromSeconds(1);
-            ThreadPoolTimer PeriodicTimer = ThreadPoolTimer.CreatePeriodicTimer(LinphoneCoreIterate, period);
-#else
-            Thread iterate = new Thread(LinphoneCoreIterate);
-            iterate.IsBackground = false;
-            iterate.Start();
-#endif
-        }
+//        protected  void OnStart()
+//        {
+//            // Handle when your app starts
+//#if WINDOWS_UWP
+//            TimeSpan period = TimeSpan.FromSeconds(1);
+//            ThreadPoolTimer PeriodicTimer = ThreadPoolTimer.CreatePeriodicTimer(LinphoneCoreIterate, period);
+//#else
+//            Thread iterate = new Thread(LinphoneCoreIterate);
+//            iterate.IsBackground = false;
+//            iterate.Start();
+//#endif
+//        }
 
         protected  void OnSleep()
         {
@@ -222,43 +222,43 @@ namespace NavigationMenuSample.Views
             }
         }
 
-        private void OnCall(Core lc, Call lcall, CallState state, string message)
-        {
-#if WINDOWS_UWP
-            Debug.WriteLine("Call state changed: " + state);
-#else
-            Console.WriteLine("Call state changed: " + state);
-#endif
-            //HeaderTextBlock.Text = "Llamada - " + state;
+//        private void OnCall(Core lc, Call lcall, CallState state, string message)
+//        {
+//#if WINDOWS_UWP
+//            Debug.WriteLine("Call state changed: " + state);
+//#else
+//            Console.WriteLine("Call state changed: " + state);
+//#endif
+//            //HeaderTextBlock.Text = "Llamada - " + state;
 
-                if (lc.CallsNb > 0)
-            {
-                if (state == CallState.IncomingReceived)
-                {
+//                if (lc.CallsNb > 0)
+//            {
+//                if (state == CallState.IncomingReceived)
+//                {
                     
-                     OnCallClicked();
-                    numTelefonico = NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
-                    ConsultarDatos(NoTelTextBox.Text);
-                    //PRIMERO ME TRAIGO LA PORTABILIDAD Y LUEGO CONSULTO A BTCLIENTESTEL PARA VER SI YA EXISTE EN LA BASE DE DATOS
-                    //consultar la tabla de BTCLIENTESTEL
-                    // call.Text = "Answer Call (" + lcall.RemoteAddressAsString + ")";
-                    // linphonecore.AcceptCall(call);
-                    //presentador.ConsultarClientes();
-                }
-                else
-                {
-                    HeaderTextBlock.Text = "Llamada - Finalizada";
-                    // call.Text = "Terminate Call";
-                }
-            }
-            else
-            {
-                //call.Text = "Start Call";
-                HeaderTextBlock.Text = "Llamada - Disponible";
-                dispatcherTimer.Stop();
-                //call_stats.Text = "";
-            }
-        }
+//                     OnCallClicked();
+//                    numTelefonico = NoTelTextBox.Text = lcall.RemoteAddress.DisplayName;
+//                    ConsultarDatos(NoTelTextBox.Text);
+//                    //PRIMERO ME TRAIGO LA PORTABILIDAD Y LUEGO CONSULTO A BTCLIENTESTEL PARA VER SI YA EXISTE EN LA BASE DE DATOS
+//                    //consultar la tabla de BTCLIENTESTEL
+//                    // call.Text = "Answer Call (" + lcall.RemoteAddressAsString + ")";
+//                    // linphonecore.AcceptCall(call);
+//                    //presentador.ConsultarClientes();
+//                }
+//                else
+//                {
+//                    HeaderTextBlock.Text = "Llamada - Finalizada";
+//                    // call.Text = "Terminate Call";
+//                }
+//            }
+//            else
+//            {
+//                //call.Text = "Start Call";
+//                HeaderTextBlock.Text = "Llamada - Disponible";
+//                dispatcherTimer.Stop();
+//                //call_stats.Text = "";
+//            }
+//        }
 
         private void ConsultarDatos(string noTelefonico)
         {
@@ -267,36 +267,36 @@ namespace NavigationMenuSample.Views
             ConsultarClientesTel(noTelefonico);
         }
 
-        private void OnCallClicked()
-        {
-            if (LinphoneCore.CallsNb == 0)
-            {
-                var addr = LinphoneCore.InterpretUrl(Constantes.DIRECCION_ELAXTIC);
-                LinphoneCore.InviteAddress(addr);
-            }
-            else
-            {
-                Call call = LinphoneCore.CurrentCall;
-                if (call.State == CallState.IncomingReceived)
-                {
-                    LinphoneCore.AcceptCall(call);
-                    LimpiarDatos();
+        //private void OnCallClicked()
+        //{
+        //    if (LinphoneCore.CallsNb == 0)
+        //    {
+        //        var addr = LinphoneCore.InterpretUrl(Constantes.DIRECCION_ELAXTIC);
+        //        LinphoneCore.InviteAddress(addr);
+        //    }
+        //    else
+        //    {
+        //        Call call = LinphoneCore.CurrentCall;
+        //        if (call.State == CallState.IncomingReceived)
+        //        {
+        //            LinphoneCore.AcceptCall(call);
+        //            LimpiarDatos();
                     
-                    HoraLlamadaTextBox.Text = GetTimeString();
-                    dispatcherTimer.Start();
-                }
-                else
-                {
-                    LinphoneCore.TerminateAllCalls();
-                    HeaderTextBlock.Text = "Llamada - Disponible";
-                    dispatcherTimer.Stop();
-                }
-            }
-        }
+        //            HoraLlamadaTextBox.Text = GetTimeString();
+        //            dispatcherTimer.Start();
+        //        }
+        //        else
+        //        {
+        //            LinphoneCore.TerminateAllCalls();
+        //            HeaderTextBlock.Text = "Llamada - Disponible";
+        //            dispatcherTimer.Stop();
+        //        }
+        //    }
+        //}
 
         private void AppBarCallEndButton_Click(object sender, RoutedEventArgs e)
         {
-            OnCallClicked();
+           // OnCallClicked();
         }
         
         private void OnStats(Core lc, Call call, CallStats stats)
@@ -392,7 +392,7 @@ namespace NavigationMenuSample.Views
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            ConsultarClientes();
+            //ConsultarClientes();
         }
        
         private void ApprRecesoButton_Click(object sender, RoutedEventArgs e)
@@ -633,7 +633,7 @@ namespace NavigationMenuSample.Views
 
         public void consultarCorreoEntrada()
         {
-            correosPresentador.consultarCorreoEntrada(usuario.Id);
+            //correosPresentador.consultarCorreoEntrada(usuario.Id);
         }
         private async void SendEmailButton()
         {
