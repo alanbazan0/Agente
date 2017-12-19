@@ -118,8 +118,8 @@
     <Compile Include="Vistas\ClientesDetallePage.xaml.cs">
       <DependentUpon>ClientesDetallePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ConfiguraciónPage.xaml.cs">
-      <DependentUpon>ConfiguraciónPage.xaml</DependentUpon>
+    <Compile Include="Vistas\ConfiguracionPage.xaml.cs">
+      <DependentUpon>ConfiguracionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vistas\CorreoPage.xaml.cs">
       <DependentUpon>CorreoPage.xaml</DependentUpon>
@@ -204,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Vistas\ConfiguraciónPage.xaml">
+    <Page Include="Vistas\ConfiguracionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,6 +259,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AdapterView\" />
   </ItemGroup>
   <Import Project="..\AgenteApp\AgenteApp\AgenteApp.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

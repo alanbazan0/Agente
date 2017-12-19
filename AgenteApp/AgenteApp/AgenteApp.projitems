@@ -20,7 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Cliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CampoGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\ClienteTelefono.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Configuración.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Configuracion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Correos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Componente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\EstatusUsuario.cs" />
