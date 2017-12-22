@@ -176,25 +176,53 @@ namespace AgenteApp.UWP.Vistas
         {
             IComponente componenteVista = componenteFabrica.CrearComponente(componente); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
             
-            if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE")
+            /*if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE")
             {
                 (componenteVista as UIElement).KeyDown += ClientePage_KeyDownName;
+            }*/
+            if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE" || componenteVista.Componente.campoId == "BTCLIENTESNOMBRE" || 
+                 componenteVista.Componente.campoId == "BTCLIENTEAPATERNO" || componenteVista.Componente.campoId == "BTCLIENTEAMATERNO")
+            {
+                (componenteVista as UIElement).LostFocus += ClientePage_KeyDownName;
             }
             formularioComponentes.Children.Add(componenteVista as UIElement);
             
         }
 
-        private void ClientePage_KeyDownName(object sender, KeyRoutedEventArgs e)
+        private void ClientePage_KeyDownName(object sender, RoutedEventArgs e)
         {
-
+            string nombre = "";
+            string nombreS = "";
+            string paterno = "";
+            string materno = "";
             //hay que programar el evento onkeypress in the tap button 
-            if (e.Key == Windows.System.VirtualKey.Tab)
-            {
-                var componente = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEPNOMBRE")
+            
+                var primerNombre = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEPNOMBRE")
                                            .Select(a => a)
                                            .First();
-                var boxname = (componente as UIElement).GetType().GetProperty("textBox").GetValue((componente as UIElement), null);
-            }
+                var segundoNombre = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTESNOMBRE")
+                                          .Select(a => a)
+                                          .First();
+                var apellidoPaterno = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEAPATERNO")
+                                          .Select(a => a)
+                                          .First();
+                var apellidoMaterno = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEAMATERNO")
+                                          .Select(a => a)
+                                          .First();
+
+                var nombreCompletoC = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTENCOMPLETO")
+                                          .Select(a => a)
+                                          .First();
+                
+                nombre = ((TextoComponente)primerNombre).Filtro.valor;
+                nombreS = ((TextoComponente)segundoNombre).Filtro.valor;
+                paterno = ((TextoComponente)apellidoPaterno).Filtro.valor;
+                materno = ((TextoComponente)apellidoMaterno).Filtro.valor;
+
+            nombreCompletoC.SetValue(Grid.ColumnSpanProperty,2);
+            nombreCompletoC.SetValue(WidthProperty, 500);
+            (nombreCompletoC as IComponente).Valor  = nombre + " " + nombreS + " " + paterno + " " + materno;
+            
         }
 
         private void AppGuardarClienteButton_Click(object sender, RoutedEventArgs e)

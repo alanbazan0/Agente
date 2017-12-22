@@ -13,6 +13,6 @@ namespace AgenteApp.Componentes
         Componente Componente { get; set; }
         string Titulo { set; }
         Campo Filtro { get; }
-        string Valor { set; }
+        string Valor { set; get; }
     }
 }

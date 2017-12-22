@@ -4,12 +4,12 @@ using System.Text;
 
 namespace AgenteApp.Modelos
 {
-    class Configuración
+    class Configuracion
     {
-        string versión, secuencia, descripción, campo, asistente, tipo;
-        string tabla, campoid, campos, valores;
+        string versión, descripción, campo, asistente, tipo, tabla, campoid, campos, valores;
+        int secuencia;
         public string Versión { get { return versión; } set { versión = value; } }
-        public string Secuencia { get { return secuencia; } set { secuencia = value; } }
+        public int Secuencia { get { return secuencia; } set { secuencia = value; } }
         public string Descripcion { get { return descripción; } set { descripción = value; } }
         public string Campo { get { return campo; } set { campo = value; } }
         public string Asistente { get { return asistente; } set { asistente = value; } }

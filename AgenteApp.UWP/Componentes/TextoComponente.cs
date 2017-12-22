@@ -53,6 +53,8 @@ namespace AgenteApp.Componentes
             }
         }
 
-        public string Valor { set { textBox.Text = value; } }
+        public string Valor { set { textBox.Text = value; }
+            get { return textBox.Text; }
+        }
     }
 }
