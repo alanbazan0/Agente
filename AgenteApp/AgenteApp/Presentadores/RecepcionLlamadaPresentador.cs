@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace AgenteApp.Presentadores
 {
@@ -64,23 +65,26 @@ namespace AgenteApp.Presentadores
         public async void InsertarPausa()
         {
             PausaRepositorio repositorio = new PausaRepositorio();
-            Resultado<string> resultado = await repositorio.InsertarPausa(vista.Pausa);
+            Resultado<object> resultado = await repositorio.InsertarPausa(vista.Pausa);
             if (resultado.mensajeError != string.Empty)
             {
-                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+                vista.ultimoIdPausa = resultado.mensajeError;
+                vista.Pausas = JsonConvert.DeserializeObject<List<Pausas>>(resultado.valor.ToString());
             }
-                
+
         }
 
         public async void ActulizarPausa()
         {
             PausaRepositorio repositorio = new PausaRepositorio();
-            Resultado<string> resultado = await repositorio.ActulizarPausa(vista.Pausa);
-            if (resultado.mensajeError != string.Empty)
+            Resultado<List<Pausas>> resultado = await repositorio.ActulizarPausa(vista.Pausa);
+            if (resultado.mensajeError == string.Empty)
             {
-                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+                vista.Pausas = resultado.valor;
             }
-               
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+
         }
 
         public async void ConsultarPausa()
@@ -94,5 +98,28 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
+
+        
+        public async void InsertarParametros()
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            ParametrosRepositorio repositorio = new ParametrosRepositorio();
+            Resultado<string> resultado = await repositorio.Insertar(vista.Parametro);
+            //if (resultado.mensajeError != string.Empty)
+            //{
+            //    vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+            //}  
+        }
+
+        public async void BorrarParametros()
+        {
+            ParametrosRepositorio repositorio = new ParametrosRepositorio();
+            Resultado<string> resultado = await repositorio.Borrar(vista.Parametro);
+            //if (resultado.mensajeError != string.Empty)
+            //{
+            //    vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+            //}  
+        }
+        
     }
 }

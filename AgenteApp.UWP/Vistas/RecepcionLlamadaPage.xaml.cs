@@ -34,6 +34,9 @@ using System.Reflection;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
 using Windows.ApplicationModel.Activation;
+using Windows.System.Profile;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -59,8 +62,14 @@ namespace NavigationMenuSample.Views
         
         string extension;
         string IdLlamada;
+        string ip;
+        string idhardware;
         Boolean pausado = false;
         Call LlamadaPausada;
+        Parametros ParametroLocal;
+        string ultimoIdPausaLocal="0";
+
+        public Parametros Parametro { get => ParametroLocal; set { } }
 
         private CoreListener Listener;
 
@@ -73,12 +82,14 @@ namespace NavigationMenuSample.Views
             //correosPresentador = new CorreoPresentador(this);
             presentador = new RecepcionLlamadaPresentador(this);
             telefono = new SoftphoneEmbebed();
+            ParametroLocal = new Parametros();
             usuario = null;
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             HeaderTextBlock.Text = "Recepción de llamada - Disponible";
             FechaLlamadaTextBox.Text = GetDateString();
+            obtenerInformacion();
             try
             {
                 Listener = Factory.Instance.CreateCoreListener();
@@ -200,7 +211,7 @@ namespace NavigationMenuSample.Views
                         HeaderTextBlock.Text = "Recepción de llamada - Disponible";
                         HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
-                        LimpiarDatos();
+                        //LimpiarDatos();
                     }
 
                 }
@@ -234,7 +245,7 @@ namespace NavigationMenuSample.Views
                     LlamadaPausada = null;
                     ActualizarPausa();
                 }
-                ConsultarPausas();
+                //ConsultarPausas();
             }
         }
 
@@ -284,11 +295,15 @@ namespace NavigationMenuSample.Views
             consultarCorreoEntrada();
         }
 
+
         public void onRegister(NavigationEventArgs e)
         {
             try
             {
                 usuario = (Usuario)e.Parameter;
+                ParametroLocal.IdParamtro = usuario.Id;
+                ParametroLocal.DireccionIp = ip;
+                ParametroLocal.NumeroMaquina = idhardware;
                 extension = NoExtensionTextBox.Text = usuario.Extension;
                 string password = Constantes.PASS_CALL + usuario.Extension;
                 var authInfo = Factory.Instance.CreateAuthInfo(usuario.Extension, null, password, null, null, Constantes.DIRECCION_ELAXTIC);
@@ -401,6 +416,7 @@ namespace NavigationMenuSample.Views
             ciudadTextBox.Text = "";
             tipoTelefonoTextBox.Text = "";
             tipoLlamadaTextBox.Text = "";
+            lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
         }
 
         private string GetTimeString()
@@ -417,6 +433,7 @@ namespace NavigationMenuSample.Views
             ConsultarIdLlamada(NoExtensionTextBox.Text);
             ConsultarPortabilidad(noTelefonico);
             ConsultarClientesTel(noTelefonico);
+            BorrarParametros();
         }
 
         public void ConsultarPortabilidad(string numero)
@@ -440,31 +457,6 @@ namespace NavigationMenuSample.Views
             }
         }
 
-        public Pausas Pausa
-        {
-            get
-            {
-                Pausas PausAux = new Pausas();
-                PausAux.Extencion = extension;
-                PausAux.IdLlamada = IdLlamada;
-                PausAux.IdAgente = usuario.Id;
-                PausAux.Telefono = numTelefonico;
-                PausAux.IdPausa = "0";
-                PausAux.InicioPausa = GetDateString();
-                PausAux.Finalpausa = GetDateString();
-                PausAux.Duracion = "0";
-                lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
-                return PausAux;
-
-            }
-            set
-            {
-                 
-
-            }
-        }
-
-
         public void ConsultarIdLlamada(string extension)
         {
             presentador.ConsultarIdLlamada(extension);
@@ -474,12 +466,33 @@ namespace NavigationMenuSample.Views
         {
             set
             {
-                IdLlamada = idLlamadaTextBox.Text = value;
+                try
+                {
+                    IdLlamada = idLlamadaTextBox.Text = value;
+                    ParametroLocal.DescripcionValor = "Llamada id";
+                    ParametroLocal.PalabraReservada = "@IDLLAMADA@";
+                    ParametroLocal.ValorParametro = IdLlamada;
+                    InsertarParametros();
+                }
+                catch { }
+            }
+        }
+        
+
+            public string ultimoIdPausa
+        {
+            set
+            {
+                try
+                {
+                    ultimoIdPausaLocal =value;
+                }
+                catch { }
             }
         }
 
         public void ConsultarClientesTel(string numero)
-        {           
+        {
             presentador.ConsultarClientesTel(numero);
         }
 
@@ -491,18 +504,60 @@ namespace NavigationMenuSample.Views
                 if (value.Count > 0)
                 {
                     lbCoincidencias.Foreground = new SolidColorBrush(Colors.Green);
-                    lbCoincidencias.Text = "Coincidencias encontradas con número telefónico: "+numTelefonico;
+                    lbCoincidencias.Text = "Coincidencias encontradas con número telefónico: " + numTelefonico;
+                    ParametroLocal.ValorParametro = "S";
                 }
                 else
                 {
                     lbCoincidencias.Foreground = new SolidColorBrush(Colors.Red);
                     lbCoincidencias.Text = "Coincidencias no encontradas con número telefónico: " + numTelefonico;
+                    ParametroLocal.ValorParametro = "N";
                 }
+                ParametroLocal.DescripcionValor = "coincidencia";
+                ParametroLocal.PalabraReservada = "@COINCIDENCIA@";
+                InsertarParametros();
+
+                ParametroLocal.DescripcionValor = "numero entrante";
+                ParametroLocal.PalabraReservada = "@NUMEROTEL@";
+                ParametroLocal.ValorParametro = numTelefonico;
+                InsertarParametros();
+            }
+        }
+        
+            public void BorrarParametros()
+        {
+            presentador.BorrarParametros();
+        }
+
+        public void InsertarParametros()
+        {
+            presentador.InsertarParametros();
+        }
+
+        public Pausas Pausa
+        {
+            get
+            {
+                Pausas PausAux = new Pausas();
+                PausAux.Extencion = extension;
+                PausAux.IdLlamada = IdLlamada;
+                PausAux.IdAgente = usuario.Id;
+                PausAux.Telefono = numTelefonico;
+                PausAux.IdPausa = ultimoIdPausaLocal;
+                PausAux.InicioPausa = GetDateString();
+                PausAux.Finalpausa = GetDateString();
+                PausAux.Duracion = "0";
+                return PausAux;
+
+            }
+            set
+            {
+                 
+
             }
         }
 
-        
-             private void PruebaPausar(object sender, RoutedEventArgs e)
+        private void PruebaPausar(object sender, RoutedEventArgs e)
         {
             
                 if (pausado==false)
@@ -513,10 +568,9 @@ namespace NavigationMenuSample.Views
                 }
                 else
                 {
-                pausado = false;
-                ActualizarPausa();
+                    pausado = false;
+                    ActualizarPausa();
                 }
-            ConsultarPausas();
         }
 
 
@@ -535,6 +589,16 @@ namespace NavigationMenuSample.Views
             presentador.ConsultarPausa();
         }
 
+        public List<Pausas> Pausas
+        {
+            set
+            {
+                TiempoEsperaListView.ItemsSource = value;
+            }
+        }
+
+
+
         public async void MostrarMensajeAsync(string titulo, string mensaje)
         {
             progressRing.IsActive = false;
@@ -545,13 +609,31 @@ namespace NavigationMenuSample.Views
             }
         }
 
-        public List<Pausas> Pausas
+        public void obtenerInformacion()
         {
-            set
+            //optenemos ip           
+            foreach (HostName localHostName in NetworkInformation.GetHostNames())
             {
-                TiempoEsperaListView.ItemsSource = value;
+                if (localHostName.IPInformation != null)
+                {
+                    if (localHostName.Type == HostNameType.Ipv4)
+                    {
+                        ip = localHostName.ToString();
+                        break;
+                    }
+                }
             }
+
+            //optenemos id hardware
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+            idhardware = BitConverter.ToString(bytes);
         }
+
+
 
     }
 }

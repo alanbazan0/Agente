@@ -16,9 +16,9 @@ namespace AgenteApp.Repositorios
         {
         }
 
-        public async Task<Resultado<string>> InsertarPausa(Pausas pausa)
+        public async Task<Resultado<object>> InsertarPausa(Pausas pausa)
         {
-            Resultado<string> datos = new Resultado<string>();
+            Resultado<object> datos = new Resultado<object>();
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/Pausas.php";
             AgregarParametro("accion", "insertarPausas");
@@ -36,7 +36,7 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-                    datos = JsonConvert.DeserializeObject<Resultado<string>>(resultadoContenido);
+                    datos = JsonConvert.DeserializeObject<Resultado<object>>(resultadoContenido);
                 }
             }
             catch (Exception ex)
@@ -47,9 +47,9 @@ namespace AgenteApp.Repositorios
             return datos;
         }
 
-        public async Task<Resultado<string>> ActulizarPausa(Pausas pausa)
+        public async Task<Resultado<List<Pausas>>> ActulizarPausa(Pausas pausa)
         {
-            Resultado<string> datos = new Resultado<string>();
+            Resultado<List<Pausas>> datos = new Resultado<List<Pausas>>();
 
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/Pausas.php";
@@ -58,6 +58,7 @@ namespace AgenteApp.Repositorios
             AgregarParametro("Telefono", pausa.Telefono);
             AgregarParametro("Extencion", pausa.Extencion);
             AgregarParametro("IdAgente", pausa.IdAgente);
+            AgregarParametro("IdPausa", pausa.IdPausa);
 
 
             try
@@ -69,7 +70,7 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-                    datos = JsonConvert.DeserializeObject<Resultado<string>>(resultadoContenido);
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Pausas>>>(resultadoContenido);
 
 
                 }

@@ -286,8 +286,8 @@
                             </Grid>
                         </VariableSizedWrapGrid>
                     </Grid>
-
-                    <Grid>
+                    
+                        <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -304,60 +304,74 @@
                                 
                             </Grid>
                         </VariableSizedWrapGrid>
+
                         <ListView Grid.Column="0" Grid.Row="2"  x:Name="TiempoEsperaListView"  >
-                        <ListView.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid  Padding="0" Margin="15,0,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100" />
-                                        <ColumnDefinition Width="200" />
-                                        <ColumnDefinition Width="200" />
-                                        <ColumnDefinition Width="200" />
-                                        <ColumnDefinition Width="200" />
+                            <ListView.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  Padding="0" Margin="15,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
                                         </Grid.ColumnDefinitions>
 
-                                    <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
                                             <TextBlock Text="SECUENCIA"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                    </Border>
-                                    <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                        </Border>
+                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
                                             <TextBlock Text="FECHA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                    </Border>
-                                    <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                        </Border>
+                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                            <TextBlock Text="HORA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        </Border>
+                                        <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
                                             <TextBlock Text="FECHA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                    </Border>
-                                    <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
-                                        <TextBlock Text="DURACION"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                    </Border>
-                                    <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                        </Border>
+                                        <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                            <TextBlock Text="HORA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        </Border>
+                                        <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                            <TextBlock Text="DURACION"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        </Border>
+                                        <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
                                             <TextBlock Text="ACUMULADO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                    </Border>
+                                        </Border>
 
                                     </Grid>
-                            </DataTemplate>
-                        </ListView.HeaderTemplate>
+                                </DataTemplate>
+                            </ListView.HeaderTemplate>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Padding="0" Margin="15,0,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="200" />
-                                            <ColumnDefinition Width="200" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Column="0" Text="{Binding IdPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                         <TextBlock Grid.Column="1" Text="{Binding InicioPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding Finalpausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="3" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="4" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding HoraInicia}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="3" Text="{Binding Finalpausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="4" Text="{Binding HoraFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="5" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Grid.Column="6" Text="{Binding Acumulado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
+
                 </StackPanel>
             </StackPanel>
         </Grid>

@@ -63,7 +63,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.BackToWindow,
                     Label = "Tranferir",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(TransferenciaPage)
                 },
                 new NavMenuItem()
                 {
@@ -265,6 +265,8 @@ namespace NavigationMenuSample
             Window.Current.Activate();
         }
 
+
+
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
@@ -363,8 +365,6 @@ namespace NavigationMenuSample
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
             item.Arguments = usa;
 
-
-
             if (item != null)
             {
                 item.IsSelected = true;
@@ -386,10 +386,6 @@ namespace NavigationMenuSample
                             this.AppFrame.Navigate(item.DestPage, item.Arguments);
                             break;
                     }
-
-
-                    
-                        
 
                     //Page destPage = (Page) Activator.CreateInstance(item.DestPage);
                     //this.AppFrame.Content = destPage;
@@ -549,5 +545,7 @@ namespace NavigationMenuSample
                 args.ItemContainer.ClearValue(AutomationProperties.NameProperty);
             }
         }
+
+
     }
 }
