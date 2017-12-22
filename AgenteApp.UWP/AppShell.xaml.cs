@@ -118,8 +118,13 @@ namespace NavigationMenuSample
                     Symbol = Symbol.Contact,
                     Label = "Chat interno",
                     DestPage = typeof(BasicPage)
+                },
+                 new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Cerrar sesion",
+                    DestPage = typeof(CerrarSesionPage)
                 }
-
             });
 
         public static AppShell Current = null;

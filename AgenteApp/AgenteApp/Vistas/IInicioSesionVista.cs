@@ -9,8 +9,13 @@ namespace AgenteApp.Views
     {
         string NombreUsuario { get; set; }
         string Contrasena { get; set; }
+
+        string Ip { get; set; }
+        string Idhardware { get; set; }
+
         void IniciarSesion();
         void MostrarMenu(Usuario usuario);
         void MostrarMensaje(string mensaje);
+        void InsertarSesionTrabajo();
     }
 }

@@ -25,10 +25,31 @@ namespace AgenteApp.Presenters
                 usuario = resultado.valor;
                 if (usuario != null)
                 {
-                    vista.MostrarMenu(usuario);
+                    InsertarSesionTrabajo();
+                    //vista.MostrarMenu(usuario);
                 }
                 else
                     vista.MostrarMensaje("La combinación de usuario y contraseña es incorrecta.");
+            }
+            else
+                vista.MostrarMensaje(resultado.mensajeError);
+
+
+        }
+
+        public async void InsertarSesionTrabajo()
+        {
+            UsuarioRepositorio accesoDatos = new UsuarioRepositorio();
+            Resultado<string> resultado = await accesoDatos.InsertarSesionTrabajo(vista.Ip, vista.Idhardware,vista.NombreUsuario);
+            if (resultado.mensajeError == string.Empty)
+            {
+                string resultadoa = resultado.valor;
+                if (resultadoa.Equals("true"))
+                {
+                    vista.MostrarMenu(usuario);
+                }
+                else
+                    vista.MostrarMensaje("Sesion de trabajo, no cerro correctamente.\nFavor de liberar usuario para ingresar.");
             }
             else
                 vista.MostrarMensaje(resultado.mensajeError);

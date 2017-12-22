@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoRecesos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CerrarSesionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\ClientesDetallePresentador .cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CorreoPresentador.cs" />
@@ -40,6 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid2Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CerrarSesionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesTelefonoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\AsteriskRepositorio.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\InicioSesionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\MenuPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAltaCorreo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICerrarSesion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IClientesVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAgenteVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICorreo.cs" />

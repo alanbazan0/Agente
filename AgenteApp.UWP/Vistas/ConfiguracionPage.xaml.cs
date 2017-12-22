@@ -29,7 +29,7 @@ namespace AgenteApp.UWP.Vistas
         {
             lista();
             this.InitializeComponent();
-            list.ItemsSource = conf;
+            //list.ItemsSource = conf;
         }
         public void lista()
         {
@@ -72,9 +72,9 @@ namespace AgenteApp.UWP.Vistas
                         Valores = ""
                     }
                     );
-                list.ItemsSource = null;
+                //list.ItemsSource = null;
                 // lista();
-                list.ItemsSource = conf;
+                //list.ItemsSource = conf;
             }
         }
         private void datosListView_ItemClick(object sender, ItemClickEventArgs e)
