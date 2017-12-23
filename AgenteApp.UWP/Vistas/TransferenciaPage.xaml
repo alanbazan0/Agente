@@ -158,17 +158,17 @@
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Grid.Row="0" x:Name="bt7" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="1" Grid.Row="0" x:Name="bt7" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="7" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="2" Grid.Row="0"  x:Name="bt8" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="2" Grid.Row="0"  x:Name="bt8" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="8" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="3" Grid.Row="0" x:Name="bt9" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="3" Grid.Row="0" x:Name="bt9" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="9" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -247,17 +247,17 @@
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Grid.Row="1" x:Name="bt4" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="1" Grid.Row="1" x:Name="bt4" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="4" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="2" Grid.Row="1" x:Name="bt5" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="2" Grid.Row="1" x:Name="bt5" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="5" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="3" Grid.Row="1" x:Name="bt6" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="3" Grid.Row="1" x:Name="bt6" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="6" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -288,17 +288,17 @@
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Grid.Row="2" x:Name="bt1" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="1" Grid.Row="2" x:Name="bt1" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="1" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="2" Grid.Row="2" x:Name="bt2" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="2" Grid.Row="2" x:Name="bt2" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="2" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="3" Grid.Row="2" x:Name="bt3" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="3" Grid.Row="2" x:Name="bt3" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="3" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
@@ -328,17 +328,17 @@
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1" Grid.Row="0" x:Name="bta" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="1" Grid.Row="0" x:Name="bta" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="*" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="2" Grid.Row="0"  x:Name="bt0" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="2" Grid.Row="0"  x:Name="bt0" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="0" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Grid.Column="3" Grid.Row="0" x:Name="btb" Background="Gray" Height="49" Width="49" >
+                                <Button Grid.Column="3" Grid.Row="0" x:Name="btg" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
                                     <StackPanel>
                                         <TextBlock Text="#" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>

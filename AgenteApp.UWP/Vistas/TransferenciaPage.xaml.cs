@@ -49,5 +49,50 @@ namespace NavigationMenuSample.Views
 
 
         }
+
+        private void digitarNumero(object sender, RoutedEventArgs e)
+        {
+            Button padnumeric = (Button)sender;
+            switch(padnumeric.Name)
+            {
+                case "bt7":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text+ "7";
+                    break;
+                case "bt8":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "8";
+                    break;
+                case "bt9":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "9";
+                    break;
+                case "bt4":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "4";
+                    break;
+                case "bt5":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "5";
+                    break;
+                case "bt6":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "6";
+                    break;
+                case "bt3":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "3";
+                    break;
+                case "bt2":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "2";
+                    break;
+                case "bt1":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "1";
+                    break;
+                case "bta":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "*";
+                    break;
+                case "bt0":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "0";
+                    break;
+                case "btg":
+                    txtNumeroATranferir.Text = txtNumeroATranferir.Text + "#";
+                    break;
+            }
+        }
+        
     }
 }
