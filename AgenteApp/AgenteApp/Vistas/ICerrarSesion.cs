@@ -10,6 +10,8 @@ namespace AgenteApp.Vistas
     {
         void CerrarSesion();
         string NombreUsuario { get; set; }
+        string IP { get; set; }
+        string IdHardware { get; set; }
         void cerrarPRograma();
     }
 }

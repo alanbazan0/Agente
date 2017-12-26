@@ -8,7 +8,10 @@ namespace AgenteApp.Vistas
 {
     public interface IClientesVista
     {
+        string IP { get; set; }
+        string IdHardware { get; set; }
         void ConsultarClientes();
+        void ConsultarParametros();
         void ConsultarClientesTel(string numero);
         void MostrarMensajeAsync(string titulo, string mensaje);
         List<Campo> Filtros { get;  }

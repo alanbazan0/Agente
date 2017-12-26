@@ -9,6 +9,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
+using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,6 +30,9 @@ namespace AgenteApp.UWP.Vistas
     public sealed partial class CerrarSesionPage : Page,ICerrarSesion
     {
         Usuario usuario;
+        string idhardware = "";
+        string ip = "";
+
         CerrarSesionPresentador presentador;
         public CerrarSesionPage()
         {
@@ -38,6 +44,7 @@ namespace AgenteApp.UWP.Vistas
         {
             base.OnNavigatedFrom(e);
             usuario = (Usuario)e.Parameter;
+            obtenerInformacion();
             CerrarSesion();
         }
         public string NombreUsuario
@@ -52,6 +59,9 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
+        public string IP { get { return ip; } set { ip = value; } }
+        public string IdHardware { get { return idhardware; } set { idhardware = value; } }
+
         public void CerrarSesion()
         {
             presentador.CerrarSesion();
@@ -60,6 +70,29 @@ namespace AgenteApp.UWP.Vistas
         public void cerrarPRograma()
         {
             CoreApplication.Exit();
+        }
+        public void obtenerInformacion()
+        {
+            //optenemos ip           
+            foreach (HostName localHostName in NetworkInformation.GetHostNames())
+            {
+                if (localHostName.IPInformation != null)
+                {
+                    if (localHostName.Type == HostNameType.Ipv4)
+                    {
+                        ip = localHostName.ToString();
+                        break;
+                    }
+                }
+            }
+
+            //optenemos id hardware
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+            idhardware = BitConverter.ToString(bytes);
         }
     }
 }

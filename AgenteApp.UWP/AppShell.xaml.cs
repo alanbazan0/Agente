@@ -379,7 +379,7 @@ namespace NavigationMenuSample
                     switch (item.Label)
                     {
                         case "Identificación del cliente":
-                            var parametros = new { modo = ModoVentana.ALTA, telCliente = "8711897006"/*, idCliente = idCliente, portabilidad = portabilidadParametros*/ };
+                            var parametros = new { modo = ModoVentana.ALTA, telCliente = "8711897006", usuarioId= usa.Id/*, idCliente = idCliente, portabilidad = portabilidadParametros*/ };
                             item.Arguments = parametros;
                             this.AppFrame.Navigate(item.DestPage, item.Arguments);
                             break;
