@@ -13,6 +13,9 @@ using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
+using Windows.System.Profile;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,8 +42,13 @@ namespace NavigationMenuSample.Views
         List<CampoGrid> camposGlobal;
         Portabilidad portabilidadParametros;
         List<CampoGrid> camposGloba;
+        string ip = "";
+        string idHardware = "";
         private ModoVentana modo;
         string numTelefonico;
+        private string idhardware;
+        string usuarioId = "";
+
         public ClientesDetallePage()
         {
 
@@ -112,6 +120,9 @@ namespace NavigationMenuSample.Views
                 clientesCriterioListView.ItemsSource = value;
             }
         }
+
+        public string IP { get { return ip; } set { ip = value; } }
+        public string IdHardware { get { return idHardware; } set { idHardware = value; } }
 
         public void CrearCriterioSeleccion(Componente criterioSeleccion)
         {
@@ -270,6 +281,9 @@ namespace NavigationMenuSample.Views
 
                 modo = (ModoVentana)parametros.GetType().GetProperty("modo").GetValue(parametros, null);
                 numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null);
+                usuarioId = (string)parametros.GetType().GetProperty("usuarioId").GetValue(parametros, null);
+                obtenerInformacion();
+                ConsultarParametros();
                 ConsultarPortabilidad(numTelefonico);
                 //presentador.CrearFormulario(modo);
                 //parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
@@ -326,6 +340,35 @@ namespace NavigationMenuSample.Views
         private void StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
+        }
+
+        public void ConsultarParametros()
+        {
+            presentador.ConsultarParametros(usuarioId);
+        }
+
+        public void obtenerInformacion()
+        {
+            //optenemos ip           
+            foreach (HostName localHostName in NetworkInformation.GetHostNames())
+            {
+                if (localHostName.IPInformation != null)
+                {
+                    if (localHostName.Type == HostNameType.Ipv4)
+                    {
+                        ip = localHostName.ToString();
+                        break;
+                    }
+                }
+            }
+
+            //optenemos id hardware
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+            idhardware = BitConverter.ToString(bytes);
         }
     }
 }

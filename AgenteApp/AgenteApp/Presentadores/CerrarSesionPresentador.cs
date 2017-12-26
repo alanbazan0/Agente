@@ -21,7 +21,7 @@ namespace AgenteApp.Presentadores
         {
             
             CerrarSesionRepositorio repositorio = new CerrarSesionRepositorio();
-            Resultado<string> resultado = await repositorio.CerrarSesion(vista.NombreUsuario);
+            Resultado<string> resultado = await repositorio.CerrarSesion(vista.NombreUsuario,vista.IP,vista.IdHardware);
             if (resultado.mensajeError == string.Empty)
             {
                 vista.cerrarPRograma();

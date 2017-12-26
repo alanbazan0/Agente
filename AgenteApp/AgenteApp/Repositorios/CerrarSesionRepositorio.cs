@@ -15,15 +15,16 @@ namespace AgenteApp.Repositorios
         {
         }
 
-        public async Task<Resultado<string>> CerrarSesion(string nombre)
+        public async Task<Resultado<string>> CerrarSesion(string nombre,string ip ,string idHardware)
         {
             Resultado<string> datos = new Resultado<string>();
 
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/Usuarios.php";
             AgregarParametro("accion", "CerrarSesion");
-            AgregarParametro("idNombre", nombre);
-
+            AgregarParametro("idNombre", nombre); 
+            AgregarParametro("idHardware", idHardware);
+            AgregarParametro("ip", ip);
             try
             {
                 using (var cliente = new HttpClient())
