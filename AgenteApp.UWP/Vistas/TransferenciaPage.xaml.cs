@@ -1,17 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
+using AgenteApp.Vistas;
+using AgenteApp.Clases;
+using AgenteApp.Modelos;
+using Windows.Foundation;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using AgenteApp.Presentadores;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System.Collections.Generic;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml.Controls.Primitives;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.UI.Popups;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -20,13 +25,34 @@ namespace NavigationMenuSample.Views
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class TransferenciaPage : Page
+    public sealed partial class TransferenciaPage : Page, IParametrosVista
     {
+        Parametros ParametroLocal;
+        TransferenciaPresentador presentador;
         public TransferenciaPage()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
+            ConsultarParametros();
+            txtNumeroTelefono.Text = GetValorParametro("@NUMEROTEL@");
+        }
+
+        public Parametros Parametro { get => ParametroLocal; set { } }
+
+        public List<Parametros> Parametros { get; set; }
+        public string GetValorParametro(string palabraReservada)
+        {
+            string valor = "";
+            for(int i=0;i<Parametros.Count;i++)
+            {
+
+                if(Parametros[i].PalabraReservada == palabraReservada)
+                {
+                    valor = Parametros[i].ValorParametro;
+                }
+            }
+            return valor;
         }
 
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
@@ -48,6 +74,11 @@ namespace NavigationMenuSample.Views
             }
 
 
+        }
+
+        public void ConsultarParametros()
+        {
+            presentador.ConsultarParametros();
         }
 
         private void digitarNumero(object sender, RoutedEventArgs e)
@@ -93,6 +124,16 @@ namespace NavigationMenuSample.Views
                     break;
             }
         }
-        
+
+        public async void MostrarMensajeAsync(string titulo, string mensaje)
+        {
+            progressRing.IsActive = false;
+            if (mensaje != null)
+            {
+                var dialog = new MessageDialog(mensaje, titulo);
+                await dialog.ShowAsync();
+            }
+        }
+
     }
 }

@@ -107,7 +107,7 @@
 
                                 <Button Grid.Column="0" x:Name="btpausar" Background="White" Height="50" Width="150"  Click="Pausar">
                                     <StackPanel>
-                                        <TextBlock Text="Pausar" Foreground="Gray" HorizontalAlignment="Center"/>
+                                        <TextBlock x:Name="bttxtPausa" Text="Pausar" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
                             </Grid>

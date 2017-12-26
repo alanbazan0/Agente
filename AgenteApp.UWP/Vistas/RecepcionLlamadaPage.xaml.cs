@@ -2,11 +2,11 @@
 using AgenteApp.Vistas;
 using AgenteApp.Clases;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
+using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.UI;
@@ -172,8 +172,10 @@ namespace NavigationMenuSample.Views
                 {
                     telefono.LinphoneCore.AcceptCall(call);
                     HeaderTextBlock.Text = "Recepción de llamada - En llamada";
+                    
                     numTelefonico = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
                     LimpiarDatos();
+                    estatusTextBox.Text = "Contestada";
                     HoraLlamadaTextBox.Text = GetTimeString();
                     dispatcherTimer.Start();
                     ConsultarDatos(NoTelTextBox.Text);
@@ -236,12 +238,14 @@ namespace NavigationMenuSample.Views
                 {
                     telefono.LinphoneCore.PauseCall(LlamadaPausada);
                     HeaderTextBlock.Text = "Recepción de llamada - Pausa";
+                    bttxtPausa.Text = "Reanudar llamada";
                     InsertarPausa();
                 }
                 else if (LlamadaPausada.State == CallState.Paused)
                 {
                     telefono.LinphoneCore.ResumeCall(LlamadaPausada);
                     HeaderTextBlock.Text = "Recepción de llamada - En llamada";
+                    bttxtPausa.Text = "Pausar";
                     LlamadaPausada = null;
                     ActualizarPausa();
                 }
@@ -416,6 +420,7 @@ namespace NavigationMenuSample.Views
             ciudadTextBox.Text = "";
             tipoTelefonoTextBox.Text = "";
             tipoLlamadaTextBox.Text = "";
+            estatusTextBox.Text = "";
             lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
         }
 
@@ -430,10 +435,11 @@ namespace NavigationMenuSample.Views
         private void ConsultarDatos(string noTelefonico)
         {
             progressRing.IsActive = true;
+            BorrarParametros();
             ConsultarIdLlamada(NoExtensionTextBox.Text);
             ConsultarPortabilidad(noTelefonico);
             ConsultarClientesTel(noTelefonico);
-            BorrarParametros();
+            
         }
 
         public void ConsultarPortabilidad(string numero)
