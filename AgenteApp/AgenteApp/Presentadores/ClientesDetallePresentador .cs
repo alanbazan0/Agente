@@ -135,9 +135,24 @@ namespace AgenteApp.Presentadores
             List<Campo> filtros = vista.Filtros;
             ClientesRepositorio repositorio = new ClientesRepositorio();
             Resultado<List<Parametros>> resultado = await repositorio.ConsultarParametros(vista.IP,vista.IdHardware, usuario);
+            bool coincidencia = false;
             if (resultado.mensajeError == string.Empty)
             {
-                //vista.ClientesCriterio = resultado.valor;
+
+                for (var i = 0; i < resultado.valor.Count; i++)
+                {
+                    if (resultado.valor[i].PalabraReservada.Equals("@NUMEROTEL@"))
+                    {
+                        vista.Consultar(resultado.valor[i].ValorParametro);
+                        coincidencia = true;
+                    }                   
+                }
+                if (coincidencia)
+                { }
+                else
+                {
+                    vista.Consultar("");
+                }
             }
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);

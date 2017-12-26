@@ -12,6 +12,7 @@ namespace AgenteApp.Vistas
         string IdHardware { get; set; }
         void ConsultarClientes();
         void ConsultarParametros();
+        void Consultar(string numeroTel);
         void ConsultarClientesTel(string numero);
         void MostrarMensajeAsync(string titulo, string mensaje);
         List<Campo> Filtros { get;  }
