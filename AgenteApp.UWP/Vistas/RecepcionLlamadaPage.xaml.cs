@@ -87,7 +87,7 @@ namespace NavigationMenuSample.Views
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+            HeaderTextBlock.Text = "Llamada entrante - Disponible";
             tFechaextBox.Text=FechaLlamadaTextBox.Text = GetDateString();
             obtenerInformacion();
             try
@@ -149,7 +149,7 @@ namespace NavigationMenuSample.Views
             }
             else
             {
-                HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+                HeaderTextBlock.Text = "Llamada entrante - Disponible";
                 ttxtTiempoLlamada.Text= HoraLlamadaTextBox.Text = "00:00:00";
                 dispatcherTimer.Stop();
                 LimpiarDatos();
@@ -171,7 +171,7 @@ namespace NavigationMenuSample.Views
                 if (call.State == CallState.IncomingReceived)
                 {
                     telefono.LinphoneCore.AcceptCall(call);
-                    HeaderTextBlock.Text = "Recepción de llamada - En llamada";
+                    HeaderTextBlock.Text = "Llamada entrante - En llamada";
                     
                     numTelefonico = ttxtNumeroTelefono.Text =  NoTelTextBox.Text = call.RemoteAddress.DisplayName;
                     LimpiarDatos();
@@ -199,7 +199,7 @@ namespace NavigationMenuSample.Views
                     if (call.State == CallState.StreamsRunning)
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
-                        HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+                        HeaderTextBlock.Text = "Llamada entrante - Disponible";
                         ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
                         LimpiarDatos();
@@ -210,7 +210,7 @@ namespace NavigationMenuSample.Views
                     if (LlamadaPausada.State == CallState.Paused)
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
-                        HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+                        HeaderTextBlock.Text = "Llamada entrante - Disponible";
                         ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
                         //LimpiarDatos();
@@ -237,15 +237,15 @@ namespace NavigationMenuSample.Views
                 if (LlamadaPausada.State == CallState.StreamsRunning)
                 {
                     telefono.LinphoneCore.PauseCall(LlamadaPausada);
-                    HeaderTextBlock.Text = "Recepción de llamada - Pausa";
-                    bttxtPausa.Text = "Reanudar llamada";
+                    HeaderTextBlock.Text = "Llamada entrante - Pausa";
+                    btPausa.Label = "Reanudar llamada";
                     InsertarPausa();
                 }
                 else if (LlamadaPausada.State == CallState.Paused)
                 {
                     telefono.LinphoneCore.ResumeCall(LlamadaPausada);
-                    HeaderTextBlock.Text = "Recepción de llamada - En llamada";
-                    bttxtPausa.Text = "Pausar";
+                    HeaderTextBlock.Text = "Llamada entrante - En llamada";
+                    btPausa.Label = "Pausar llamada";
                     LlamadaPausada = null;
                     ActualizarPausa();
                 }
@@ -278,7 +278,7 @@ namespace NavigationMenuSample.Views
                     if (call.State == CallState.StreamsRunning)
                     {
                         telefono.LinphoneCore.TransferCall(call, ttxtNumeroATranferir.Text);
-                        HeaderTextBlock.Text = "Recepción de llamada - Diponible";
+                        HeaderTextBlock.Text = "Llamada entrante - Diponible";
                     }
                 }
   
@@ -295,7 +295,9 @@ namespace NavigationMenuSample.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
+            usuario = (Usuario)e.Parameter;
             onRegister(e);
+            ConsultarSupervisores();
             consultarCorreoEntrada();
         }
 
@@ -304,7 +306,7 @@ namespace NavigationMenuSample.Views
         {
             try
             {
-                usuario = (Usuario)e.Parameter;
+                
                 ParametroLocal.IdParamtro = usuario.Id;
                 ParametroLocal.DireccionIp = ip;
                 ParametroLocal.NumeroMaquina = idhardware;
@@ -594,6 +596,7 @@ namespace NavigationMenuSample.Views
         {
             presentador.ConsultarPausa();
         }
+       
 
         public List<Pausas> Pausas
         {
@@ -637,6 +640,7 @@ namespace NavigationMenuSample.Views
             byte[] bytes = new byte[hardwareId.Length];
             dataReader.ReadBytes(bytes);
             idhardware = BitConverter.ToString(bytes);
+            
         }
 
 
@@ -684,6 +688,32 @@ namespace NavigationMenuSample.Views
                     ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "#";
                     break;
             }
+        }
+
+        public void ConsultarSupervisores()
+        {
+            presentador.ConsultarSupervisores(usuario.Id);
+        }
+
+        public List<Supervisores> Supervisores
+        {
+            set
+            {
+                SupervisoresListView.ItemsSource = value;
+            }
+        }
+
+
+        private void supervisoresListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var supervisor = e.ClickedItem;
+
+            if (supervisor != null)
+            {
+                var contenido = (string)supervisor.GetType().GetProperty("ExtensionSupervisor").GetValue(supervisor, null);
+                ttxtNumeroATranferir.Text = contenido;
+            }
+
         }
 
 
