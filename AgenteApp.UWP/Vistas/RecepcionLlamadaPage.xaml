@@ -68,7 +68,280 @@
         <Grid x:Name="ContentContainer" Grid.Row="1" EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <StackPanel>
-                    <Grid>
+                    <Pivot x:Name="rootPivote1" HeaderFocusVisualPlacement="ItemHeaders" Width="900" Height="auto">
+                        <PivotItem Header="Datos llamada"  Width="900" Height="auto">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                                    <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+                                </StackPanel>
+                                <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="botonesLlmada" HorizontalAlignment="Left"  Orientation="Horizontal" Width="300" ItemHeight="50" ItemWidth="150"  >
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50" ></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" x:Name="btColagar" Background="White" Height="50" Width="150" Click="Colgar">
+                                            <StackPanel>
+                                                <TextBlock Text="Colgar" Foreground="Gray" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+
+
+                                    </Grid>
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="0" x:Name="btpausar" Background="White" Height="50" Width="150"  Click="Pausar">
+                                            <StackPanel>
+                                                <TextBlock x:Name="bttxtPausa" Text="Pausar" Foreground="Gray" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                </VariableSizedWrapGrid>
+                                <VariableSizedWrapGrid Grid.Column="0" Grid.Row="1" Margin="5"  x:Name="LamadaEntrante" HorizontalAlignment="Left"  Orientation="Horizontal" Width="900"  ItemHeight="50" ItemWidth="280"  >
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="50"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Tiempo de llam." Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="timpoLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="00:00:00" HorizontalAlignment="Stretch" Margin="8" />
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Estado"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="EstadoTextBox"  Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Ciudad"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="ciudadTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Tipo de telefono"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="tipoTelefonoTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Tipo de llamada"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="tipoLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Fecha de llamada"   Margin="8"  />
+                                        <TextBox  Grid.Column="1" x:Name="FechaLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Hora de llamada"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="HoraLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="No. Telefonico"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="NoTelTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Id de la llamada"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="idLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="No. extension"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="NoExtensionTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                    </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Estatus"   Margin="8"  />
+                                        <TextBox Grid.Column="1" x:Name="estatusTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                    </Grid>
+                                </VariableSizedWrapGrid>
+                                <VariableSizedWrapGrid Grid.Column="0" Grid.Row="2" Margin="5"  x:Name="LamadaEntrante2"  Orientation="Horizontal" Width="Auto"   >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0"  x:Name="Concidencias1"  Orientation="Horizontal" Width="Auto"  >
+                                            <Grid >
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" ></RowDefinition>
+                                                </Grid.RowDefinitions>
+
+                                                <TextBlock Grid.Column="0" x:Name="lbCoincidencias" Text="Coincidencias encontradas con número telefónico" Margin="0" FontSize="23" TextAlignment="Center" Foreground="Black"  />
+
+                                            </Grid>
+                                        </VariableSizedWrapGrid>
+
+                                        <ListView Grid.Column="0" Grid.Row="2"  x:Name="TiempoEsperaListView"  >
+                                            <ListView.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  Padding="0" Margin="15,0,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                                            <TextBlock Text="SECUENCIA"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                            <TextBlock Text="FECHA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                            <TextBlock Text="HORA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                                            <TextBlock Text="FECHA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                                            <TextBlock Text="HORA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                                            <TextBlock Text="DURACION"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                            <TextBlock Text="ACUMULADO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.HeaderTemplate>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Padding="0" Margin="15,0,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="{Binding IdPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="1" Text="{Binding InicioPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="2" Text="{Binding HoraInicia}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="3" Text="{Binding Finalpausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="4" Text="{Binding HoraFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="5" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="6" Text="{Binding Acumulado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </Grid>
+                                </VariableSizedWrapGrid>
+
+                            </Grid>
+                        </PivotItem>
+                        <PivotItem Header="Tranferir"  Width="auto" >
+                            <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -77,86 +350,271 @@
                             <RowDefinition Height="Auto"></RowDefinition>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                            <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+                            <ProgressRing x:Name="tprogressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
                         </StackPanel>
-                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="botonesLlmada"  Orientation="Horizontal" Width="Auto"  ItemHeight="49" ItemWidth="150" >
+                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="tbotonesLlmada"  Orientation="Horizontal" Width="Auto"  >
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
-                                   
+
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" x:Name="btColagar" Background="White" Height="50" Width="150" Click="Colgar">
+                                <Button Grid.Column="0" x:Name="tbtranferir" Background="White" Height="50" Width="150" Click="Transferir" >
                                     <StackPanel>
-                                        <TextBlock Text="Colgar" Foreground="Gray" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Transferir" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
 
-                                
-                            </Grid>
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    
-                                </Grid.ColumnDefinitions>
 
-                                <Button Grid.Column="0" x:Name="btpausar" Background="White" Height="50" Width="150"  Click="Pausar">
-                                    <StackPanel>
-                                        <TextBlock x:Name="bttxtPausa" Text="Pausar" Foreground="Gray" HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
                             </Grid>
                             
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    
-                                </Grid.ColumnDefinitions>
-
-                                <Button Grid.Column="0" x:Name="btTrasferir" Background="White" Height="50" Width="150" Click="PruebaPausar" >
-                                    <StackPanel>
-                                        <TextBlock Text="" Foreground="Gray" HorizontalAlignment="Center" />
-                                        
-                                    </StackPanel>
-                                </Button>
-                                
-                            </Grid>
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                                    
-                                </Grid.ColumnDefinitions>
-
-
-                                <Button Grid.Column="0" x:Name="btConeferencia" Background="White" Height="50" Width="150"  >
-                                    <StackPanel>
-                                        <TextBlock Text="" Foreground="Gray" HorizontalAlignment="Center"/>
-                                    </StackPanel>
-                                </Button>
-                            </Grid>
                         </VariableSizedWrapGrid>
-                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="1" Margin="5"  x:Name="LamadaEntrante"  Orientation="Horizontal" Width="Auto"  ItemHeight="50" ItemWidth="300" >
+                                <VariableSizedWrapGrid Grid.Column="0" Grid.Row="1" Margin="5"  x:Name="tLamadaEntrante"  Orientation="Horizontal" Width="900"   ItemHeight="50" ItemWidth="450"  >
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="190"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Numero telefonico origen" Margin="8"  />
+                                <TextBox Grid.Column="1" x:Name="ttxtNumeroTelefono" Grid.ColumnSpan="2" PlaceholderText="-" HorizontalAlignment="Stretch" Margin="8" />
+                            </Grid>
+
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="250"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Nombre completo"   Margin="12"  />
+                                <TextBox Grid.Column="1" x:Name="ttxtNombreCompleto"  Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                            </Grid>
+
+                        </VariableSizedWrapGrid>
+                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="2" Margin="5"  x:Name="tLamadaEntrante2"  Orientation="Horizontal" Width="900"   ItemHeight="50" ItemWidth="450"    >
                                 <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                    <ColumnDefinition Width="190"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Tiempo de llamada" Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="timpoLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="00:00:00" HorizontalAlignment="Stretch" Margin="8" />
+                                <TextBlock Grid.Column="0" Text="Transferir a "   Margin="8"  />
+                                <TextBox Grid.Column="1" x:Name="ttxtNumeroATranferir" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+
+                            </Grid>
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="300"></ColumnDefinition>
+
+                                        </Grid.ColumnDefinitions>
+                                        <ListView Grid.Column="0"  x:Name="tTiempoEsperaListView"  >
+                                            <ListView.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  Padding="0" Margin="15,0,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                                            <TextBlock Text="SECUENCIA"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                            <TextBlock Text="PUESTO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+                                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                            <TextBlock Text="NOMBRE"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        </Border>
+
+
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.HeaderTemplate>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Padding="0" Margin="15,0,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition Width="100" />
+
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="{Binding IdPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="1" Text="{Binding InicioPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                        <TextBlock Grid.Column="2" Text="{Binding HoraInicia}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+
+
+                                    </Grid>
+                                </VariableSizedWrapGrid>
+                                
+                                <VariableSizedWrapGrid Grid.Column="0" Grid.Row="2" Margin="5"  x:Name="tLamadaEntrante3"  Orientation="Horizontal" Width="auto"   ItemHeight="50" ItemWidth="450"    >
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="150"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                    </Grid>
+
+
+                                    <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="190"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Grid.Row="0" x:Name="tbt7" Background="Gray" Height="47" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="7" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="2" Grid.Row="0"  x:Name="tbt8" Background="Gray" Height="47" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="8" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="3" Grid.Row="0" x:Name="tbt9" Background="Gray" Height="47" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="9" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                
+                                
+
+                            </Grid>
+
+
+                                    <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="190"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Grid.Row="1" x:Name="tbt4" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="4" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="2" Grid.Row="1" x:Name="tbt5" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="5" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="3" Grid.Row="1" x:Name="tbt6" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="6" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+
+                            </Grid>
+
+                          
+                                    <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="190"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Grid.Row="2" x:Name="tbt1" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="1" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="2" Grid.Row="2" x:Name="tbt2" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="2" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="3" Grid.Row="2" x:Name="tbt3" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="3" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+
+
+                            </Grid>
+
+                            
+                             
+                                    <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="190"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" Grid.Row="0" x:Name="tbta" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="*" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="2" Grid.Row="0"  x:Name="tbt0" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="0" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="3" Grid.Row="0" x:Name="tbtg" Background="Gray" Height="49" Width="49" Click="digitarNumero" >
+                                    <StackPanel>
+                                        <TextBlock Text="#" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+
+
+                                </VariableSizedWrapGrid>
+
+                                <VariableSizedWrapGrid Grid.Column="0" Grid.Row="3" Margin="5"  x:Name="tLamadaEntrante4"  Orientation="Horizontal" Width="900"   ItemHeight="50" ItemWidth="280"    >
+                                    <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"  ></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130"></ColumnDefinition>
+                                    <ColumnDefinition Width="150"></ColumnDefinition>
+
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Tiempo de llam."   Margin="8"  />
+                                <TextBox Grid.Column="1" x:Name="ttxtTiempoLlamada" Grid.ColumnSpan="1" PlaceholderText="00:00:00" HorizontalAlignment="Stretch" Margin="8" />
+                               
                             </Grid>
 
                             <Grid >
@@ -164,23 +622,25 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                   
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Estado"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="EstadoTextBox"  Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                            </Grid>
+                                <TextBox Grid.Column="1" x:Name="tEstadoTextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                
 
+                            </Grid>
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Ciudad"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="ciudadTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                <TextBox Grid.Column="1" x:Name="tCiudadTextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
                             </Grid>
 
                             <Grid >
@@ -188,51 +648,23 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Tipo de telefono"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="tipoTelefonoTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                
-                            </Grid>
-
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Tipo de llamada"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="tipoLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                
-                            </Grid>
-
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Fecha de llamada"   Margin="8"  />
-                                <TextBox  Grid.Column="1" x:Name="FechaLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                
-                             </Grid>
+                                <TextBox Grid.Column="1" x:Name="tFechaextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                            </Grid>
 
                             <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Hora de llamada"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="HoraLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                
+                                <TextBox Grid.Column="1" x:Name="tHoratextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
                             </Grid>
 
                             <Grid >
@@ -240,12 +672,11 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="No. Telefonico"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="NoTelTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                
+                                <TextBlock Grid.Column="0" Text="Id de llamada"   Margin="8"  />
+                                <TextBox Grid.Column="1" x:Name="tIdllamtextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
                             </Grid>
 
                             <Grid >
@@ -253,12 +684,11 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Id de la llamada"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="idLlamadaTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                
+                                <TextBlock Grid.Column="0" Text="No de extencion"   Margin="8"  />
+                                <TextBox Grid.Column="1" x:Name="tNoExttextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
                             </Grid>
 
                             <Grid >
@@ -266,112 +696,17 @@
                                     <RowDefinition Height="Auto"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="No. extension"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="NoExtensionTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                            </Grid>
-
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"></ColumnDefinition>
+                                            <ColumnDefinition Width="130"></ColumnDefinition>
                                     <ColumnDefinition Width="150"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Estatus"   Margin="8"  />
-                                <TextBox Grid.Column="1" x:Name="estatusTextBox" Grid.ColumnSpan="2" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                <TextBox Grid.Column="1" x:Name="ttEstatustextBox" Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
                             </Grid>
+
                         </VariableSizedWrapGrid>
                     </Grid>
-                    
-                        <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                            <RowDefinition Height="Auto"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="Concidencias1"  Orientation="Horizontal" Width="Auto"  ItemHeight="50" ItemWidth="7000" >
-                            <Grid >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" ></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" ></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" x:Name="lbCoincidencias" Text="Coincidencias encontradas con número telefónico" Margin="8" FontSize="23" TextAlignment="Center" Foreground="White"  />
-                                
-                            </Grid>
-                        </VariableSizedWrapGrid>
-
-                        <ListView Grid.Column="0" Grid.Row="2"  x:Name="TiempoEsperaListView"  >
-                            <ListView.HeaderTemplate>
-                                <DataTemplate>
-                                    <Grid  Padding="0" Margin="15,0,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
-                                            <TextBlock Text="SECUENCIA"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
-                                            <TextBlock Text="FECHA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
-                                            <TextBlock Text="HORA INICIAL"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-                                        <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
-                                            <TextBlock Text="FECHA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-                                        <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
-                                            <TextBlock Text="HORA FINAL"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-                                        <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
-                                            <TextBlock Text="DURACION"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-                                        <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
-                                            <TextBlock Text="ACUMULADO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        </Border>
-
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.HeaderTemplate>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Padding="0" Margin="15,0,0,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                            <ColumnDefinition Width="100" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding IdPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="1" Text="{Binding InicioPausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="2" Text="{Binding HoraInicia}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="3" Text="{Binding Finalpausa}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="4" Text="{Binding HoraFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="5" Text="{Binding Duracion}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                        <TextBlock Grid.Column="6" Text="{Binding Acumulado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-
+                        </PivotItem>
+                    </Pivot>
                 </StackPanel>
             </StackPanel>
         </Grid>
