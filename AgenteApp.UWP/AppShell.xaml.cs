@@ -44,7 +44,7 @@ namespace NavigationMenuSample
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Phone,
-                    Label = "Recepción de llamada",
+                    Label = "llamada entrante",
                     DestPage = typeof(RecepcionLlamadaPage)
                 },
                 new NavMenuItem()
@@ -59,18 +59,18 @@ namespace NavigationMenuSample
                     Label = "CRM",
                     DestPage = typeof(AgentePage)
                 },
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.BackToWindow,
-                    Label = "Tranferir",
-                    DestPage = typeof(TransferenciaPage)
-                },
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.BackToWindow,
-                    Label = "Conferenciar",
-                    DestPage = typeof(BasicPage)
-                },
+                //new NavMenuItem()
+                //{
+                //    Symbol = Symbol.BackToWindow,
+                //    Label = "Tranferir",
+                //    DestPage = typeof(TransferenciaPage)
+                //},
+                //new NavMenuItem()
+                //{
+                //    Symbol = Symbol.BackToWindow,
+                //    Label = "Conferenciar",
+                //    DestPage = typeof(BasicPage)
+                //},
                 new NavMenuItem()
                 {
                     Symbol = Symbol.BackToWindow,

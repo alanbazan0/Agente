@@ -88,7 +88,7 @@ namespace NavigationMenuSample.Views
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
             HeaderTextBlock.Text = "Recepción de llamada - Disponible";
-            FechaLlamadaTextBox.Text = GetDateString();
+            tFechaextBox.Text=FechaLlamadaTextBox.Text = GetDateString();
             obtenerInformacion();
             try
             {
@@ -149,8 +149,8 @@ namespace NavigationMenuSample.Views
             }
             else
             {
-                HeaderTextBlock.Text = "Recepción de llamada - Disponible";               
-                HoraLlamadaTextBox.Text = "00:00:00";
+                HeaderTextBlock.Text = "Recepción de llamada - Disponible";
+                ttxtTiempoLlamada.Text= HoraLlamadaTextBox.Text = "00:00:00";
                 dispatcherTimer.Stop();
                 LimpiarDatos();
             }
@@ -173,10 +173,10 @@ namespace NavigationMenuSample.Views
                     telefono.LinphoneCore.AcceptCall(call);
                     HeaderTextBlock.Text = "Recepción de llamada - En llamada";
                     
-                    numTelefonico = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
+                    numTelefonico = ttxtNumeroTelefono.Text =  NoTelTextBox.Text = call.RemoteAddress.DisplayName;
                     LimpiarDatos();
-                    estatusTextBox.Text = "Contestada";
-                    HoraLlamadaTextBox.Text = GetTimeString();
+                    ttEstatustextBox.Text = estatusTextBox.Text = "Contestada";
+                    tHoratextBox.Text = HoraLlamadaTextBox.Text = GetTimeString();
                     dispatcherTimer.Start();
                     ConsultarDatos(NoTelTextBox.Text);
                 }
@@ -200,7 +200,7 @@ namespace NavigationMenuSample.Views
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
                         HeaderTextBlock.Text = "Recepción de llamada - Disponible";
-                        HoraLlamadaTextBox.Text = "00:00:00";
+                        ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
                         LimpiarDatos();
                     }
@@ -211,7 +211,7 @@ namespace NavigationMenuSample.Views
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
                         HeaderTextBlock.Text = "Recepción de llamada - Disponible";
-                        HoraLlamadaTextBox.Text = "00:00:00";
+                        ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
                         //LimpiarDatos();
                     }
@@ -277,8 +277,8 @@ namespace NavigationMenuSample.Views
                     Call call = telefono.LinphoneCore.CurrentCall;
                     if (call.State == CallState.StreamsRunning)
                     {
-                        //telefono.LinphoneCore.TransferCall(call, numTranfer.Text);
-                        //HeaderTextBlock.Text = "Recepción de llamada - Diponible";
+                        telefono.LinphoneCore.TransferCall(call, ttxtNumeroATranferir.Text);
+                        HeaderTextBlock.Text = "Recepción de llamada - Diponible";
                     }
                 }
   
@@ -308,7 +308,7 @@ namespace NavigationMenuSample.Views
                 ParametroLocal.IdParamtro = usuario.Id;
                 ParametroLocal.DireccionIp = ip;
                 ParametroLocal.NumeroMaquina = idhardware;
-                extension = NoExtensionTextBox.Text = usuario.Extension;
+                extension = tNoExttextBox.Text = NoExtensionTextBox.Text = usuario.Extension;
                 string password = Constantes.PASS_CALL + usuario.Extension;
                 var authInfo = Factory.Instance.CreateAuthInfo(usuario.Extension, null, password, null, null, Constantes.DIRECCION_ELAXTIC);
                 telefono.LinphoneCore.AddAuthInfo(authInfo);
@@ -398,7 +398,7 @@ namespace NavigationMenuSample.Views
             {
                 Shor = hor.ToString();
             }
-            timpoLlamadaTextBox.Text = Shor + ":" + Smin + ":" + Sseg;
+            ttxtTiempoLlamada.Text = timpoLlamadaTextBox.Text = Shor + ":" + Smin + ":" + Sseg;
             segunds += 1;
         }
 
@@ -415,9 +415,9 @@ namespace NavigationMenuSample.Views
             min = 0;
             hor = 0;
             segunds = 0;
-            timpoLlamadaTextBox.Text = "00:00:00";
-            EstadoTextBox.Text = "";
-            ciudadTextBox.Text = "";
+            ttxtTiempoLlamada.Text = timpoLlamadaTextBox.Text = "00:00:00";
+            tEstadoTextBox.Text = EstadoTextBox.Text = "";
+            tCiudadTextBox.Text = ciudadTextBox.Text = "";
             tipoTelefonoTextBox.Text = "";
             tipoLlamadaTextBox.Text = "";
             estatusTextBox.Text = "";
@@ -453,8 +453,8 @@ namespace NavigationMenuSample.Views
             {
                 try
                 {
-                    EstadoTextBox.Text = value[0].EstadoPortabilidad;
-                    ciudadTextBox.Text = value[0].MunicipioPortabilidad;
+                    tEstadoTextBox.Text=EstadoTextBox.Text = value[0].EstadoPortabilidad;
+                    tCiudadTextBox.Text = ciudadTextBox.Text = value[0].MunicipioPortabilidad;
                     tipoTelefonoTextBox.Text = value[0].RedPortabilidad;
                     tipoLlamadaTextBox.Text = value[0].TipoLlamadaPortabilidad;
                     portabilidadParametros = value[0];
@@ -474,7 +474,7 @@ namespace NavigationMenuSample.Views
             {
                 try
                 {
-                    IdLlamada = idLlamadaTextBox.Text = value;
+                    IdLlamada = tIdllamtextBox.Text = idLlamadaTextBox.Text = value;
                     ParametroLocal.DescripcionValor = "Llamada id";
                     ParametroLocal.PalabraReservada = "@IDLLAMADA@";
                     ParametroLocal.ValorParametro = IdLlamada;
@@ -639,6 +639,52 @@ namespace NavigationMenuSample.Views
             idhardware = BitConverter.ToString(bytes);
         }
 
+
+
+        //funciones de transferencia
+        private void digitarNumero(object sender, RoutedEventArgs e)
+        {
+            Button padnumeric = (Button)sender;
+            switch (padnumeric.Name)
+            {
+                case "tbt7":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "7";
+                    break;
+                case "tbt8":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "8";
+                    break;
+                case "tbt9":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "9";
+                    break;
+                case "tbt4":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "4";
+                    break;
+                case "tbt5":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "5";
+                    break;
+                case "tbt6":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "6";
+                    break;
+                case "tbt3":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "3";
+                    break;
+                case "bt2":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "2";
+                    break;
+                case "tbt1":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "1";
+                    break;
+                case "tbta":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "*";
+                    break;
+                case "tbt0":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "0";
+                    break;
+                case "tbtg":
+                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "#";
+                    break;
+            }
+        }
 
 
     }

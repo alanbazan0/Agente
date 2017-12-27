@@ -88,7 +88,7 @@
                                     <ColumnDefinition Width="auto"></ColumnDefinition>
 
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="0" x:Name="btranferir" Background="White" Height="50" Width="150" >
+                                <Button Grid.Column="0" x:Name="btranferir" Background="White" Height="50" Width="150" Click="Transferir" >
                                     <StackPanel>
                                         <TextBlock Text="Transferir" Foreground="Gray" HorizontalAlignment="Center"/>
                                     </StackPanel>

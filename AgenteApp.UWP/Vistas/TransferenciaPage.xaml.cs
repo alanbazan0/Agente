@@ -17,6 +17,9 @@ using Windows.Foundation.Collections;
 using Windows.UI.Xaml.Controls.Primitives;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Popups;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
+using Windows.System.Profile;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,31 +30,48 @@ namespace NavigationMenuSample.Views
     /// </summary>
     public sealed partial class TransferenciaPage : Page, IParametrosVista
     {
+        Usuario usuario;
         Parametros ParametroLocal;
+        string noTelefonico;
         TransferenciaPresentador presentador;
+        string ip;
+        string idhardware;
         public TransferenciaPage()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
-            ConsultarParametros();
-            txtNumeroTelefono.Text = GetValorParametro("@NUMEROTEL@");
+            presentador = new TransferenciaPresentador(this);
+            ParametroLocal = new Parametros();
+            usuario = null;
+            FechaextBox.Text = GetDateString();
+            obtenerInformacion();
         }
 
         public Parametros Parametro { get => ParametroLocal; set { } }
 
-        public List<Parametros> Parametros { get; set; }
+        public List<Parametros> Parametros
+        {  set {
+                for (int i = 0; i < value.Count; i++)
+                {
+
+                    switch(value[i].PalabraReservada)                      
+                    {
+                        case "@NUMEROTEL@":
+                            noTelefonico =  txtNumeroTelefono.Text = value[i].ValorParametro;
+                            break;
+                        case "@IDLLAMADA@":
+                            IdllamtextBox.Text = value[i].ValorParametro;
+                            break;
+                    }
+                }
+                ConsultarPortabilidad(noTelefonico);
+            }
+        }
         public string GetValorParametro(string palabraReservada)
         {
             string valor = "";
-            for(int i=0;i<Parametros.Count;i++)
-            {
-
-                if(Parametros[i].PalabraReservada == palabraReservada)
-                {
-                    valor = Parametros[i].ValorParametro;
-                }
-            }
+           
             return valor;
         }
 
@@ -78,7 +98,12 @@ namespace NavigationMenuSample.Views
 
         public void ConsultarParametros()
         {
+            NoExttextBox.Text = usuario.Extension;
+            ParametroLocal.IdParamtro = usuario.Id;
+            ParametroLocal.NumeroMaquina = idhardware;
+            ParametroLocal.DireccionIp = ip;
             presentador.ConsultarParametros();
+            
         }
 
         private void digitarNumero(object sender, RoutedEventArgs e)
@@ -133,6 +158,83 @@ namespace NavigationMenuSample.Views
                 var dialog = new MessageDialog(mensaje, titulo);
                 await dialog.ShowAsync();
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            usuario = (Usuario)e.Parameter;
+            ConsultarParametros();
+        }
+
+        public void obtenerInformacion()
+        {
+            //optenemos ip           
+            foreach (HostName localHostName in NetworkInformation.GetHostNames())
+            {
+                if (localHostName.IPInformation != null)
+                {
+                    if (localHostName.Type == HostNameType.Ipv4)
+                    {
+                        ip = localHostName.ToString();
+                        break;
+                    }
+                }
+            }
+
+            //optenemos id hardware
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+            idhardware = BitConverter.ToString(bytes);
+        }
+
+        private string GetDateString()
+        {
+            DateTime dateTime = DateTime.Now;
+            string text = dateTime.ToString("dd/MM/yyyy");// + "-" + dateTime.TimeOfDay.ToString();
+            return text;
+        }
+
+        public void ConsultarPortabilidad(string numero)
+        {
+            presentador.ConsultarPortabilidad(numero);
+        }
+
+        public List<Portabilidad> Portabilidad
+        {
+            set
+            {
+                try
+                {
+                    EstadoTextBox.Text = value[0].EstadoPortabilidad;
+                    CiudadTextBox.Text = value[0].MunicipioPortabilidad;
+                    EstatustextBox.Text = "Contestada";
+                }
+                catch { }
+            }
+        }
+
+        private void Transferir(object sender, RoutedEventArgs e)
+        {
+
+            //if (telefono.LinphoneCore.CallsNb == 0)
+            //{
+
+            //}
+            //else
+            //{
+            //    Call call = telefono.LinphoneCore.CurrentCall;
+            //    if (call.State == CallState.StreamsRunning)
+            //    {
+            //        //telefono.LinphoneCore.TransferCall(call, numTranfer.Text);
+            //        //HeaderTextBlock.Text = "Recepción de llamada - Diponible";
+            //    }
+            //}
+
+
         }
 
     }
