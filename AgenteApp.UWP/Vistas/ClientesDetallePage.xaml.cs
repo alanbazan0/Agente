@@ -58,6 +58,9 @@ namespace NavigationMenuSample.Views
             //formularioClienteFabrica = new FormularioFabrica();
             presentador.CrearCatalogoClientes();
             obtenerInformacion();
+
+           
+
         }
 
         public List<Campo> Filtros
