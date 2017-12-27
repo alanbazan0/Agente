@@ -35,6 +35,8 @@ namespace AgenteApp.UWP.Vistas
         FormularioPresentador presentador;
         ComponenteFabrica componenteFabrica;
 
+        List<ClienteTelefono>telefonosLis;
+        List<Correos> correosList;
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
         private ModoVentana modo;
@@ -49,6 +51,25 @@ namespace AgenteApp.UWP.Vistas
             //this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             clienteTelefono = new ClienteTelefono();
             presentador.TipoTelefono();
+
+            telefonosLis = new List<ClienteTelefono>();
+
+            ClienteTelefono telefonCLiente = new ClienteTelefono();
+            telefonCLiente.TipoTelefono = " ";
+            telefonCLiente.TelefonoCliente = " ";
+            telefonCLiente.Compania = " ";
+
+            telefonosLis.Add(telefonCLiente);
+            telefonos.ItemsSource = telefonosLis;
+
+
+            correosList = new List<Correos>();
+
+            Correos correoCliente = new Correos();
+            correoCliente.Correo = " ";
+
+            correosList.Add(correoCliente);
+            correos.ItemsSource = correosList;
 
         }
 
@@ -261,7 +282,24 @@ namespace AgenteApp.UWP.Vistas
 
 
         }
+        private void Window_KeyDown(object sender, RoutedEventHandler e)
+        {
+            string l = (string)sender.GetType().GetProperty("SelectedItem").GetValue(sender, null);
+           
 
+                telefonosLis.Add(
+                    new ClienteTelefono()
+                    {                           
+                        TipoTelefono = " ",
+                        TelefonoCliente = " ",
+                        Compania = " "
+                    }
+                    );
+                //list.ItemsSource = null;
+                // lista();
+                //list.ItemsSource = conf;
+            
+        }
         public void ActualizarTelefonoCliente(string idCliente)
         {
             clienteTelefono.Id = idCliente;
