@@ -43,10 +43,9 @@ namespace NavigationMenuSample.Views
         Portabilidad portabilidadParametros;
         List<CampoGrid> camposGloba;
         string ip = "";
-        string idHardware = "";
+        string idhardware = "";
         private ModoVentana modo;
         string numTelefonico;
-        private string idhardware;
         string usuarioId = "";
 
         public ClientesDetallePage()
@@ -58,6 +57,7 @@ namespace NavigationMenuSample.Views
             this.Loaded += CommandBarPage_Loaded;
             //formularioClienteFabrica = new FormularioFabrica();
             presentador.CrearCatalogoClientes();
+            obtenerInformacion();
         }
 
         public List<Campo> Filtros
@@ -107,8 +107,21 @@ namespace NavigationMenuSample.Views
                 //ciudadTextBox.Text = value[0].MunicipioPortabilidad;
                 //tipoTelefonoTextBox.Text = value[0].RedPortabilidad;
                 //tipoLlamadaTextBox.Text = value[0].TipoLlamadaPortabilidad;
-
-                portabilidadParametros = value[0];
+                if (value.Count == 0)
+                {
+                    portabilidadParametros = new Portabilidad();
+                    portabilidadParametros.IdMunicipio = "";
+                    portabilidadParametros.IdConsecutivo = "";
+                    portabilidadParametros.NumeroPortabilidad = "";
+                    portabilidadParametros.DescripcionPortabilidad = "";
+                    portabilidadParametros.MunicipioPortabilidad = "";
+                    portabilidadParametros.CiudadPortabilidad = "";
+                    portabilidadParametros.EstadoPortabilidad = "";
+                    portabilidadParametros.TipoLlamadaPortabilidad = "";
+                }
+                else
+                {portabilidadParametros = value[0]; }
+                
             }
         }
         public string setIdLlamada { set => throw new NotImplementedException(); }
@@ -122,7 +135,7 @@ namespace NavigationMenuSample.Views
         }
 
         public string IP { get { return ip; } set { ip = value; } }
-        public string IdHardware { get { return idHardware; } set { idHardware = value; } }
+        public string IdHardware { get { return idhardware; } set { idhardware = value; } }
 
         public void CrearCriterioSeleccion(Componente criterioSeleccion)
         {
@@ -280,14 +293,14 @@ namespace NavigationMenuSample.Views
             {
 
                 modo = (ModoVentana)parametros.GetType().GetProperty("modo").GetValue(parametros, null);
-                numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null);
+                //numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null);
                 usuarioId = (string)parametros.GetType().GetProperty("usuarioId").GetValue(parametros, null);
-                obtenerInformacion();
+                //obtenerInformacion();
                 ConsultarParametros();
-                ConsultarPortabilidad(numTelefonico);
+                //ConsultarPortabilidad(numTelefonico);
                 //presentador.CrearFormulario(modo);
                 //parametroPortabilidad = (Portabilidad)parametros.GetType().GetProperty("portabilidad").GetValue(parametros, null);
-                if (modo == ModoVentana.ALTA)
+               /* if (modo == ModoVentana.ALTA)
                 {
                     
                     ConsultarClientesTel(numTelefonico);
@@ -302,7 +315,7 @@ namespace NavigationMenuSample.Views
                     //presentador.TraerDatosCliente(idCliente);
                     //presentador.traerDatosTelefono(idCliente);
 
-                }
+                }*/
 
             }
         }
@@ -319,6 +332,7 @@ namespace NavigationMenuSample.Views
         public void ConsultarClientesTel(string numero)
         {
             progressRing.IsActive = true;
+            numTelefonico = numero;
             presentador.ConsultarClientesTel(numero);
         }
 
@@ -369,6 +383,13 @@ namespace NavigationMenuSample.Views
             byte[] bytes = new byte[hardwareId.Length];
             dataReader.ReadBytes(bytes);
             idhardware = BitConverter.ToString(bytes);
+        }
+
+        public void Consultar(string numeroTel)
+        {
+            numTelefonico = numeroTel;
+            ConsultarClientesTel(numeroTel);
+            ConsultarPortabilidad(numeroTel);
         }
     }
 }
