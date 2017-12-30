@@ -72,7 +72,7 @@ namespace AgenteApp.Presentadores
                     vista.MostrarMensaje("Error", resultado.mensajeError);
             }
         }
-        public async void guardarTelefonoCliente(ClienteTelefono clienteTelefono)
+        public async void guardarTelefonoCliente(List<ClienteTelefono> clienteTelefono)
         {
             ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
             Resultado<string> resultado = await repositorio.Insertar(clienteTelefono);
@@ -158,5 +158,31 @@ namespace AgenteApp.Presentadores
                 vista.AsignarValor(campo, registro);
             }
         }
+        public async void ConsultarPortabilidad(string numeroTelefono)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<List<Portabilidad>> resultado = await repositorio.ConsultarPortabilidad(numeroTelefono);
+            if (resultado.mensajeError == string.Empty)
+            {
+               if( resultado.valor.Count>0)
+                    vista.ConsultarPortabilidad(resultado.valor[0].DescripcionPortabilidad, resultado.valor[0].IdMunicipio, resultado.valor[0].IdConsecutivo);
+               else
+                    vista.ConsultarPortabilidad(" "," "," ");
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        public async void guardarCorreoCliente(List<Correos> clienteCorreo,string idCliente)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<string> resultado = await repositorio.InsertarCorreo(clienteCorreo, idCliente);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.MostrarMensaje("Alta", "El cliente se guardo correctamente");
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
     }
 }

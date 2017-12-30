@@ -6,9 +6,11 @@ namespace AgenteApp.Modelos
 {
     public class Correos
     {
-        string id, fecha, nombre, correo, asunto, contenido;
+        string id, fecha, nombre, correo, asunto, contenido, origen, origenDsc;
         string acorreo , titulo, total, dia , semana , mes, NomCLinete;
 
+        public string OrigenDsc { get { return origenDsc; } set { origenDsc = value; } }
+        public string Origen { get { return origen; } set { origen = value; } }
         public string NUmCLinete { get { return NomCLinete; } set { NomCLinete = value; } }
         public string Id { get { return id; } set { id = value; } }
         public string Fecha { get { return fecha; } set { fecha = value; } }

@@ -53,11 +53,11 @@
                                     <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
                     </VariableSizedWrapGrid>
                     <ScrollViewer  ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
-                        <ListView x:Name="clientesListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
+                        <ListView x:Name="clientesListView"          Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
                         </ListView>
                     </ScrollViewer>
                     <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
-                        <ListView x:Name="clientesCriterioListView"  Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick" Visibility="Collapsed">
+                        <ListView x:Name="clientesCriterioListView"  Grid.Row="2"   ItemClick="clientesListView_ItemClick" Visibility="Collapsed">
                         </ListView>
                     </ScrollViewer>
                 </Grid>

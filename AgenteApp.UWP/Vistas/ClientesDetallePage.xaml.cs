@@ -98,6 +98,7 @@ namespace NavigationMenuSample.Views
             {
                 progressRing.IsActive = false;
                 clientesListView.ItemsSource = value;
+                clientesListView.IsItemClickEnabled = true;
             }
         }
         
@@ -166,7 +167,25 @@ namespace NavigationMenuSample.Views
             }
 
         }
-        
+
+        private void clientesListView_ItemClick2(object sender, ItemClickEventArgs e)
+        {
+            //var cliente = clientesListView.SelectedItem;
+            var cliente = e.ClickedItem;
+
+            if (cliente != null)
+            {
+                var numero = camposGlobal.Where(a => a.campoId == "BTCLIENTENUMERO")
+                                        .Select(a => a.id)
+                                        .First();
+                string alias = "C" + numero.ToString();
+                int idCliente = Int32.Parse((string)cliente.GetType().GetProperty(alias).GetValue(cliente, null));
+
+                var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente, portabilidad = portabilidadParametros };
+                this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
+            }
+
+        }
 
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
         {
