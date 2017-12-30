@@ -717,13 +717,68 @@
                                             <RowDefinition Height="Auto"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
                                             <ColumnDefinition Width="110"></ColumnDefinition>
                                             <ColumnDefinition Width="240"></ColumnDefinition>
                                             <ColumnDefinition Width="50"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="Participantes"   Margin="12"  />
-                                        <TextBox Grid.Column="1" x:Name="txtParticipantes"  Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
-                                        <Button Grid.Column="2" x:Name="btAgregar" Background="Green" Height="40" Width="50" Click="agregarInvitados" FontSize="18" >
+                                        <Button Grid.Column="0" x:Name="Control1" Content="Buscar" Height="40" Width="50" >
+                                            <Button.Flyout>
+                                                <Flyout>
+                                                    <StackPanel>
+                                                        <ListView Grid.Column="0"  x:Name="FlyInvitadosListView" IsItemClickEnabled="True" MaxHeight="400"  >
+                                                            <ListView.HeaderTemplate>
+                                                                <DataTemplate>
+                                                                    <Grid  Padding="0" Margin="15,0,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="100" />
+                                                                            <ColumnDefinition Width="100" />
+                                                                            <ColumnDefinition Width="200" />
+
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0"  Grid.ColumnSpan="2" Margin="0,0,-124,0">
+                                                                            <TextBlock Text="SECUENCIA"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                        </Border>
+                                                                        <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                                            <TextBlock Text="PUESTO"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                        </Border>
+                                                                        <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                                            <TextBlock Text="NOMBRE"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                        </Border>
+
+
+                                                                    </Grid>
+                                                                </DataTemplate>
+                                                            </ListView.HeaderTemplate>
+                                                            <ListView.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <Grid Padding="0" Margin="15,0,0,0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="100" />
+                                                                            <ColumnDefinition Width="100" />
+                                                                            <ColumnDefinition Width="200" />
+                                                                            <ColumnDefinition Width="200" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="Auto"/>
+                                                                        </Grid.RowDefinitions>
+                                                                        <TextBlock Grid.Column="0" Text="{Binding Id}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                        <TextBlock Grid.Column="1" Text="{Binding Puesto}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                        <TextBlock Grid.Column="2" Text="{Binding Nombre}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                        <TextBlock Grid.Column="3" Text="{Binding Extension}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                                    </Grid>
+                                                                </DataTemplate>
+                                                            </ListView.ItemTemplate>
+                                                        </ListView>
+                                                        <Button Click="DeleteConfirmation_Click" Content="Cancelar" HorizontalAlignment="Right" />
+                                                    </StackPanel>
+                                                </Flyout>
+                                            </Button.Flyout>
+                                        </Button>
+                                        <TextBlock Grid.Column="1" Text="Participantes"   Margin="12"  />
+                                        <TextBox Grid.Column="2" x:Name="txtParticipantes"  Grid.ColumnSpan="1" PlaceholderText="" HorizontalAlignment="Stretch" Margin="8" />
+                                        <Button Grid.Column="3" x:Name="btAgregar" Background="Green" Height="40" Width="50" Click="agregarInvitados" FontSize="18" >
                                             <StackPanel>
                                                 <TextBlock Text="+" Foreground="White" HorizontalAlignment="Center"/>
                                             </StackPanel>

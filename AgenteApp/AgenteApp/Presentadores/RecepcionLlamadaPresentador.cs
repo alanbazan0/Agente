@@ -1,6 +1,7 @@
 ﻿using AgenteApp.Clases;
 using AgenteApp.Modelos;
 using AgenteApp.Repositorios;
+using AgenteApp.Presenters;
 using AgenteApp.Vistas;
 
 using Newtonsoft.Json.Linq;
@@ -134,6 +135,20 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
+
+        public async void ConsultarUsuarios()
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            UsuarioRepositorio repositorio = new UsuarioRepositorio();
+            Resultado<List<Usuario>> resultado = await repositorio.ConsultarUsuarios();
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.usuarios = resultado.valor;
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+
 
 
     }

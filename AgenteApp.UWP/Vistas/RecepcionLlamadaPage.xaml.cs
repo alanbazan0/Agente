@@ -600,6 +600,11 @@ namespace NavigationMenuSample.Views
             presentador.ConsultarClientesTel(numero);
         }
 
+        public void ConsultarUsuarios()
+        {
+            presentador.ConsultarUsuarios();
+        }
+
         public List<ClienteTelefono> Clientes
         {
             set
@@ -799,6 +804,13 @@ namespace NavigationMenuSample.Views
             }
         }
 
+        public List<Usuario> usuarios
+        {
+            set
+            {
+                FlyInvitadosListView.ItemsSource = value;
+            }
+        }
 
         private void supervisoresListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -884,5 +896,13 @@ namespace NavigationMenuSample.Views
                     HeaderTextBlock.Text = "Llamada entrante - Conferencia";
                 }
             }
+        private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
+        {
+            Flyout f = this.Control1.Flyout as Flyout;
+            if (f != null)
+            {
+                f.Hide();
+            }
+        }
     }
 }

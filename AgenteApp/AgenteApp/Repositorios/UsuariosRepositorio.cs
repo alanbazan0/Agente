@@ -92,5 +92,36 @@ namespace AgenteApp.Presenters
         //    return usuario;
 
         //}
+
+        public async Task<Resultado<List<Usuario>>> ConsultarUsuarios()
+        {
+            Resultado<List< Usuario >> datos = new Resultado<List<Usuario>>();
+
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Usuarios.php";
+            AgregarParametro("accion", "consultarUsuarios");
+
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Usuario>>>(resultadoContenido);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+                datos.mensajeError = "Error al iniciar sesion. \r\nDetalle Error:\r\n" + ex.Message;
+
+            }
+            return datos;
+        }
     }
 }
