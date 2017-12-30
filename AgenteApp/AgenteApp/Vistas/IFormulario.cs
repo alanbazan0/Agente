@@ -17,6 +17,7 @@ namespace AgenteApp.Vistas
         void CrearFormularioClientes(Componente componente);
         string idCliente { set;  }
         void ActualizarTelefonoCliente(string idCliente);
+        void ConsultarPortabilidad(string compania,string municipio,string consecutivo);
         void AsignarValor(Componente componente, Objeto registro);
     }
 }

@@ -55,10 +55,10 @@
             <VariableSizedWrapGrid Grid.Row="2"  Margin="10,14,10,10"   x:Name="formularioTelefono"   Orientation="Horizontal"  ItemHeight="50" ItemWidth="210"   >
                 <TextBlock Text="Numero telefonico" Margin="8" />
                 <TextBox x:Name="noTelefonicoClienteTextBox" PlaceholderText="idCliente" Margin="8"  />
-                <TextBlock Text="Razon social" Margin="8" />
-                <TextBox x:Name="razonSocialTextBox" PlaceholderText="Razon social" Margin="8"  />
-                <TextBlock Text="Tipo de telefono" Margin="8" />
-                <ComboBox x:Name="tipoTelefonoTextBox" Height="30" PlaceholderText="Tipo de telefono" HorizontalAlignment="Stretch" 
+                <TextBlock Text="Carrier" Margin="8" />
+                <TextBox x:Name="razonSocialTextBox" PlaceholderText="Carrier" Margin="8"  />
+                <TextBlock Text="Origen de telefono" Margin="8" />
+                <ComboBox x:Name="tipoTelefonoTextBox" Height="30" PlaceholderText="Origen de telefono" HorizontalAlignment="Stretch" 
                           VerticalAlignment="Stretch"  
                           VariableSizedWrapGrid.RowSpan="1"  >
                     <ComboBox.ItemTemplate>
@@ -80,6 +80,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Border  Grid.Column="0" Margin="15,0,15,0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
                     <TextBlock Text="Telefonos de cliente"  TextAlignment="Center" FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
@@ -88,34 +89,63 @@
                 <Border  Grid.Column="1"   Margin="15,0,15,0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
                     <TextBlock Text="Correos de cliente"  TextAlignment="Center" FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                 </Border>
+                <Grid Grid.Column="0" Grid.Row="1" Padding="0" Margin="15,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="telefonoAgregar" Grid.Column="0" Grid.Row="0" Width="180" Text="{Binding TelefonoCliente}"  />
+                    <ComboBox x:Name="cmbAgregarOri" Grid.Column="1"  Grid.Row="0" Height="30" Width="180" PlaceholderText="Origen de telefono" HorizontalAlignment="Stretch" 
+                                            VerticalAlignment="Stretch"   VariableSizedWrapGrid.RowSpan="1"  >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Width="200" Height="Auto">
+                                    <TextBlock Text="{Binding Id}" Visibility="Collapsed" />
+                                    <TextBlock Text="{Binding Descripcion}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button x:Name = "btnAgregar" Grid.Column="2" Grid.Row="0" Background="#ebebeb" Foreground="#5e777c" Content="Agregar telefono" Click="clickAgregarTel"  HorizontalAlignment="Stretch" Width="170"  />
 
+                </Grid>
 
-                <ListView x:Name="telefonos"  Grid.Column="0" Grid.Row="1" Margin="0,0,15,0"   >
+                <Grid Grid.Column="1" Grid.Row="1" Padding="0" Margin="15,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="correoAgregar" Grid.Column="0" Grid.Row="0" Width="180" Text="{Binding TelefonoCliente}"  />
+                    <ComboBox x:Name="cmbAgregarOriCorre" Grid.Column="1"  Grid.Row="0" Height="30" Width="180" PlaceholderText="Origen de correo" HorizontalAlignment="Stretch" 
+                                            VerticalAlignment="Stretch"   VariableSizedWrapGrid.RowSpan="1"  >
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Width="200" Height="Auto">
+                                    <TextBlock Text="{Binding Id}" Visibility="Collapsed" />
+                                    <TextBlock Text="{Binding Descripcion}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button x:Name = "btnAgregarCorreo" Grid.Column="2" Grid.Row="0" Background="#ebebeb" Foreground="#5e777c" Content="Agregar Correo" Click="clickAgregarCorreo"  HorizontalAlignment="Stretch" Width="170"  />
+
+                </Grid>
+
+                <ListView x:Name="telefonos" Height="200" Grid.Column="0" Grid.Row="2" Margin="0,0,0,0"   >
                     <ListView.HeaderTemplate>
                         <DataTemplate>
-                            <Grid  Padding="0" Margin="15,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="200" />
-                                    <ColumnDefinition Width="200" />
-                                </Grid.ColumnDefinitions>
-
-                                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
-                                    <TextBlock Text="Numero de telefono"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                </Border>
-                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
-                                    <TextBlock Text="Tipo de telefono"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                </Border>
-                                <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
-                                    <TextBlock Text="Carrier"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                </Border>
-
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.HeaderTemplate>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Padding="0" Margin="-7,0,0,0">
+                            <Grid  Padding="0" Margin="15,0,15,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="200" />
                                     <ColumnDefinition Width="200" />
@@ -123,38 +153,60 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBox Grid.Column="0" Width="180" Text="{Binding TelefonoCliente}"  />
-                                <ComboBox  Grid.Column="1" Height="30" Width="180" PlaceholderText="Tipo de telefono" HorizontalAlignment="Stretch" 
-                          VerticalAlignment="Stretch"  
-                          VariableSizedWrapGrid.RowSpan="1"  >
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" Width="200" Height="Auto">
-                                                <TextBlock Text="{Binding Id}" Visibility="Collapsed" />
-                                                <TextBlock Text="{Binding Descripcion}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <TextBox Grid.Column="2" Width="170"  Text="{Binding Compania}"  />
+                                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                    <TextBlock Text="Numero de telefono"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                </Border>
+                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                    <TextBlock Text="Origen de telefono"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                </Border>
+                                <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                    <TextBlock Text="Carrier"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                </Border>
                                
                             </Grid>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
+                    </ListView.HeaderTemplate>
+                    <ListView.ItemTemplate>
+                            <DataTemplate>
+                            <Grid Padding="0"   Margin="-7,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="200" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+
+                                    <TextBlock Grid.Column="0" Width="180" Text="{Binding TelefonoCliente}"/>
+                                <TextBlock Grid.Column="1" Width="170" Text="{Binding TipoTelefonoDes}"/>
+                                    <TextBlock Grid.Column="2" Width="170" Text="{Binding Compania}"/>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                 </ListView>
-
-
-                <ListView x:Name="correos"  Grid.Column="1"  Grid.Row="1" Margin="0,0,0,0"  >
+                <ListView x:Name="correos" Height="200"  Grid.Column="1"  Grid.Row="2" Margin="0,0,0,0"  >
                     <ListView.HeaderTemplate>
                         <DataTemplate>
                             <Grid  Padding="0" Margin="15,0,0,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="711" />
+                                    <ColumnDefinition Width="311" />
+                                    <ColumnDefinition Width="311" />
                                 </Grid.ColumnDefinitions>
-
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
                                 <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,15,0">
                                     <TextBlock Text="Correo"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                </Border>
+                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,15,0">
+                                    <TextBlock Text="Origen de correo"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                 </Border>
 
                             </Grid>
@@ -164,12 +216,14 @@
                         <DataTemplate>
                             <Grid Padding="0" Margin="3,0,0,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="500" />
+                                    <ColumnDefinition Width="311" />
+                                    <ColumnDefinition Width="311" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <TextBox Grid.Column="2" Width="500" Text="{Binding Correo}"  />
+                                <TextBlock Grid.Column="0" Width="180" Text="{Binding Correo}"/>
+                                <TextBlock Grid.Column="1" Width="170" Text="{Binding OrigenDsc}"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

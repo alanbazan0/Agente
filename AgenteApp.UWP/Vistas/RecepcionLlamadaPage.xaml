@@ -80,6 +80,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                                     <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+                                    <ProgressBar x:Name="progressBar2" Foreground="#6b6b6b" />
                                 </StackPanel>
                                 <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="botonesLlmada" HorizontalAlignment="Left"  Orientation="Horizontal" Width="300" ItemHeight="50" ItemWidth="150"  >
                                     <Grid >

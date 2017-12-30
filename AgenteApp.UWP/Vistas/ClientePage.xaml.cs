@@ -53,23 +53,7 @@ namespace AgenteApp.UWP.Vistas
             presentador.TipoTelefono();
 
             telefonosLis = new List<ClienteTelefono>();
-
-            ClienteTelefono telefonCLiente = new ClienteTelefono();
-            telefonCLiente.TipoTelefono = " ";
-            telefonCLiente.TelefonoCliente = " ";
-            telefonCLiente.Compania = " ";
-
-            telefonosLis.Add(telefonCLiente);
-            telefonos.ItemsSource = telefonosLis;
-
-
             correosList = new List<Correos>();
-
-            Correos correoCliente = new Correos();
-            correoCliente.Correo = " ";
-
-            correosList.Add(correoCliente);
-            correos.ItemsSource = correosList;
 
         }
 
@@ -163,6 +147,8 @@ namespace AgenteApp.UWP.Vistas
             set
             {
                 tipoTelefonoTextBox.ItemsSource = value;
+                cmbAgregarOri.ItemsSource = value;
+                cmbAgregarOriCorre.ItemsSource = value;
             }
         }
 
@@ -267,12 +253,25 @@ namespace AgenteApp.UWP.Vistas
             clienteTelefono.Compania = parametroPortabilidad.DescripcionPortabilidad;
             TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
             clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
-            presentador.guardarTelefonoCliente(clienteTelefono);
+            for (int i = 0; i < telefonosLis.Count; i++)
+            {
+                telefonosLis[i].Id = IdCliente;
+            }
+            telefonosLis.Add(clienteTelefono);
+            GuardarCorreoCliente(IdCliente);
+            //presentador.guardarTelefonoCliente(telefonosLis);
+            
+        }
+
+        public void GuardarCorreoCliente(string IdCliente)
+        {
+            presentador.guardarCorreoCliente(correosList, IdCliente);
         }
 
         public void AsignarValor(Componente campo, Objeto registro)
         {
-            var componente = formularioComponentes.Children.Where(a => (a as IComponente).Componente.tablaId == campo.tablaId 
+    
+               var componente = formularioComponentes.Children.Where(a => (a as IComponente).Componente.tablaId == campo.tablaId 
                                                                    && (a as IComponente).Componente.campoId == campo.campoId)
                                        .Select(a => a)
                                        .First();
@@ -282,24 +281,32 @@ namespace AgenteApp.UWP.Vistas
 
 
         }
-        private void Window_KeyDown(object sender, RoutedEventHandler e)
+        TipoTelefono itemboxTCorreo;
+        private void clickAgregarCorreo(object sender, RoutedEventArgs e)
         {
-            string l = (string)sender.GetType().GetProperty("SelectedItem").GetValue(sender, null);
-           
+            //string l = (string)sender.GetType().GetProperty("SelectedItem").GetValue(sender, null);
 
-                telefonosLis.Add(
-                    new ClienteTelefono()
-                    {                           
-                        TipoTelefono = " ",
-                        TelefonoCliente = " ",
-                        Compania = " "
-                    }
-                    );
-                //list.ItemsSource = null;
-                // lista();
-                //list.ItemsSource = conf;
-            
+            itemboxTCorreo = (TipoTelefono)cmbAgregarOriCorre.SelectedItem;
+            correosList.Add(
+                new Correos()
+                {
+                    Correo = correoAgregar.Text,
+                    Origen = itemboxTCorreo.Id,
+                    OrigenDsc= itemboxTCorreo.Descripcion
+                }
+                );
+            correos.ItemsSource = null;
+            // lista();
+            correos.ItemsSource = correosList;
+
         }
+        TipoTelefono itemboxTTelefono;
+        private void clickAgregarTel(object sender, RoutedEventArgs e)
+        {
+            itemboxTTelefono = (TipoTelefono)cmbAgregarOri.SelectedItem;
+            presentador.ConsultarPortabilidad(telefonoAgregar.Text);
+        }
+
         public void ActualizarTelefonoCliente(string idCliente)
         {
             clienteTelefono.Id = idCliente;
@@ -311,6 +318,26 @@ namespace AgenteApp.UWP.Vistas
             TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
             clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
             presentador.ActualizarTelefonoCliente(clienteTelefono);
+        }
+
+        public void ConsultarPortabilidad(string compania,string IdMunicipio, string IdConsecutivo)
+        {
+            telefonosLis.Add(
+                 new ClienteTelefono()
+                 {
+                     Id = "",
+                     TipoTelefonoDes = itemboxTTelefono.Descripcion,
+                     TipoTelefono = itemboxTTelefono.Id,
+                     TelefonoCliente = telefonoAgregar.Text,
+                     Compania = compania,
+                     Nir = IdMunicipio,
+                     Serie = IdConsecutivo,
+                     Numeracion = telefonoAgregar.Text,
+                     EsNuevo ="S"
+                 }
+                 );
+            telefonos.ItemsSource = null;
+            telefonos.ItemsSource = telefonosLis;
         }
     }
 }

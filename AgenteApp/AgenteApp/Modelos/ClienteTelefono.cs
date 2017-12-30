@@ -14,8 +14,11 @@ namespace AgenteApp.Modelos
          string numeracion;
          string compania;
          string tipoTelefono;
-
+        string tipoTelefonoDes;
+        string esNuevo;
         public string Id { get { return id; } set {id= value; } }
+        public string TipoTelefonoDes { get { return tipoTelefonoDes; } set { tipoTelefonoDes = value; } }
+        public string EsNuevo { get { return esNuevo; } set { esNuevo = value; } }
         //public string consecutivo { get {; } set {= value; } }
         public string Nir { get { return nir; } set { nir= value; } }
         public string Serie { get { return serie; } set { serie= value; } }
