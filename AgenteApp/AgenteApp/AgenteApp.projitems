@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Objeto.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Parametros.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Pausas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Supervisores.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoRecesos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />

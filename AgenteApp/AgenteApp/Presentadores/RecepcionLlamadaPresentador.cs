@@ -120,6 +120,21 @@ namespace AgenteApp.Presentadores
             //    vista.MostrarMensajeAsync("Error", resultado.mensajeError);
             //}  
         }
+
+        //funciones trasferir
         
+        public async void ConsultarSupervisores(string agenteid)
+        {
+            PausaRepositorio repositorio = new PausaRepositorio();
+            Resultado<List<Supervisores>> resultado = await repositorio.ConsultarSupervisores(agenteid);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.Supervisores = resultado.valor;
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+
+
     }
 }
