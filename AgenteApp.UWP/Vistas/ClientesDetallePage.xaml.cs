@@ -134,7 +134,7 @@ namespace NavigationMenuSample.Views
             set
             {
                 progressRing.IsActive = false;
-                clientesCriterioListView.ItemsSource = value;
+               clientesCriterioListView.ItemsSource = value;
             }
         }
 
@@ -157,7 +157,7 @@ namespace NavigationMenuSample.Views
             if (cliente != null)
             {
                 var numero = camposGlobal.Where(a => a.campoId == "BTCLIENTENUMERO")
-                                        .Select(a => a.id)
+                                        .Select(a => a.orden)
                                         .First();
                 string alias = "C" + numero.ToString();
                 int idCliente = Int32.Parse((string)cliente.GetType().GetProperty(alias).GetValue(cliente, null));

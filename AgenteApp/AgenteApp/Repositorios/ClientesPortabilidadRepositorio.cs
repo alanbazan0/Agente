@@ -45,5 +45,37 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+        
+        public async Task<Resultado<List<Portabilidad>>> ConsultarVacio(string numero)
+        {
+            Resultado<List<Portabilidad>> datos = new Resultado<List<Portabilidad>>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Portables.php";
+            AgregarParametro("accion", "consultarPortabilidadVacio");
+            AgregarParametro("numero", numero);
+            //AgregarParametro("version", version.ToString());
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Portabilidad>>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
     }
 }

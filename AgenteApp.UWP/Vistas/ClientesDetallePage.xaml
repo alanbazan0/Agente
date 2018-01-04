@@ -53,13 +53,29 @@
                                     <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
                     </VariableSizedWrapGrid>
                     <ScrollViewer  ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
-                        <ListView x:Name="clientesListView"          Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
+                        <ListView x:Name="clientesListView" Grid.Row="2"  IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick">
                         </ListView>
                     </ScrollViewer>
+                    
+                </Grid>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    </StackPanel>
+                    <VariableSizedWrapGrid  Grid.Row="1" Margin="10"  x:Name="criteriosSeleccionDetalleCliente2"  Orientation="Horizontal"  ItemHeight="50" ItemWidth="300"  >
+                        <!--<TextBox x:Name="nombreCompletoCriterioTextBox" PlaceholderText="Nombre completo" Margin="8" Width="250" />
+                                    <TextBox x:Name="rfcCriterioTextBox" PlaceholderText="RFC" Margin="8" Width="250" />                                    
+                                    <TextBox x:Name="curpCriterioTextBox" PlaceholderText="CURP" Margin="8" Width="250" />-->
+                    </VariableSizedWrapGrid>
                     <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Visible"  Grid.Row="2">
-                        <ListView x:Name="clientesCriterioListView"  Grid.Row="2"   ItemClick="clientesListView_ItemClick" Visibility="Collapsed">
+                        <ListView x:Name="clientesCriterioListView"  Grid.Row="2" IsItemClickEnabled="True" ItemClick="clientesListView_ItemClick" Visibility="Collapsed">
                         </ListView>
                     </ScrollViewer>
+
                 </Grid>
             </StackPanel>
         </Grid>

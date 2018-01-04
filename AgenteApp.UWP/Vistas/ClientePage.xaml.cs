@@ -40,6 +40,8 @@ namespace AgenteApp.UWP.Vistas
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
         private ModoVentana modo;
+        string numeroSeleccionado, numeroSeleccionadoId;
+        string correoSeleccionado;
         string numTelefonico;
         public ClientePage()
         {
@@ -54,6 +56,7 @@ namespace AgenteApp.UWP.Vistas
 
             telefonosLis = new List<ClienteTelefono>();
             correosList = new List<Correos>();
+
 
         }
 
@@ -113,9 +116,12 @@ namespace AgenteApp.UWP.Vistas
                 {
                     this.HeaderTextBlock.Text = "Identificación del cliente / actualizar cliente";
                     int idCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
+
+
                     presentador.TraerDatosCliente(idCliente);
                     presentador.traerDatosTelefono(idCliente);
-                    
+                    presentador.traerDatosCorreos(idCliente);
+
                 }
 
             }
@@ -127,7 +133,6 @@ namespace AgenteApp.UWP.Vistas
             {
                 progressRing.IsActive = false;
                 clientesListView.ItemsSource = value;
-
                 //Y AQUI HAY QUE MANDAR EL LLENADO DE LOS NUMEROS TELEFONICOS  /////////////////////////////////////////////////////////////////////////
             }
         }
@@ -137,6 +142,16 @@ namespace AgenteApp.UWP.Vistas
             set
             {
                string IdCliente = value;
+
+                clienteTelefono.Id = IdCliente;
+                clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
+                clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
+                clienteTelefono.Numeracion = numTelefonico;
+                clienteTelefono.TelefonoCliente = "0";
+                clienteTelefono.Compania = parametroPortabilidad.DescripcionPortabilidad;
+                TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
+                clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
+                telefonosLis.Add(clienteTelefono);
                 GuardarTelefonoCliente(IdCliente);
             }
             
@@ -152,21 +167,32 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
-        public ClienteTelefono ClienteTelefono
+        public List<ClienteTelefono> ClienteTelefono
         {
             set
             {
-                noTelefonicoClienteTextBox.Text = value.Numeracion;
-                razonSocialTextBox.Text = value.Compania;
-                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value.TipoTelefono)-1;
+                noTelefonicoClienteTextBox.Text = value[0].Numeracion;
+                razonSocialTextBox.Text = value[0].Compania;
+                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value[0].TipoTelefono)-1;
+                telefonos.ItemsSource = value;
+                telefonosLis = value;
+            }
+        }
+                
+        public List<Correos> ClienteCorreos
+        {
+            set
+            {                
+                correos.ItemsSource = value;
+                correosList = value;
             }
         }
 
         //private void AppCerrarButton_Click(object sender, RoutedEventArgs e)
         //{
-            
+
         //    this.Frame.Navigate(typeof(NavigationMenuSample.Views.AgentePage));  //AgenteApp.UWP.Vistas.AgentePage));
-            
+
         //}
 
         public async void MostrarMensaje(string titulo, string mensaje)
@@ -237,6 +263,53 @@ namespace AgenteApp.UWP.Vistas
             GuardarClientes();
         }
 
+        private void eliminarCorreo_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < correosList.Count; i++)
+            {
+                if (correosList[i].Correo.Equals(correoSeleccionado))
+                {
+                    correosList.RemoveRange(i, 1);
+                }
+            }
+            correos.ItemsSource = null;
+            correos.ItemsSource = correosList;
+        }
+
+        private void eliminarNum_Click(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < telefonosLis.Count; i++)
+            {
+                if (telefonosLis[i].Numeracion.Equals(numeroSeleccionado))
+                {
+                    telefonosLis.RemoveRange(i,1);
+                }
+            }
+            if (!numeroSeleccionado.Equals(""))
+                presentador.BorrarTelefonoCliente(numeroSeleccionado,numeroSeleccionadoId);
+            telefonos.ItemsSource = null;
+            telefonos.ItemsSource = telefonosLis;
+        }
+
+        private void telefonosListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var telefonoSel = e.ClickedItem;
+            numeroSeleccionado =(string)telefonoSel.GetType().GetProperty("Numeracion").GetValue(telefonoSel, null);
+            numeroSeleccionadoId = (string)telefonoSel.GetType().GetProperty("Id").GetValue(telefonoSel, null);
+            EliminaNum.Visibility = Visibility.Visible;
+            EliminaCorreo.Visibility = Visibility.Collapsed;
+            //();
+        }
+        
+        private void correosListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var correoSel = e.ClickedItem;
+            correoSeleccionado = (string)correoSel.GetType().GetProperty("Correo").GetValue(correoSel, null);
+
+            EliminaNum.Visibility = Visibility.Collapsed; 
+            EliminaCorreo.Visibility = Visibility.Visible;
+        }
+
         public void GuardarClientes()
         {
             progressRing.IsActive = true;
@@ -245,21 +318,12 @@ namespace AgenteApp.UWP.Vistas
 
         public void GuardarTelefonoCliente(string IdCliente)
         {
-            clienteTelefono.Id = IdCliente;
-            clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
-            clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
-            clienteTelefono.Numeracion = numTelefonico;
-            clienteTelefono.TelefonoCliente = "0";
-            clienteTelefono.Compania = parametroPortabilidad.DescripcionPortabilidad;
-            TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
-            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
             for (int i = 0; i < telefonosLis.Count; i++)
             {
                 telefonosLis[i].Id = IdCliente;
             }
-            telefonosLis.Add(clienteTelefono);
             GuardarCorreoCliente(IdCliente);
-            //presentador.guardarTelefonoCliente(telefonosLis);
+            presentador.guardarTelefonoCliente(telefonosLis);
             
         }
 
@@ -275,7 +339,7 @@ namespace AgenteApp.UWP.Vistas
                                                                    && (a as IComponente).Componente.campoId == campo.campoId)
                                        .Select(a => a)
                                        .First();
-            string alias = "C" + campo.id.ToString();
+            string alias = "C" + campo.orden.ToString();
 
             (componente as IComponente).Valor =  (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
 
@@ -298,6 +362,7 @@ namespace AgenteApp.UWP.Vistas
             correos.ItemsSource = null;
             // lista();
             correos.ItemsSource = correosList;
+            correoAgregar.Text = "";
 
         }
         TipoTelefono itemboxTTelefono;
@@ -305,19 +370,20 @@ namespace AgenteApp.UWP.Vistas
         {
             itemboxTTelefono = (TipoTelefono)cmbAgregarOri.SelectedItem;
             presentador.ConsultarPortabilidad(telefonoAgregar.Text);
+           
         }
 
         public void ActualizarTelefonoCliente(string idCliente)
         {
-            clienteTelefono.Id = idCliente;
+            /*clienteTelefono.Id = idCliente;
             clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
             clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
             clienteTelefono.Numeracion = noTelefonicoClienteTextBox.Text;
             clienteTelefono.TelefonoCliente = "0";
             clienteTelefono.Compania =razonSocialTextBox.Text;
             TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
-            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
-            presentador.ActualizarTelefonoCliente(clienteTelefono);
+            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;*/
+            presentador.ActualizarTelefonoCliente(telefonosLis,idCliente);
         }
 
         public void ConsultarPortabilidad(string compania,string IdMunicipio, string IdConsecutivo)
@@ -328,16 +394,17 @@ namespace AgenteApp.UWP.Vistas
                      Id = "",
                      TipoTelefonoDes = itemboxTTelefono.Descripcion,
                      TipoTelefono = itemboxTTelefono.Id,
-                     TelefonoCliente = telefonoAgregar.Text,
+                     TelefonoCliente = "0",
                      Compania = compania,
                      Nir = IdMunicipio,
                      Serie = IdConsecutivo,
                      Numeracion = telefonoAgregar.Text,
                      EsNuevo ="S"
-                 }
+        }
                  );
             telefonos.ItemsSource = null;
             telefonos.ItemsSource = telefonosLis;
+            telefonoAgregar.Text = "";
         }
     }
 }

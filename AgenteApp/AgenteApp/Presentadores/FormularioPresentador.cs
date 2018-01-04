@@ -84,6 +84,19 @@ namespace AgenteApp.Presentadores
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
 
+
+        public async void BorrarTelefonoCliente(string numero, string idCliente)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<string> resultado = await repositorio.BorrarTelefonoCliente(numero, idCliente);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.MostrarMensaje("Alta", "El numero del cliente se borro correctamente");
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
         private async void CrearFormularioAlta()
         {
             FormularioAltaRepositorio repositorio = new FormularioAltaRepositorio();
@@ -131,7 +144,7 @@ namespace AgenteApp.Presentadores
         public async void traerDatosTelefono(int idCliente)
         {
             ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
-            Resultado <ClienteTelefono> resultado = await repositorio.ConsultarTelefonoIdCliente(idCliente);
+            Resultado<List<ClienteTelefono>> resultado = await repositorio.ConsultarTelefonoIdCliente(idCliente);
             if (resultado.mensajeError == string.Empty)
             {
                 vista.ClienteTelefono = resultado.valor;
@@ -139,10 +152,23 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
-        public async void ActualizarTelefonoCliente(ClienteTelefono clienteTelefono)
+
+        public async void traerDatosCorreos(int idCliente)
         {
             ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
-            Resultado<string> resultado = await repositorio.Actualizar(clienteTelefono);
+            Resultado<List<Correos>> resultado = await repositorio.ConsultarCorreoIdCliente(idCliente);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.ClienteCorreos = resultado.valor;
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        
+        public async void ActualizarTelefonoCliente(List<ClienteTelefono> clienteTelefono, string idCliente)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<string> resultado = await repositorio.Actualizar(clienteTelefono, idCliente);
             if (resultado.mensajeError == string.Empty)
             {
                 vista.MostrarMensaje("Notificación", "Se actualizó el registro correctamente el cliente");
@@ -164,10 +190,13 @@ namespace AgenteApp.Presentadores
             Resultado<List<Portabilidad>> resultado = await repositorio.ConsultarPortabilidad(numeroTelefono);
             if (resultado.mensajeError == string.Empty)
             {
-               if( resultado.valor.Count>0)
+                if (resultado.valor.Count > 0)
                     vista.ConsultarPortabilidad(resultado.valor[0].DescripcionPortabilidad, resultado.valor[0].IdMunicipio, resultado.valor[0].IdConsecutivo);
-               else
-                    vista.ConsultarPortabilidad(" "," "," ");
+                else
+                {
+                    resultado = await repositorio.ConsultarPortabilidadVacia(numeroTelefono);
+                    vista.ConsultarPortabilidad(resultado.valor[0].DescripcionPortabilidad, resultado.valor[0].IdMunicipio, resultado.valor[0].IdConsecutivo);
+                }
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
@@ -178,7 +207,7 @@ namespace AgenteApp.Presentadores
             Resultado<string> resultado = await repositorio.InsertarCorreo(clienteCorreo, idCliente);
             if (resultado.mensajeError == string.Empty)
             {
-                vista.MostrarMensaje("Alta", "El cliente se guardo correctamente");
+                //vista.MostrarMensaje("Alta", "El cliente se guardo correctamente");
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);

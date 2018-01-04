@@ -55,6 +55,10 @@ namespace AgenteApp.Presentadores
             Resultado<List<Portabilidad>> resultado = await repositorio.Consultar(numero);
             if (resultado.mensajeError == string.Empty)
             {
+                if (resultado.valor.Count==0)
+                {
+                    resultado = await repositorio.ConsultarVacio(numero);
+                }
                 vista.Portabilidad = resultado.valor;
             }
             else

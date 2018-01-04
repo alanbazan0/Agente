@@ -45,9 +45,42 @@ namespace AgenteApp.Repositorios
         }
 
 
-        public async Task<Resultado<ClienteTelefono>> ConsultarTelefonoIdCliente(int idCliente)
+        public async Task<Resultado<string>> BorrarTelefonoCliente(string numero, string idCliente)
         {
-            Resultado <ClienteTelefono> datos = new Resultado<ClienteTelefono>();
+            Resultado<string> datos = new Resultado<string>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
+            AgregarParametro("accion", "BorrarTelefonoCliente");
+            AgregarParametro("idCliente", idCliente);
+            AgregarParametro("numero", numero);
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<string>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
+
+
+        public async Task<Resultado<List<ClienteTelefono>>> ConsultarTelefonoIdCliente(int idCliente)
+        {
+            Resultado < List < ClienteTelefono> >datos = new Resultado<List<ClienteTelefono>>();
             //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
@@ -63,7 +96,7 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-                    datos = JsonConvert.DeserializeObject<Resultado<ClienteTelefono>>(resultadoContenido);
+                    datos = JsonConvert.DeserializeObject<Resultado<List<ClienteTelefono>>>(resultadoContenido);
                     //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
 
                 }
@@ -76,7 +109,38 @@ namespace AgenteApp.Repositorios
             return datos;
         }
 
-        public async Task<Resultado<string>> Actualizar(ClienteTelefono clienteTelefono)
+        public async Task<Resultado<List<Correos>>> ConsultarCorreoIdCliente(int idCliente)
+        {
+            Resultado<List<Correos>> datos = new Resultado<List<Correos>>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
+            AgregarParametro("accion", "ConsultarCorreos");
+            AgregarParametro("llaves", idCliente.ToString());
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Correos>>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
+
+        public async Task<Resultado<string>> Actualizar(List<ClienteTelefono> clienteTelefono,string idCliente)
         {
             Resultado<string> datos = new Resultado<string>();
             //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
@@ -84,6 +148,7 @@ namespace AgenteApp.Repositorios
             Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
             AgregarParametro("accion", "actualizar");
             AgregarParametro("clientetelefono", JsonConvert.SerializeObject(clienteTelefono));
+            AgregarParametro("idCliente", idCliente);
             //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
             try
             {
@@ -170,7 +235,37 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+        
+            public async Task<Resultado<List<Portabilidad>>> ConsultarPortabilidadVacia(string NumeroEntrante)
+        {
+            Resultado<List<Portabilidad>> datos = new Resultado<List<Portabilidad>>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Portables.php";
+            AgregarParametro("accion", "consultarPortabilidadVacio");
+            AgregarParametro("numero", NumeroEntrante);
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Portabilidad>>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
 
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
         public async Task<Resultado<string>> InsertarCorreo(List<Correos> clienteCorreo,string idCliente)
         {
             Resultado<string> datos = new Resultado<string>();

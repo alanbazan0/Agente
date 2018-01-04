@@ -57,7 +57,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "CRM",
-                    DestPage = typeof(AgentePage)
+                    DestPage = typeof(CRMPage)
                 },
                 //new NavMenuItem()
                 //{
