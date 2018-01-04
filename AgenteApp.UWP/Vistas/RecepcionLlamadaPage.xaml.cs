@@ -342,7 +342,7 @@ namespace NavigationMenuSample.Views
             usuario = (Usuario)e.Parameter;
             onRegister(e);
             ConsultarSupervisores();
-            consultarCorreoEntrada();
+            //ConsultarUsuarios();
         }
 
 
@@ -600,10 +600,7 @@ namespace NavigationMenuSample.Views
             presentador.ConsultarClientesTel(numero);
         }
 
-        public void ConsultarUsuarios()
-        {
-            presentador.ConsultarUsuarios();
-        }
+        
 
         public List<ClienteTelefono> Clientes
         {
@@ -773,7 +770,7 @@ namespace NavigationMenuSample.Views
                 case "tbt3":
                     ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "3";
                     break;
-                case "bt2":
+                case "tbt2":
                     ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "2";
                     break;
                 case "tbt1":
@@ -788,6 +785,42 @@ namespace NavigationMenuSample.Views
                 case "tbtg":
                     ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "#";
                     break;
+                case "cbt7":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "7";
+                    break;
+                case "cbt8":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "8";
+                    break;
+                case "cbt9":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "9";
+                    break;
+                case "cbt4":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "4";
+                    break;
+                case "cbt5":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "5";
+                    break;
+                case "cbt6":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "6";
+                    break;
+                case "cbt3":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "3";
+                    break;
+                case "cbt2":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "2";
+                    break;
+                case "cbt1":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "1";
+                    break;
+                case "cbta":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "*";
+                    break;
+                case "cbt0":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "0";
+                    break;
+                case "cbtg":
+                    txtNotelefonico.Text = txtNotelefonico.Text + "#";
+                    break;
             }
         }
 
@@ -801,14 +834,6 @@ namespace NavigationMenuSample.Views
             set
             {
                 SupervisoresListView.ItemsSource = value;
-            }
-        }
-
-        public List<Usuario> usuarios
-        {
-            set
-            {
-                FlyInvitadosListView.ItemsSource = value;
             }
         }
 
@@ -850,9 +875,6 @@ namespace NavigationMenuSample.Views
                         InvitadosListView.ItemsSource = null;
                         InvitadosListView.ItemsSource = invitados;
                         telefono.LinphoneCore.Invite(txtNotelefonico.Text);
-
-
-
                     }
                 }
             }
@@ -903,6 +925,70 @@ namespace NavigationMenuSample.Views
             {
                 f.Hide();
             }
+        }
+
+        public void ConsultarUsuarios(object sender, RoutedEventArgs e)
+        {
+            presentador.ConsultarUsuarios();
+        }
+
+        public List<Usuario> usuarios
+        {
+            set
+            {
+                FlyInvitadosListView.ItemsSource = value;
+            }
+        }
+
+        private void flyListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var usuarioConferencia = e.ClickedItem;
+
+            if (usuarioConferencia != null)
+            {
+                int secuencia = InvitadosListView.Items.Count;
+
+                invitados.Add(
+                  new Usuario()
+                  {
+                      Nombre = (string)usuarioConferencia.GetType().GetProperty("Nombre").GetValue(usuarioConferencia, null),
+                      Puesto = (string)usuarioConferencia.GetType().GetProperty("Puesto").GetValue(usuarioConferencia, null),
+                      Extension = (string)usuarioConferencia.GetType().GetProperty("Extension").GetValue(usuarioConferencia, null),
+                      Id = Convert.ToString(secuencia + 1)
+                  }
+                  );
+                InvitadosListView.ItemsSource = null;
+                InvitadosListView.ItemsSource = invitados;
+                telefono.LinphoneCore.Invite(txtNotelefonico.Text);
+                Flyout f = this.Control1.Flyout as Flyout;
+                if (f != null)
+                {
+                    f.Hide();
+                }
+                //if (telefono.LinphoneCore.CallsNb == 0)
+                //{
+
+                //}
+                //else
+                //{
+                //    int secuencia = InvitadosListView.Items.Count;
+
+                //            invitados.Add(
+                //              new Usuario()
+                //              {
+                //                  Nombre = (string)usuarioConferencia.GetType().GetProperty("Nombre").GetValue(usuarioConferencia, null),
+                //                  Puesto = (string)usuarioConferencia.GetType().GetProperty("Puesto").GetValue(usuarioConferencia, null),
+                //                  Extension = (string)usuarioConferencia.GetType().GetProperty("Extension").GetValue(usuarioConferencia, null),
+                //                  Id = Convert.ToString(secuencia + 1)
+                //              }
+                //              );
+                //            InvitadosListView.ItemsSource = null;
+                //            InvitadosListView.ItemsSource = invitados;
+                //            telefono.LinphoneCore.Invite(txtNotelefonico.Text);
+
+                //}
+            }
+
         }
     }
 }
