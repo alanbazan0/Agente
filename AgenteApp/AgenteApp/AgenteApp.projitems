@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Parametros.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Pausas.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Supervisores.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\Tipificacion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoRecesos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />
@@ -41,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecepcionLlamadaPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\TipificacionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\TransferenciaPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid2Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RecesoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\RepositorioBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ServicioDatos.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\TipificacionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\UsuariosRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Constantes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\MetodoHTTP.cs" />
@@ -79,5 +82,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IParametrosVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IRecepcionLlamadaVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IReceso.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\ITipificacionVista.cs" />
   </ItemGroup>
 </Project>

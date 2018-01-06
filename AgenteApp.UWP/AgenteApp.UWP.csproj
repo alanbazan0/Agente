@@ -157,6 +157,9 @@
     <Compile Include="Vistas\SmsPage.xaml.cs">
       <DependentUpon>SmsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\TipificacionPage.xaml.cs">
+      <DependentUpon>TipificacionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\TransferenciaPage.xaml.cs">
       <DependentUpon>TransferenciaPage.xaml</DependentUpon>
     </Compile>
@@ -273,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\SmsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\TipificacionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
