@@ -22,6 +22,10 @@ using System.Net;
 using Windows.Networking.Connectivity;
 using Windows.System.Profile;
 using Windows.Networking;
+using Windows.Storage.Streams;
+using Windows.Media.Capture;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Storage;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,6 +39,8 @@ namespace AgenteApp.UWP
         InicioSesionPresentador presentador;
         string ip = "";
         string idhardware = "";
+        private StorageFile storeFile;  
+        private IRandomAccessStream stream;
         public InicioSesionPage()
         {
             this.InitializeComponent();
@@ -107,6 +113,27 @@ namespace AgenteApp.UWP
         public void InsertarSesionTrabajo()
         {
             presentador.InsertarSesionTrabajo();
+        }
+
+        
+        private async void captureBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (nombreUsuarioTextBox.Text != string.Empty)
+            {
+                captureImage.Visibility = Visibility.Visible;
+                CameraCaptureUI capture = new CameraCaptureUI();
+                capture.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+                capture.PhotoSettings.CroppedAspectRatio = new Size(3, 5);
+                capture.PhotoSettings.MaxResolution = CameraCaptureUIMaxPhotoResolution.HighestAvailable;
+                storeFile = await capture.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (storeFile != null)
+                {
+                    BitmapImage bimage = new BitmapImage();
+                    stream = await storeFile.OpenAsync(FileAccessMode.Read); ;
+                    bimage.SetSource(stream);
+                    captureImage.Source = bimage;
+                }
+            }
         }
     }
 }
