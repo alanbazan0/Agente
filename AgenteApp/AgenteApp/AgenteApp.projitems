@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Configuracion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Correos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Componente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\CRM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\EstatusUsuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Campo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\MovimientoPersonal.cs" />
@@ -38,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\ClientesDetallePresentador .cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CorreoPresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CRMPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecepcionLlamadaPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CorreoRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CriteriosSeleccionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\ClientesRepositorio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CRMRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioActualizacionRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\FormularioAltaRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\MenuServicioDatos.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IClientesVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAgenteVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICorreo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICRM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IFormulario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IMenuVista.cs" />

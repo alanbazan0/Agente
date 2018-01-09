@@ -21,6 +21,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Reflection;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
+using Windows.System.Profile;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -41,8 +44,10 @@ namespace AgenteApp.UWP.Vistas
         ClienteTelefono clienteTelefono;
         private ModoVentana modo;
         string numeroSeleccionado, numeroSeleccionadoId;
-        string correoSeleccionado;
+        string correoSeleccionado, correoSeleccionadoId;
         string numTelefonico;
+        string ip = "";
+        string idhardware = "";
         public ClientePage()
         {
             this.InitializeComponent();
@@ -171,9 +176,12 @@ namespace AgenteApp.UWP.Vistas
         {
             set
             {
-                noTelefonicoClienteTextBox.Text = value[0].Numeracion;
-                razonSocialTextBox.Text = value[0].Compania;
-                tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value[0].TipoTelefono)-1;
+                if (!(value.Count() == 0))
+                {
+                    noTelefonicoClienteTextBox.Text = value[0].Numeracion;
+                    razonSocialTextBox.Text = value[0].Compania;
+                    tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value[0].TipoTelefono) - 1;
+                }
                 telefonos.ItemsSource = value;
                 telefonosLis = value;
             }
@@ -272,6 +280,7 @@ namespace AgenteApp.UWP.Vistas
                     correosList.RemoveRange(i, 1);
                 }
             }
+            presentador.eliminarCorreo(correoSeleccionado, correoSeleccionadoId);
             correos.ItemsSource = null;
             correos.ItemsSource = correosList;
         }
@@ -305,7 +314,7 @@ namespace AgenteApp.UWP.Vistas
         {
             var correoSel = e.ClickedItem;
             correoSeleccionado = (string)correoSel.GetType().GetProperty("Correo").GetValue(correoSel, null);
-
+            correoSeleccionadoId = (string)correoSel.GetType().GetProperty("Id").GetValue(correoSel, null);
             EliminaNum.Visibility = Visibility.Collapsed; 
             EliminaCorreo.Visibility = Visibility.Visible;
         }
@@ -405,6 +414,29 @@ namespace AgenteApp.UWP.Vistas
             telefonos.ItemsSource = null;
             telefonos.ItemsSource = telefonosLis;
             telefonoAgregar.Text = "";
+        }
+        public void obtenerInformacion()
+        {
+            //optenemos ip           
+            foreach (HostName localHostName in NetworkInformation.GetHostNames())
+            {
+                if (localHostName.IPInformation != null)
+                {
+                    if (localHostName.Type == HostNameType.Ipv4)
+                    {
+                        ip = localHostName.ToString();
+                        break;
+                    }
+                }
+            }
+
+            //optenemos id hardware
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+            idhardware = BitConverter.ToString(bytes);
         }
     }
 }

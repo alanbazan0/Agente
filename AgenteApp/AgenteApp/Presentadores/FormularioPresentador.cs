@@ -91,6 +91,18 @@ namespace AgenteApp.Presentadores
             Resultado<string> resultado = await repositorio.BorrarTelefonoCliente(numero, idCliente);
             if (resultado.mensajeError == string.Empty)
             {
+                vista.MostrarMensaje("Eliminar", "El numero del cliente se borro correctamente");
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        public async void eliminarCorreo(string numero, string idCliente)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<string> resultado = await repositorio.eliminarCorreo(numero, idCliente);
+            if (resultado.mensajeError == string.Empty)
+            {
                 vista.MostrarMensaje("Alta", "El numero del cliente se borro correctamente");
             }
             else
