@@ -99,7 +99,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "Tipificación",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(TipificacionPage)
                 },
                 new NavMenuItem()
                 {
