@@ -38,5 +38,35 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+
+        
+            public async Task<Resultado<List<DatosAsistente>>> ConsultarDatosAsistente(DatosAsistente da)
+        {
+            Resultado<List<DatosAsistente>> datos = new Resultado<List<DatosAsistente>>();
+
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Tipificacion.php";
+            AgregarParametro("accion", "consultarAsistente");
+            AgregarParametro("Vesion", da.VErsion);
+            AgregarParametro("Secuencia", da.Secuencia);
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<DatosAsistente>>>(resultadoContenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
     }
 }
