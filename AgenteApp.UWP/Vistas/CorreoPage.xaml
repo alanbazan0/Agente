@@ -205,7 +205,7 @@
                                         <TextBlock x:Name = "indiSemanaActualE" Text="2"   Grid.Row="2" Grid.Column="2" TextAlignment="Center"  Foreground="White"/>
                                     </Grid>
 
-                                    <Grid Background="#05ee0a" Margin="0,5,0,0" Tapped="mesActual">
+                                    <Grid Background="#006847" Margin="0,5,0,0" Tapped="mesActual">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>

@@ -1,10 +1,13 @@
-﻿using AgenteApp.Modelos;
+﻿using AgenteApp.Componentes;
+using AgenteApp.Modelos;
 using AgenteApp.Presentadores;
+using AgenteApp.UWP.Fabricas;
 using AgenteApp.Vistas;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.Foundation;
@@ -35,10 +38,13 @@ namespace NavigationMenuSample.Views
         string nombreCompleto,ip, idhardware;
         CRMPresentador presentador;
         List<CampoGrid> camposGlobal;
+        ComponenteFabrica componenteFabrica;
+
         public CRMPage()
         {
             this.InitializeComponent();
             presentador = new CRMPresentador(this);
+            componenteFabrica = new ComponenteFabrica();
         }
 
         public List<Parametros> parametrosUsuario
@@ -50,7 +56,7 @@ namespace NavigationMenuSample.Views
                     if (value[i].PalabraReservada.Equals("@NOMCOMPLETO@"))
                     {
                         nombreCompleto = value[i].ValorParametro;
-                        NombreCliente.Text = nombreCompleto;
+                        //NombreCliente.Text = nombreCompleto;
                     }
                     if (value[i].PalabraReservada.Equals("@IDCLIENTE@"))
                     {
@@ -127,6 +133,8 @@ namespace NavigationMenuSample.Views
         public void cosultarCRMIndicadores()
         {
             presentador.cosultarCRMIndicadores(idCliente);
+            presentador.CrearCamposCRM();
+            presentador.TraerDatosCliente(Convert.ToInt32( idCliente));
         }
 
         public void datosIndicadores(List<CRM> indicadoresCRM)
@@ -194,6 +202,36 @@ namespace NavigationMenuSample.Views
             xamlItemTemplate.AppendLine(@"</DataTemplate>");
             var itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlItemTemplate.ToString()) as DataTemplate;
             CRMListView.ItemTemplate = itemTemplate;
+        }
+
+        public void CrearFormularioClientes(Componente componente)
+        {
+            IComponente componenteVista = componenteFabrica.CrearComponente(componente); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+
+            /*if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE")
+            {
+                (componenteVista as UIElement).KeyDown += ClientePage_KeyDownName;
+            }*/
+            /*if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE" || componenteVista.Componente.campoId == "BTCLIENTESNOMBRE" ||
+                 componenteVista.Componente.campoId == "BTCLIENTEAPATERNO" || componenteVista.Componente.campoId == "BTCLIENTEAMATERNO")
+            {
+                (componenteVista as UIElement).LostFocus += ClientePage_KeyDownName;
+            }*/
+            formularioComponentes.Children.Add(componenteVista as UIElement);
+        }
+
+        public void AsignarValor(Componente campo, Objeto registro)
+        {
+
+            var componente = formularioComponentes.Children.Where(a => (a as IComponente).Componente.tablaId == campo.tablaId
+                                                                && (a as IComponente).Componente.campoId == campo.campoId)
+                                    .Select(a => a)
+                                    .First();
+            string alias = "C" + campo.orden.ToString();
+
+            (componente as IComponente).Valor = (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
+
+
         }
     }
 }

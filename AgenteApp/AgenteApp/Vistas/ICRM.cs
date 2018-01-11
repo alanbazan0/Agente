@@ -16,5 +16,7 @@ namespace AgenteApp.Vistas
         void cosultarCRM();
         void datosIndicadores(List<CRM> indicadoresCRM);
         void CrearColumnasGrid1CRM(List<CampoGrid> campos);
+        void CrearFormularioClientes(Componente componente);
+        void AsignarValor(Componente componente, Objeto registro);
     }
 }

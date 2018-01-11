@@ -169,5 +169,63 @@ namespace AgenteApp.Repositorios
             return datos;
         }
 
+        public async Task<Resultado<List<Componente>>> ConsultarCamposClientePorVersion(int version)
+        {
+            Resultado<List<Componente>> datos = null;
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/CRM.php";
+            AgregarParametro("accion", "ConsultarCamposClientePorVersion");
+            AgregarParametro("version", version.ToString());
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Componente>>>(resultadoContenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+            return datos;
+        }
+
+        public async Task<Resultado<Objeto>> ConsultarPorIdCliente(int idCliente, int version)
+        {
+            Resultado<Objeto> datos = new Resultado<Objeto>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/CRM.php";
+            AgregarParametro("accion", "consultarDinamicamenteIdCliente");
+            AgregarParametro("idCliente", idCliente.ToString());
+            AgregarParametro("version", version.ToString());
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<Objeto>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
+
     }
 }
