@@ -296,19 +296,19 @@
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.4</Version>
+      <Version>6.0.6</Version>
     </PackageReference>
     <PackageReference Include="NETStandard.Library">
       <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.1-beta1</Version>
+      <Version>11.0.1-beta3</Version>
     </PackageReference>
     <PackageReference Include="System.Security.Cryptography.Algorithms">
       <Version>4.3.1</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Connectivity">
-      <Version>3.0.3</Version>
+      <Version>4.0.0.171-beta</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>2.5.0.121934</Version>
@@ -319,6 +319,50 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdapterView\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GxClasses">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\GxClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Biometrics">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Biometrics.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Biometrics.Client">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Biometrics.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Biometrics.Gui">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Biometrics.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Cluster">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Cluster.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Devices">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Devices.Virtual">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Devices.Virtual.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.FaceVerification">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.FaceVerification.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Gui">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Licensing">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Media">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Media.Processing">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Media.Processing.dll</HintPath>
+    </Reference>
+    <Reference Include="Neurotec.Media_FX35">
+      <HintPath>bin\x86\Debug\MatchFace\Assably\Neurotec.Media_FX35.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="..\AgenteApp\AgenteApp\AgenteApp.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -162,6 +162,19 @@ namespace AgenteApp.Presentadores
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
 
+        public async void insertarParametro(List<Parametros> usuario)
+        {
+            List<Campo> filtros = vista.Filtros;
+            ClientesRepositorio repositorio = new ClientesRepositorio();
+            Resultado<string> resultado = await repositorio.insertarParametro(usuario);
+            if (resultado.mensajeError == string.Empty)
+            {
+
+            }
+            else { }
+                //(vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+
 
     }
 }

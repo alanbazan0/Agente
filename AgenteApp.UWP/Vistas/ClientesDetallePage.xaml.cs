@@ -159,11 +159,39 @@ namespace NavigationMenuSample.Views
                 var numero = camposGlobal.Where(a => a.campoId == "BTCLIENTENUMERO")
                                         .Select(a => a.orden)
                                         .First();
+
+                var nombre = camposGlobal.Where(a => a.campoId == "BTCLIENTENCOMPLETO")
+                                        .Select(a => a.orden)
+                                        .First();
                 string alias = "C" + numero.ToString();
                 int idCliente = Int32.Parse((string)cliente.GetType().GetProperty(alias).GetValue(cliente, null));
 
+                string nombreAlias = "C" + nombre.ToString();
+                string nombreCompleto= (string)cliente.GetType().GetProperty(nombreAlias).GetValue(cliente, null);
+
                 var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente, portabilidad = portabilidadParametros };
                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
+
+                List<Parametros> parametrosCliente = new List<Parametros>();
+                Parametros  parametroCliente = new Parametros();
+                parametroCliente.DescripcionValor = "nombre completo";
+                parametroCliente.IdParamtro = usuarioId;
+                parametroCliente.DireccionIp = ip;
+                parametroCliente.NumeroMaquina = idhardware;
+                parametroCliente.PalabraReservada = "@NOMCOMPLETO@";
+                parametroCliente.ValorParametro = nombreCompleto;
+                parametrosCliente.Add(parametroCliente);
+                
+                parametroCliente = new Parametros();
+                parametroCliente.DescripcionValor = "id cliente";
+                parametroCliente.IdParamtro = usuarioId;
+                parametroCliente.DireccionIp = ip;
+                parametroCliente.NumeroMaquina = idhardware;
+                parametroCliente.PalabraReservada = "@IDCLIENTE@";
+                parametroCliente.ValorParametro = idCliente.ToString();
+                parametrosCliente.Add(parametroCliente);
+
+                presentador.insertarParametro(parametrosCliente);
             }
 
         }
@@ -176,14 +204,47 @@ namespace NavigationMenuSample.Views
             if (cliente != null)
             {
                 var numero = camposGlobal.Where(a => a.campoId == "BTCLIENTENUMERO")
-                                        .Select(a => a.id)
+                                        .Select(a => a.orden)
                                         .First();
+
+                var nombre = camposGlobal.Where(a => a.campoId == "BTCLIENTENCOMPLETO")
+                                       .Select(a => a.orden)
+                                       .First();
+
                 string alias = "C" + numero.ToString();
                 int idCliente = Int32.Parse((string)cliente.GetType().GetProperty(alias).GetValue(cliente, null));
 
+                string nombreAlias = "C" + nombre.ToString();
+                string nombreCompleto = (string)cliente.GetType().GetProperty(nombreAlias).GetValue(cliente, null);
+
                 var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente, portabilidad = portabilidadParametros };
                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);
+
+
+
+                List<Parametros> parametrosCliente = new List<Parametros>();
+                Parametros parametroCliente = new Parametros();
+                parametroCliente.DescripcionValor = "nombre completo";
+                parametroCliente.IdParamtro = usuarioId;
+                parametroCliente.DireccionIp = ip;
+                parametroCliente.NumeroMaquina = idhardware;
+                parametroCliente.PalabraReservada = "@NOMCOMPLETO@";
+                parametroCliente.ValorParametro = nombreCompleto;
+                parametrosCliente.Add(parametroCliente);
+
+                parametroCliente = new Parametros();
+                parametroCliente.DescripcionValor = "id cliente";
+                parametroCliente.IdParamtro = usuarioId;
+                parametroCliente.DireccionIp = ip;
+                parametroCliente.NumeroMaquina = idhardware;
+                parametroCliente.PalabraReservada = "@IDCLIENTE@";
+                parametroCliente.ValorParametro = idCliente.ToString();
+                parametrosCliente.Add(parametroCliente);
+
+                presentador.insertarParametro(parametrosCliente);
             }
+
+
 
         }
 
@@ -248,7 +309,7 @@ namespace NavigationMenuSample.Views
             {
                 CampoGrid campo = campos[i];
                 xamlItemTemplate.AppendLine(@"<Border  Grid.Column=""" + i.ToString() + @""" CornerRadius=""0"" BorderBrush=""Black"" BorderThickness=""0 0 0 0"">");
-                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.id + @"}"" Foreground=""Black"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
+                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.orden + @"}"" Foreground=""Black"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
                 xamlItemTemplate.AppendLine(@"</Border>");
             }
             xamlItemTemplate.AppendLine(@"</Grid>");
@@ -297,7 +358,7 @@ namespace NavigationMenuSample.Views
             {
                 CampoGrid campo = campos[i];
                 xamlItemTemplate.AppendLine(@"<Border  Grid.Column=""" + i.ToString() + @""" CornerRadius=""0"" BorderBrush=""Black"" BorderThickness=""0 0 0 0"">");
-                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.id + @"}"" Foreground=""Black"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
+                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.orden + @"}"" Foreground=""Black"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
                 xamlItemTemplate.AppendLine(@"</Border>");
             }
             xamlItemTemplate.AppendLine(@"</Grid>");
@@ -355,7 +416,7 @@ namespace NavigationMenuSample.Views
         {
             progressRing.IsActive = true;
             numTelefonico = numero;
-            presentador.ConsultarClientesTel(numero);
+             presentador.ConsultarClientesTel(numero);
         }
 
         public async void MostrarMensajeAsync(string titulo, string mensaje)

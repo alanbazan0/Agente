@@ -62,8 +62,6 @@
                     </ctl:PageHeader.HeaderContent>
                 </ctl:PageHeader>
             </CommandBar.Content>
-            <AppBarButton Icon="AddFriend" Label="Alta cliente" Foreground="White" />
-            <AppBarButton Icon="MailForward" Label="Responder correo" Foreground="White" />
         </CommandBar>
 
         <StackPanel>
@@ -76,7 +74,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Cliente:" HorizontalAlignment="Left"     Margin="15,15,15,15" Width="auto"/>
-                <TextBox x:Name="correotxt"      Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="15" Width="500" />
+                <TextBox x:Name="NombreCliente"      Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="15" Width="500" />
             </Grid>
             <StackPanel Margin="0,0,0,3">
                 <Grid  Padding="0" >
@@ -107,12 +105,9 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
-                                        <TextBlock Text=""  FontSize="10"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                        <TextBlock Text="Indicadores por canal"  FontSize="15"  Foreground="White" MaxLines="2"  TextAlignment="Center" TextWrapping="WrapWholeWords"/>
                                     </Border>
                                 </Grid>
-                            </StackPanel>
-                            <StackPanel x:Name = "contactos" HorizontalAlignment="Stretch" >
-                                <TextBlock Text="Indicadores por canal" TextAlignment="Center"/>
                             </StackPanel>
                             <StackPanel x:Name = "indicadores"  >
                                 <StackPanel >
@@ -127,14 +122,9 @@
                                             <RowDefinition Height="25" />
                                             <RowDefinition Height="25" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Acomulados" Grid.Row="0"     Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-
+                                        <TextBlock Text="Interacciones" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White" Grid.ColumnSpan="2" Height="30" Margin="0.5,0,96,0" VerticalAlignment="Top"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock Text="Recibidos"     Grid.Row="1" Grid.Column="1"  TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock Text="Enviados"   Grid.Row="1" Grid.Column="2"  TextAlignment="Center" Foreground="White"/>
-
-                                        <TextBlock x:Name = "indiAcomuladoR" Text="1"     Grid.Row="2" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock x:Name = "indiAcomuladoE" Text="2"   Grid.Row="2" Grid.Column="2" TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "Interacciones" Text="1"   FontSize="20"  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
                                     <Grid Background="#ff9900" Margin="0,5,0,0" >
                                         <Grid.ColumnDefinitions>
@@ -147,14 +137,9 @@
                                             <RowDefinition Height="25" />
                                             <RowDefinition Height="25" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Dia actual" Grid.Row="0"     Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-
+                                        <TextBlock Text="Inbound" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock Text="Recibidos"     Grid.Row="1" Grid.Column="1"  TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock Text="Enviados"   Grid.Row="1" Grid.Column="2"  TextAlignment="Center" Foreground="White"/>
-
-                                        <TextBlock x:Name = "indiActualR" Text="1"     Grid.Row="2" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock x:Name = "indiActualE" Text="2"   Grid.Row="2" Grid.Column="2" TextAlignment="Center"  Foreground="White"/>
+                                        <TextBlock x:Name = "Inbound" Text="2"  FontSize="20" Grid.Row="1" Grid.Column="1" TextAlignment="Center"  Foreground="White"/>
                                     </Grid>
 
                                     <Grid Background="#ababab" Margin="0,5,0,0"  >
@@ -168,14 +153,9 @@
                                             <RowDefinition Height="25" />
                                             <RowDefinition Height="25" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Semana actual" Grid.Row="0"     Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-
+                                        <TextBlock Text="Outbound" Grid.Row="0"  FontSize="20"   Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock Text="Recibidos"     Grid.Row="1" Grid.Column="1"  TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock Text="Enviados"   Grid.Row="1" Grid.Column="2"  TextAlignment="Center" Foreground="White"/>
-
-                                        <TextBlock x:Name = "indiSemanaActualR" Text="1"     Grid.Row="2" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock x:Name = "indiSemanaActualE" Text="2"   Grid.Row="2" Grid.Column="2" TextAlignment="Center"  Foreground="White"/>
+                                        <TextBlock x:Name = "Outbound" Text="1"   FontSize="20"  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
 
                                     <Grid Background="#05ee0a" Margin="0,5,0,0" >
@@ -189,21 +169,48 @@
                                             <RowDefinition Height="25" />
                                             <RowDefinition Height="25" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="Mes actual" Grid.Row="0"     Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-
+                                        <TextBlock Text="SMS" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock Text="Recibidos"     Grid.Row="1" Grid.Column="1"  TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock Text="Enviados"   Grid.Row="1" Grid.Column="2"  TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "SMS" Text="1" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                    </Grid>
 
-                                        <TextBlock x:Name = "indiMesActualR" Text="1"     Grid.Row="2" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
-                                        <TextBlock x:Name = "indiMesActualE" Text="2"   Grid.Row="2" Grid.Column="2" TextAlignment="Center"  Foreground="White"/>
+                                    <Grid Background="#02bafe" Margin="0,5,0,0" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Mailing" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
+                                        <TextBlock x:Name = "Mailing" Text="1" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                    </Grid>
+
+                                    <Grid Background="#ababab" Margin="0,5,0,0" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="Robot" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
+                                        <TextBlock x:Name = "Robot" Text="1" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" >
-                            <Grid Margin="0,0,0,0" >
+                            <Grid Margin="0,0,15,0" >
                                 <Grid.ColumnDefinitions >
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
@@ -217,72 +224,33 @@
 
                             </Grid>
                             <StackPanel x:Name="correosEntrada">
-                                <ListView x:Name="correosListView" Margin="15,0,0,0" Height="250" IsItemClickEnabled="True" >
-                                    <ListView.HeaderTemplate>
-                                        <DataTemplate>
-                                            <Grid  Padding="0" >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50" />
-                                                    <ColumnDefinition Width="300" />
-                                                    <ColumnDefinition Width="300" />
-                                                    <ColumnDefinition Width="300" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text=""  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Correo"  FontSize="15"  TextAlignment="Center" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                                <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black"  Background="#6b6b6b" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Asunto"  FontSize="15"  Foreground="White"  TextAlignment="Center" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                                <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Fecha"  FontSize="15"  Foreground="White" TextAlignment="Center" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.HeaderTemplate>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Padding="0" Margin="0,0,0,0" >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50" />
-                                                    <ColumnDefinition Width="300" />
-                                                    <ColumnDefinition Width="300"/>
-                                                    <ColumnDefinition Width="300"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <Image Grid.Column="0"  Source="../Assets/Contacto.png" Height="30" />
-                                                <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Titulo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                <TextBlock Grid.Column="2" FontSize="12" Text="{Binding Asunto}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                <TextBlock Grid.Column="3" FontSize="12" Text="{Binding Fecha}"  TextAlignment="Center" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                            </Grid>
-
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
+                                <ListView x:Name="CRMListView" Margin="0,0,15,0" Height="250" IsItemClickEnabled="True" >
+                                    
                                 </ListView>
                             </StackPanel>
+                            <TextBlock Text="Seguimiento a tramites de cliente" TextAlignment="Start" FontSize="20"  Foreground="Black" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             <StackPanel x:Name="correosSalida">
-                                <ListView x:Name="correosSalidaListView" Margin="15,0,0,0"  IsItemClickEnabled="True"  >
+                                <ListView x:Name="correosSalidaListView" Margin="0,0,15,0"  IsItemClickEnabled="True"  >
                                     <ListView.HeaderTemplate>
                                         <DataTemplate>
                                             <Grid  Padding="0" >
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50" />
-                                                    <ColumnDefinition Width="250" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="300" />
                                                     <ColumnDefinition Width="200" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Correo"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
+                                                    <TextBlock Text="Tramite"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                                 </Border>
-                                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Asunto"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
+                                                    <TextBlock Text="Estatus"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                                 </Border>
-                                                <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
+                                                <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
+                                                    <TextBlock Text="Descripción"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                </Border>
+                                                <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
                                                     <TextBlock Text="Fecha"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
                                                 </Border>
                                             </Grid>
@@ -292,8 +260,9 @@
                                         <DataTemplate>
                                             <Grid Padding="0" Margin="0,0,0,0">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="50" />
-                                                    <ColumnDefinition Width="250" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="200" />
+                                                    <ColumnDefinition Width="300" />
                                                     <ColumnDefinition Width="200" />
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
@@ -307,11 +276,7 @@
                                     </ListView.ItemTemplate>
                                 </ListView>
                             </StackPanel>
-                            <ScrollViewer Height="350">
-                                <StackPanel >
-                                    <WebView x:Name = "webCorreo" Height="400"  Source="http://www.contoso.com" Margin="0,0,0,0" />
-                                </StackPanel>
-                            </ScrollViewer>
+                           
                         </StackPanel>
 
 
