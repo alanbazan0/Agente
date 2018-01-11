@@ -8,6 +8,7 @@ namespace AgenteApp.Vistas
     interface ITipificacionVista
     {
         List<Tipificacion> tipificacion { set; }
+        List<DatosAsistente> datosAsistente { set; }
         void MostrarMensajeAsync(string titulo, string mensaje);
     }
 }

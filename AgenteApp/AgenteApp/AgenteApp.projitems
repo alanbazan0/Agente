@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Configuracion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Correos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Componente.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modelos\DatosAsistente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\CRM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\EstatusUsuario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Campo.cs" />

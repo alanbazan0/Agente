@@ -66,17 +66,7 @@
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
         <Grid x:Name="ContentContainer" Grid.Row="1"   EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                <StackPanel>
-                    <VariableSizedWrapGrid Grid.Column="0" Grid.Row="0" Margin="5"  x:Name="GrisTipif"  Orientation="Horizontal" Width="900"   ItemHeight="500" ItemWidth="900"    >
-           
-                    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" Height="auto" Width="auto" >
-                            <ListView x:Name="TipificacionListView" Visibility="Visible" Height="500" >
-                            </ListView>
-                    </ScrollViewer>
-                    </VariableSizedWrapGrid>
-                </StackPanel>
-            </StackPanel>
+            
         </Grid>
         
 
