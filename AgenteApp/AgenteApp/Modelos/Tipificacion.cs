@@ -30,6 +30,7 @@ namespace AgenteApp.Modelos
         string tamanoletra;
         string tipoletra;
         string numerorenglones;
+        string campoPadre;
         public string Version { get { return version; } set { version = value; } }
         public string Secuencia { get { return secuencia; } set { secuencia = value; } }
         public string Descripcion { get { return descripcion; } set { descripcion = value; } }
@@ -54,5 +55,6 @@ namespace AgenteApp.Modelos
         public string Tamanoletra { get { return tamanoletra; } set { tamanoletra = value; } }
         public string Tipoletra { get { return tipoletra; } set { tipoletra = value; } }
         public string Numerorenglones { get { return numerorenglones; } set { numerorenglones = value; } }
+        public string CampoPadre { get { return campoPadre; } set { campoPadre = value; } }
     }
 }

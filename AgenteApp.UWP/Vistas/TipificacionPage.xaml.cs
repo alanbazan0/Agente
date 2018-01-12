@@ -512,12 +512,25 @@ namespace AgenteApp.UWP.Vistas
         {
             String DescripicionCampo = (sender as Button).Name.Split('_')[1];
             AsistenteSeleccionado = DescripicionCampo;
+            string campoPadre = "";
             foreach (Tipificacion tip in configuracion)
             {
                 if (tip.Descripcion == DescripicionCampo)
                 {
+                    string padreDe = "";
+                    if (tip.CampoPadre != "")
+                    {
+                        foreach (Tipificacion jera in configuracion)
+                        {
+                            if (jera.Campocrm.Equals(tip.CampoPadre))
+                            {
+                                campoPadre = jera.Campocrm;
+                            }
+                        }
+                    }
                     DAsistente.VErsion = tip.Version;
                     DAsistente.Secuencia = tip.Secuencia;
+                    DAsistente.CampoCriterio = campoPadre;
                 }
             }
             presentador.ConsultarDatosAsistente(DAsistente);

@@ -14,6 +14,7 @@ namespace AgenteApp.Modelos
         string jerId4;
         string jerId5;
         string campoDescripcion;
+        string campoCriterio;
         public string VErsion { get { return version; } set { version = value; } }
         public string Secuencia { get { return secuencia; } set { secuencia = value; } }
         public string JerId1 { get { return jerId1; } set { jerId1 = value; } }
@@ -22,5 +23,6 @@ namespace AgenteApp.Modelos
         public string JerId4 { get { return jerId4; } set { jerId4 = value; } }
         public string JerId5 { get { return jerId5; } set { jerId5 = value; } }
         public string CampoDescripcion { get { return campoDescripcion; } set { campoDescripcion = value; } }
+        public string CampoCriterio { get { return campoCriterio; } set { campoCriterio = value; } }
     }
 }
