@@ -21,6 +21,8 @@ using Windows.UI.Popups;
 using System.Text;
 using Windows.UI;
 using System.Reflection;
+using Windows.UI.Xaml.Media.Imaging;
+
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -88,11 +90,11 @@ namespace AgenteApp.UWP.Vistas
                 DAsistentes = value;
                 String DescripicionCampo = AsistenteSeleccionado;
                 Grid gr = ContentContainer.Children[0] as Grid;
-                var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_" + DescripicionCampo)
+                var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid-" + DescripicionCampo)
                                                 .Select(a => a)
                                                 .First();
                 VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
-                var BtCancel = VarSizeWrap.Children.Where(a => (a as Button).Name == "Asis_" + DescripicionCampo)
+                var BtCancel = VarSizeWrap.Children.Where(a => (a as Button).Name == "Asis-" + DescripicionCampo)
                                                 .Select(a => a)
                                                 .First();
                 Button bt = BtCancel as Button;
@@ -100,7 +102,7 @@ namespace AgenteApp.UWP.Vistas
 
                 StackPanel sp = f.Content as StackPanel;
 
-               var listv= sp.Children.Where(a => (a as ListView).Name == "ListView_" + DescripicionCampo)
+               var listv= sp.Children.Where(a => (a as ListView).Name == "ListView-" + DescripicionCampo)
                                                 .Select(a => a)
                                                 .First();
                 ListView lv = listv as ListView;
@@ -195,29 +197,29 @@ namespace AgenteApp.UWP.Vistas
                 int secuencia = LV.Items.Count;
 
                 Grid gr = ContentContainer.Children[0] as Grid;
-                var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_" + AsistenteSeleccionado)
+                var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid-" + AsistenteSeleccionado)
                                                 .Select(a => a)
                                                 .First();
                 VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
-                var BtCancel = VarSizeWrap.Children.Where(a => (a as Button).Name == "Asis_" + AsistenteSeleccionado)
+                var BtCancel = VarSizeWrap.Children.Where(a => (a as Button).Name == "Asis-" + AsistenteSeleccionado)
                                                 .Select(a => a)
                                                 .First();
-                GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id_" + AsistenteSeleccionado)
+                GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + AsistenteSeleccionado)
                                                 .Select(a => a)
                                                 .First();
                 VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
-                var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID_" + AsistenteSeleccionado)
+                var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + AsistenteSeleccionado)
                                                 .Select(a => a)
                                                 .First();
 
                 TextBox txtId = textID as TextBox;
                 txtId.Text = (string)usuarioConferencia.GetType().GetProperty("JerId1").GetValue(usuarioConferencia, null);
 
-                GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_dsc_" + AsistenteSeleccionado)
+                GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_dsc-" + AsistenteSeleccionado)
                                                 .Select(a => a)
                                                 .First();
                 VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
-                var textDSC = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "DSC_" + AsistenteSeleccionado)
+                var textDSC = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "DSC-" + AsistenteSeleccionado)
                                                 .Select(a => a)
                                                 .First();
 
@@ -236,13 +238,13 @@ namespace AgenteApp.UWP.Vistas
 
         private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
         {
-            String DescripicionCampo = (sender as Button).Name.Split('_')[1];
+            String DescripicionCampo = (sender as Button).Name.Split('-')[1];
             Grid gr = ContentContainer.Children[0] as Grid;
-            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_" + DescripicionCampo)
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid-" + DescripicionCampo)
                                             .Select(a => a)
                                             .First();
             VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
-            var BtCancel = VarSizeWrap.Children.Where(a => (a as Button).Name == "Asis_" + DescripicionCampo)
+            var BtCancel = VarSizeWrap.Children.Where(a => (a as Button).Name == "Asis-" + DescripicionCampo)
                                             .Select(a => a)
                                             .First();
             Button bt = BtCancel as Button;
@@ -255,6 +257,7 @@ namespace AgenteApp.UWP.Vistas
 
         public void CrearCombo(ref Grid GridHeaderTemplate, Tipificacion campo, int i)
         {
+            //label
             VariableSizedWrapGrid gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 0);
@@ -266,7 +269,7 @@ namespace AgenteApp.UWP.Vistas
             block.Foreground = GetColor(campo.Colorletra);
             gridCombo.Children.Add(block);
             GridHeaderTemplate.Children.Add(gridCombo);
-
+            //aistente vacio porque es combo
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 1);
@@ -274,7 +277,7 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             GridHeaderTemplate.Children.Add(gridCombo);
-
+            // campo id
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 2);
@@ -282,10 +285,10 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             TextBox text = new TextBox();
-            text.Name = campo.Descripcion + "ID";
+            text.Name = "ID-"+campo.Version+"." +campo.Secuencia+"."+campo.Campoid ;
             gridCombo.Children.Add(text);
             GridHeaderTemplate.Children.Add(gridCombo);
-
+            //campo descripcion
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 3);
@@ -293,30 +296,28 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             text = new TextBox();
-            text.Name = campo.Descripcion + "DSC";
+            text.Name = "DSC-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             text.Width = 295;
             gridCombo.Children.Add(text);
             GridHeaderTemplate.Children.Add(gridCombo);
-
+            //combo
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 4);
             gridCombo.Background = GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
-            gridCombo.Name = "Grid_" + campo.Descripcion;
+            gridCombo.Name = "Grid-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             Button BT = new Button();
-            BT.Name = "Asis_" + campo.Descripcion;
+            BT.Name = "Asis-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             BT.Background = new SolidColorBrush(Colors.DodgerBlue);
             BT.Height = 50;
             BT.Width = 50;
-
-
             Flyout flyout = new Flyout();
             StackPanel SP = new StackPanel();
             ListView LV = new ListView();
             LV.SetValue(Grid.ColumnProperty, 0);
-            LV.Name = "ListView_" + campo.Descripcion;
+            LV.Name = "ListView-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             LV.IsItemClickEnabled = true;
             LV.MaxHeight = 400;
             StringBuilder xamlHeaderTemplate = new StringBuilder();
@@ -356,7 +357,7 @@ namespace AgenteApp.UWP.Vistas
             LV.ItemTemplate = itemTemplate;
             SP.Children.Add(LV);
             Button BtCancel = new Button();
-            BtCancel.Name = "ButtonCancel_" + campo.Descripcion;
+            BtCancel.Name = "ButtonCancel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             BtCancel.Content = "Cancelar";
             BtCancel.HorizontalAlignment = HorizontalAlignment.Right;
             SP.Children.Add(BtCancel);
@@ -392,19 +393,28 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Background = GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
-            gridCombo.Name = "Grid_" + campo.Descripcion;
-            Button BT = new Button();
-            BT.Name = "Asis_" + campo.Descripcion;
-            BT.Background = new SolidColorBrush(Colors.DodgerBlue);
+            gridCombo.Name = "Grid-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
+            AppBarButton BT = new AppBarButton();
+            BT.Name = "Asis-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             BT.Height = 50;
             BT.Width = 50;
             BT.Click += ConsultaAsistente;
+            //BitmapImage bi = new BitmapImage();
+            //bi.DecodePixelWidth = 100;
+            //bi.DecodePixelHeight = 100;
 
+            //bi.UriSource = new Uri("ms-appx:///Pages:,,,/Recursos/Imagenes/asistente.png");
+            //ImageBrush ibh = new ImageBrush();
+            //IconElement ie ;
+            //ibh.ImageSource = bi;
+            BT.Icon = new SymbolIcon(Symbol.Find);
+            
+            BT.Background = new SolidColorBrush(Colors.LightGray);
             Flyout flyout = new Flyout();
             StackPanel SP = new StackPanel();
             ListView LV = new ListView();
             LV.SetValue(Grid.ColumnProperty, 0);
-            LV.Name = "ListView_" + campo.Descripcion;
+            LV.Name = "ListView-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             LV.IsItemClickEnabled = true;
             LV.ItemClick += FlyAsisListView_ItemClick;
             LV.MaxHeight = 400;
@@ -445,7 +455,7 @@ namespace AgenteApp.UWP.Vistas
             LV.ItemTemplate = itemTemplate;
             SP.Children.Add(LV);
             Button BtCancel = new Button();
-            BtCancel.Name = "ButtonCancel_" + campo.Descripcion;
+            BtCancel.Name = "ButtonCancel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             BtCancel.Content = "Cancelar";
             BtCancel.HorizontalAlignment = HorizontalAlignment.Right;
             SP.Children.Add(BtCancel);
@@ -463,9 +473,9 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Background = GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
-            gridCombo.Name = "Grid_id_" + campo.Descripcion;
+            gridCombo.Name = "Grid_id-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             TextBox text = new TextBox();
-            text.Name = "ID_"+ campo.Descripcion;
+            text.Name = "ID-"+campo.Version+"." +campo.Secuencia+"."+campo.Campoid ;
             gridCombo.Children.Add(text);
             GridHeaderTemplate.Children.Add(gridCombo);
             // campo descripcion
@@ -476,14 +486,12 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Background = GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
-            gridCombo.Name = "Grid_dsc_" + campo.Descripcion;
+            gridCombo.Name = "Grid_dsc-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             text = new TextBox();
-            text.Name = "DSC_"+ campo.Descripcion;
+            text.Name = "DSC-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             text.Width = 290;
             gridCombo.Children.Add(text);
             GridHeaderTemplate.Children.Add(gridCombo);
-
-            // combo
 
         }
 
@@ -510,32 +518,56 @@ namespace AgenteApp.UWP.Vistas
 
         private void ConsultaAsistente(object sender, RoutedEventArgs e)
         {
-            String DescripicionCampo = (sender as Button).Name.Split('_')[1];
+            String DescripicionCampo = (sender as Button).Name.Split('-')[1];
             AsistenteSeleccionado = DescripicionCampo;
+            string[] campoDatos = DescripicionCampo.Split('.');
+            string campoHijo = campoDatos[campoDatos.Length-1];
             string campoPadre = "";
-            foreach (Tipificacion tip in configuracion)
+            string Criterio = "";
+            Tipificacion tip = new Tipificacion();
+            for (int i=0;i< configuracion.Count;i++)
             {
-                if (tip.Descripcion == DescripicionCampo)
+                tip = configuracion[i];
+                if (tip.Campoid == campoHijo)
                 {
-                    string padreDe = "";
-                    if (tip.CampoPadre != "")
+                    if (tip.CampoPadre != ""&& tip.CampoPadre != null)
                     {
                         foreach (Tipificacion jera in configuracion)
                         {
-                            if (jera.Campocrm.Equals(tip.CampoPadre))
+                            if (jera.Campoid.Equals(tip.CampoPadre))
                             {
-                                campoPadre = jera.Campocrm;
+                                Criterio = buscarIdPadre(jera.Version, jera.Secuencia, jera.Campoid);
+                                break;
                             }
                         }
                     }
+                   
                     DAsistente.VErsion = tip.Version;
                     DAsistente.Secuencia = tip.Secuencia;
-                    DAsistente.CampoCriterio = campoPadre;
+                    DAsistente.CampoCriterio = Criterio;
                 }
             }
             presentador.ConsultarDatosAsistente(DAsistente);
 
 
+
+        }
+        private string buscarIdPadre(string version, string secuencia, String campoPadre)
+        {
+           
+
+                Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version+"."+ secuencia+"."+ campoPadre)
+                                                .Select(a => a)
+                                                .First();
+               
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+                var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+                TextBox txtId = textID as TextBox;
+            return txtId.Text;
         }
     }
 }

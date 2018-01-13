@@ -90,4 +90,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IReceso.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ITipificacionVista.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Recursos\Imagenes\asistente.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Recursos\Imagenes\btnAsistente.svg" />
+  </ItemGroup>
 </Project>
