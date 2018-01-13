@@ -140,6 +140,20 @@ namespace AgenteApp.Presentadores
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
 
+
+        public async void consultarCP(string cp)
+        {
+            FormularioAltaRepositorio repositorio = new FormularioAltaRepositorio();
+            Resultado<List<CodigoPostal>> resultado = await repositorio.consultarCP(cp);
+
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.direccionesCodigo = resultado.valor;
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        
         public async void TraerDatosCliente(int idCliente)
         {
             //List<Filtro> filtros = vista.Filtros;

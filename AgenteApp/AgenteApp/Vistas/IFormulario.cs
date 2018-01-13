@@ -13,6 +13,7 @@ namespace AgenteApp.Vistas
         List<Campo> Campos { get; }
         List<Objeto> Clientes { set; }
         List<TipoTelefono> TipoTelefono { set; }
+        List<CodigoPostal> direccionesCodigo { set; }
         List<ClienteTelefono> ClienteTelefono { set; }
         List<Correos> ClienteCorreos { set; }
         void CrearFormularioClientes(Componente componente);

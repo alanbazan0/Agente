@@ -40,6 +40,7 @@ namespace AgenteApp.UWP.Vistas
 
         List<ClienteTelefono>telefonosLis;
         List<Correos> correosList;
+        List<CodigoPostal> direccionCP;
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
         private ModoVentana modo;
@@ -196,6 +197,29 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
+        public List<CodigoPostal> direccionesCodigo
+        {
+            set
+            {
+                var colonia = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECOLONIA")
+                                          .Select(a => a)
+                                          .First();
+                var ciudad = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECIUDAD")
+                                          .Select(a => a)
+                                          .First();
+                var estado = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEESTADO")
+                                          .Select(a => a)
+                                          .First();
+
+                if (value.Count() > 0)
+                { 
+                    (colonia as IComponente).Valor = value[0].colonia;
+                    (ciudad as IComponente).Valor = value[0].ciudad;
+                    (estado as IComponente).Valor = value[0].estado;
+                }
+            }
+        }
+
         //private void AppCerrarButton_Click(object sender, RoutedEventArgs e)
         //{
 
@@ -226,8 +250,25 @@ namespace AgenteApp.UWP.Vistas
             {
                 (componenteVista as UIElement).LostFocus += ClientePage_KeyDownName;
             }
+            //le asiganamos evento al codigo postal si lo trea, para consultar
+            else if (componenteVista.Componente.campoId == "BTCLIENTECPID")
+            {
+                (componenteVista as UIElement).LostFocus += ConsultarCP_LostFocus;
+            }
             formularioComponentes.Children.Add(componenteVista as UIElement);
             
+        }
+
+        private void ConsultarCP_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string codigoPostal = "";
+            var CPOSTAL = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECPID")
+                                       .Select(a => a)
+                                       .First();
+            codigoPostal=((TextoComponente)CPOSTAL).Filtro.valor;
+
+            presentador.consultarCP(codigoPostal);
+
         }
 
         private void ClientePage_KeyDownName(object sender, RoutedEventArgs e)
