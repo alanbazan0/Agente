@@ -161,9 +161,10 @@ namespace AgenteApp.Presentadores
             gridCombo.Background = GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.Width = 500;
+            gridCombo.Name = "Grid_texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             TextBox text = new TextBox();
-            text.Name = campo.Descripcion + "DSC";
+            text.Name =  "Texto" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid; ;
             text.Width = 390;
             text.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Children.Add(text);
