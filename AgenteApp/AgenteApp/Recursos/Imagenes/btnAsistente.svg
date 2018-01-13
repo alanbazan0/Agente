@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25" height="25" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <metadata id="metadata3107">image/svg+xml</metadata>
+ <defs>
+  <linearGradient y2="0.945313" x2="0.53125" y1="0.335938" x1="0.550781" id="svg_26">
+   <stop stop-color="#e3f2fc" offset="0" id="stop3086"/>
+   <stop stop-color="#4a6475" offset="1" id="stop3088"/>
+  </linearGradient>
+  <linearGradient id="svg_29" x1="0.011719" y1="0.503906" x2="0.945313" y2="0.507813">
+   <stop offset="0" stop-color="#add4e6"/>
+   <stop offset="1" stop-color="#edfafd"/>
+  </linearGradient>
+  <linearGradient id="svg_30" x1="0.953125" y1="0.511719" x2="0.042969" y2="0.511719">
+   <stop offset="0" stop-color="#add4e6"/>
+   <stop offset="1" stop-color="#edfafd"/>
+  </linearGradient>
+ </defs>
+ <g id="g3090">
+  <title>Layer 1</title>
+  <rect stroke-width="1.25" id="svg_2" height="16.36599" width="21.033173" y="3.200058" x="1.633384" stroke="#282f3a" fill="url(#svg_26)"/>
+  <path id="svg_5" d="m12.21642,4.405247l0.81758,-0.937565l1.278319,-0.691079l2.054021,-0.459596l1.951269,-0.017071l1.805941,0.343l1.14319,0.640457l0.60985,0.698683l0.15111,14.616654l-1.49412,-0.571026l-1.364531,-0.370569l-1.733311,-0.048748l-1.491859,0.209343l-1.55896,0.474716l-1.397551,0.79073l-0.64726,-1.254705l-0.12369,-13.423223z" stroke="#8fa9b7" fill="url(#svg_29)" stroke-width="0.75"/>
+  <path fill="#fcfcf7" stroke="#13354f" opacity="0.5" d="m19,15.8" id="svg_25"/>
+  <path d="m2.3164,4.36795l0.8176,-0.9655l1.2783,-0.71167l2.054,-0.47329l1.9513,-0.01757l1.806001,0.35321l1.1431,0.65954l0.6099,0.7195l0.1511,15.052131l-1.4941,-0.788l-1.4645,-0.431601l-1.6334,-0.100201l-1.5418,0.215601l-1.309,0.188799l-1.1475,0.314301l-1.0473,0.307899l-0.1737,-14.323149z" stroke="#8fa9b7" fill="url(#svg_30)" stroke-width="0.75" id="svg_27"/>
+  <circle stroke-width="0" id="svg_34" r="1.476563" cy="19.25061" cx="12.349073" stroke="#585945" fill="#282f3a"/>
+ </g>
+</svg>

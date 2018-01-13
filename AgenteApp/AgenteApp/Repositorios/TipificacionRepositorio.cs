@@ -49,6 +49,7 @@ namespace AgenteApp.Repositorios
             AgregarParametro("accion", "consultarAsistente");
             AgregarParametro("Vesion", da.VErsion);
             AgregarParametro("Secuencia", da.Secuencia);
+            AgregarParametro("Criterio", da.CampoCriterio);
             try
             {
                 using (var cliente = new HttpClient())

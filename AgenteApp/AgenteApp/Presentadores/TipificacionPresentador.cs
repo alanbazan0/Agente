@@ -165,6 +165,7 @@ namespace AgenteApp.Presentadores
             TextBox text = new TextBox();
             text.Name = campo.Descripcion + "DSC";
             text.Width = 390;
+            text.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Children.Add(text);
             xamlHeaderTemplate.Children.Add(gridCombo);
         }
@@ -184,6 +185,10 @@ namespace AgenteApp.Presentadores
                 case "Blue":
                     colorBrush = new SolidColorBrush(Colors.Blue);
                     break;
+                case "DodgerBlue":
+                    colorBrush = new SolidColorBrush(Colors.DodgerBlue);
+                    break;
+                    
 
             }
 

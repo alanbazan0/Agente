@@ -19,9 +19,9 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>AgenteApp.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundle>Always</AppxBundle>
+    <AppxBundle>Never</AppxBundle>
     <AppxBundlePlatforms>x86</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>972ED6ED9CD2A1A759D18FE0DB28BC246DE62204</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>4C0CE6A0FBFCB7176478F37BA6DE4118A9C04042</PackageCertificateThumbprint>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -173,6 +173,8 @@
   <ItemGroup>
     <Content Include="Assets\Contacto.png" />
     <Content Include="Assets\correoIndi.png" />
+    <Content Include="Recursos\Imagenes\asistente.png" />
+    <Content Include="Recursos\Imagenes\btnAsistente.svg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
