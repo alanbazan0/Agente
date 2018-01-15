@@ -226,6 +226,35 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+        public async Task<Resultado<List<Tipificacion>>> ConsultarDatosTipificacion(string folio, string idCliente,int version)
+        {
+            Resultado<List<Tipificacion>> datos = new Resultado<List<Tipificacion>>();
 
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/CRM.php";
+            AgregarParametro("accion", "ConsultarDatosTipificacion");
+            AgregarParametro("folio", folio);
+            AgregarParametro("idCliente", idCliente);
+            AgregarParametro("version", "IBD.FNC01");
+            //AgregarParametro("version", version.ToString());
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Tipificacion>>>(resultadoContenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
     }
 }

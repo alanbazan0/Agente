@@ -12,6 +12,8 @@ namespace AgenteApp.Presentadores
     class CRMPresentador
     {
         private ICRM vista;
+        private ITipificacionVista vista2;
+
         private Usuario usuario;
         List<CampoGrid> campos;
         List<Componente> campoFromulario;
@@ -19,7 +21,10 @@ namespace AgenteApp.Presentadores
         {
             this.vista = vista;
         }
-
+        public CRMPresentador(ITipificacionVista vista)
+        {
+            this.vista2 = vista;
+        }
         public async void consultarParametros(string clienteId)
         {
             CRMRepositorio accesoDatos = new CRMRepositorio();
@@ -109,6 +114,19 @@ namespace AgenteApp.Presentadores
             {
                 vista.AsignarValor(campo, registro);
             }
+        }
+
+        public async void ConsultarDatosTipificacion(string folio, string idCliente)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            CRMRepositorio repositorio = new CRMRepositorio();
+            Resultado<List<Tipificacion>> resultado = await repositorio.ConsultarDatosTipificacion(folio, idCliente, Constantes.VERSION);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista2.tipificacion = resultado.valor;
+            }
+            else
+                vista2.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
 
     }

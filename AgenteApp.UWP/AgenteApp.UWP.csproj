@@ -135,6 +135,9 @@
     <Compile Include="Vistas\CRMPage.xaml.cs">
       <DependentUpon>CRMPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\DetalleCRMPage.xaml.cs">
+      <DependentUpon>DetalleCRMPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\InicioSesionPage.xaml.cs">
       <DependentUpon>InicioSesionPage.xaml</DependentUpon>
     </Compile>
@@ -250,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\CRMPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\DetalleCRMPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
