@@ -69,5 +69,34 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+
+        public async Task<Resultado<List<Tipificacion>>> GuardarTipificacion(List<Tipificacion> tipificaciones)
+        {
+            Resultado<List<Tipificacion>> datos = new Resultado<List<Tipificacion>>();
+
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Tipificacion.php";
+            AgregarParametro("accion", "GuardarTipificacion");
+            AgregarParametro("tipificaciones", JsonConvert.SerializeObject(tipificaciones));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Tipificacion>>>(resultadoContenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
+        
     }
 }

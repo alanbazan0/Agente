@@ -35,6 +35,7 @@ namespace AgenteApp.UWP.Vistas
     {
         TipificacionPresentador presentador;
         List<Tipificacion> configuracion;
+        List<Tipificacion> tipificaciones;
         List<DatosAsistente> DAsistentes;
         DatosAsistente DAsistente;
         string AsistenteSeleccionado;
@@ -494,6 +495,55 @@ namespace AgenteApp.UWP.Vistas
             GridHeaderTemplate.Children.Add(gridCombo);
 
         }
+        private void GuardarTipi_Click(object sender, RoutedEventArgs e)
+        {
+            GuardarTipificacion();
+        }
+
+        public void GuardarTipificacion()
+        {
+            string valor = "";
+            Tipificacion tipi;
+            tipificaciones = new List<Tipificacion>();
+            for (int i = 0; i < configuracion.Count; i++)
+            {
+                switch (configuracion[i].Asistente)
+                {
+                        case "1":                        
+                        break;
+                        case "2":
+                            valor = buscarIdPadre(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
+                            tipi = new Tipificacion();
+                            tipi.Secuencia = configuracion[i].Secuencia;
+                            tipi.Campoid = configuracion[i].Campoid;
+                            tipi.Descripcion = configuracion[i].Descripcion;
+                            tipi.Valores = valor;
+                            tipificaciones.Add(tipi);
+                        break;
+                        case "3":
+                            break;
+                        case "4":
+                        //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        //case "5":
+                        //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        case "6":
+                            break;
+                        case "7":
+                            valor=buscarIdPadreTexto(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
+                            tipi = new Tipificacion();
+                            tipi.Secuencia = configuracion[i].Secuencia;
+                            tipi.Campoid = configuracion[i].Campoid;
+                            tipi.Descripcion = configuracion[i].Descripcion;
+                            tipi.Valores = valor;
+                            tipificaciones.Add(tipi);
+                        break;
+                }                
+                
+            }
+            presentador.GuardarTipificacion(tipificaciones);
+        }
 
         private SolidColorBrush GetColor(string color)
         {
@@ -554,19 +604,33 @@ namespace AgenteApp.UWP.Vistas
         }
         private string buscarIdPadre(string version, string secuencia, String campoPadre)
         {
-           
-
-                Grid gr = ContentContainer.Children[0] as Grid;
+            Grid gr = ContentContainer.Children[0] as Grid;
             var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version+"."+ secuencia+"."+ campoPadre)
                                                 .Select(a => a)
                                                 .First();
                
             VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
-                var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + version + "." + secuencia + "." + campoPadre)
+            var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + version + "." + secuencia + "." + campoPadre)
                                                 .Select(a => a)
                                                 .First();
 
-                TextBox txtId = textID as TextBox;
+            TextBox txtId = textID as TextBox;
+            return txtId.Text;
+        }
+
+        private string buscarIdPadreTexto(string version, string secuencia, String campoPadre)
+        {
+            Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_texto-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "Texto-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            TextBox txtId = textID as TextBox;
             return txtId.Text;
         }
     }

@@ -164,7 +164,7 @@ namespace AgenteApp.Presentadores
             gridCombo.Name = "Grid_texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             TextBox text = new TextBox();
-            text.Name =  "Texto" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid; ;
+            text.Name = "Texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid; ;
             text.Width = 390;
             text.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Children.Add(text);
@@ -195,5 +195,19 @@ namespace AgenteApp.Presentadores
 
             return colorBrush;
         }
+
+        public async void GuardarTipificacion(List<Tipificacion> tipificaciones)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            TipificacionRepositorio repositorio = new TipificacionRepositorio();
+            Resultado<List<Tipificacion>> resultado = await repositorio.GuardarTipificacion(tipificaciones);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.tipificacion = resultado.valor;
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+        
     }
 }
