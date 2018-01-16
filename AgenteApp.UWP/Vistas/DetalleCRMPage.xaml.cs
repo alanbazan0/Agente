@@ -1,15 +1,18 @@
-﻿using AgenteApp.Presentadores;
+﻿using AgenteApp.Modelos;
+using AgenteApp.Presentadores;
 using AgenteApp.Vistas;
-using AgenteApp.Modelos;
-using AgenteApp.Clases;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,15 +20,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Popups;
-using System.Text;
-using Windows.UI;
-using System.Reflection;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.Networking;
-using Windows.Networking.Connectivity;
-using Windows.System.Profile;
-
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,96 +28,39 @@ namespace AgenteApp.UWP.Vistas
     /// <summary>
     /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class TipificacionPage : Page, ITipificacionVista
+    public sealed partial class DetalleCRMPage : Page, ITipificacionVista
     {
-        Usuario usuario;
         TipificacionPresentador presentador;
+        CRMPresentador presentadorcrm;
         List<Tipificacion> configuracion;
         List<Tipificacion> tipificaciones;
         List<DatosAsistente> DAsistentes;
-        Parametros ParametroLocal;
         DatosAsistente DAsistente;
         string AsistenteSeleccionado;
-        string ip;
-        string idhardware;
-        string noTelefonico;
-        string IdLlamada;
-        string IdCliente;
-        string IdCrm="0";
-        public TipificacionPage()
+        string folio = "",idCLinete="";
+        public DetalleCRMPage()
         {
             this.InitializeComponent();
-            this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
+            //this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
             presentador = new TipificacionPresentador(this);
+            presentadorcrm = new CRMPresentador(this);
             configuracion = new List<Tipificacion>();
             DAsistente = new DatosAsistente();
             DAsistentes = new List<DatosAsistente>();
-            ParametroLocal = new Parametros();
-            obtenerInformacion();
-            
-        }
-
-        public void obtenerInformacion()
-        {
-            //optenemos ip           
-            foreach (HostName localHostName in NetworkInformation.GetHostNames())
-            {
-                if (localHostName.IPInformation != null)
-                {
-                    if (localHostName.Type == HostNameType.Ipv4)
-                    {
-                        ip = localHostName.ToString();
-                        break;
-                    }
-                }
-            }
-
-            //optenemos id hardware
-            var token = HardwareIdentification.GetPackageSpecificToken(null);
-            var hardwareId = token.Id;
-            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
-            byte[] bytes = new byte[hardwareId.Length];
-            dataReader.ReadBytes(bytes);
-            idhardware = BitConverter.ToString(bytes);
             ConsultarConfiguracion();
         }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            usuario = (Usuario)e.Parameter;
-            ConsultarParametros();
-        }
+            var parametros = e.Parameter;
 
-        public Parametros Parametro { get => ParametroLocal; set { } }
-
-        public List<Parametros> Parametros
-        {
-            set
+            if (parametros != null)
             {
-                for (int i = 0; i < value.Count; i++)
-                {
-
-                    switch (value[i].PalabraReservada)
-                    {
-                        case "@NUMEROTEL@":
-                            noTelefonico =  value[i].ValorParametro;
-                            break;
-                        case "@IDLLAMADA@":
-                            IdLlamada = value[i].ValorParametro;
-                            break;
-                        case "@IDCLIENTE@":
-                             IdCliente = value[i].ValorParametro;
-                            break;
-                        case "@IDCRM@":
-                            IdCrm = value[i].ValorParametro;
-                            break;
-                    }
-                }
+                folio = (string)parametros.GetType().GetProperty("folio").GetValue(parametros, null);
+                idCLinete = (string)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);              
             }
         }
-
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
         {
             double? diagonal = DisplayInformation.GetForCurrentView().DiagonalSizeInInches;
@@ -142,15 +79,6 @@ namespace AgenteApp.UWP.Vistas
                 bottombar.Visibility = Visibility.Collapsed;
             }
         }
-     
-        public void ConsultarParametros()
-        {
-            IdCrm = "0";
-            ParametroLocal.IdParamtro = usuario.Id;
-            ParametroLocal.NumeroMaquina = idhardware;
-            ParametroLocal.DireccionIp = ip;
-            presentador.ConsultarParametros();
-        }
 
         public void ConsultarConfiguracion()
         {
@@ -163,6 +91,7 @@ namespace AgenteApp.UWP.Vistas
             {
                 configuracion = value;
                 CrearComponentes(configuracion);
+                presentadorcrm.ConsultarDatosTipificacion(folio, idCLinete);
             }
         }
 
@@ -185,15 +114,46 @@ namespace AgenteApp.UWP.Vistas
 
                 StackPanel sp = f.Content as StackPanel;
 
-               var listv= sp.Children.Where(a => (a as ListView).Name == "ListView-" + DescripicionCampo)
-                                                .Select(a => a)
-                                                .First();
+                var listv = sp.Children.Where(a => (a as ListView).Name == "ListView-" + DescripicionCampo)
+                                                 .Select(a => a)
+                                                 .First();
                 ListView lv = listv as ListView;
                 lv.ItemsSource = DAsistentes;
             }
         }
 
-        public List<Tipificacion> valoresDatosAsistente { set => throw new NotImplementedException(); }
+        public List<Tipificacion> valoresDatosAsistente
+        {
+            set
+            {
+                for (int i = 0; i < value.Count; i++)
+                {
+                    switch (value[i].Asistente)
+                    {
+                        case "1":
+                            break;
+                        case "2":
+                            ValorbuscarIdPadre(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+
+                            break;
+                        case "3":
+                            break;
+                        case "4":
+                        //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        //case "5":
+                        //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        case "6":
+                            break;
+                        case "7":
+                            ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+
+                            break;
+                    }
+                }
+            }
+        }
 
         public void CrearComponentes(List<Tipificacion> conf)
         {
@@ -255,6 +215,8 @@ namespace AgenteApp.UWP.Vistas
 
                 }
 
+
+
             }
             ContentContainer.Children.Add(TipifiacionGrid);
 
@@ -309,7 +271,7 @@ namespace AgenteApp.UWP.Vistas
                 TextBox txtDsc = textDSC as TextBox;
                 txtDsc.Text = (string)usuarioConferencia.GetType().GetProperty("CampoDescripcion").GetValue(usuarioConferencia, null);
 
-               
+
                 Button bt = BtCancel as Button;
                 Flyout f = bt.Flyout as Flyout;
                 if (f != null)
@@ -368,7 +330,7 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             TextBox text = new TextBox();
-            text.Name = "ID-"+campo.Version+"." +campo.Secuencia+"."+campo.Campoid ;
+            text.Name = "ID-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.Children.Add(text);
             GridHeaderTemplate.Children.Add(gridCombo);
             //campo descripcion
@@ -482,9 +444,17 @@ namespace AgenteApp.UWP.Vistas
             BT.Height = 50;
             BT.Width = 50;
             BT.Click += ConsultaAsistente;
+            //BitmapImage bi = new BitmapImage();
+            //bi.DecodePixelWidth = 100;
+            //bi.DecodePixelHeight = 100;
+
+            //bi.UriSource = new Uri("ms-appx:///Pages:,,,/Recursos/Imagenes/asistente.png");
+            //ImageBrush ibh = new ImageBrush();
+            //IconElement ie ;
+            //ibh.ImageSource = bi;
             BT.Icon = new SymbolIcon(Symbol.Find);
-            
-            BT.Background = new SolidColorBrush(Colors.White);
+
+            BT.Background = new SolidColorBrush(Colors.LightGray);
             Flyout flyout = new Flyout();
             StackPanel SP = new StackPanel();
             ListView LV = new ListView();
@@ -539,7 +509,7 @@ namespace AgenteApp.UWP.Vistas
             FlyoutBase.SetAttachedFlyout(BT, flyout);
             BT.Flyout = flyout;
             BtCancel.Click += new RoutedEventHandler(DeleteConfirmation_Click);
-            gridCombo.Children.Add(BT);
+            //gridCombo.Children.Add(BT);
             GridHeaderTemplate.Children.Add(gridCombo);
             //campo id
             gridCombo = new VariableSizedWrapGrid();
@@ -550,7 +520,7 @@ namespace AgenteApp.UWP.Vistas
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Name = "Grid_id-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             TextBox text = new TextBox();
-            text.Name = "ID-"+campo.Version+"." +campo.Secuencia+"."+campo.Campoid ;
+            text.Name = "ID-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.Children.Add(text);
             GridHeaderTemplate.Children.Add(gridCombo);
             // campo descripcion
@@ -577,64 +547,46 @@ namespace AgenteApp.UWP.Vistas
         public void GuardarTipificacion()
         {
             string valor = "";
-            CRM crm1 = new CRM();
             Tipificacion tipi;
             tipificaciones = new List<Tipificacion>();
-            List<CRM> listCrm = new List<CRM>();
-            crm1.CanalId = "1";
-            crm1.IdLlamada       = IdLlamada;
-            crm1.Extension       = usuario.Extension;
-            crm1.TelefonoCliente = noTelefonico;
-            crm1.IdCliente    = IdCliente;
-            crm1.IdAgente     = usuario.Id;
-            crm1.NombreAgente = usuario.Nombre;
-            crm1.IdFolio = IdCrm;
-            listCrm.Add(crm1);
             for (int i = 0; i < configuracion.Count; i++)
             {
                 switch (configuracion[i].Asistente)
                 {
-                        case "1":                        
+                    case "1":
                         break;
-                        case "2":
-                            valor = buscarIdPadre(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
-                            tipi = new Tipificacion();
-                            tipi.Secuencia = configuracion[i].Secuencia;
-                            tipi.Campoid = configuracion[i].Campoid;
-                            tipi.Descripcion = configuracion[i].Descripcion;
-                            tipi.Valores = valor;
-                            tipificaciones.Add(tipi);
+                    case "2":
+                        valor = buscarIdPadre(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
+                        tipi = new Tipificacion();
+                        tipi.Secuencia = configuracion[i].Secuencia;
+                        tipi.Campoid = configuracion[i].Campoid;
+                        tipi.Descripcion = configuracion[i].Descripcion;
+                        tipi.Valores = valor;
+                        tipificaciones.Add(tipi);
                         break;
-                        case "3":
-                            break;
-                        case "4":
-                        //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
-                        //    break;
-                        //case "5":
-                        //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
-                        //    break;
-                        case "6":
-                            break;
-                        case "7":
-                            valor=buscarIdPadreTexto(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
-                            tipi = new Tipificacion();
-                            tipi.Secuencia = configuracion[i].Secuencia;
-                            tipi.Campoid = configuracion[i].Campoid;
-                            tipi.Descripcion = configuracion[i].Descripcion;
-                            tipi.Valores = valor;
-                            tipificaciones.Add(tipi);
+                    case "3":
                         break;
-                }                
-                
+                    case "4":
+                    //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
+                    //    break;
+                    //case "5":
+                    //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
+                    //    break;
+                    case "6":
+                        break;
+                    case "7":
+                        valor = buscarIdPadreTexto(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
+                        tipi = new Tipificacion();
+                        tipi.Secuencia = configuracion[i].Secuencia;
+                        tipi.Campoid = configuracion[i].Campoid;
+                        tipi.Descripcion = configuracion[i].Descripcion;
+                        tipi.Valores = valor;
+                        tipificaciones.Add(tipi);
+                        break;
+                }
+
             }
-            if(IdCrm == "0")
-            {
-                presentador.GuardarTipificacion(listCrm, tipificaciones);
-            }
-            else
-            {
-                presentador.ActulizarTipificacion(listCrm, tipificaciones);
-            }
+            presentador.GuardarTipificacion(tipificaciones);
         }
 
         private SolidColorBrush GetColor(string color)
@@ -657,21 +609,22 @@ namespace AgenteApp.UWP.Vistas
             return colorBrush;
         }
 
+
         private void ConsultaAsistente(object sender, RoutedEventArgs e)
         {
             String DescripicionCampo = (sender as Button).Name.Split('-')[1];
             AsistenteSeleccionado = DescripicionCampo;
             string[] campoDatos = DescripicionCampo.Split('.');
-            string campoHijo = campoDatos[campoDatos.Length-1];
+            string campoHijo = campoDatos[campoDatos.Length - 1];
             string campoPadre = "";
             string Criterio = "";
             Tipificacion tip = new Tipificacion();
-            for (int i=0;i< configuracion.Count;i++)
+            for (int i = 0; i < configuracion.Count; i++)
             {
                 tip = configuracion[i];
                 if (tip.Campoid == campoHijo)
                 {
-                    if (tip.CampoPadre != ""&& tip.CampoPadre != null)
+                    if (tip.CampoPadre != "" && tip.CampoPadre != null)
                     {
                         foreach (Tipificacion jera in configuracion)
                         {
@@ -682,7 +635,7 @@ namespace AgenteApp.UWP.Vistas
                             }
                         }
                     }
-                   
+
                     DAsistente.VErsion = tip.Version;
                     DAsistente.Secuencia = tip.Secuencia;
                     DAsistente.CampoCriterio = Criterio;
@@ -693,14 +646,13 @@ namespace AgenteApp.UWP.Vistas
 
 
         }
-
         private string buscarIdPadre(string version, string secuencia, String campoPadre)
         {
             Grid gr = ContentContainer.Children[0] as Grid;
-            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version+"."+ secuencia+"."+ campoPadre)
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version + "." + secuencia + "." + campoPadre)
                                                 .Select(a => a)
                                                 .First();
-               
+
             VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
             var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + version + "." + secuencia + "." + campoPadre)
                                                 .Select(a => a)
@@ -726,16 +678,48 @@ namespace AgenteApp.UWP.Vistas
             return txtId.Text;
         }
 
-        public  string IDCRM
+        private void ValorbuscarIdPadre(string version, string secuencia, String campoPadre,string valorId,string valorDsc)
         {
-            set
-            {
-                IdCrm = value;
-            }
-            get
-            {
-                return IdCrm;
-            }
+            Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            var GridDsc = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_dsc-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+            VariableSizedWrapGrid VarSizeWrapDsc = GridDsc as VariableSizedWrapGrid;
+            var textDCS = VarSizeWrapDsc.Children.Where(a => (a as TextBox).Name == "DSC-" + version + "." + secuencia + "." + campoPadre)
+                                               .Select(a => a)
+                                               .First();
+            
+
+            TextBox txtId = textID as TextBox;
+            TextBox txtdsc = textDCS as TextBox;
+            txtId.Text = valorId;
+            txtdsc.Text = valorDsc;
+        }
+
+        private void ValorbuscarIdPadreTexto(string version, string secuencia, String campoPadre, string valorId, string valorDsc)
+        {
+            Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_texto-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "Texto-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            TextBox txtId = textID as TextBox;
+            txtId.Text = valorId;
         }
     }
 }
+

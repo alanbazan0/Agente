@@ -227,13 +227,13 @@
 
                             </Grid>
                             <StackPanel x:Name="correosEntrada">
-                                <ListView x:Name="CRMListView" Margin="0,0,15,0" Height="250" IsItemClickEnabled="True" >
+                                <ListView x:Name="CRMListView" Margin="0,0,15,0" Height="250" IsItemClickEnabled="True" ItemClick="CRM1_ItemClick">
                                     
                                 </ListView>
                             </StackPanel>
                             <TextBlock Text="Seguimiento a tramites de cliente" TextAlignment="Start" FontSize="20"  Foreground="Black" MaxLines="2" TextWrapping="WrapWholeWords"/>
                             <StackPanel x:Name="correosSalida">
-                                <ListView x:Name="correosSalidaListView" Margin="0,0,15,0"  IsItemClickEnabled="True"  >
+                                <ListView x:Name="correosSalidaListView" Margin="0,0,15,0" IsItemClickEnabled="True"   >
                                     <ListView.HeaderTemplate>
                                         <DataTemplate>
                                             <Grid  Padding="0" >

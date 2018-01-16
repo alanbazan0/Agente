@@ -2,6 +2,7 @@
 using AgenteApp.Modelos;
 using AgenteApp.Presentadores;
 using AgenteApp.UWP.Fabricas;
+using AgenteApp.UWP.Vistas;
 using AgenteApp.Vistas;
 using System;
 using System.Collections.Generic;
@@ -232,6 +233,28 @@ namespace NavigationMenuSample.Views
             (componente as IComponente).Valor = (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
 
 
+        }
+        private void CRM1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var correos = e.ClickedItem;
+
+            if (correos != null)
+            {
+                var numero = camposGlobal.Where(a => a.campoId == "BTCRM1FOLIO")
+                                        .Select(a => a.orden)
+                                        .First();
+
+                string alias = "C" + numero.ToString();
+                string  folio = (string)correos.GetType().GetProperty(alias).GetValue(correos, null);
+                var parametros = new { folio = folio, idCliente = idCliente };
+                this.Frame.Navigate(typeof(DetalleCRMPage), parametros);
+                /* var numero = camposGloba.Where(a => a.c == "BTCLIENTENUMERO").Select(a => a.id).First();
+                 string alias = "C" + numero.ToString();
+                 int idCliente = Int32.Parse((string)correos.GetType().GetProperty(alias).GetValue(correos, null));
+
+                 var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente };
+                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);*/
+            }
         }
     }
 }

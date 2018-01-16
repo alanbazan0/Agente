@@ -18,5 +18,6 @@ namespace AgenteApp.Vistas
         void CrearColumnasGrid1CRM(List<CampoGrid> campos);
         void CrearFormularioClientes(Componente componente);
         void AsignarValor(Componente componente, Objeto registro);
+
     }
 }

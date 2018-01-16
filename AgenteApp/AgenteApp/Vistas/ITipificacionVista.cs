@@ -12,6 +12,8 @@ namespace AgenteApp.Vistas
         List<Parametros> Parametros { set; }
         Parametros Parametro { get; set; }
         string IDCRM { get; set; }
+
+        List<Tipificacion> valoresDatosAsistente { set; }
         void MostrarMensajeAsync(string titulo, string mensaje);
     }
 }
