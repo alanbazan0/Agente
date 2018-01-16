@@ -95,6 +95,31 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
+        public List<Parametros> Parametros
+        {
+            set
+            {
+                
+            }
+        }
+
+        public Parametros Parametro
+        {
+            set
+            {
+
+            }
+        }
+
+        public string IDCRM
+        {
+            set
+            {
+               
+            }
+          
+        }
+
         public List<DatosAsistente> datosAsistente
         {
             set
@@ -154,6 +179,9 @@ namespace AgenteApp.UWP.Vistas
                 }
             }
         }
+
+        Parametros ITipificacionVista.Parametro { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string ITipificacionVista.IDCRM { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void CrearComponentes(List<Tipificacion> conf)
         {
@@ -586,7 +614,7 @@ namespace AgenteApp.UWP.Vistas
                 }
 
             }
-            presentador.GuardarTipificacion(tipificaciones);
+            //presentador.GuardarTipificacion(tipificaciones);
         }
 
         private SolidColorBrush GetColor(string color)
