@@ -127,7 +127,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="Interacciones" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White" Grid.ColumnSpan="2" Height="30" Margin="0.5,0,96,0" VerticalAlignment="Top"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock x:Name = "Interacciones" Text="1"   FontSize="20"  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "Interacciones" Text="0"   FontSize="20"  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
                                     <Grid Background="#ff9900" Margin="0,5,0,0" >
                                         <Grid.ColumnDefinitions>
@@ -142,7 +142,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="Inbound" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock x:Name = "Inbound" Text="2"  FontSize="20" Grid.Row="1" Grid.Column="1" TextAlignment="Center"  Foreground="White"/>
+                                        <TextBlock x:Name = "Inbound" Text="0"  FontSize="20" Grid.Row="1" Grid.Column="1" TextAlignment="Center"  Foreground="White"/>
                                     </Grid>
 
                                     <Grid Background="#ababab" Margin="0,5,0,0"  >
@@ -158,7 +158,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="Outbound" Grid.Row="0"  FontSize="20"   Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock x:Name = "Outbound" Text="1"   FontSize="20"  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "Outbound" Text="0"   FontSize="20"  Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
 
                                     <Grid Background="#05ee0a" Margin="0,5,0,0" >
@@ -174,7 +174,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="SMS" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock x:Name = "SMS" Text="1" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "SMS" Text="0" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
 
                                     <Grid Background="#02bafe" Margin="0,5,0,0" >
@@ -190,7 +190,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="Mailing" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock x:Name = "Mailing" Text="1" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "Mailing" Text="0" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
 
                                     <Grid Background="#ababab" Margin="0,5,0,0" >
@@ -206,7 +206,7 @@
                                         </Grid.RowDefinitions>
                                         <TextBlock Text="Robot" Grid.Row="0"   FontSize="20"  Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                         <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"   Source="../Assets/correoIndi.png" Height="auto" />
-                                        <TextBlock x:Name = "Robot" Text="1" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
+                                        <TextBlock x:Name = "Robot" Text="0" FontSize="20"    Grid.Row="1" Grid.Column="1" TextAlignment="Center" Foreground="White"/>
                                     </Grid>
                                 </StackPanel>
                             </StackPanel>

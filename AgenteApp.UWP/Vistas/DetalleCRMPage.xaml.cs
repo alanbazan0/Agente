@@ -172,7 +172,7 @@ namespace AgenteApp.UWP.Vistas
                         case "6":
                             break;
                         case "7":
-                            ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+                            ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valores);
 
                             break;
                     }
@@ -733,7 +733,7 @@ namespace AgenteApp.UWP.Vistas
             txtdsc.Text = valorDsc;
         }
 
-        private void ValorbuscarIdPadreTexto(string version, string secuencia, String campoPadre, string valorId, string valorDsc)
+        private void ValorbuscarIdPadreTexto(string version, string secuencia, String campoPadre, string valorId)
         {
             Grid gr = ContentContainer.Children[0] as Grid;
             var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_texto-" + version + "." + secuencia + "." + campoPadre)
