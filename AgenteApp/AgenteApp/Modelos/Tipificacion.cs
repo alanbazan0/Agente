@@ -31,6 +31,9 @@ namespace AgenteApp.Modelos
         string tipoletra;
         string numerorenglones;
         string campoPadre;
+        string valorcampoid;
+        string valorcampodsc;
+
         public string Version { get { return version; } set { version = value; } }
         public string Secuencia { get { return secuencia; } set { secuencia = value; } }
         public string Descripcion { get { return descripcion; } set { descripcion = value; } }
@@ -56,5 +59,8 @@ namespace AgenteApp.Modelos
         public string Tipoletra { get { return tipoletra; } set { tipoletra = value; } }
         public string Numerorenglones { get { return numerorenglones; } set { numerorenglones = value; } }
         public string CampoPadre { get { return campoPadre; } set { campoPadre = value; } }
+        public string Valorcampoid { get { return valorcampoid; } set { valorcampoid = value; } }
+        public string Valorcampodsc { get { return valorcampodsc; } set { valorcampodsc = value; } }
+    
     }
 }

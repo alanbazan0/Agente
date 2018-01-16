@@ -9,6 +9,8 @@ namespace AgenteApp.Vistas
     {
         List<Tipificacion> tipificacion { set; }
         List<DatosAsistente> datosAsistente { set; }
+
+        List<Tipificacion> valoresDatosAsistente { set; }
         void MostrarMensajeAsync(string titulo, string mensaje);
     }
 }

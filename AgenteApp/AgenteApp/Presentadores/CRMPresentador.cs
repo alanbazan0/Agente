@@ -123,7 +123,7 @@ namespace AgenteApp.Presentadores
             Resultado<List<Tipificacion>> resultado = await repositorio.ConsultarDatosTipificacion(folio, idCliente, Constantes.VERSION);
             if (resultado.mensajeError == string.Empty)
             {
-                vista2.tipificacion = resultado.valor;
+                vista2.valoresDatosAsistente = resultado.valor;
             }
             else
                 vista2.MostrarMensajeAsync("Error", resultado.mensajeError);

@@ -111,6 +111,8 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
+        public List<Tipificacion> valoresDatosAsistente { set => throw new NotImplementedException(); }
+
         public void CrearComponentes(List<Tipificacion> conf)
         {
             Grid TipifiacionGrid = new Grid();

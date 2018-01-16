@@ -122,6 +122,39 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
+        public List<Tipificacion> valoresDatosAsistente
+        {
+            set
+            {
+                for (int i = 0; i < value.Count; i++)
+                {
+                    switch (value[i].Asistente)
+                    {
+                        case "1":
+                            break;
+                        case "2":
+                            ValorbuscarIdPadre(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+
+                            break;
+                        case "3":
+                            break;
+                        case "4":
+                        //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        //case "5":
+                        //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        case "6":
+                            break;
+                        case "7":
+                            ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+
+                            break;
+                    }
+                }
+            }
+        }
+
         public void CrearComponentes(List<Tipificacion> conf)
         {
             Grid TipifiacionGrid = new Grid();
@@ -643,6 +676,49 @@ namespace AgenteApp.UWP.Vistas
 
             TextBox txtId = textID as TextBox;
             return txtId.Text;
+        }
+
+        private void ValorbuscarIdPadre(string version, string secuencia, String campoPadre,string valorId,string valorDsc)
+        {
+            Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "ID-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            var GridDsc = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_dsc-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+            VariableSizedWrapGrid VarSizeWrapDsc = GridDsc as VariableSizedWrapGrid;
+            var textDCS = VarSizeWrapDsc.Children.Where(a => (a as TextBox).Name == "DSC-" + version + "." + secuencia + "." + campoPadre)
+                                               .Select(a => a)
+                                               .First();
+            
+
+            TextBox txtId = textID as TextBox;
+            TextBox txtdsc = textDCS as TextBox;
+            txtId.Text = valorId;
+            txtdsc.Text = valorDsc;
+        }
+
+        private void ValorbuscarIdPadreTexto(string version, string secuencia, String campoPadre, string valorId, string valorDsc)
+        {
+            Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_texto-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            var textID = VarSizeWrap.Children.Where(a => (a as TextBox).Name == "Texto-" + version + "." + secuencia + "." + campoPadre)
+                                                .Select(a => a)
+                                                .First();
+
+            TextBox txtId = textID as TextBox;
+            txtId.Text = valorId;
         }
     }
 }
