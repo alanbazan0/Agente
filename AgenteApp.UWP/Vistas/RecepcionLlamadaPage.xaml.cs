@@ -504,6 +504,7 @@ namespace NavigationMenuSample.Views
 
         private void LimpiarDatos()
         {
+            BorrarParametros();
             seg = 0;
             min = 0;
             hor = 0;
@@ -520,6 +521,7 @@ namespace NavigationMenuSample.Views
             tipoLlamadaTextBox.Text = "";
             estatusTextBox.Text = "";
             lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
+            
         }
 
         private string GetTimeString()

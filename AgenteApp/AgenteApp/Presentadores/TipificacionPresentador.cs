@@ -36,7 +36,21 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
-        
+
+        public async void ConsultarParametros()
+        {
+            ParametrosRepositorio repositorio = new ParametrosRepositorio();
+            Resultado<List<Parametros>> resultado = await repositorio.Consultar(vista.Parametro);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.Parametros = resultado.valor;
+            }
+            else
+            {
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+            }
+        }
+
         public async void ConsultarDatosAsistente(DatosAsistente DA)
         {
             //List<Filtro> filtros = vista.Filtros;
@@ -196,18 +210,33 @@ namespace AgenteApp.Presentadores
             return colorBrush;
         }
 
-        public async void GuardarTipificacion(List<Tipificacion> tipificaciones)
+        public async void GuardarTipificacion(List<CRM> crm1,List<Tipificacion> tipificaciones)
         {
             //List<Filtro> filtros = vista.Filtros;
             TipificacionRepositorio repositorio = new TipificacionRepositorio();
-            Resultado<List<Tipificacion>> resultado = await repositorio.GuardarTipificacion(tipificaciones);
+            Resultado<object> resultado = await repositorio.GuardarTipificacion(crm1,tipificaciones);
             if (resultado.mensajeError == string.Empty)
             {
-                vista.tipificacion = resultado.valor;
+                vista.IDCRM = resultado.valor.ToString();
+                vista.MostrarMensajeAsync("Aviso", "Los datos se guardaron correctamente.");
             }
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
         
+        public async void ActulizarTipificacion(List<CRM> crm1, List<Tipificacion> tipificaciones)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            TipificacionRepositorio repositorio = new TipificacionRepositorio();
+            Resultado<object> resultado = await repositorio.ActulizarTipificacion(crm1, tipificaciones);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.IDCRM = resultado.valor.ToString();
+                vista.MostrarMensajeAsync("Aviso", "Los datos se guardaron correctamente.");
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+
     }
 }

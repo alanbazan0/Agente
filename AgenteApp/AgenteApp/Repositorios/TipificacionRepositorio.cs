@@ -70,13 +70,14 @@ namespace AgenteApp.Repositorios
             return datos;
         }
 
-        public async Task<Resultado<List<Tipificacion>>> GuardarTipificacion(List<Tipificacion> tipificaciones)
+        public async Task<Resultado<object>> GuardarTipificacion(List<CRM> crm1,List<Tipificacion> tipificaciones)
         {
-            Resultado<List<Tipificacion>> datos = new Resultado<List<Tipificacion>>();
-
+            string datos = "";
+            Resultado<object> res = new Resultado<object>();
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/Tipificacion.php";
             AgregarParametro("accion", "GuardarTipificacion");
+            AgregarParametro("TipificacionCabecero", JsonConvert.SerializeObject(crm1));
             AgregarParametro("tipificaciones", JsonConvert.SerializeObject(tipificaciones));
             try
             {
@@ -87,7 +88,9 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
-                    datos = JsonConvert.DeserializeObject<Resultado<List<Tipificacion>>>(resultadoContenido);
+
+                    res = JsonConvert.DeserializeObject<Resultado<object>>(resultadoContenido);
+                    
                 }
             }
             catch (Exception ex)
@@ -95,8 +98,40 @@ namespace AgenteApp.Repositorios
                 Console.Out.WriteLine(ex.Message);
 
             }
-            return datos;
+            return res;
         }
+
         
+        public async Task<Resultado<object>> ActulizarTipificacion(List<CRM> crm1, List<Tipificacion> tipificaciones)
+        {
+            string datos = "";
+            Resultado<object> res = new Resultado<object>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/Tipificacion.php";
+            AgregarParametro("accion", "ActualizarTipificacion");
+            AgregarParametro("TipificacionCabecero", JsonConvert.SerializeObject(crm1));
+            AgregarParametro("tipificaciones", JsonConvert.SerializeObject(tipificaciones));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+
+                    res = JsonConvert.DeserializeObject<Resultado<object>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return res;
+        }
+
     }
 }

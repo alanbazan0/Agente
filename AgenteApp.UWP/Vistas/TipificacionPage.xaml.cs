@@ -22,6 +22,9 @@ using System.Text;
 using Windows.UI;
 using System.Reflection;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
+using Windows.System.Profile;
 
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
@@ -33,12 +36,20 @@ namespace AgenteApp.UWP.Vistas
     /// </summary>
     public sealed partial class TipificacionPage : Page, ITipificacionVista
     {
+        Usuario usuario;
         TipificacionPresentador presentador;
         List<Tipificacion> configuracion;
         List<Tipificacion> tipificaciones;
         List<DatosAsistente> DAsistentes;
+        Parametros ParametroLocal;
         DatosAsistente DAsistente;
         string AsistenteSeleccionado;
+        string ip;
+        string idhardware;
+        string noTelefonico;
+        string IdLlamada;
+        string IdCliente;
+        string IdCrm="0";
         public TipificacionPage()
         {
             this.InitializeComponent();
@@ -48,7 +59,69 @@ namespace AgenteApp.UWP.Vistas
             configuracion = new List<Tipificacion>();
             DAsistente = new DatosAsistente();
             DAsistentes = new List<DatosAsistente>();
+            ParametroLocal = new Parametros();
+            obtenerInformacion();
+            
+        }
+
+        public void obtenerInformacion()
+        {
+            //optenemos ip           
+            foreach (HostName localHostName in NetworkInformation.GetHostNames())
+            {
+                if (localHostName.IPInformation != null)
+                {
+                    if (localHostName.Type == HostNameType.Ipv4)
+                    {
+                        ip = localHostName.ToString();
+                        break;
+                    }
+                }
+            }
+
+            //optenemos id hardware
+            var token = HardwareIdentification.GetPackageSpecificToken(null);
+            var hardwareId = token.Id;
+            var dataReader = Windows.Storage.Streams.DataReader.FromBuffer(hardwareId);
+            byte[] bytes = new byte[hardwareId.Length];
+            dataReader.ReadBytes(bytes);
+            idhardware = BitConverter.ToString(bytes);
             ConsultarConfiguracion();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            usuario = (Usuario)e.Parameter;
+            ConsultarParametros();
+        }
+
+        public Parametros Parametro { get => ParametroLocal; set { } }
+
+        public List<Parametros> Parametros
+        {
+            set
+            {
+                for (int i = 0; i < value.Count; i++)
+                {
+
+                    switch (value[i].PalabraReservada)
+                    {
+                        case "@NUMEROTEL@":
+                            noTelefonico =  value[i].ValorParametro;
+                            break;
+                        case "@IDLLAMADA@":
+                            IdLlamada = value[i].ValorParametro;
+                            break;
+                        case "@IDCLIENTE@":
+                             IdCliente = value[i].ValorParametro;
+                            break;
+                        case "@IDCRM@":
+                            IdCrm = value[i].ValorParametro;
+                            break;
+                    }
+                }
+            }
         }
 
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
@@ -68,6 +141,15 @@ namespace AgenteApp.UWP.Vistas
                 pageTitleContainer.Visibility = Visibility.Collapsed;
                 bottombar.Visibility = Visibility.Collapsed;
             }
+        }
+     
+        public void ConsultarParametros()
+        {
+            IdCrm = "0";
+            ParametroLocal.IdParamtro = usuario.Id;
+            ParametroLocal.NumeroMaquina = idhardware;
+            ParametroLocal.DireccionIp = ip;
+            presentador.ConsultarParametros();
         }
 
         public void ConsultarConfiguracion()
@@ -170,8 +252,6 @@ namespace AgenteApp.UWP.Vistas
                         break;
 
                 }
-
-
 
             }
             ContentContainer.Children.Add(TipifiacionGrid);
@@ -400,17 +480,9 @@ namespace AgenteApp.UWP.Vistas
             BT.Height = 50;
             BT.Width = 50;
             BT.Click += ConsultaAsistente;
-            //BitmapImage bi = new BitmapImage();
-            //bi.DecodePixelWidth = 100;
-            //bi.DecodePixelHeight = 100;
-
-            //bi.UriSource = new Uri("ms-appx:///Pages:,,,/Recursos/Imagenes/asistente.png");
-            //ImageBrush ibh = new ImageBrush();
-            //IconElement ie ;
-            //ibh.ImageSource = bi;
             BT.Icon = new SymbolIcon(Symbol.Find);
             
-            BT.Background = new SolidColorBrush(Colors.LightGray);
+            BT.Background = new SolidColorBrush(Colors.White);
             Flyout flyout = new Flyout();
             StackPanel SP = new StackPanel();
             ListView LV = new ListView();
@@ -503,8 +575,19 @@ namespace AgenteApp.UWP.Vistas
         public void GuardarTipificacion()
         {
             string valor = "";
+            CRM crm1 = new CRM();
             Tipificacion tipi;
             tipificaciones = new List<Tipificacion>();
+            List<CRM> listCrm = new List<CRM>();
+            crm1.CanalId = "1";
+            crm1.IdLlamada       = IdLlamada;
+            crm1.Extension       = usuario.Extension;
+            crm1.TelefonoCliente = noTelefonico;
+            crm1.IdCliente    = IdCliente;
+            crm1.IdAgente     = usuario.Id;
+            crm1.NombreAgente = usuario.Nombre;
+            crm1.IdFolio = IdCrm;
+            listCrm.Add(crm1);
             for (int i = 0; i < configuracion.Count; i++)
             {
                 switch (configuracion[i].Asistente)
@@ -542,7 +625,14 @@ namespace AgenteApp.UWP.Vistas
                 }                
                 
             }
-            presentador.GuardarTipificacion(tipificaciones);
+            if(IdCrm == "0")
+            {
+                presentador.GuardarTipificacion(listCrm, tipificaciones);
+            }
+            else
+            {
+                presentador.ActulizarTipificacion(listCrm, tipificaciones);
+            }
         }
 
         private SolidColorBrush GetColor(string color)
@@ -564,7 +654,6 @@ namespace AgenteApp.UWP.Vistas
 
             return colorBrush;
         }
-
 
         private void ConsultaAsistente(object sender, RoutedEventArgs e)
         {
@@ -602,6 +691,7 @@ namespace AgenteApp.UWP.Vistas
 
 
         }
+
         private string buscarIdPadre(string version, string secuencia, String campoPadre)
         {
             Grid gr = ContentContainer.Children[0] as Grid;
@@ -632,6 +722,18 @@ namespace AgenteApp.UWP.Vistas
 
             TextBox txtId = textID as TextBox;
             return txtId.Text;
+        }
+
+        public  string IDCRM
+        {
+            set
+            {
+                IdCrm = value;
+            }
+            get
+            {
+                return IdCrm;
+            }
         }
     }
 }
