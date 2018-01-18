@@ -5,7 +5,6 @@ using AgenteApp.Vistas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AgenteApp.Presentadores
 {
@@ -77,7 +76,7 @@ namespace AgenteApp.Presentadores
                 vista.MostrarMensaje(resultado.mensajeError);
         }
 
-        public async void CrearCamposCRM()
+        public async void CrearCamposCRM(string idCliente)
         {
             CRMRepositorio repositorio = new CRMRepositorio();
             Resultado<List<Componente>> resultado = await repositorio.ConsultarCamposClientePorVersion(Constantes.VERSION);
@@ -90,6 +89,7 @@ namespace AgenteApp.Presentadores
                     if (campoFromulario.presentacion == "1")
                         vista.CrearFormularioClientes(campoFromulario);
                 }
+                TraerDatosCliente(Convert.ToInt32(idCliente));
             }
             else
                 vista.MostrarMensaje( resultado.mensajeError);

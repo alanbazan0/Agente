@@ -134,8 +134,8 @@ namespace NavigationMenuSample.Views
         public void cosultarCRMIndicadores()
         {
             presentador.cosultarCRMIndicadores(idCliente);
-            presentador.CrearCamposCRM();
-            presentador.TraerDatosCliente(Convert.ToInt32( idCliente));
+            presentador.CrearCamposCRM(idCliente);
+            //presentador.TraerDatosCliente(Convert.ToInt32( idCliente));
         }
 
         public void datosIndicadores(List<CRM> indicadoresCRM)
