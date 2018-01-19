@@ -105,7 +105,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "Llamar",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(LlamarManualmentePage)
                 },
                 new NavMenuItem()
                 {
