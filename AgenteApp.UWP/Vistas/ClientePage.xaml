@@ -59,39 +59,7 @@
                 
             </VariableSizedWrapGrid>
 
-            <Grid Grid.Column="0" Grid.Row="2" Padding="0" Margin="15,0,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Text="Numero telefonico" Margin="8" />
-                <TextBox x:Name="noTelefonicoClienteTextBox" Grid.Column="1" PlaceholderText="Numero telefono" Margin="8" IsReadOnly="True" />
-                <TextBlock Text="Carrier" Margin="8" Grid.Column="0" Grid.Row="1" />
-                <TextBox x:Name="razonSocialTextBox" PlaceholderText="Carrier" Grid.Column="1" Grid.Row="1" Margin="8" IsReadOnly="True" />
-                <TextBlock Text="Origen de telefono" Margin="8" Grid.Column="0" Grid.Row="2"/>
-                <ComboBox x:Name="tipoTelefonoTextBox" Height="30"  Grid.Column="1" Grid.Row="3" PlaceholderText="Origen de telefono" HorizontalAlignment="Stretch" 
-                          VerticalAlignment="Stretch"  
-                          VariableSizedWrapGrid.RowSpan="1"  >
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Width="200" Height="Auto">
-                                <TextBlock Text="{Binding Id}" Visibility="Collapsed" />
-                                <TextBlock Text="{Binding Descripcion}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Grid>
-
-
-
-
-            <Grid  Padding="0" Grid.Row="3"  Margin="0,0,0,0" >
+            <Grid  Padding="0" Grid.Row="2"  Margin="0,0,0,0" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -110,17 +78,17 @@
                 </Border>
                 <Grid Grid.Column="0" Grid.Row="1" Padding="0" Margin="15,0,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="110" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBox x:Name="telefonoAgregar" Grid.Column="0" Grid.Row="0" Width="180" Text="{Binding TelefonoCliente}"  />
-                    <ComboBox x:Name="cmbAgregarOri" Grid.Column="1"  Grid.Row="0" Height="30" Width="180" PlaceholderText="Origen de telefono" HorizontalAlignment="Stretch" 
+                    <TextBox x:Name="telefonoAgregar" Grid.Column="0" Grid.Row="0" Width="140" Text="{Binding TelefonoCliente}"  />
+                    <ComboBox x:Name="cmbAgregarOri" Grid.Column="1"  Grid.Row="0" Height="30" Width="169" PlaceholderText="Origen de telefono" HorizontalAlignment="Stretch" 
                                             VerticalAlignment="Stretch"   VariableSizedWrapGrid.RowSpan="1"  >
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -131,7 +99,7 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Button x:Name = "btnAgregar" Grid.Column="2" Grid.Row="0" Background="#ebebeb" Foreground="#5e777c" Content="Agregar telefono" Click="clickAgregarTel"  HorizontalAlignment="Stretch" Width="170"  />
+                    <Button x:Name = "btnAgregar" Grid.Column="2" Grid.Row="0" Background="#ebebeb" Foreground="#5e777c" Content="+" Click="clickAgregarTel"  HorizontalAlignment="Stretch" Width="100"  />
 
                 </Grid>
 

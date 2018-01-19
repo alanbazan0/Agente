@@ -114,9 +114,9 @@ namespace AgenteApp.UWP.Vistas
                 if (modo == ModoVentana.ALTA)
                 {
                     this.HeaderTextBlock.Text = "Identificación del cliente / alta cliente";
-                    numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null); 
-                    noTelefonicoClienteTextBox.Text = numTelefonico;
-                    razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
+                    numTelefonico = (string)parametros.GetType().GetProperty("telCliente").GetValue(parametros, null);
+                    telefonoAgregar.Text = numTelefonico;
+                    //razonSocialTextBox.Text = parametroPortabilidad.DescripcionPortabilidad;
                 }
                 else
                 {
@@ -149,7 +149,7 @@ namespace AgenteApp.UWP.Vistas
             {
                string IdCliente = value;
 
-                clienteTelefono.Id = IdCliente;
+               /*clienteTelefono.Id = IdCliente;
                 clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
                 clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
                 clienteTelefono.Numeracion = numTelefonico;
@@ -158,6 +158,7 @@ namespace AgenteApp.UWP.Vistas
                 TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
                 clienteTelefono.TipoTelefono = itemboxTTelefono.Id;
                 telefonosLis.Add(clienteTelefono);
+                */
                 GuardarTelefonoCliente(IdCliente);
             }
             
@@ -167,7 +168,7 @@ namespace AgenteApp.UWP.Vistas
         {
             set
             {
-                tipoTelefonoTextBox.ItemsSource = value;
+                //tipoTelefonoTextBox.ItemsSource = value;
                 cmbAgregarOri.ItemsSource = value;
                 cmbAgregarOriCorre.ItemsSource = value;
             }
@@ -179,9 +180,9 @@ namespace AgenteApp.UWP.Vistas
             {
                 if (!(value.Count() == 0))
                 {
-                    noTelefonicoClienteTextBox.Text = value[0].Numeracion;
-                    razonSocialTextBox.Text = value[0].Compania;
-                    tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value[0].TipoTelefono) - 1;
+                    telefonoAgregar.Text = value[0].Numeracion;
+                    //razonSocialTextBox.Text = value[0].Compania;
+                    //tipoTelefonoTextBox.SelectedIndex = Convert.ToInt32(value[0].TipoTelefono) - 1;
                 }
                 telefonos.ItemsSource = value;
                 telefonosLis = value;
