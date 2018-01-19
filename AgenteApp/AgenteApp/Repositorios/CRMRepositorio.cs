@@ -235,7 +235,7 @@ namespace AgenteApp.Repositorios
             AgregarParametro("accion", "ConsultarDatosTipificacion");
             AgregarParametro("folio", folio);
             AgregarParametro("idCliente", idCliente);
-            AgregarParametro("version", "IBD.FNC01");
+            AgregarParametro("version", version.ToString());
             //AgregarParametro("version", version.ToString());
             try
             {

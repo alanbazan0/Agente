@@ -28,7 +28,7 @@ namespace AgenteApp.Presentadores
         {
             //List<Filtro> filtros = vista.Filtros;
             TipificacionRepositorio repositorio = new TipificacionRepositorio();
-            Resultado<List<Tipificacion>> resultado = await repositorio.ConsultarConfiguracion();
+            Resultado<List<Tipificacion>> resultado = await repositorio.ConsultarConfiguracion(Constantes.VERSION.ToString());
             if (resultado.mensajeError == string.Empty)
             {
                 vista.tipificacion = resultado.valor;
@@ -165,6 +165,8 @@ namespace AgenteApp.Presentadores
             block.Text = campo.Descripcion;
             block.Foreground = GetColor(campo.Colorletra);
             block.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
+            gridCombo.Name = "GridLabel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.Children.Add(block);
             xamlHeaderTemplate.Children.Add(gridCombo);
 
@@ -177,6 +179,7 @@ namespace AgenteApp.Presentadores
             gridCombo.Width = 500;
             gridCombo.Name = "Grid_texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
             TextBox text = new TextBox();
             text.Name = "Texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid; ;
             text.Width = 390;
@@ -186,7 +189,7 @@ namespace AgenteApp.Presentadores
         }
 
 
-        private SolidColorBrush GetColor(string color)
+        public SolidColorBrush GetColor(string color)
         {
             SolidColorBrush colorBrush = new SolidColorBrush(Colors.White);
             switch (color)
@@ -236,6 +239,33 @@ namespace AgenteApp.Presentadores
             }
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+
+        public Visibility SeleccionarPresntacion(string presentar)
+        {
+            Visibility vis = new Visibility();
+            if (presentar == "SI")
+            {
+                vis = Visibility.Visible;
+            }
+            else
+            {
+                vis = Visibility.Collapsed;
+            }
+            return vis;
+        }
+
+        public string TomarPresntacion(Visibility vis)
+        {
+
+            if (vis==Visibility.Visible)
+            {
+                return "SI";
+            }
+            else
+            {
+                return "NO";
+            }
         }
 
     }

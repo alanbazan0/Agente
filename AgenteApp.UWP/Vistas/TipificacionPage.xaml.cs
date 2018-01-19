@@ -50,6 +50,7 @@ namespace AgenteApp.UWP.Vistas
         string IdLlamada;
         string IdCliente;
         string IdCrm="0";
+
         public TipificacionPage()
         {
             this.InitializeComponent();
@@ -197,65 +198,68 @@ namespace AgenteApp.UWP.Vistas
 
         public void CrearComponentes(List<Tipificacion> conf)
         {
-            Grid TipifiacionGrid = new Grid();
-            TipifiacionGrid.Padding = new Thickness(0);
-            TipifiacionGrid.Margin = new Thickness(0);
-            RowDefinition r = new RowDefinition();
-            foreach (Tipificacion ren in conf)
-            {
+            
+               
+                Grid TipifiacionGrid = new Grid();
+                TipifiacionGrid.Padding = new Thickness(0);
+                TipifiacionGrid.Margin = new Thickness(0);
+                RowDefinition r = new RowDefinition();
+                foreach (Tipificacion ren in conf)
+                {
+                    r = new RowDefinition();
+                    r.Height = GridLength.Auto;
+                    TipifiacionGrid.RowDefinitions.Add(r);
+                }
                 r = new RowDefinition();
                 r.Height = GridLength.Auto;
                 TipifiacionGrid.RowDefinitions.Add(r);
-            }
-            r = new RowDefinition();
-            r.Height = GridLength.Auto;
-            TipifiacionGrid.RowDefinitions.Add(r);
-            ColumnDefinition column = new ColumnDefinition();
-            column.Width = new GridLength(200);
-            TipifiacionGrid.ColumnDefinitions.Add(column);
-            column = new ColumnDefinition();
-            column.Width = new GridLength(100);
-            TipifiacionGrid.ColumnDefinitions.Add(column);
-            column = new ColumnDefinition();
-            column.Width = new GridLength(100);
-            TipifiacionGrid.ColumnDefinitions.Add(column);
-            column = new ColumnDefinition();
-            column.Width = new GridLength(300);
-            TipifiacionGrid.ColumnDefinitions.Add(column);
-            column = new ColumnDefinition();
-            column.Width = new GridLength(100);
-            TipifiacionGrid.ColumnDefinitions.Add(column);
-            for (int i = 0; i < conf.Count; i++)
-            {
-                Tipificacion campo = conf[i];
-
-                switch (campo.Asistente)
+                ColumnDefinition column = new ColumnDefinition();
+                column.Width = new GridLength(200);
+                TipifiacionGrid.ColumnDefinitions.Add(column);
+                column = new ColumnDefinition();
+                column.Width = new GridLength(100);
+                TipifiacionGrid.ColumnDefinitions.Add(column);
+                column = new ColumnDefinition();
+                column.Width = new GridLength(100);
+                TipifiacionGrid.ColumnDefinitions.Add(column);
+                column = new ColumnDefinition();
+                column.Width = new GridLength(300);
+                TipifiacionGrid.ColumnDefinitions.Add(column);
+                column = new ColumnDefinition();
+                column.Width = new GridLength(100);
+                TipifiacionGrid.ColumnDefinitions.Add(column);
+                for (int i = 0; i < conf.Count; i++)
                 {
-                    case "1":
-                        CrearCombo(ref TipifiacionGrid, campo, i + 1);
-                        break;
-                    case "2":
-                        CrearAsistente(ref TipifiacionGrid, campo, i + 1);
-                        break;
-                    case "3":
-                        presentador.CrearCheckBox(ref TipifiacionGrid, campo, i + 1);
-                        break;
-                    case "4":
-                    //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
-                    //    break;
-                    //case "5":
-                    //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
-                    //    break;
-                    case "6":
-                        presentador.CrearLineaDivisoria(ref TipifiacionGrid, campo, i + 1);
-                        break;
-                    case "7":
-                        presentador.CrearTexto(ref TipifiacionGrid, campo, i + 1);
-                        break;
+                    Tipificacion campo = conf[i];
+
+                    switch (campo.Asistente)
+                    {
+                        case "1":
+                            CrearCombo(ref TipifiacionGrid, campo, i + 1);
+                            break;
+                        case "2":
+                            CrearAsistente(ref TipifiacionGrid, campo, i + 1);
+                            break;
+                        case "3":
+                            presentador.CrearCheckBox(ref TipifiacionGrid, campo, i + 1);
+                            break;
+                        case "4":
+                        //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        //case "5":
+                        //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
+                        //    break;
+                        case "6":
+                            presentador.CrearLineaDivisoria(ref TipifiacionGrid, campo, i + 1);
+                            break;
+                        case "7":
+                            presentador.CrearTexto(ref TipifiacionGrid, campo, i + 1);
+                            break;
+
+                    }
 
                 }
-
-            }
+           
             ContentContainer.Children.Add(TipifiacionGrid);
 
         }
@@ -268,7 +272,6 @@ namespace AgenteApp.UWP.Vistas
                 await dialog.ShowAsync();
             }
         }
-
 
         public void FlyAsisListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -309,6 +312,11 @@ namespace AgenteApp.UWP.Vistas
                 TextBox txtDsc = textDSC as TextBox;
                 txtDsc.Text = (string)usuarioConferencia.GetType().GetProperty("CampoDescripcion").GetValue(usuarioConferencia, null);
 
+                string[] campoDatos = AsistenteSeleccionado.Split('.');
+                string campoidPadre = campoDatos[campoDatos.Length - 1];
+                string campoSecuencia = campoDatos[campoDatos.Length - 2];
+                string version = campoDatos[campoDatos.Length - 3];
+                BuscarDependenciaVisual(version, campoSecuencia, campoidPadre, txtId.Text);
                
                 Button bt = BtCancel as Button;
                 Flyout f = bt.Flyout as Flyout;
@@ -317,6 +325,95 @@ namespace AgenteApp.UWP.Vistas
                     f.Hide();
                 }
             }
+        }
+
+        private void BuscarDependenciaVisual(string version, string secuencia, string campoIdPedre,string valorTrigger)
+        {
+            OcultarNoPresentar();
+            Tipificacion tip = new Tipificacion();
+            for (int i = 0; i < configuracion.Count; i++)
+            {
+                tip = configuracion[i];
+                if (tip.VersionDependenciaVisual == version && tip.SecuenciaDependenciaVisual == secuencia && tip.ValorTrigger == valorTrigger)
+                {
+                    Grid gr = ContentContainer.Children[0] as Grid;
+                    switch (tip.Asistente)
+                    {
+                        case "2":
+                            VisualizarAsistente(ref gr, tip.Version+"."+tip.Secuencia+"."+tip.Campoid,Visibility.Visible);
+                            break;
+                        case "7":
+                            VisualizarTexto(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid,Visibility.Visible);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void OcultarNoPresentar()
+        {
+            Tipificacion tip = new Tipificacion();
+            for (int i = 0; i < configuracion.Count; i++)
+            {
+                tip = configuracion[i];
+               
+                    Grid gr = ContentContainer.Children[0] as Grid;
+                    switch (tip.Asistente)
+                    {
+                        case "2":
+                            VisualizarAsistente(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid, presentador.SeleccionarPresntacion(tip.Presentar));
+                            break;
+                        case "7":
+                            VisualizarTexto(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid, presentador.SeleccionarPresntacion(tip.Presentar));
+                            break;
+                    }
+            }
+        }
+
+        private void VisualizarAsistente(ref Grid contenedorPrincipal,string campohijo,Visibility visEnable)
+       {
+                var GriPrincipal = contenedorPrincipal.Children.Where(a => (a as VariableSizedWrapGrid).Name == "GridLabel-" + campohijo)
+                                                    .Select(a => a)
+                                                    .First();
+                VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+                VarSizeWrap.Visibility = visEnable;
+
+                GriPrincipal = contenedorPrincipal.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid-" + campohijo)
+                                                    .Select(a => a)
+                                                    .First();
+                VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+                VarSizeWrap.Visibility = visEnable;
+
+                GriPrincipal = contenedorPrincipal.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + campohijo)
+                                                .Select(a => a)
+                                                .First();
+                VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+                GriPrincipal.Visibility = visEnable;
+                
+                GriPrincipal = contenedorPrincipal.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_dsc-" + campohijo)
+                                                .Select(a => a)
+                                                .First();
+                VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+                GriPrincipal.Visibility = visEnable;
+                
+       }
+        
+        private void VisualizarTexto(ref Grid contenedorPrincipal, string campohijo, Visibility visEnable)
+        {
+            Grid gr = ContentContainer.Children[0] as Grid;
+            var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "GridLabel-" + campohijo)
+                                                .Select(a => a)
+                                                .First();
+
+            VariableSizedWrapGrid VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            VarSizeWrap.Visibility = visEnable;
+
+            GriPrincipal = contenedorPrincipal.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_texto-" + campohijo)
+                                               .Select(a => a)
+                                               .First();
+            VarSizeWrap = GriPrincipal as VariableSizedWrapGrid;
+            GriPrincipal.Visibility = visEnable;
+
         }
 
         private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
@@ -344,19 +441,19 @@ namespace AgenteApp.UWP.Vistas
             VariableSizedWrapGrid gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 0);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             TextBlock block = new TextBlock();
             block.Text = campo.Descripcion;
-            block.Foreground = GetColor(campo.Colorletra);
+            block.Foreground = presentador.GetColor(campo.Colorletra);
             gridCombo.Children.Add(block);
             GridHeaderTemplate.Children.Add(gridCombo);
             //aistente vacio porque es combo
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 1);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             GridHeaderTemplate.Children.Add(gridCombo);
@@ -364,7 +461,7 @@ namespace AgenteApp.UWP.Vistas
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 2);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             TextBox text = new TextBox();
@@ -375,7 +472,7 @@ namespace AgenteApp.UWP.Vistas
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 3);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             text = new TextBox();
@@ -387,7 +484,7 @@ namespace AgenteApp.UWP.Vistas
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 4);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Name = "Grid-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
@@ -453,27 +550,28 @@ namespace AgenteApp.UWP.Vistas
             GridHeaderTemplate.Children.Add(gridCombo);
         }
 
-
         public void CrearAsistente(ref Grid GridHeaderTemplate, Tipificacion campo, int i)
         {
             //label
             VariableSizedWrapGrid gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 0);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Name = "GridLabel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             TextBlock block = new TextBlock();
             block.Text = campo.Descripcion;
-            block.Foreground = GetColor(campo.Colorletra);
+            block.Foreground = presentador.GetColor(campo.Colorletra);
             gridCombo.Children.Add(block);
+            gridCombo.Visibility = presentador.SeleccionarPresntacion(campo.Presentar);
             GridHeaderTemplate.Children.Add(gridCombo);
 
             //asistente
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 1);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Name = "Grid-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
@@ -482,8 +580,7 @@ namespace AgenteApp.UWP.Vistas
             BT.Height = 50;
             BT.Width = 50;
             BT.Click += ConsultaAsistente;
-            BT.Icon = new SymbolIcon(Symbol.Find);
-            
+            BT.Icon = new SymbolIcon(Symbol.Find);          
             BT.Background = new SolidColorBrush(Colors.White);
             Flyout flyout = new Flyout();
             StackPanel SP = new StackPanel();
@@ -509,9 +606,7 @@ namespace AgenteApp.UWP.Vistas
             xamlHeaderTemplate.AppendLine(@"</Grid > ");
             xamlHeaderTemplate.AppendLine(@"</DataTemplate>");
             var itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlHeaderTemplate.ToString()) as DataTemplate;
-
             LV.HeaderTemplate = itemTemplate;
-
             StringBuilder xamlItemTemplate = new StringBuilder();
             xamlItemTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
             xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""15,0,0,0"" >");
@@ -540,25 +635,29 @@ namespace AgenteApp.UWP.Vistas
             BT.Flyout = flyout;
             BtCancel.Click += new RoutedEventHandler(DeleteConfirmation_Click);
             gridCombo.Children.Add(BT);
+            gridCombo.Visibility = presentador.SeleccionarPresntacion(campo.Presentar);
             GridHeaderTemplate.Children.Add(gridCombo);
+
             //campo id
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 2);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Name = "Grid_id-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             TextBox text = new TextBox();
             text.Name = "ID-"+campo.Version+"." +campo.Secuencia+"."+campo.Campoid ;
             gridCombo.Children.Add(text);
+            gridCombo.Visibility = presentador.SeleccionarPresntacion(campo.Presentar);
             GridHeaderTemplate.Children.Add(gridCombo);
+
             // campo descripcion
             gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 3);
             gridCombo.SetValue(Grid.ColumnSpanProperty, 2);
-            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Background = presentador.GetColor(campo.Colorfondo);
             gridCombo.Height = 50;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Name = "Grid_dsc-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
@@ -566,9 +665,11 @@ namespace AgenteApp.UWP.Vistas
             text.Name = "DSC-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             text.Width = 290;
             gridCombo.Children.Add(text);
+            gridCombo.Visibility = presentador.SeleccionarPresntacion(campo.Presentar);
             GridHeaderTemplate.Children.Add(gridCombo);
 
         }
+
         private void GuardarTipi_Click(object sender, RoutedEventArgs e)
         {
             GuardarTipificacion();
@@ -592,18 +693,21 @@ namespace AgenteApp.UWP.Vistas
             listCrm.Add(crm1);
             for (int i = 0; i < configuracion.Count; i++)
             {
+
                 switch (configuracion[i].Asistente)
                 {
                         case "1":                        
                         break;
                         case "2":
-                            valor = buscarIdPadre(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
                             tipi = new Tipificacion();
+                            tipi = buscarComponentePadre(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
+                        if (tipi.Presentar == "SI")
+                        {
                             tipi.Secuencia = configuracion[i].Secuencia;
                             tipi.Campoid = configuracion[i].Campoid;
                             tipi.Descripcion = configuracion[i].Descripcion;
-                            tipi.Valores = valor;
                             tipificaciones.Add(tipi);
+                        }
                         break;
                         case "3":
                             break;
@@ -616,13 +720,16 @@ namespace AgenteApp.UWP.Vistas
                         case "6":
                             break;
                         case "7":
-                            valor=buscarIdPadreTexto(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
                             tipi = new Tipificacion();
+                            tipi = buscarComponentePadreTexto(configuracion[i].Version, configuracion[i].Secuencia, configuracion[i].Campoid);
+
+                        if (tipi.Presentar == "SI")
+                        {
                             tipi.Secuencia = configuracion[i].Secuencia;
                             tipi.Campoid = configuracion[i].Campoid;
                             tipi.Descripcion = configuracion[i].Descripcion;
-                            tipi.Valores = valor;
                             tipificaciones.Add(tipi);
+                        }
                         break;
                 }                
                 
@@ -635,26 +742,6 @@ namespace AgenteApp.UWP.Vistas
             {
                 presentador.ActulizarTipificacion(listCrm, tipificaciones);
             }
-        }
-
-        private SolidColorBrush GetColor(string color)
-        {
-            SolidColorBrush colorBrush = new SolidColorBrush(Colors.White);
-            switch (color)
-            {
-                case "Black":
-                    colorBrush = new SolidColorBrush(Colors.Black);
-                    break;
-                case "White":
-                    colorBrush = new SolidColorBrush(Colors.White);
-                    break;
-                case "Blue":
-                    colorBrush = new SolidColorBrush(Colors.Blue);
-                    break;
-
-            }
-
-            return colorBrush;
         }
 
         private void ConsultaAsistente(object sender, RoutedEventArgs e)
@@ -677,7 +764,7 @@ namespace AgenteApp.UWP.Vistas
                         {
                             if (jera.Campoid.Equals(tip.CampoPadre))
                             {
-                                Criterio = buscarIdPadre(jera.Version, jera.Secuencia, jera.Campoid);
+                                Criterio = buscarComponentePadre(jera.Version, jera.Secuencia, jera.Campoid).Valores;
                                 break;
                             }
                         }
@@ -694,8 +781,9 @@ namespace AgenteApp.UWP.Vistas
 
         }
 
-        private string buscarIdPadre(string version, string secuencia, String campoPadre)
+        private Tipificacion buscarComponentePadre(string version, string secuencia, String campoPadre)
         {
+            Tipificacion TipificaiconRecuperada = new Tipificacion();
             Grid gr = ContentContainer.Children[0] as Grid;
             var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_id-" + version+"."+ secuencia+"."+ campoPadre)
                                                 .Select(a => a)
@@ -707,11 +795,14 @@ namespace AgenteApp.UWP.Vistas
                                                 .First();
 
             TextBox txtId = textID as TextBox;
-            return txtId.Text;
+            TipificaiconRecuperada.Presentar = presentador.TomarPresntacion(GriPrincipal.Visibility);
+            TipificaiconRecuperada.Valores = txtId.Text;
+            return TipificaiconRecuperada;
         }
 
-        private string buscarIdPadreTexto(string version, string secuencia, String campoPadre)
+        private Tipificacion buscarComponentePadreTexto(string version, string secuencia, String campoPadre)
         {
+            Tipificacion TipificaiconRecuperada = new Tipificacion();
             Grid gr = ContentContainer.Children[0] as Grid;
             var GriPrincipal = gr.Children.Where(a => (a as VariableSizedWrapGrid).Name == "Grid_texto-" + version + "." + secuencia + "." + campoPadre)
                                                 .Select(a => a)
@@ -723,7 +814,9 @@ namespace AgenteApp.UWP.Vistas
                                                 .First();
 
             TextBox txtId = textID as TextBox;
-            return txtId.Text;
+            TipificaiconRecuperada.Presentar = presentador.TomarPresntacion(GriPrincipal.Visibility);
+            TipificaiconRecuperada.Valores = txtId.Text;
+            return TipificaiconRecuperada;
         }
 
         public  string IDCRM
@@ -738,6 +831,6 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
-       
+        
     }
 }

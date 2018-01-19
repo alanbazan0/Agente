@@ -33,6 +33,9 @@ namespace AgenteApp.Modelos
         string campoPadre;
         string valorcampoid;
         string valorcampodsc;
+        string versionDependenciaVisual;
+        string secuenciaDependenciaVisual;
+        string valorTrigger;
 
         public string Version { get { return version; } set { version = value; } }
         public string Secuencia { get { return secuencia; } set { secuencia = value; } }
@@ -61,6 +64,9 @@ namespace AgenteApp.Modelos
         public string CampoPadre { get { return campoPadre; } set { campoPadre = value; } }
         public string Valorcampoid { get { return valorcampoid; } set { valorcampoid = value; } }
         public string Valorcampodsc { get { return valorcampodsc; } set { valorcampodsc = value; } }
-    
+        public string VersionDependenciaVisual { get { return versionDependenciaVisual; } set { versionDependenciaVisual = value; } }
+        public string SecuenciaDependenciaVisual { get { return secuenciaDependenciaVisual; } set { secuenciaDependenciaVisual = value; } }
+        public string ValorTrigger { get { return valorTrigger; } set { valorTrigger = value; } }
+
     }
 }

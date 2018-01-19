@@ -12,13 +12,14 @@ namespace AgenteApp.Repositorios
 {
     class TipificacionRepositorio : RepositorioBase
     {
-        public async Task<Resultado<List<Tipificacion>>> ConsultarConfiguracion()
+        public async Task<Resultado<List<Tipificacion>>> ConsultarConfiguracion(string version)
         {
             Resultado<List<Tipificacion>> datos = new Resultado<List<Tipificacion>>();
 
             DireccionBase = Constantes.DIRECCION_BASE;
             Url = "/BastiaanSoftwareCenter/php/repositorios/Tipificacion.php";
             AgregarParametro("accion", "consultar");
+            AgregarParametro("version", version);
             try
             {
                 using (var cliente = new HttpClient())
