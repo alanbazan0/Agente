@@ -155,6 +155,7 @@ namespace AgenteApp.Presentadores
 
         public void CrearTexto(ref Grid xamlHeaderTemplate, Tipificacion campo, int i)
         {
+
             VariableSizedWrapGrid gridCombo = new VariableSizedWrapGrid();
             gridCombo.SetValue(Grid.RowProperty, i);
             gridCombo.SetValue(Grid.ColumnProperty, 0);
@@ -165,7 +166,7 @@ namespace AgenteApp.Presentadores
             block.Text = campo.Descripcion;
             block.Foreground = GetColor(campo.Colorletra);
             block.VerticalAlignment = VerticalAlignment.Center;
-            gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
+            //gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
             gridCombo.Name = "GridLabel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.Children.Add(block);
             xamlHeaderTemplate.Children.Add(gridCombo);
@@ -179,7 +180,7 @@ namespace AgenteApp.Presentadores
             gridCombo.Width = 500;
             gridCombo.Name = "Grid_texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.VerticalAlignment = VerticalAlignment.Center;
-            gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
+            //gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
             TextBox text = new TextBox();
             text.Name = "Texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid; ;
             text.Width = 390;
@@ -266,6 +267,19 @@ namespace AgenteApp.Presentadores
             {
                 return "NO";
             }
+        }
+
+        public async void ConsultarDetalleTipificacion(List<Tipificacion>arrCampos)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            TipificacionRepositorio repositorio = new TipificacionRepositorio();
+            Resultado<List<Tipificacion>> resultado = await repositorio.ConsultarDetalleTipificacion(Constantes.VERSION.ToString(), arrCampos);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.tipificacion = resultado.valor;
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
 
     }

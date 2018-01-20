@@ -33,7 +33,9 @@ namespace AgenteApp.UWP.Vistas
         TipificacionPresentador presentador;
         CRMPresentador presentadorcrm;
         List<Tipificacion> configuracion;
+        List<Tipificacion> configuracionDetalleCampos;
         List<Tipificacion> tipificaciones;
+        List<Tipificacion> datosTipificacion;
         List<DatosAsistente> DAsistentes;
         DatosAsistente DAsistente;
         string AsistenteSeleccionado;
@@ -46,9 +48,11 @@ namespace AgenteApp.UWP.Vistas
             presentador = new TipificacionPresentador(this);
             presentadorcrm = new CRMPresentador(this);
             configuracion = new List<Tipificacion>();
+            configuracionDetalleCampos = new List<Tipificacion>();
             DAsistente = new DatosAsistente();
             DAsistentes = new List<DatosAsistente>();
-            ConsultarConfiguracion();
+            datosTipificacion = new List<Tipificacion>();
+            //ConsultarConfiguracion();
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -58,7 +62,8 @@ namespace AgenteApp.UWP.Vistas
             if (parametros != null)
             {
                 folio = (string)parametros.GetType().GetProperty("folio").GetValue(parametros, null);
-                idCLinete = (string)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);              
+                idCLinete = (string)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
+                presentadorcrm.ConsultarDatosTipificacion(folio, idCLinete);
             }
         }
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
@@ -82,7 +87,7 @@ namespace AgenteApp.UWP.Vistas
 
         public void ConsultarConfiguracion()
         {
-            presentador.ConsultarConfiguracion();
+            presentador.ConsultarDetalleTipificacion(configuracionDetalleCampos);
         }
 
         public List<Tipificacion> tipificacion
@@ -91,7 +96,33 @@ namespace AgenteApp.UWP.Vistas
             {
                 configuracion = value;
                 CrearComponentes(configuracion);
-                presentadorcrm.ConsultarDatosTipificacion(folio, idCLinete);
+                for (int i = 0; i < datosTipificacion.Count; i++)
+               {
+                   switch (value[i].Asistente)
+                   {
+                       case "1":
+                           break;
+                       case "2":
+                           ValorbuscarIdPadre(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+
+                           break;
+                       case "3":
+                           break;
+                       case "4":
+                       //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
+                       //    break;
+                       //case "5":
+                       //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
+                       //    break;
+                       case "6":
+                           break;
+                       case "7":
+                           ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valores);
+
+                           break;
+                   }
+               }
+                //presentadorcrm.ConsultarDatosTipificacion(folio, idCLinete);
             }
         }
 
@@ -151,32 +182,8 @@ namespace AgenteApp.UWP.Vistas
         {
             set
             {
-                for (int i = 0; i < value.Count; i++)
-                {
-                    switch (value[i].Asistente)
-                    {
-                        case "1":
-                            break;
-                        case "2":
-                            ValorbuscarIdPadre(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
-
-                            break;
-                        case "3":
-                            break;
-                        case "4":
-                        //    presentador.CrearRadioButon(ref TipifiacionGrid, campo, i + 1);
-                        //    break;
-                        //case "5":
-                        //    presentador.CrearFecha(ref TipifiacionGrid, campo, i + 1);
-                        //    break;
-                        case "6":
-                            break;
-                        case "7":
-                            ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valores);
-
-                            break;
-                    }
-                }
+                presentador.ConsultarDetalleTipificacion(value);
+                datosTipificacion=value;
             }
         }
 
