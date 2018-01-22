@@ -402,18 +402,22 @@ namespace AgenteApp.UWP.Vistas
             //string l = (string)sender.GetType().GetProperty("SelectedItem").GetValue(sender, null);
 
             itemboxTCorreo = (TipoTelefono)cmbAgregarOriCorre.SelectedItem;
-            correosList.Add(
-                new Correos()
-                {
-                    Correo = correoAgregar.Text,
-                    Origen = itemboxTCorreo.Id,
-                    OrigenDsc= itemboxTCorreo.Descripcion
-                }
-                );
-            correos.ItemsSource = null;
-            // lista();
-            correos.ItemsSource = correosList;
-            correoAgregar.Text = "";
+            if (itemboxTCorreo != null)
+            {
+                correosList.Add(
+                  new Correos()
+                  {
+                      Correo = correoAgregar.Text,
+                      Origen = itemboxTCorreo.Id,
+                      OrigenDsc = itemboxTCorreo.Descripcion
+                  }
+                  );
+                correos.ItemsSource = null;
+                // lista();
+                correos.ItemsSource = correosList;
+                correoAgregar.Text = "";
+            }
+
 
         }
         TipoTelefono itemboxTTelefono;

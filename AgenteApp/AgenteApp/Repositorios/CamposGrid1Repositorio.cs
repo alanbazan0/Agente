@@ -30,6 +30,7 @@ namespace AgenteApp.Repositorios
                     var contenido = new FormUrlEncodedContent(parametros);
                     var resultado = await cliente.PostAsync(Url, contenido);
                     string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    resultadoContenido= Utilidades.UTF8_to_ISO(resultadoContenido);
                     datos = JsonConvert.DeserializeObject<Resultado<List<CampoGrid>>>(resultadoContenido);
                 }
             }
@@ -38,6 +39,6 @@ namespace AgenteApp.Repositorios
                 System.Console.WriteLine(ex.Message);
             }
             return datos;
-        }
+        }        
     }
 }
