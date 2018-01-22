@@ -56,8 +56,14 @@ namespace NavigationMenuSample
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
-                    Label = "CRM",
+                    Label = "Interacciones (CRM)",
                     DestPage = typeof(CRMPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Tipificación",
+                    DestPage = typeof(TipificacionPage)
                 },
                 //new NavMenuItem()
                 //{
@@ -71,12 +77,6 @@ namespace NavigationMenuSample
                 //    Label = "Conferenciar",
                 //    DestPage = typeof(BasicPage)
                 //},
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.BackToWindow,
-                    Label = "Regresar llamada",
-                    DestPage = typeof(BasicPage)
-                },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Mail,
@@ -97,28 +97,34 @@ namespace NavigationMenuSample
                 },
                 new NavMenuItem()
                 {
+                    Symbol = Symbol.BackToWindow,
+                    Label = "Call back",
+                    DestPage = typeof(BasicPage)
+                },             
+                new NavMenuItem()
+                {
                     Symbol = Symbol.Contact,
-                    Label = "Tipificación",
-                    DestPage = typeof(TipificacionPage)
+                    Label = "Llamar(Predictivo/CallBack)",
+                    DestPage = typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
-                    Label = "Llamar",
+                    Label = "Llamar(Manualmente)",
                     DestPage = typeof(LlamarManualmentePage)
+                },
+                 new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Chat interno",
+                    DestPage = typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
                     Label = "Receso",
                     DestPage = typeof(RecesoPage)
-                },
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.Contact,
-                    Label = "Chat interno",
-                    DestPage = typeof(BasicPage)
-                },
+                },            
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,

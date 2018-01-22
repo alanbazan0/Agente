@@ -50,6 +50,8 @@ namespace AgenteApp.UWP.Vistas
         string IdLlamada;
         string IdCliente;
         string IdCrm="0";
+        string ValorAnterior = "";
+        List<string> ListaSecuencias;
 
         public TipificacionPage()
         {
@@ -61,6 +63,7 @@ namespace AgenteApp.UWP.Vistas
             DAsistente = new DatosAsistente();
             DAsistentes = new List<DatosAsistente>();
             ParametroLocal = new Parametros();
+            ListaSecuencias = new List<string>();
             obtenerInformacion();
             
         }
@@ -327,9 +330,13 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
-        private void BuscarDependenciaVisual(string version, string secuencia, string campoIdPedre,string valorTrigger)
+        private void BuscarDependenciaVisual(string version, string secuencia, string campoIdPedre, string valorTrigger)
         {
-            OcultarNoPresentar();
+            for (int j = 0; j < ListaSecuencias.Count; j++)
+            { 
+                if(ListaSecuencias[j]== secuencia)
+                    OcultarNoPresentar(version, secuencia, j);
+            }
             Tipificacion tip = new Tipificacion();
             for (int i = 0; i < configuracion.Count; i++)
             {
@@ -346,28 +353,36 @@ namespace AgenteApp.UWP.Vistas
                             VisualizarTexto(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid,Visibility.Visible);
                             break;
                     }
+                    if(!ListaSecuencias.Contains(secuencia))
+                        ListaSecuencias.Add(secuencia);
                 }
             }
         }
 
-        private void OcultarNoPresentar()
+        private void OcultarNoPresentar(string version, string secuencia, int CountDependent)
         {
             Tipificacion tip = new Tipificacion();
-            for (int i = 0; i < configuracion.Count; i++)
+            for(int j = CountDependent;j<ListaSecuencias.Count;j++)
             {
-                tip = configuracion[i];
-               
-                    Grid gr = ContentContainer.Children[0] as Grid;
-                    switch (tip.Asistente)
+                for (int i = 0; i < configuracion.Count; i++)
+                {
+                    tip = configuracion[i];
+                    if (tip.VersionDependenciaVisual == version && tip.SecuenciaDependenciaVisual == ListaSecuencias[j])
                     {
-                        case "2":
-                            VisualizarAsistente(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid, presentador.SeleccionarPresntacion(tip.Presentar));
-                            break;
-                        case "7":
-                            VisualizarTexto(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid, presentador.SeleccionarPresntacion(tip.Presentar));
-                            break;
+                        Grid gr = ContentContainer.Children[0] as Grid;
+                        switch (tip.Asistente)
+                        {
+                            case "2":
+                                VisualizarAsistente(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid, presentador.SeleccionarPresntacion(tip.Presentar));
+                                break;
+                            case "7":
+                                VisualizarTexto(ref gr, tip.Version + "." + tip.Secuencia + "." + tip.Campoid, presentador.SeleccionarPresntacion(tip.Presentar));
+                                break;
+                        }
                     }
+                }
             }
+            
         }
 
         private void VisualizarAsistente(ref Grid contenedorPrincipal,string campohijo,Visibility visEnable)
@@ -704,6 +719,7 @@ namespace AgenteApp.UWP.Vistas
                         if (tipi.Presentar == "SI")
                         {
                             tipi.Secuencia = configuracion[i].Secuencia;
+                            tipi.Version = configuracion[i].Version;
                             tipi.Campoid = configuracion[i].Campoid;
                             tipi.Descripcion = configuracion[i].Descripcion;
                             tipificaciones.Add(tipi);
@@ -726,6 +742,7 @@ namespace AgenteApp.UWP.Vistas
                         if (tipi.Presentar == "SI")
                         {
                             tipi.Secuencia = configuracion[i].Secuencia;
+                            tipi.Version = configuracion[i].Version;
                             tipi.Campoid = configuracion[i].Campoid;
                             tipi.Descripcion = configuracion[i].Descripcion;
                             tipificaciones.Add(tipi);

@@ -138,7 +138,7 @@
                    IsTabStop="False">
 
             <SplitView.Pane>
-                <Grid x:Name="PaneContentGrid" Background="#ff9900">
+                <Grid x:Name="PaneContentGrid" Background="#575652">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>

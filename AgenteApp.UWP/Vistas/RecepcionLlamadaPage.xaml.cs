@@ -75,6 +75,10 @@ namespace NavigationMenuSample.Views
         List<Call> llamadaConferencia;
         Parametros ParametroLocal;
         string ultimoIdPausaLocal = "0";
+        string noTelefonico = "";
+        string IdCliente = "";
+        string IdCrm = "";
+        string NombreCliente = "";
 
         public Parametros Parametro { get => ParametroLocal; set { } }
 
@@ -312,6 +316,7 @@ namespace NavigationMenuSample.Views
 
         private void CambioTap(object sender, SelectionChangedEventArgs e)
         {
+            ConsultarParametros();
             Pivot PV = (Pivot)sender;
             if (PV.SelectedIndex == 1)
             {
@@ -328,6 +333,44 @@ namespace NavigationMenuSample.Views
             {
                 btTrasnferir.Visibility = Visibility.Collapsed;
                 btConferencia.Visibility = Visibility.Collapsed;
+                
+            }
+        }
+
+        public void ConsultarParametros()
+        {
+            ParametroLocal.IdParamtro = usuario.Id;
+            ParametroLocal.NumeroMaquina = idhardware;
+            ParametroLocal.DireccionIp = ip;
+            presentador.ConsultarParametros();
+        }
+
+        public List<Parametros> Parametros
+        {
+            set
+            {
+                for (int i = 0; i < value.Count; i++)
+                {
+
+                    switch (value[i].PalabraReservada)
+                    {
+                        case "@NUMEROTEL@":
+                            noTelefonico = value[i].ValorParametro;
+                            break;
+                        case "@IDLLAMADA@":
+                            IdLlamada = value[i].ValorParametro;
+                            break;
+                        case "@IDCLIENTE@":
+                            IdCliente = value[i].ValorParametro;
+                            break;
+                        case "@IDCRM@":
+                            IdCrm = value[i].ValorParametro;
+                            break;
+                        case "@NOMCOMPLETO@":
+                           ttxtNombreCompletoconf.Text = ttxtNombreCompleto.Text= NombreCliente = value[i].ValorParametro;
+                            break;
+                    }
+                }
             }
         }
 

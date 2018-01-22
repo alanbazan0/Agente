@@ -24,7 +24,7 @@ namespace AgenteApp.Vistas
         List<Pausas> Pausas { set; }
         List<Supervisores> Supervisores { set; }
         List<Usuario> usuarios { set; }
-
+        List<Parametros> Parametros { set; }
         void MostrarMensajeAsync(string titulo, string mensaje);
 
     }

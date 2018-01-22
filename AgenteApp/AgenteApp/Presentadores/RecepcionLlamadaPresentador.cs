@@ -149,6 +149,19 @@ namespace AgenteApp.Presentadores
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
 
+        public async void ConsultarParametros()
+        {
+            ParametrosRepositorio repositorio = new ParametrosRepositorio();
+            Resultado<List<Parametros>> resultado = await repositorio.Consultar(vista.Parametro);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.Parametros = resultado.valor;
+            }
+            else
+            {
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+            }
+        }
 
 
     }
