@@ -98,12 +98,12 @@ namespace AgenteApp.UWP.Vistas
                 CrearComponentes(configuracion);
                 for (int i = 0; i < datosTipificacion.Count; i++)
                {
-                   switch (value[i].Asistente)
+                   switch (datosTipificacion[i].Asistente)
                    {
                        case "1":
                            break;
                        case "2":
-                           ValorbuscarIdPadre(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valorcampoid, value[i].Valorcampodsc);
+                           ValorbuscarIdPadre(datosTipificacion[i].Version, datosTipificacion[i].Secuencia, datosTipificacion[i].Campoid, datosTipificacion[i].Valorcampoid, datosTipificacion[i].Valorcampodsc);
 
                            break;
                        case "3":
@@ -117,7 +117,7 @@ namespace AgenteApp.UWP.Vistas
                        case "6":
                            break;
                        case "7":
-                           ValorbuscarIdPadreTexto(value[i].Version, value[i].Secuencia, value[i].Campoid, value[i].Valores);
+                           ValorbuscarIdPadreTexto(datosTipificacion[i].Version, datosTipificacion[i].Secuencia, datosTipificacion[i].Campoid, datosTipificacion[i].Valores);
 
                            break;
                    }
