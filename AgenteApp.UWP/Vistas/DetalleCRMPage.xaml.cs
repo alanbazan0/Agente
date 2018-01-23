@@ -247,7 +247,7 @@ namespace AgenteApp.UWP.Vistas
                         presentador.CrearLineaDivisoria(ref TipifiacionGrid, campo, i + 1);
                         break;
                     case "7":
-                        presentador.CrearTexto(ref TipifiacionGrid, campo, i + 1);
+                        presentador.CrearTextoDetalleCRM(ref TipifiacionGrid, campo, i + 1);
                         break;
 
                 }

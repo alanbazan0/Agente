@@ -191,7 +191,41 @@ namespace AgenteApp.Presentadores
             xamlHeaderTemplate.Children.Add(gridCombo);
         }
 
+        public void CrearTextoDetalleCRM(ref Grid xamlHeaderTemplate, Tipificacion campo, int i)
+        {
 
+            VariableSizedWrapGrid gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 0);
+            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Height = 50;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            TextBlock block = new TextBlock();
+            block.Text = campo.Descripcion;
+            block.Foreground = GetColor(campo.Colorletra);
+            block.VerticalAlignment = VerticalAlignment.Center;
+            //gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
+            gridCombo.Name = "GridLabel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
+            gridCombo.Children.Add(block);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+
+            gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 2);
+            gridCombo.SetValue(Grid.ColumnSpanProperty, 3);
+            gridCombo.Background = GetColor(campo.Colorfondo);
+            gridCombo.Height = 50;
+            gridCombo.Width = 500;
+            gridCombo.Name = "Grid_texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            //gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
+            TextBox text = new TextBox();
+            text.Name = "Texto-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid; ;
+            text.Width = 390;
+            text.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Children.Add(text);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+        }
         public SolidColorBrush GetColor(string color)
         {
             SolidColorBrush colorBrush = new SolidColorBrush(Colors.White);
