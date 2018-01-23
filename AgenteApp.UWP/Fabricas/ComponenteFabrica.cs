@@ -18,7 +18,11 @@ namespace AgenteApp.UWP.Fabricas
             switch (tipoComponente)
             {
                 case TipoComponente.Texto:
-                    TextoComponente textBox = new TextoComponente();
+                    TextoComponente textBox;
+                    if (componente.campoId.Equals("BTCLIENTENCOMPLETO"))
+                        textBox = new TextoComponente(275);
+                    else
+                        textBox = new TextoComponente();
                     textBox.Titulo = componente.titulo;
                    // textBox.Width = 600;
                     //textBox.Height = 40;

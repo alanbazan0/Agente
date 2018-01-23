@@ -31,6 +31,23 @@ namespace AgenteApp.Componentes
             this.Children.Add(textBlock);
             this.Children.Add(textBox);
         }
+        public TextoComponente(int tam)
+        {
+            textBox = new TextBox();
+            textBlock = new TextBlock();
+
+            this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(150) });
+            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(tam) });
+            textBlock.SetValue(Grid.ColumnProperty, 0);
+            //textBlock.TextWrapping = TextWrapping.WrapWholeWords;
+            textBox.SetValue(Grid.ColumnProperty, 1);
+            textBlock.Margin = new Thickness(8);
+            textBox.Margin = new Thickness(8);
+            //this.Margin = new Thickness(8);
+            this.Children.Add(textBlock);
+            this.Children.Add(textBox);
+        }
 
         public Campo Filtro
         {
