@@ -66,7 +66,9 @@ namespace AgenteApp.Presentadores
                 Resultado<string> resultado = await repositorio.Actualizar(campos, Constantes.VERSION);
                 if (resultado.mensajeError == string.Empty)
                 {
+                    vista.ActualizarCorreoCliente(resultado.valor);
                     vista.ActualizarTelefonoCliente(resultado.valor);
+
                 }
                 else
                     vista.MostrarMensaje("Error", resultado.mensajeError);
@@ -202,7 +204,18 @@ namespace AgenteApp.Presentadores
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
         }
-
+        public async void ActualizarCorreoCliente(List<Correos> clienteCorreo, string idCliente)
+        {
+            ClientesTelefonoRepositorio repositorio = new ClientesTelefonoRepositorio();
+            Resultado<string> resultado = await repositorio.ActualizarCorreo(clienteCorreo, idCliente);
+            if (resultado.mensajeError == string.Empty)
+            {
+                //vista.MostrarMensaje("Notificación", "Se actualizó el registro correctamente el cliente");
+            }
+            else
+                vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+        
         private void AsignarValores(Objeto registro)
         {
             foreach (var campo in campoFromulario)

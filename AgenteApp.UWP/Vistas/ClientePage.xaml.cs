@@ -402,18 +402,25 @@ namespace AgenteApp.UWP.Vistas
             //string l = (string)sender.GetType().GetProperty("SelectedItem").GetValue(sender, null);
 
             itemboxTCorreo = (TipoTelefono)cmbAgregarOriCorre.SelectedItem;
-            correosList.Add(
-                new Correos()
-                {
-                    Correo = correoAgregar.Text,
-                    Origen = itemboxTCorreo.Id,
-                    OrigenDsc= itemboxTCorreo.Descripcion
-                }
-                );
-            correos.ItemsSource = null;
-            // lista();
-            correos.ItemsSource = correosList;
-            correoAgregar.Text = "";
+            if (itemboxTCorreo != null)
+            {
+                correosList.Add(
+                  new Correos()
+                  {
+                      Id = "",
+                      Correo = correoAgregar.Text,
+                      Origen = itemboxTCorreo.Id,
+                      OrigenDsc = itemboxTCorreo.Descripcion,
+                      EsNuevo = "S"
+
+                  }
+                  );
+                correos.ItemsSource = null;
+                // lista();
+                correos.ItemsSource = correosList;
+                correoAgregar.Text = "";
+            }
+
 
         }
         TipoTelefono itemboxTTelefono;
@@ -436,7 +443,18 @@ namespace AgenteApp.UWP.Vistas
             clienteTelefono.TipoTelefono = itemboxTTelefono.Id;*/
             presentador.ActualizarTelefonoCliente(telefonosLis,idCliente);
         }
-
+        public void ActualizarCorreoCliente(string idCliente)
+        {
+            /*clienteTelefono.Id = idCliente;
+            clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
+            clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
+            clienteTelefono.Numeracion = noTelefonicoClienteTextBox.Text;
+            clienteTelefono.TelefonoCliente = "0";
+            clienteTelefono.Compania =razonSocialTextBox.Text;
+            TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
+            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;*/
+            presentador.ActualizarCorreoCliente(correosList, idCliente);
+        }
         public void ConsultarPortabilidad(string compania,string IdMunicipio, string IdConsecutivo)
         {
             telefonosLis.Add(
