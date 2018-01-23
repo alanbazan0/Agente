@@ -57,7 +57,7 @@ namespace NavigationMenuSample.Views
                     if (value[i].PalabraReservada.Equals("@NOMCOMPLETO@"))
                     {
                         nombreCompleto = value[i].ValorParametro;
-                        //NombreCliente.Text = nombreCompleto;
+                        txtNombreCompleto.Text = nombreCompleto;
                     }
                     if (value[i].PalabraReservada.Equals("@IDCLIENTE@"))
                     {
