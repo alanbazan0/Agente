@@ -66,7 +66,7 @@
                 <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
-        <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+        <ProgressRing x:Name="progressRing" Height="50" Width="50" Margin="0,50,0,0" Foreground="#6b6b6b"/>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="700" >
             <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Auto">
                 <Grid x:Name="ContentContainer"  EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
