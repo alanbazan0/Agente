@@ -563,6 +563,7 @@ namespace NavigationMenuSample.Views
             tipoTelefonoTextBox.Text = "";
             tipoLlamadaTextBox.Text = "";
             estatusTextBox.Text = "";
+            TiempoEsperaListView.ItemsSource = null;
             lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
             
         }
