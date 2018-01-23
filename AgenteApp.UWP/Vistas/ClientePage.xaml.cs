@@ -407,9 +407,12 @@ namespace AgenteApp.UWP.Vistas
                 correosList.Add(
                   new Correos()
                   {
+                      Id = "",
                       Correo = correoAgregar.Text,
                       Origen = itemboxTCorreo.Id,
-                      OrigenDsc = itemboxTCorreo.Descripcion
+                      OrigenDsc = itemboxTCorreo.Descripcion,
+                      EsNuevo = "S"
+
                   }
                   );
                 correos.ItemsSource = null;
@@ -440,7 +443,18 @@ namespace AgenteApp.UWP.Vistas
             clienteTelefono.TipoTelefono = itemboxTTelefono.Id;*/
             presentador.ActualizarTelefonoCliente(telefonosLis,idCliente);
         }
-
+        public void ActualizarCorreoCliente(string idCliente)
+        {
+            /*clienteTelefono.Id = idCliente;
+            clienteTelefono.Nir = parametroPortabilidad.IdMunicipio;
+            clienteTelefono.Serie = parametroPortabilidad.IdConsecutivo;
+            clienteTelefono.Numeracion = noTelefonicoClienteTextBox.Text;
+            clienteTelefono.TelefonoCliente = "0";
+            clienteTelefono.Compania =razonSocialTextBox.Text;
+            TipoTelefono itemboxTTelefono = (TipoTelefono)tipoTelefonoTextBox.SelectedItem;
+            clienteTelefono.TipoTelefono = itemboxTTelefono.Id;*/
+            presentador.ActualizarCorreoCliente(correosList, idCliente);
+        }
         public void ConsultarPortabilidad(string compania,string IdMunicipio, string IdConsecutivo)
         {
             telefonosLis.Add(

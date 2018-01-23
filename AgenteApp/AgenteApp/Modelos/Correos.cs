@@ -7,7 +7,7 @@ namespace AgenteApp.Modelos
     public class Correos
     {
         string id, fecha, nombre, correo, asunto, contenido, origen, origenDsc;
-        string acorreo , titulo, total, dia , semana , mes, NomCLinete;
+        string acorreo , titulo, total, dia , semana , mes, NomCLinete, esNuevo;
 
         public string OrigenDsc { get { return origenDsc; } set { origenDsc = value; } }
         public string Origen { get { return origen; } set { origen = value; } }
@@ -20,7 +20,7 @@ namespace AgenteApp.Modelos
         public string Contenido { get { return contenido; } set { contenido = value; } }
         public string Acorreo { get { return acorreo; } set { acorreo = value; } }
         public string Titulo { get { return titulo; } set { titulo = value; } }
-
+        public string EsNuevo { get { return esNuevo; } set { esNuevo = value; } }
         public string Total { get { return total; } set { total = value; } }
         public string DIa { get { return dia; } set { dia = value; } }
         public string Semana { get { return semana; } set { semana = value; } }

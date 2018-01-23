@@ -329,5 +329,36 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+        public async Task<Resultado<string>> ActualizarCorreo(List<Correos> clienteCorreo, string idCliente)
+        {
+            Resultado<string> datos = new Resultado<string>();
+            //Resultado<List<Cliente>> datos = new Resultado<List<Cliente>>();
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/ClientesTelefonos.php";
+            AgregarParametro("accion", "ActualizarCorreo");
+            AgregarParametro("clienteCorreo", JsonConvert.SerializeObject(clienteCorreo));
+            AgregarParametro("idCliente", idCliente);
+            //AgregarParametro("campos", JsonConvert.SerializeObject(campos));
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    datos = JsonConvert.DeserializeObject<Resultado<string>>(resultadoContenido);
+                    //datos = JsonConvert.DeserializeObject<Resultado<List<Cliente>>>(resultadoContenido);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
     }
 }

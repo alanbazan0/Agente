@@ -64,6 +64,7 @@ namespace AgenteApp.UWP.Vistas
                 folio = (string)parametros.GetType().GetProperty("folio").GetValue(parametros, null);
                 idCLinete = (string)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
                 presentadorcrm.ConsultarDatosTipificacion(folio, idCLinete);
+                progressRing.IsActive = true;
             }
         }
         private void CommandBarPage_Loaded(object sender, RoutedEventArgs e)
@@ -122,6 +123,7 @@ namespace AgenteApp.UWP.Vistas
                            break;
                    }
                }
+                progressRing.IsActive = false;
                 //presentadorcrm.ConsultarDatosTipificacion(folio, idCLinete);
             }
         }
