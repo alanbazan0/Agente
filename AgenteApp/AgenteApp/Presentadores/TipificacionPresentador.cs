@@ -169,6 +169,7 @@ namespace AgenteApp.Presentadores
             //gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
             gridCombo.Name = "GridLabel-" + campo.Version + "." + campo.Secuencia + "." + campo.Campoid;
             gridCombo.Children.Add(block);
+            gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
             xamlHeaderTemplate.Children.Add(gridCombo);
 
             gridCombo = new VariableSizedWrapGrid();
@@ -186,6 +187,7 @@ namespace AgenteApp.Presentadores
             text.Width = 390;
             text.VerticalAlignment = VerticalAlignment.Center;
             gridCombo.Children.Add(text);
+            gridCombo.Visibility = SeleccionarPresntacion(campo.Presentar);
             xamlHeaderTemplate.Children.Add(gridCombo);
         }
 
