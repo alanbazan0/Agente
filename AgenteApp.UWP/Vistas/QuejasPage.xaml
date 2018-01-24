@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Visible" HorizontalContentAlignment="Stretch" Background="#ff9900" Margin="0">
             <AppBarButton Icon="Message" Label="Enviar sms" Foreground="White"/>
             <AppBarButton Icon="ClosePane" Label="Cerrar" Foreground="White"/>
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
@@ -59,17 +59,17 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="No. Cliente:" HorizontalAlignment="Left"     Margin="15,15,15,15" Width="auto"/>
+                
                 <TextBlock Grid.Column="2" Grid.Row="0" Text="RFC:" HorizontalAlignment="Left"       Margin="15" Width="auto"/>
                 <TextBlock Grid.Column="4" Grid.Row="0" Text="CURP:" HorizontalAlignment="Left"   Margin="-140,15,15,15" Width="auto"/>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="NSS" HorizontalAlignment="Left" Margin="15,0,0,0" Width="auto"/>
-                <TextBlock Grid.Column="2" Grid.Row="1" Text="Nombre completo" HorizontalAlignment="Left" Margin="15,0,0,0" Width="auto"/>
+                
 
                 <TextBox x:Name="correotxt"      Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Margin="15" Width="200" />
                 <TextBox x:Name="asuntotxt_Copy" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Left" Margin="-80,15,15,15" Width="200" />
                 <TextBox x:Name="asuntotxt"      Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center"  Margin="235,15,15,15"  Width="200" Grid.ColumnSpan="2" />
                 <TextBox x:Name="contenidotxt"   Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Margin="15,3,18,27" Width="200" />
-                <TextBox x:Name="NombreComtxt"   Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="21,3,18,27" Width="431" />
+                
             </Grid>
                 <Grid  Padding="0" >
                     <Grid.ColumnDefinitions>
@@ -93,13 +93,30 @@
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Nombre completo" HorizontalAlignment="Left" Margin="15" Width="125"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="No. Cliente:" HorizontalAlignment="Left"    Margin="15" Width="auto"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="No. Credito:" HorizontalAlignment="Left"    Margin="15" Width="auto"/>
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Area captura:" HorizontalAlignment="Left"    Margin="15" Width="auto"/>
+                <TextBlock Grid.Column="0" Grid.Row="5" Text="Area de la queja:" HorizontalAlignment="Left"    Margin="15" Width="auto"/>
+                <TextBlock Grid.Column="0" Grid.Row="6" Text="Fecha de acontecimiento:" HorizontalAlignment="Left"    Margin="15" Width="auto"/>
+                <TextBlock Grid.Column="0" Grid.Row="7" Text="Motivo:"         HorizontalAlignment="Left" Margin="15" Width="50"/>
+                <TextBlock Grid.Column="0" Grid.Row="8" Text="Observaciones"   HorizontalAlignment="Left" Margin="15" Width="auto"/>
 
-                            <TextBlock Grid.Column="0" Grid.Row="2" Text="Motivo:" HorizontalAlignment="Left"   Margin="15" Width="50"/>
-                             <TextBlock Grid.Column="0" Grid.Row="4" Text="Observaciones" HorizontalAlignment="Left" Margin="15" Width="auto"/>
-                            <TextBox x:Name="MotivoBtxt"      Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" PlaceholderText="" Margin="3" Width="600" />
-                            <TextBox x:Name="observacionesBtxt"   Grid.Column="1" Grid.Row="4" Margin="15" Width="600" Height="150"/>
-                            <Button Grid.Column="1"    Grid.Row="5"  Background="#ff9900" Foreground="White"  Content="Enviar"  HorizontalAlignment="Right"   Margin="15" Width="auto"/>
+                <TextBox x:Name="NombreComtxt"      Grid.Column="1" Grid.Row="1"    HorizontalAlignment="Left" Margin="3" Width="600" />
+                <TextBox x:Name="NoCliente"         Grid.Column="1" Grid.Row="2"    HorizontalAlignment="Left" Margin="3" Width="300" />
+                <TextBox x:Name="NoCredito"         Grid.Column="1" Grid.Row="3"    HorizontalAlignment="Left" Margin="3" Width="300" />
+                <ComboBox x:Name="AreaCaptura"       Grid.Column="1" Grid.Row="4"    HorizontalAlignment="Left" Margin="3" Width="500" />
+                <TextBox x:Name="AreaQueja"        Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" Margin="3" Width="500" />
+                <DatePicker x:Name="FechaAcontecimiento" Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="3" Width="500" />
+                <TextBox x:Name="MotivoBtxt"        Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" Margin="3" Width="600" />
+                <TextBox x:Name="observacionesBtxt" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" Margin="3" Width="600" Height="150"/>
+                <Button Grid.Column="1" Grid.Row="9"  Background="#ff9900" Foreground="White"  Content="Enviar"  HorizontalAlignment="Left"   Margin="3" Width="auto"/>
 
                 </Grid>
          </StackPanel>
