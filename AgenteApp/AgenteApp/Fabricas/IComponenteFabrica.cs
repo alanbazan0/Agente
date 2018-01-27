@@ -8,6 +8,6 @@ namespace AgenteApp.Fabricas
 {
     public interface IComponenteFabrica
     {
-        IComponente CrearComponente(Componente criterioSeleccion); 
+        IComponente CrearComponente(Componente criterioSeleccion,int tamanoTitulo); 
     }
 }

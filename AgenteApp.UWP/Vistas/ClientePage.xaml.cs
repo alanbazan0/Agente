@@ -24,6 +24,7 @@ using System.Reflection;
 using Windows.Networking;
 using Windows.Networking.Connectivity;
 using Windows.System.Profile;
+using System.Text;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -43,6 +44,8 @@ namespace AgenteApp.UWP.Vistas
         List<CodigoPostal> direccionCP;
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
+
+        Flyout flyout;
         private ModoVentana modo;
         string numeroSeleccionado, numeroSeleccionadoId;
         string correoSeleccionado, correoSeleccionadoId;
@@ -197,30 +200,128 @@ namespace AgenteApp.UWP.Vistas
                 correosList = value;
             }
         }
-
-        public List<CodigoPostal> direccionesCodigo
+        public void direccioneCodigo(List<CodigoPostal> direccionesCodigo, object sender, RoutedEventArgs e)
         {
-            set
-            {
-                var colonia = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECOLONIA")
+            var colonia = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECOLONIA")
                                           .Select(a => a)
                                           .First();
-                var ciudad = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECIUDAD")
-                                          .Select(a => a)
-                                          .First();
-                var estado = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEESTADO")
-                                          .Select(a => a)
-                                          .First();
+            var ciudad = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECIUDAD")
+                                      .Select(a => a)
+                                      .First();
+            var estado = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEESTADO")
+                                      .Select(a => a)
+                                      .First();
+            var codigopos = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECPID")
+                                      .Select(a => a)
+                                      .First();
+            
 
-                if (value.Count() > 0)
-                { 
-                    (colonia as IComponente).Valor = value[0].colonia;
-                    (ciudad as IComponente).Valor = value[0].ciudad;
-                    (estado as IComponente).Valor = value[0].estado;
+            flyout = new Flyout();
+            StackPanel SP = new StackPanel();
+            ListView LV = new ListView();
+            LV.SetValue(Grid.ColumnProperty, 0);
+            LV.Name = "ListView";
+            LV.IsItemClickEnabled = true;
+            LV.ItemClick += FlyAsisListView_ItemClick;
+            LV.MaxHeight = 400;
+            StringBuilder xamlHeaderTemplate = new StringBuilder();
+            xamlHeaderTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
+            xamlHeaderTemplate.AppendLine(@"<Grid  Padding = ""0"" Margin = ""15,0,0,0"" >");
+            xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions >");
+            xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width = ""100"" />");
+            xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width = ""250"" />");
+            xamlHeaderTemplate.AppendLine(@"</Grid.ColumnDefinitions >");
+            xamlHeaderTemplate.AppendLine(@"<Border  Grid.Column = ""0"" CornerRadius = ""0"" BorderBrush = ""Black"" Background = ""#6b6b6b"" BorderThickness = ""0 0 0 0""  Grid.ColumnSpan = ""2"" Margin = ""0,0,-124,0"" >");
+            xamlHeaderTemplate.AppendLine(@"<TextBlock Text = ""ID""  FontSize = ""15"" Foreground = ""White"" MaxLines = ""2"" TextWrapping = ""WrapWholeWords"" />");
+            xamlHeaderTemplate.AppendLine(@"</Border >");
+            xamlHeaderTemplate.AppendLine(@"<Border  Grid.Column = ""2"" CornerRadius = ""0"" BorderBrush = ""Black"" Background = ""#6b6b6b"" BorderThickness = ""0 0 0 0"" Margin = ""0,0,-124,0"" > ");
+            xamlHeaderTemplate.AppendLine(@"<TextBlock Text = ""Colonia""  FontSize = ""15"" Foreground = ""White"" MaxLines = ""2"" TextWrapping = ""WrapWholeWords"" />");
+            xamlHeaderTemplate.AppendLine(@"</Border >");
+            xamlHeaderTemplate.AppendLine(@"</Grid > ");
+            xamlHeaderTemplate.AppendLine(@"</DataTemplate>");
+            var itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlHeaderTemplate.ToString()) as DataTemplate;
+            LV.HeaderTemplate = itemTemplate;
+            StringBuilder xamlItemTemplate = new StringBuilder();
+            xamlItemTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
+            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""15,0,0,0"" >");
+            xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions >");
+            xamlItemTemplate.AppendLine(@"<ColumnDefinition Width = ""100"" /> ");
+            xamlItemTemplate.AppendLine(@"<ColumnDefinition Width = ""250"" />");
+            xamlItemTemplate.AppendLine(@"</Grid.ColumnDefinitions >");
+            xamlItemTemplate.AppendLine(@"<Grid.RowDefinitions > ");
+            xamlItemTemplate.AppendLine(@"<RowDefinition Height = ""Auto"" />");
+            xamlItemTemplate.AppendLine(@"</Grid.RowDefinitions >");
+            xamlItemTemplate.AppendLine(@"<TextBlock Grid.Column = ""0"" Text = ""{Binding JerId1}"" MaxLines = ""2"" TextWrapping = ""WrapWholeWords"" /> ");
+            xamlItemTemplate.AppendLine(@"<TextBlock Grid.Column = ""3"" Text = ""{Binding colonia}"" MaxLines = ""2"" TextWrapping = ""WrapWholeWords"" />");
+            xamlItemTemplate.AppendLine(@"</Grid >");
+            xamlItemTemplate.AppendLine(@"</DataTemplate>");
+            itemTemplate = Windows.UI.Xaml.Markup.XamlReader.Load(xamlItemTemplate.ToString()) as DataTemplate;
+            LV.ItemTemplate = itemTemplate;
+            SP.Children.Add(LV);
+            Button BtCancel = new Button();
+            BtCancel.Name = "ButtonCancel";
+            BtCancel.Content = "Cancelar";
+            BtCancel.HorizontalAlignment = HorizontalAlignment.Right;
+            //SP.Children.Add(BtCancel);
+            flyout.Placement = FlyoutPlacementMode.Top;
+            flyout.Content = SP;
+            FlyoutBase.SetAttachedFlyout(codigopos as FrameworkElement, flyout);
+
+            if (direccionesCodigo.Count() > 0)
+            {
+                (colonia as IComponente).Valor = direccionesCodigo[0].colonia;
+                (ciudad as IComponente).Valor = direccionesCodigo[0].ciudad;
+                (estado as IComponente).Valor = direccionesCodigo[0].estado;
+                
+                if (direccionesCodigo.Count() >1)
+                {
+                    FrameworkElement senderElement = sender as FrameworkElement;
+                    FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+                    flyoutBase.ShowAt(senderElement);
+
+                    Flyout f = flyoutBase as Flyout;
+
+                    StackPanel sp = f.Content as StackPanel;
+                    var listv = sp.Children.Where(a => (a as ListView).Name == "ListView")
+                                                .Select(a => a)
+                                                .First();
+                    ListView lv = listv as ListView;
+                    lv.ItemsSource = direccionesCodigo;
                 }
+            }
+            else
+            {
+                (colonia as IComponente).Valor = "";
+                (ciudad as IComponente).Valor = "";
+                (estado as IComponente).Valor = "";
             }
         }
 
+        public void FlyAsisListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            ListView LV = sender as ListView;
+            var usuarioConferencia = e.ClickedItem;
+            if (usuarioConferencia != null)
+            {
+
+                var colonia = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECOLONIA")
+                                         .Select(a => a)
+                                         .First();
+
+
+                (colonia as IComponente).Valor = (string)usuarioConferencia.GetType().GetProperty("colonia").GetValue(usuarioConferencia, null);
+
+                var codigopos = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTECPID")
+                                      .Select(a => a)
+                                      .First();
+
+                FrameworkElement senderElement = codigopos as FrameworkElement;
+                FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout(senderElement);
+
+                flyoutBase.Hide();
+            }
+        }
         //private void AppCerrarButton_Click(object sender, RoutedEventArgs e)
         //{
 
@@ -238,9 +339,9 @@ namespace AgenteApp.UWP.Vistas
             }
         }
 
-        public void CrearFormularioClientes(Componente componente)
+        public void CrearFormularioClientes(Componente componente,int tamanoTitulo)
         {
-            IComponente componenteVista = componenteFabrica.CrearComponente(componente); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            IComponente componenteVista = componenteFabrica.CrearComponente(componente,tamanoTitulo); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
             
             /*if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE")
             {
@@ -250,6 +351,10 @@ namespace AgenteApp.UWP.Vistas
                  componenteVista.Componente.campoId == "BTCLIENTEAPATERNO" || componenteVista.Componente.campoId == "BTCLIENTEAMATERNO")
             {
                 (componenteVista as UIElement).LostFocus += ClientePage_KeyDownName;
+            }
+            if (componenteVista.Componente.campoId == "BTCLIENTENCOMPLETO")
+            {
+                (componenteVista as UIElement).SetValue(VariableSizedWrapGrid.ColumnSpanProperty, 2);
             }
             //le asiganamos evento al codigo postal si lo trea, para consultar
             else if (componenteVista.Componente.campoId == "BTCLIENTECPID")
@@ -268,10 +373,9 @@ namespace AgenteApp.UWP.Vistas
                                        .First();
             codigoPostal=((TextoComponente)CPOSTAL).Filtro.valor;
 
-            presentador.consultarCP(codigoPostal);
+            presentador.consultarCP(codigoPostal,sender,e);
 
         }
-
         private void ClientePage_KeyDownName(object sender, RoutedEventArgs e)
         {
             string nombre = "";
@@ -279,7 +383,8 @@ namespace AgenteApp.UWP.Vistas
             string paterno = "";
             string materno = "";
             //hay que programar el evento onkeypress in the tap button 
-            
+            if (modo == ModoVentana.ALTA)
+            {
                 var primerNombre = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEPNOMBRE")
                                            .Select(a => a)
                                            .First();
@@ -296,15 +401,16 @@ namespace AgenteApp.UWP.Vistas
                 var nombreCompletoC = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTENCOMPLETO")
                                           .Select(a => a)
                                           .First();
-                
+
                 nombre = ((TextoComponente)primerNombre).Filtro.valor;
                 nombreS = ((TextoComponente)segundoNombre).Filtro.valor;
                 paterno = ((TextoComponente)apellidoPaterno).Filtro.valor;
                 materno = ((TextoComponente)apellidoMaterno).Filtro.valor;
 
-            nombreCompletoC.SetValue(Grid.ColumnSpanProperty,2);
-            nombreCompletoC.SetValue(WidthProperty, 500);
-            (nombreCompletoC as IComponente).Valor  = nombre + " " + nombreS + " " + paterno + " " + materno;
+                nombreCompletoC.SetValue(Grid.ColumnSpanProperty, 2);
+                nombreCompletoC.SetValue(WidthProperty, 500);
+                (nombreCompletoC as IComponente).Valor = nombre + " " + nombreS + " " + paterno + " " + materno;
+            }
             
         }
 
@@ -498,5 +604,7 @@ namespace AgenteApp.UWP.Vistas
             dataReader.ReadBytes(bytes);
             idhardware = BitConverter.ToString(bytes);
         }
+
+       
     }
 }

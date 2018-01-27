@@ -205,19 +205,14 @@ namespace NavigationMenuSample.Views
             CRMListView.ItemTemplate = itemTemplate;
         }
 
-        public void CrearFormularioClientes(Componente componente)
+        public void CrearFormularioClientes(Componente componente,int tamanoTitulo)
         {
-            IComponente componenteVista = componenteFabrica.CrearComponente(componente); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            IComponente componenteVista = componenteFabrica.CrearComponente(componente, tamanoTitulo); //criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
 
-            /*if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE")
+            if (componenteVista.Componente.campoId == "BTCLIENTENCOMPLETO")
             {
-                (componenteVista as UIElement).KeyDown += ClientePage_KeyDownName;
-            }*/
-            /*if (componenteVista.Componente.campoId == "BTCLIENTEPNOMBRE" || componenteVista.Componente.campoId == "BTCLIENTESNOMBRE" ||
-                 componenteVista.Componente.campoId == "BTCLIENTEAPATERNO" || componenteVista.Componente.campoId == "BTCLIENTEAMATERNO")
-            {
-                (componenteVista as UIElement).LostFocus += ClientePage_KeyDownName;
-            }*/
+                (componenteVista as UIElement).SetValue(VariableSizedWrapGrid.ColumnSpanProperty, 2);
+            }
             formularioComponentes.Children.Add(componenteVista as UIElement);
         }
 

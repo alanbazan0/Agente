@@ -79,7 +79,7 @@
                     <TextBox x:Name="txtNombreCompleto" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Left"  FontSize="15" Text="" Height="35" Width="350" Margin="-150,0,0,0"/>
 
                 </VariableSizedWrapGrid>
-               <VariableSizedWrapGrid Grid.Row="1" x:Name="formularioComponentes"  Orientation="Horizontal" Margin="5" Width="Auto"  ItemHeight="50" ItemWidth="300" Grid.RowSpan="2" >
+                <VariableSizedWrapGrid Grid.Row="1" x:Name="formularioComponentes"  Orientation="Horizontal" Margin="5" Width="auto"  ItemHeight="50" >
                  
                 </VariableSizedWrapGrid>
                

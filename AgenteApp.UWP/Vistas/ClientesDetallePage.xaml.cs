@@ -141,9 +141,9 @@ namespace NavigationMenuSample.Views
         public string IP { get { return ip; } set { ip = value; } }
         public string IdHardware { get { return idhardware; } set { idhardware = value; } }
 
-        public void CrearCriterioSeleccion(Componente criterioSeleccion)
+        public void CrearCriterioSeleccion(Componente criterioSeleccion,int tamanoTitulo)
         {
-            IComponente componente = componenteFabrica.CrearComponente(criterioSeleccion);
+            IComponente componente = componenteFabrica.CrearComponente(criterioSeleccion, tamanoTitulo);
             criteriosSeleccionDetalleCliente.Children.Add(componente as UIElement);
            
         }
