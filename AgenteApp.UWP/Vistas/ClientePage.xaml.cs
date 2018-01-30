@@ -407,8 +407,6 @@ namespace AgenteApp.UWP.Vistas
                 paterno = ((TextoComponente)apellidoPaterno).Filtro.valor;
                 materno = ((TextoComponente)apellidoMaterno).Filtro.valor;
 
-                nombreCompletoC.SetValue(Grid.ColumnSpanProperty, 2);
-                nombreCompletoC.SetValue(WidthProperty, 500);
                 (nombreCompletoC as IComponente).Valor = nombre + " " + nombreS + " " + paterno + " " + materno;
             }
             
