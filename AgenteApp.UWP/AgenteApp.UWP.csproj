@@ -157,6 +157,9 @@
     <Compile Include="Vistas\RecesoPage.xaml.cs">
       <DependentUpon>RecesoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ReconocimientoVozPage.xaml.cs">
+      <DependentUpon>ReconocimientoVozPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\ResponCorreo.xaml.cs">
       <DependentUpon>ResponCorreo.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vistas\RecesoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vistas\ReconocimientoVozPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

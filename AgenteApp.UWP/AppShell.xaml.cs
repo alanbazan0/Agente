@@ -124,7 +124,13 @@ namespace NavigationMenuSample
                     Symbol = Symbol.Contact,
                     Label = "Receso",
                     DestPage = typeof(RecesoPage)
-                },            
+                },
+                 new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Label = "Reconocimiento de voz",
+                    DestPage = typeof(ReconocimientoVozPage)
+                },
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,

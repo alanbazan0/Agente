@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Reflection;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,41 +35,41 @@ namespace NavigationMenuSample.Views
             Button padnumeric = (Button)sender;
             switch (padnumeric.Name)
             {
-                case "tbt7":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "7";
+                case "tbt7Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "7";
                     break;
-                case "tbt8":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "8";
+                case "tbt8Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "8";
                     break;
-                case "tbt9":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "9";
+                case "tbt9Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "9";
                     break;
-                case "tbt4":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "4";
+                case "tbt4Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "4";
                     break;
-                case "tbt5":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "5";
+                case "tbt5Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "5";
                     break;
-                case "tbt6":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "6";
+                case "tbt6Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "6";
                     break;
                 case "tbt3":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "3";
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "3";
                     break;
-                case "tbt2":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "2";
+                case "tbt2Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "2";
                     break;
-                case "tbt1":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "1";
+                case "tbt1Out":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "1";
                     break;
-                case "tbta":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "*";
+                case "tbtaOut":
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "*";
                     break;
                 case "tbt0":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "0";
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "0";
                     break;
                 case "tbtg":
-                    ttxtNumeroATranferir.Text = ttxtNumeroATranferir.Text + "#";
+                    ttxtNumeroATranferirOut.Text = ttxtNumeroATranferirOut.Text + "#";
                     break;
                 case "cbt7":
                     txtNotelefonico.Text = txtNotelefonico.Text + "7";
@@ -107,6 +108,18 @@ namespace NavigationMenuSample.Views
                     txtNotelefonico.Text = txtNotelefonico.Text + "#";
                     break;
             }
+        }
+
+        private void supervisoresListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var supervisor = e.ClickedItem;
+
+            if (supervisor != null)
+            {
+                var contenido = (string)supervisor.GetType().GetProperty("ExtensionSupervisor").GetValue(supervisor, null);
+                ttxtNumeroATranferirOut.Text = contenido;
+            }
+
         }
     }
 }
