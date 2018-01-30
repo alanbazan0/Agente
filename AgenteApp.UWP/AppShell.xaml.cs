@@ -105,7 +105,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Contact,
                     Label = "Llamar(Predictivo/CallBack)",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(LlamarPredictivoPage)
                 },
                 new NavMenuItem()
                 {

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Windows.UI.Xaml;
 
 namespace AgenteApp.Presentadores
 {
@@ -36,10 +37,11 @@ namespace AgenteApp.Presentadores
             if (resultado.mensajeError == string.Empty)
             {
                 campoFromulario = resultado.valor;
+                int tamanoTitulo = CalcularColumanMayor(campoFromulario);
                 foreach (Componente campoFromulario in campoFromulario)
                 {
                     if (campoFromulario.presentacion == "1")
-                        vista.CrearFormularioClientes(campoFromulario);
+                        vista.CrearFormularioClientes(campoFromulario, tamanoTitulo);
                 }
             }
             else
@@ -119,14 +121,32 @@ namespace AgenteApp.Presentadores
             if (resultado.mensajeError == string.Empty)
             {
                 campoFromulario = resultado.valor;
+                int tamanoTitulo= CalcularColumanMayor(campoFromulario);
                 foreach (Componente campoFromulario in campoFromulario)
                 {
                     if (campoFromulario.presentacion == "1")
-                        vista.CrearFormularioClientes(campoFromulario);
+                        vista.CrearFormularioClientes(campoFromulario, tamanoTitulo);
                 }
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
+        }
+
+        public int CalcularColumanMayor(List<Componente> campoFromularios)
+        {
+            int tamanoTitulo = 0;
+            foreach (Componente campoFromulario in campoFromularios)
+            {                  
+                    if (Convert.ToInt32(campoFromulario.titulo.Count()) > tamanoTitulo)
+                    {
+                        tamanoTitulo = Convert.ToInt32(campoFromulario.titulo.Count());
+                    }
+                    else
+                    {
+                    }
+                
+            }
+           return tamanoTitulo;
         }
 
         public async void TipoTelefono()
@@ -143,14 +163,14 @@ namespace AgenteApp.Presentadores
         }
 
 
-        public async void consultarCP(string cp)
+        public async void consultarCP(string cp, object sender, RoutedEventArgs e)
         {
             FormularioAltaRepositorio repositorio = new FormularioAltaRepositorio();
             Resultado<List<CodigoPostal>> resultado = await repositorio.consultarCP(cp);
 
             if (resultado.mensajeError == string.Empty)
             {
-                vista.direccionesCodigo = resultado.valor;
+                vista.direccioneCodigo(resultado.valor,sender,e);
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);

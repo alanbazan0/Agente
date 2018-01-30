@@ -14,13 +14,12 @@ namespace AgenteApp.Componentes
         protected TextBox textBox;
         protected TextBlock textBlock;
 
-        public TextoComponente()
+        public TextoComponente(int tamTitulo)
         {
             textBox = new TextBox();
             textBlock = new TextBlock();
-            
             this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(150) });
+            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(tamTitulo) });
             this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(150) });
             textBlock.SetValue(Grid.ColumnProperty, 0);
             //textBlock.TextWrapping = TextWrapping.WrapWholeWords;
@@ -31,13 +30,12 @@ namespace AgenteApp.Componentes
             this.Children.Add(textBlock);
             this.Children.Add(textBox);
         }
-        public TextoComponente(int tam)
+        public TextoComponente(int tam, int tamTitulo)
         {
             textBox = new TextBox();
             textBlock = new TextBlock();
-
             this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(150) });
+            this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(tamTitulo) });
             this.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(tam) });
             textBlock.SetValue(Grid.ColumnProperty, 0);
             //textBlock.TextWrapping = TextWrapping.WrapWholeWords;

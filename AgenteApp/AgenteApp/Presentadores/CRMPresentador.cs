@@ -84,10 +84,11 @@ namespace AgenteApp.Presentadores
             if (resultado.mensajeError == string.Empty)
             {
                 campoFromulario = resultado.valor;
+                int tamanoTitulo = CalcularColumanMayor(campoFromulario);
                 foreach (Componente campoFromulario in campoFromulario)
                 {
                     if (campoFromulario.presentacion == "1")
-                        vista.CrearFormularioClientes(campoFromulario);
+                        vista.CrearFormularioClientes(campoFromulario, tamanoTitulo);
                 }
                 TraerDatosCliente(Convert.ToInt32(idCliente));
             }
@@ -128,6 +129,20 @@ namespace AgenteApp.Presentadores
             else
                 vista2.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
+        public int CalcularColumanMayor(List<Componente> campoFromularios)
+        {
+            int tamanoTitulo = 0;
+            foreach (Componente campoFromulario in campoFromularios)
+            {
+                    if (Convert.ToInt32(campoFromulario.titulo.Count()) > tamanoTitulo)
+                    {
+                        tamanoTitulo = Convert.ToInt32(campoFromulario.titulo.Count());
+                    }
+                
+            }
+            return tamanoTitulo;
+        }
 
     }
+
 }

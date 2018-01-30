@@ -11,7 +11,7 @@ namespace AgenteApp.UWP.Fabricas
 {
     public class ComponenteFabrica : IComponenteFabrica
     {
-        public IComponente CrearComponente(Componente componente)
+        public IComponente CrearComponente(Componente componente ,int tamanoTiutlo)
         {
          IComponente componenteVista = null;
             TipoComponente tipoComponente = TipoComponente.Texto;
@@ -19,10 +19,11 @@ namespace AgenteApp.UWP.Fabricas
             {
                 case TipoComponente.Texto:
                     TextoComponente textBox;
+                    tamanoTiutlo = tamanoTiutlo * 11;
                     if (componente.campoId.Equals("BTCLIENTENCOMPLETO"))
-                        textBox = new TextoComponente(275);
+                        textBox = new TextoComponente(275, tamanoTiutlo);
                     else
-                        textBox = new TextoComponente();
+                        textBox = new TextoComponente(tamanoTiutlo);
                     textBox.Titulo = componente.titulo;
                    // textBox.Width = 600;
                     //textBox.Height = 40;

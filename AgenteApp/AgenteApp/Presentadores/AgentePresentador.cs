@@ -103,14 +103,29 @@ namespace AgenteApp.Presentadores
             if (resultado.mensajeError == string.Empty)
             {
                 criteriosSeleccion = resultado.valor;
+                int tamanoTitulo = CalcularColumanMayor(criteriosSeleccion);
                 foreach (Componente criterioSeleccion in criteriosSeleccion)
                 {
+
                     if (criterioSeleccion.presentacion == "1")
-                        vista.CrearCriterioSeleccion(criterioSeleccion);
+                        vista.CrearCriterioSeleccion(criterioSeleccion, tamanoTitulo);
                 }
             }
             else
                 vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
+        public int CalcularColumanMayor(List<Componente> campoFromularios)
+        {
+            int tamanoTitulo = 0;
+            foreach (Componente campoFromulario in campoFromularios)
+            {
+               
+                    if (Convert.ToInt32(campoFromulario.titulo.Count()) > tamanoTitulo)
+                    {
+                        tamanoTitulo = Convert.ToInt32(campoFromulario.titulo.Count());
+                    }
+            }
+            return tamanoTitulo;
         }
     }
 }

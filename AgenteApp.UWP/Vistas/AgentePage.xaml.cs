@@ -416,9 +416,9 @@ namespace NavigationMenuSample.Views
             }
         }
         
-        public void CrearCriterioSeleccion(Componente criterioSeleccion)
+        public void CrearCriterioSeleccion(Componente criterioSeleccion, int tamanoTitulo)
         {
-            IComponente componente = criteriosSeleccionFabrica.CrearComponente(criterioSeleccion);
+            IComponente componente = criteriosSeleccionFabrica.CrearComponente(criterioSeleccion,tamanoTitulo);
             criteriosSeleccionStackPanel.Children.Add(componente as UIElement);
         }
 
