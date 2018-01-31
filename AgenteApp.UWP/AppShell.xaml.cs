@@ -44,24 +44,28 @@ namespace NavigationMenuSample
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Phone,
+                    Image="../Assets/img1.png",
                     Label = "llamada entrante",
                     DestPage = typeof(RecepcionLlamadaPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.AddFriend,
+                    Image="../Assets/img2.png",
                     Label = "Identificación del cliente",
                     DestPage = typeof(ClientesDetallePage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/img3.png",
                     Label = "Interacciones (CRM)",
                     DestPage = typeof(CRMPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/img4.png",
                     Label = "Tipificación",
                     DestPage = typeof(TipificacionPage)
                 },
@@ -80,60 +84,69 @@ namespace NavigationMenuSample
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Mail,
+                    Image="../Assets/im5.png",
                     Label = "Correo electrónico",
                     DestPage = typeof(CorreoPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Send,
+                    Image="../Assets/im6.png",
                     Label = "SMS",
                     DestPage = typeof(SmsPage)
                 },
-                new NavMenuItem()
+                /*new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
                     Label = "Queja",
                     DestPage = typeof(QuejasPage)
-                },
+                },*/
                 new NavMenuItem()
                 {
                     Symbol = Symbol.BackToWindow,
+                    Image="../Assets/im7.png",
                     Label = "Call back",
                     DestPage = typeof(BasicPage)
                 },             
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/im8.png",
                     Label = "Llamar(Predictivo/CallBack)",
                     DestPage = typeof(LlamarPredictivoPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/im9.png",
                     Label = "Llamar(Manualmente)",
                     DestPage = typeof(LlamarManualmentePage)
                 },
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/im10.png",
                     Label = "Chat interno",
                     DestPage = typeof(BasicPage)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/im11.png",
                     Label = "Receso",
                     DestPage = typeof(RecesoPage)
                 },
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/im12.png",
                     Label = "Reconocimiento de voz",
                     DestPage = typeof(ReconocimientoVozPage)
                 },
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
+                    Image="../Assets/im13.png",
                     Label = "Cerrar sesion",
                     DestPage = typeof(CerrarSesionPage)
                 }
@@ -410,6 +423,7 @@ namespace NavigationMenuSample
 
                 }
             }
+            
         }
 
         /// <summary>

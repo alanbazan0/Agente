@@ -383,7 +383,7 @@ namespace AgenteApp.UWP.Vistas
             string paterno = "";
             string materno = "";
             //hay que programar el evento onkeypress in the tap button 
-            if (modo == ModoVentana.ALTA)
+            if (modo == ModoVentana.ALTA || modo==ModoVentana.CAMBIOS)
             {
                 var primerNombre = formularioComponentes.Children.Where(a => (a as IComponente).Componente.campoId == "BTCLIENTEPNOMBRE")
                                            .Select(a => a)
@@ -407,8 +407,6 @@ namespace AgenteApp.UWP.Vistas
                 paterno = ((TextoComponente)apellidoPaterno).Filtro.valor;
                 materno = ((TextoComponente)apellidoMaterno).Filtro.valor;
 
-                nombreCompletoC.SetValue(Grid.ColumnSpanProperty, 2);
-                nombreCompletoC.SetValue(WidthProperty, 500);
                 (nombreCompletoC as IComponente).Valor = nombre + " " + nombreS + " " + paterno + " " + materno;
             }
             

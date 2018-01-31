@@ -21,7 +21,7 @@ namespace AgenteApp.UWP.Fabricas
                     TextoComponente textBox;
                     tamanoTiutlo = tamanoTiutlo * 11;
                     if (componente.campoId.Equals("BTCLIENTENCOMPLETO"))
-                        textBox = new TextoComponente(275, tamanoTiutlo);
+                        textBox = new TextoComponente(325, tamanoTiutlo);
                     else
                         textBox = new TextoComponente(tamanoTiutlo);
                     textBox.Titulo = componente.titulo;
