@@ -185,6 +185,25 @@
   <ItemGroup>
     <Content Include="Assets\Contacto.png" />
     <Content Include="Assets\correoIndi.png" />
+    <Content Include="Assets\im10.png" />
+    <Content Include="Assets\im11.png" />
+    <Content Include="Assets\im12.png" />
+    <Content Include="Assets\im13.png" />
+    <Content Include="Assets\im14.png" />
+    <Content Include="Assets\im15.png" />
+    <Content Include="Assets\im16.png" />
+    <Content Include="Assets\im17.png" />
+    <Content Include="Assets\im18.png" />
+    <Content Include="Assets\im19.png" />
+    <Content Include="Assets\im20.png" />
+    <Content Include="Assets\im5.png" />
+    <Content Include="Assets\im6.png" />
+    <Content Include="Assets\im7.png" />
+    <Content Include="Assets\im8.png" />
+    <Content Include="Assets\im9.png" />
+    <Content Include="Assets\img2.png" />
+    <Content Include="Assets\img3.png" />
+    <Content Include="Assets\img4.png" />
     <Content Include="Recursos\Imagenes\asistente.png" />
     <Content Include="Recursos\Imagenes\btnAsistente.svg" />
     <Content Include="Properties\Default.rd.xml" />
@@ -195,6 +214,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\img1.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -37,7 +37,8 @@
                      It appears when the user hovers over the icon, but not the label which provides
                      value when the SplitView is 'Compact' while reducing the likelihood of showing
                      redundant information when the label is shown.-->
-                <FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.ToolTip="{x:Bind Label}" Foreground="White"/>
+                <!--<FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTipService.ToolTip="{x:Bind Label}" Foreground="White"/>-->
+                <Image x:Name="Glyph"  Source="{x:Bind Image}" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" VerticalAlignment="Center" Foreground="White"/>
             </Grid>
         </DataTemplate>
@@ -49,7 +50,8 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <!-- Showing a ToolTip on Xbox is not desirable. The SelectedPipe is also deliberately omited. -->
-                <FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                <!--<FontIcon x:Name="Glyph" FontSize="16" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>-->
+                <Image x:Name="Glyph"  Source="{x:Bind Image}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 <TextBlock x:Name="Text" Grid.Column="1" Text="{x:Bind Label}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="NoWrap" Margin="0,0,16,0" Foreground="White"/>
             </Grid>
         </DataTemplate>

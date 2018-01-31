@@ -15,6 +15,7 @@ namespace NavigationMenuSample
     public class NavMenuItem : INotifyPropertyChanged
     {
         public string Label { get; set; }
+        public string Image { get; set; }
         public Symbol Symbol { get; set; }
         public char SymbolAsChar
         {
