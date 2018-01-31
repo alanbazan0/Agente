@@ -153,6 +153,74 @@ namespace AgenteApp.Presentadores
 
         }
 
+        public void CrearLineaDivisoriaPie(ref Grid xamlHeaderTemplate, int i)
+        {
+            VariableSizedWrapGrid gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 0);
+
+            gridCombo.Height = 50;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            TextBlock block = new TextBlock();
+
+            block.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Children.Add(block);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+
+            gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 1);
+
+            gridCombo.Height = 50;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            block = new TextBlock();
+            block.Text = "";
+
+            block.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Children.Add(block);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+
+            gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 2);
+
+            gridCombo.Height = 50;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            block = new TextBlock();
+            block.Text = "";
+
+            block.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Children.Add(block);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+
+            gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 3);
+
+            gridCombo.Height = 50;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            block = new TextBlock();
+            block.Text = "";
+
+            block.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Children.Add(block);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+
+            gridCombo = new VariableSizedWrapGrid();
+            gridCombo.SetValue(Grid.RowProperty, i);
+            gridCombo.SetValue(Grid.ColumnProperty, 4);
+
+            gridCombo.Height = 50;
+            gridCombo.VerticalAlignment = VerticalAlignment.Center;
+            block = new TextBlock();
+            block.Text = "";
+
+            block.VerticalAlignment = VerticalAlignment.Center;
+            gridCombo.Children.Add(block);
+            xamlHeaderTemplate.Children.Add(gridCombo);
+
+        }
+
         public void CrearTexto(ref Grid xamlHeaderTemplate, Tipificacion campo, int i)
         {
 
@@ -226,6 +294,7 @@ namespace AgenteApp.Presentadores
             gridCombo.Children.Add(text);
             xamlHeaderTemplate.Children.Add(gridCombo);
         }
+
         public SolidColorBrush GetColor(string color)
         {
             SolidColorBrush colorBrush = new SolidColorBrush(Colors.White);

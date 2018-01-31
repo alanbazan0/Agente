@@ -231,7 +231,8 @@ namespace AgenteApp.UWP.Vistas
                 column = new ColumnDefinition();
                 column.Width = new GridLength(100);
                 TipifiacionGrid.ColumnDefinitions.Add(column);
-                for (int i = 0; i < conf.Count; i++)
+                int i = 0;
+                for (; i < conf.Count; i++)
                 {
                     Tipificacion campo = conf[i];
 
@@ -262,7 +263,8 @@ namespace AgenteApp.UWP.Vistas
                     }
 
                 }
-           
+
+            presentador.CrearLineaDivisoriaPie(ref TipifiacionGrid, i + 1);
             ContentContainer.Children.Add(TipifiacionGrid);
 
         }

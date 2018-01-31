@@ -223,8 +223,9 @@ namespace NavigationMenuSample.Views
                         LimpiarDatos();
                     }
                 }
-                else
+                else if (LlamadaPausada != null)
                 {
+
                     if (LlamadaPausada.State == CallState.Paused || LlamadaPausada.State == CallState.StreamsRunning)
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
@@ -234,6 +235,14 @@ namespace NavigationMenuSample.Views
                         //LimpiarDatos();
                     }
 
+                }
+                else
+                {
+                    telefono.LinphoneCore.TerminateAllCalls();
+                    HeaderTextBlock.Text = "Llamada entrante - Disponible";
+                    ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
+                    dispatcherTimer.Stop();
+                    //LimpiarDatos();
                 }
 
             }
@@ -940,7 +949,7 @@ namespace NavigationMenuSample.Views
 
                     ConferenceParams conf = telefono.LinphoneCore.CreateConferenceParams();
                     telefono.LinphoneCore.CreateConferenceWithParams(conf);
-                    Pausar("", null);
+                    //Pausar("", null);
                     HeaderTextBlock.Text = "Llamada entrante - Conferencia";
                 }
             }
@@ -956,7 +965,7 @@ namespace NavigationMenuSample.Views
             {
                 foreach (Call cl in llamadaConferencia)
                 {
-                    if (cl != null)
+                    if (cl.State == CallState.Paused && cl != null)
                         telefono.LinphoneCore.AddToConference(cl);
                 }
                 telefono.LinphoneCore.AddAllToConference();
