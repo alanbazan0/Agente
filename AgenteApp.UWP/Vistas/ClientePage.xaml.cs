@@ -44,7 +44,7 @@ namespace AgenteApp.UWP.Vistas
         List<CodigoPostal> direccionCP;
         Portabilidad parametroPortabilidad;
         ClienteTelefono clienteTelefono;
-
+        int iDCliente;
         Flyout flyout;
         private ModoVentana modo;
         string numeroSeleccionado, numeroSeleccionadoId;
@@ -124,16 +124,24 @@ namespace AgenteApp.UWP.Vistas
                 else
                 {
                     this.HeaderTextBlock.Text = "Identificación del cliente / actualizar cliente";
-                    int idCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
+                    iDCliente = (int)parametros.GetType().GetProperty("idCliente").GetValue(parametros, null);
 
 
+                    /*se quito de aqui por q aveces hace mas rapido estos metodos q el metodo crear
+                     * formulario lo q hace q truene
                     presentador.TraerDatosCliente(idCliente);
                     presentador.traerDatosTelefono(idCliente);
-                    presentador.traerDatosCorreos(idCliente);
+                    presentador.traerDatosCorreos(idCliente);*/
 
                 }
 
             }
+        }
+        public void traerDatoGenerales( )
+        {
+            presentador.TraerDatosCliente(iDCliente);
+            presentador.traerDatosTelefono(iDCliente);
+            presentador.traerDatosCorreos(iDCliente);
         }
 
         public List<Objeto> Clientes
@@ -354,7 +362,7 @@ namespace AgenteApp.UWP.Vistas
             }
             if (componenteVista.Componente.campoId == "BTCLIENTENCOMPLETO")
             {
-                (componenteVista as UIElement).SetValue(VariableSizedWrapGrid.ColumnSpanProperty, 2);
+                (componenteVista as UIElement).SetValue(VariableSizedWrapGrid.ColumnSpanProperty, 3);
             }
             //le asiganamos evento al codigo postal si lo trea, para consultar
             else if (componenteVista.Componente.campoId == "BTCLIENTECPID")
