@@ -19,6 +19,7 @@ namespace AgenteApp.Vistas
         List<Correos> ClienteCorreos { set; }
         void CrearFormularioClientes(Componente componente,int tamanoTitulo);
         string idCliente { set;  }
+        void traerDatoGenerales();
         void ActualizarTelefonoCliente(string idCliente);
         void direccioneCodigo(List<CodigoPostal> direccionesCodigo, object sender, RoutedEventArgs e);
         void ActualizarCorreoCliente(string idCliente);

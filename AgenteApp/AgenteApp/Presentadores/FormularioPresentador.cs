@@ -43,6 +43,8 @@ namespace AgenteApp.Presentadores
                     if (campoFromulario.presentacion == "1")
                         vista.CrearFormularioClientes(campoFromulario, tamanoTitulo);
                 }
+
+                vista.traerDatoGenerales();
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
@@ -127,6 +129,7 @@ namespace AgenteApp.Presentadores
                     if (campoFromulario.presentacion == "1")
                         vista.CrearFormularioClientes(campoFromulario, tamanoTitulo);
                 }
+                vista.traerDatoGenerales();
             }
             else
                 vista.MostrarMensaje("Error", resultado.mensajeError);
