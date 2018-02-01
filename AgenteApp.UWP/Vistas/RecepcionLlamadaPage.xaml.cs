@@ -1,41 +1,21 @@
-﻿using AgenteApp.Presentadores;
-using AgenteApp.Vistas;
-using AgenteApp.Clases;
-using System;
-using System.IO;
-using System.Linq;
-using Windows.Foundation;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
+﻿using System;
+using Linphone;
 using Windows.UI;
 using Windows.UI.Xaml;
+using AgenteApp.Vistas;
+using AgenteApp.Clases;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using AgenteApp.Modelos;
-using Newtonsoft.Json.Linq;
-using AgenteApp.UWP.Fabricas;
-using AgenteApp.Componentes;
-using System.Text;
-//usings Linphone
-//using Xamarin.Forms;
-using Linphone;
-using Windows.System.Threading;
-using Windows.ApplicationModel.Core;
-using System.Diagnostics;
-using Windows.UI.Core;
 using System.Reflection;
-using Windows.ApplicationModel.Email;
-using Windows.Storage;
-using Windows.ApplicationModel.Activation;
-using Windows.System.Profile;
+using System.Diagnostics;
 using Windows.Networking;
+using Windows.UI.Xaml.Media;
+using Windows.System.Profile;
+using AgenteApp.Presentadores;
+using Windows.UI.Xaml.Controls;
+using Windows.Graphics.Display;
+using Windows.UI.Xaml.Navigation;
+using System.Collections.Generic;
 using Windows.Networking.Connectivity;
 
 
@@ -64,8 +44,6 @@ namespace NavigationMenuSample.Views
         int phor = 0;
         int psegunds = 0;
         Boolean enPausa = false;
-
-
         string extension;
         string IdLlamada;
         string ip;
@@ -79,9 +57,7 @@ namespace NavigationMenuSample.Views
         string IdCliente = "";
         string IdCrm = "";
         string NombreCliente = "";
-
         public Parametros Parametro { get => ParametroLocal; set { } }
-
         private CoreListener Listener;
 
         public RecepcionLlamadaPage()
@@ -115,9 +91,6 @@ namespace NavigationMenuSample.Views
 
         }
 
-
-
-
         private void OnGlobal(Core lc, GlobalState gstate, string message)
         {
 #if WINDOWS_UWP
@@ -126,10 +99,6 @@ namespace NavigationMenuSample.Views
             Console.WriteLine("Global state changed: " + gstate);
 #endif
         }
-
-
-
-
 
         private void OnRegistration(Core lc, ProxyConfig config, RegistrationState state, string message)
         {
@@ -188,10 +157,9 @@ namespace NavigationMenuSample.Views
                 if (call.State == CallState.IncomingReceived)
                 {
                     telefono.LinphoneCore.AcceptCall(call);
-                    HeaderTextBlock.Text = "Llamada entrante - En llamada";
-                    llamadaConferencia.Clear();
-                    numTelefonico = txtNoTelOrigen.Text = ttxtNumeroTelefono.Text = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
+                    HeaderTextBlock.Text = "Llamada entrante - En llamada";                   
                     LimpiarDatos();
+                    numTelefonico = txtNoTelOrigen.Text = ttxtNumeroTelefono.Text = NoTelTextBox.Text = call.RemoteAddress.DisplayName;                   
                     ttEstatustextBox.Text = estatusTextBox.Text = "Contestada";
                     tHoratextBox.Text = HoraLlamadaTextBox.Text = GetTimeString();
                     dispatcherTimer.Start();
@@ -242,7 +210,7 @@ namespace NavigationMenuSample.Views
                     HeaderTextBlock.Text = "Llamada entrante - Disponible";
                     ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                     dispatcherTimer.Stop();
-                    //LimpiarDatos();
+                    LimpiarDatos();
                 }
 
             }
@@ -290,7 +258,6 @@ namespace NavigationMenuSample.Views
             }
         }
 
-
         private void EntroCusor(object sender, RoutedEventArgs e)
         {
             // numTranfer.Visibility = Visibility.Visible;
@@ -321,7 +288,6 @@ namespace NavigationMenuSample.Views
 
 
         }
-
 
         private void CambioTap(object sender, SelectionChangedEventArgs e)
         {
@@ -396,7 +362,6 @@ namespace NavigationMenuSample.Views
             ConsultarSupervisores();
             //ConsultarUsuarios();
         }
-
 
         public void onRegister(NavigationEventArgs e)
         {
@@ -557,6 +522,7 @@ namespace NavigationMenuSample.Views
         private void LimpiarDatos()
         {
             BorrarParametros();
+            llamadaConferencia.Clear();
             seg = 0;
             min = 0;
             hor = 0;
@@ -573,6 +539,8 @@ namespace NavigationMenuSample.Views
             tipoLlamadaTextBox.Text = "";
             estatusTextBox.Text = "";
             TiempoEsperaListView.ItemsSource = null;
+            FlyInvitadosListView.ItemsSource = null;
+            SupervisoresListView.ItemsSource = null;
             lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
             
         }
@@ -588,7 +556,6 @@ namespace NavigationMenuSample.Views
         private void ConsultarDatos(string noTelefonico)
         {
             progressRing.IsActive = true;
-            BorrarParametros();
             ConsultarIdLlamada(NoExtensionTextBox.Text);
             ConsultarPortabilidad(noTelefonico);
             ConsultarClientesTel(noTelefonico);
@@ -637,25 +604,10 @@ namespace NavigationMenuSample.Views
             }
         }
 
-
-        public string ultimoIdPausa
-        {
-            set
-            {
-                try
-                {
-                    ultimoIdPausaLocal = value;
-                }
-                catch { }
-            }
-        }
-
         public void ConsultarClientesTel(string numero)
         {
             presentador.ConsultarClientesTel(numero);
         }
-
-        
 
         public List<ClienteTelefono> Clientes
         {
@@ -734,7 +686,6 @@ namespace NavigationMenuSample.Views
             }
         }
 
-
         public void InsertarPausa()
         {
             presentador.InsertarPausa();
@@ -750,7 +701,6 @@ namespace NavigationMenuSample.Views
             presentador.ConsultarPausa();
         }
 
-
         public List<Pausas> Pausas
         {
             set
@@ -758,8 +708,6 @@ namespace NavigationMenuSample.Views
                 TiempoEsperaListView.ItemsSource = value;
             }
         }
-
-
 
         public async void MostrarMensajeAsync(string titulo, string mensaje)
         {
@@ -796,8 +744,17 @@ namespace NavigationMenuSample.Views
 
         }
 
-
-
+        public string ultimoIdPausa
+        {
+            set
+            {
+                try
+                {
+                    ultimoIdPausaLocal = value;
+                }
+                catch { }
+            }
+        }
         //funciones de transferencia
         private void digitarNumero(object sender, RoutedEventArgs e)
         {
@@ -903,7 +860,6 @@ namespace NavigationMenuSample.Views
             }
 
         }
-
         //funciones de conferencia
         private void agregarInvitados(object sender, RoutedEventArgs e)
         {
@@ -973,6 +929,7 @@ namespace NavigationMenuSample.Views
                 HeaderTextBlock.Text = "Llamada entrante - Conferencia";
             }
         }
+
         private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
         {
             Flyout f = this.Control1.Flyout as Flyout;
@@ -1045,5 +1002,6 @@ namespace NavigationMenuSample.Views
             }
 
         }
+
     }
 }
