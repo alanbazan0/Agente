@@ -404,7 +404,7 @@ namespace NavigationMenuSample
                     switch (item.Label)
                     {
                         case "Identificación del cliente":
-                            var parametros = new { modo = ModoVentana.ALTA, telCliente = "8711897006", usuarioId= usa.Id/*, idCliente = idCliente, portabilidad = portabilidadParametros*/ };
+                            var parametros = new { modo = ModoVentana.ALTA, telCliente = "8711897006", usuarioId = usa.Id/*, idCliente = idCliente, portabilidad = portabilidadParametros*/ };
                             item.Arguments = parametros;
                             this.AppFrame.Navigate(item.DestPage, item.Arguments);
                             break;
@@ -419,7 +419,9 @@ namespace NavigationMenuSample
 
                     //Page destPage = (Page) Activator.CreateInstance(item.DestPage);
                     //this.AppFrame.Content = destPage;
-                    
+                    String a = this.TogglePaneButton.IsChecked.ToString();                    
+                    CloseNavePane();
+
 
                 }
             }
@@ -492,7 +494,11 @@ namespace NavigationMenuSample
             TogglePaneButton.IsChecked = true;
             NavPaneDivider.Visibility = Visibility.Visible;
         }
-
+        public void CloseNavePane()
+        {
+            TogglePaneButton.IsChecked = false;
+            NavPaneDivider.Visibility = Visibility.Collapsed;
+        }
         /// <summary>
         /// Hides divider when nav pane is closed.
         /// </summary>
