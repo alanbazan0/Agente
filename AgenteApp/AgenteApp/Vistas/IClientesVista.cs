@@ -13,6 +13,7 @@ namespace AgenteApp.Vistas
         void ConsultarClientes();
         void ConsultarParametros();
         void Consultar(string numeroTel);
+        void AgragarValoraFiltro(string valor);
         void ConsultarClientesTel(string numero);
         void MostrarMensajeAsync(string titulo, string mensaje);
         List<Campo> Filtros { get;  }

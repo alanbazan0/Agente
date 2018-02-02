@@ -58,9 +58,6 @@ namespace NavigationMenuSample.Views
             //formularioClienteFabrica = new FormularioFabrica();
             presentador.CrearCatalogoClientes();
             obtenerInformacion();
-
-           
-
         }
 
         public List<Campo> Filtros
@@ -76,10 +73,29 @@ namespace NavigationMenuSample.Views
                 return filtros;
             }
         }
+
+        public void AgragarValoraFiltro(string valor)
+        {
+                for (int i=0;i< criteriosSeleccionDetalleCliente.Children.Count;i++)
+                {
+                    IComponente componente = criteriosSeleccionDetalleCliente.Children[i] as IComponente;
+                    if (componente.Filtro.campoId == "BTCLIENTENCOMPLETO")
+                    {
+                    var GriPrincipal = criteriosSeleccionDetalleCliente.Children[i];
+                    TextoComponente GP = GriPrincipal as TextoComponente;
+                    var textId = GP.Children[1];
+                    TextBox TID = textId as TextBox;
+                    TID.Text = valor;
+                }
+                        
+                }
+        }
+
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             ConsultarClientes();
         }
+
         private void AppBarAltaClienteButton_Click(object sender, RoutedEventArgs e)
         {
             var parametros = new
@@ -128,7 +144,9 @@ namespace NavigationMenuSample.Views
                 
             }
         }
+
         public string setIdLlamada { set => throw new NotImplementedException(); }
+
         List<Objeto> IClientesVista.ClientesCriterio
         {
             set
@@ -139,6 +157,7 @@ namespace NavigationMenuSample.Views
         }
 
         public string IP { get { return ip; } set { ip = value; } }
+
         public string IdHardware { get { return idhardware; } set { idhardware = value; } }
 
         public void CrearCriterioSeleccion(Componente criterioSeleccion,int tamanoTitulo)
@@ -147,8 +166,7 @@ namespace NavigationMenuSample.Views
             criteriosSeleccionDetalleCliente.Children.Add(componente as UIElement);
            
         }
-
-        
+       
         private void clientesListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             //var cliente = clientesListView.SelectedItem;

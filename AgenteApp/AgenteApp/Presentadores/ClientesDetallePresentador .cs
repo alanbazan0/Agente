@@ -150,10 +150,21 @@ namespace AgenteApp.Presentadores
                     {
                         vista.Consultar(resultado.valor[i].ValorParametro);
                         coincidencia = true;
-                    }                   
+                    }
+                    else if (resultado.valor[i].PalabraReservada.Equals("@NOMBREIVR@"))
+                    {
+                        
+                        vista.AgragarValoraFiltro(resultado.valor[i].ValorParametro);
+                        vista.ConsultarClientes();
+                        coincidencia = true;
+                    }
                 }
+
+               
                 if (coincidencia)
-                { }
+                {
+                   
+                }
                 else
                 {
                     vista.Consultar("");
