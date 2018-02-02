@@ -165,7 +165,7 @@ namespace NavigationMenuSample.Views
             xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
-                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""200""/>");
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""180""/>");
             }
             xamlHeaderTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
             for (int i = 0; i < campos.Count; i++)
@@ -186,7 +186,7 @@ namespace NavigationMenuSample.Views
             xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
-                xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""200""/>");
+                xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""180""/>");
             }
             xamlItemTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
             //xamlItemTemplate.AppendLine(@"<Grid.RowDefinitions>");

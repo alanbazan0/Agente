@@ -37,7 +37,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
+            <RowDefinition  />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -102,11 +102,11 @@
             
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="600" Height="auto" >
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible"  >
             <Grid x:Name="ContentContainer"   Margin="0,0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <StackPanel>
-                    <TextBlock Text="Actividades" TextAlignment="Start" FontSize="20"  Foreground="Black" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                    <TextBlock Text="Actividades" TextAlignment="Start" FontSize="20"  Foreground="Black" MaxLines="2" />
 
                     <Grid >
                         <Grid.ColumnDefinitions>
@@ -240,7 +240,7 @@
 
                             </Grid>
                             <StackPanel x:Name="correosEntrada">
-                                <ListView x:Name="CRMListView" Margin="0,0,15,0" Height="250" IsItemClickEnabled="True" ItemClick="CRM1_ItemClick">
+                                <ListView x:Name="CRMListView" Margin="0,0,15,0" Height="250" IsItemClickEnabled="True" ItemClick="CRM1_ItemClick" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                                     
                                 </ListView>
                             </StackPanel>
