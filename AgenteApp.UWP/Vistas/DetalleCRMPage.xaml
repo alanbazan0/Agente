@@ -36,9 +36,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition />
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#ff9900">
            
@@ -67,11 +65,9 @@
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
         <ProgressRing x:Name="progressRing" Height="50" Width="50" Margin="0,50,0,0" Foreground="#6b6b6b"/>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible" MaxHeight="700" >
-            <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Auto">
-                <Grid x:Name="ContentContainer"  EntranceNavigationTransitionInfo.IsTargetElement="True" Margin="24,0">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"  >
+                <Grid x:Name="ContentContainer"   Margin="24,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 </Grid>
-            </StackPanel>
         </ScrollViewer>
 
 
