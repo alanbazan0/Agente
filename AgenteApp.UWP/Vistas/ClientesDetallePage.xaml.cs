@@ -163,6 +163,11 @@ namespace NavigationMenuSample.Views
         public void CrearCriterioSeleccion(Componente criterioSeleccion,int tamanoTitulo)
         {
             IComponente componente = componenteFabrica.CrearComponente(criterioSeleccion, tamanoTitulo);
+
+            if (componente.Componente.campoId == "BTCLIENTENCOMPLETO")
+            {
+                (componente as UIElement).SetValue(VariableSizedWrapGrid.ColumnSpanProperty, 3);
+            }
             criteriosSeleccionDetalleCliente.Children.Add(componente as UIElement);
            
         }
