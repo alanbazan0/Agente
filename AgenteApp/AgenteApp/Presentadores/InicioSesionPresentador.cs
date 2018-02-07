@@ -39,18 +39,23 @@ namespace AgenteApp.Presenters
         {
             UsuarioRepositorio accesoDatos = new UsuarioRepositorio();
             Resultado<Usuario> resultado = await accesoDatos.ConsultarDatosSesion(vista.NombreUsuario);
-            if (resultado.mensajeError == string.Empty)
+            if (resultado != null)
             {
-                usuario = resultado.valor;
-                if (usuario != null)
+                if (resultado.mensajeError == string.Empty)
                 {
-                    vista.usuario = usuario;
+                    usuario = resultado.valor;
+                    if (usuario != null)
+                    {
+                        vista.usuario = usuario;
+                    }
+                    else
+                        vista.MostrarMensaje("El usuario no existe, favor de verificar.");
                 }
                 else
-                    vista.MostrarMensaje("El usuario no existe, favor de verificar.");
+                    vista.desactivarCarga();
             }
             else
-                vista.MostrarMensaje(resultado.mensajeError);
+                vista.desactivarCarga();
         }
         public async void SubirFotoComparar()
         {

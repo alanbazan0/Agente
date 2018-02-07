@@ -188,9 +188,20 @@ namespace AgenteApp.UWP
             obtenerInformacion();
             progressRing.IsActive = true;
             presentador.DatosSesion();
-
-
+            
+        }
+        public void desactivarCarga()
+        {
+            if(progressRing.IsActive == true)
+                progressRing.IsActive = false;
         }
 
+        private void nombreUsuarioTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (captureBtn.Visibility == Visibility.Visible)
+                captureBtn.Visibility = Visibility.Collapsed;
+            contrasenaPasswordBox.Password = "";
+            contrasenaPasswordBox.PlaceholderText = "Contraseña";
+        }
     }
 }

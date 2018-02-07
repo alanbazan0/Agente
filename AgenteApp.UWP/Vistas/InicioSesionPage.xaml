@@ -15,7 +15,7 @@
             <TextBlock Text="Ingrese sus credenciales a continuación" Margin="0,0,0,20"
                TextWrapping="Wrap" Width="400"
                TextAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-            <TextBox x:Name="nombreUsuarioTextBox" LostFocus="nombreUsuarioTextBox_LosingFocus" PlaceholderText="Usuario" Margin="8" Width="250" />
+            <TextBox x:Name="nombreUsuarioTextBox" GotFocus="nombreUsuarioTextBox_GotFocus" LostFocus="nombreUsuarioTextBox_LosingFocus" PlaceholderText="Usuario" Margin="8" Width="250" />
             <PasswordBox  x:Name="contrasenaPasswordBox"  PlaceholderText="Contraseña" Margin="8" Width="250" />
 
             <Button x:Name="iniciarSesionButton" Content="Iniciar sesión" Background="#ff9900" Foreground="White"

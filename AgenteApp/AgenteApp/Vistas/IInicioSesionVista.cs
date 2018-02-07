@@ -26,5 +26,6 @@ namespace AgenteApp.Views
         void MostrarMenu(Usuario usuario);
         void MostrarMensaje(string mensaje);
         void InsertarSesionTrabajo();
+        void desactivarCarga();
     }
 }
