@@ -14,5 +14,7 @@ namespace AgenteApp.Modelos
         public string tablaId { get; set; }
         public string tipoDato { get; set; }
         public string tamano { get; set; }
+        public string tamanoCampo { get; set; }
+        
     }
 }

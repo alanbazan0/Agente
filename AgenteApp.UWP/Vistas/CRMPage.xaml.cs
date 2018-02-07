@@ -168,10 +168,7 @@ namespace NavigationMenuSample.Views
             xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
-                if(campo.campoId.Equals("BTCRM1ATENDIONOMBRE"))
-                    xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""250""/>");
-                else
-                    xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""100""/>");
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width="""+campo.tamanoCampo+@"""/>");
             }
             xamlHeaderTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
             for (int i = 0; i < campos.Count; i++)
@@ -192,11 +189,7 @@ namespace NavigationMenuSample.Views
             xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
-                if (campo.campoId.Equals("BTCRM1ATENDIONOMBRE"))
-                    xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""250""/>");
-                else
-                    xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""100""/>");
-                
+               xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""" + campo.tamanoCampo + @"""/>");                
             }
             xamlItemTemplate.AppendLine(@"</Grid.ColumnDefinitions>");                                  
             for (int i = 0; i < campos.Count; i++)
@@ -296,9 +289,9 @@ namespace NavigationMenuSample.Views
                 xamlHeaderTemplate.AppendLine(@"<RowDefinition Height=""25""/>");
                 xamlHeaderTemplate.AppendLine(@"</Grid.RowDefinitions>");
 
-
+                string ruta = "../Assets/correoIndi.png";
                 xamlHeaderTemplate.AppendLine(@"<TextBlock Text = """+campo.Titulo+@""" Grid.Row = ""0""   FontSize = ""20""  Grid.Column = ""1"" TextAlignment = ""Center"" Foreground = ""White"" />");
-                xamlHeaderTemplate.AppendLine(@"<Image Grid.Row = ""0"" Grid.Column = ""0"" Grid.RowSpan = ""3""   Source = ""../ Assets / correoIndi.png"" Height = ""auto"" />");
+                xamlHeaderTemplate.AppendLine(@"<Image Grid.Row = ""0"" Grid.Column = ""0"" Grid.RowSpan = ""3""   Source = """+ruta+@"""  Height = ""auto"" />");
                 if(campo.CanalId=="6")
                     xamlHeaderTemplate.AppendLine(@"<TextBlock Text = """ + cacularTotalIndi(campos) + @"""  FontSize = ""20"" Grid.Row = ""1"" Grid.Column = ""1"" TextAlignment = ""Center""  Foreground = ""White"" />"); 
                 else
