@@ -129,6 +129,19 @@ namespace AgenteApp.Presentadores
             else
                 vista2.MostrarMensajeAsync("Error", resultado.mensajeError);
         }
+        
+        public async void consultarConfIndicadores(string idCliente)
+        {
+            //List<Filtro> filtros = vista.Filtros;
+            CRMRepositorio repositorio = new CRMRepositorio();
+            Resultado<List<Indicadores>> resultado = await repositorio.consultarConfIndicadores(idCliente, Constantes.VERSION);
+            if (resultado.mensajeError == string.Empty)
+            {
+                vista.datosConfIndicadores (resultado.valor);
+            }
+            else
+                vista.MostrarMensajeAsync("Error", resultado.mensajeError);
+        }
         public int CalcularColumanMayor(List<Componente> campoFromularios)
         {
             int tamanoTitulo = 0;

@@ -40,6 +40,7 @@ namespace NavigationMenuSample.Views
         CRMPresentador presentador;
         List<CampoGrid> camposGlobal;
         ComponenteFabrica componenteFabrica;
+        List<CRM> datosIndicadoresCRM;
 
         public CRMPage()
         {
@@ -77,13 +78,13 @@ namespace NavigationMenuSample.Views
             set
             {
                 CRMListView.ItemsSource = value;
-                Interacciones.Text = value.Count.ToString();
+                //Interacciones.Text = value.Count.ToString();
             }
         }
 
         public void consultarParametros()
         {
-            presentador.consultarParametros(usuario.Id);           
+            presentador.consultarParametros(usuario.Id);
         }
 
         public void MostrarMensaje(string mensaje)
@@ -140,20 +141,22 @@ namespace NavigationMenuSample.Views
 
         public void datosIndicadores(List<CRM> indicadoresCRM)
         {
-            for (int i = 0; i < indicadoresCRM.Count; i++)
-            {
+            datosIndicadoresCRM = indicadoresCRM;
+            consultarConfiguracionIndicadores();
+            /*  for (int i = 0; i < indicadoresCRM.Count; i++)
+             {
                 if (indicadoresCRM[i].CanalId.Equals("1"))
-                    Inbound.Text = indicadoresCRM[i].Cantidad;
-                else if (indicadoresCRM[i].CanalId.Equals("2"))
-                    Outbound.Text = indicadoresCRM[i].Cantidad;
-                else if (indicadoresCRM[i].CanalId.Equals("3"))
-                    SMS.Text = indicadoresCRM[i].Cantidad;
-                else if (indicadoresCRM[i].CanalId.Equals("4"))
-                    Mailing.Text = indicadoresCRM[i].Cantidad;
-                else if (indicadoresCRM[i].CanalId.Equals("5"))
-                    Robot.Text = indicadoresCRM[i].Cantidad;
+                     Inbound.Text = indicadoresCRM[i].Cantidad;
+                 else if (indicadoresCRM[i].CanalId.Equals("2"))
+                     Outbound.Text = indicadoresCRM[i].Cantidad;
+                 else if (indicadoresCRM[i].CanalId.Equals("3"))
+                     SMS.Text = indicadoresCRM[i].Cantidad;
+                 else if (indicadoresCRM[i].CanalId.Equals("4"))
+                     Mailing.Text = indicadoresCRM[i].Cantidad;
+                 else if (indicadoresCRM[i].CanalId.Equals("5"))
+                     Robot.Text = indicadoresCRM[i].Cantidad;
 
-            }
+             }*/
         }
 
         public void CrearColumnasGrid1CRM(List<CampoGrid> campos)
@@ -165,7 +168,7 @@ namespace NavigationMenuSample.Views
             xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
-                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""180""/>");
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width="""+campo.tamanoCampo+@"""/>");
             }
             xamlHeaderTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
             for (int i = 0; i < campos.Count; i++)
@@ -186,12 +189,9 @@ namespace NavigationMenuSample.Views
             xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
-                xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""180""/>");
+               xamlItemTemplate.AppendLine(@"<ColumnDefinition Width=""" + campo.tamanoCampo + @"""/>");                
             }
-            xamlItemTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
-            //xamlItemTemplate.AppendLine(@"<Grid.RowDefinitions>");
-            //xamlItemTemplate.AppendLine(@"<RowDefinition Height = ""Auto""></RowDefinition>");
-            //xamlItemTemplate.AppendLine(@"</Grid.RowDefinitions>");                                    
+            xamlItemTemplate.AppendLine(@"</Grid.ColumnDefinitions>");                                  
             for (int i = 0; i < campos.Count; i++)
             {
                 CampoGrid campo = campos[i];
@@ -243,12 +243,85 @@ namespace NavigationMenuSample.Views
                 string  folio = (string)correos.GetType().GetProperty(alias).GetValue(correos, null);
                 var parametros = new { folio = folio, idCliente = idCliente };
                 this.Frame.Navigate(typeof(DetalleCRMPage), parametros);
-                /* var numero = camposGloba.Where(a => a.c == "BTCLIENTENUMERO").Select(a => a.id).First();
-                 string alias = "C" + numero.ToString();
-                 int idCliente = Int32.Parse((string)correos.GetType().GetProperty(alias).GetValue(correos, null));
+            }
+        }
 
-                 var parametros = new { modo = ModoVentana.CAMBIOS, idCliente = idCliente };
-                 this.Frame.Navigate(typeof(AgenteApp.UWP.Vistas.ClientePage), parametros);*/
+        public void consultarConfiguracionIndicadores()
+        {
+            presentador.consultarConfIndicadores(idCliente);
+        }
+
+        /*
+         * este metdo creara lso indicadores dinamicos
+         */
+        public void datosConfIndicadores(List<Indicadores> campos)
+        {
+            /*
+             * 1-Inbound
+             * 2-Outbound
+             * 3-SMS
+             * 4-Mailing
+             * 5-Robot
+             */
+            for (int i = 0; i < datosIndicadoresCRM.Count(); i++)
+            {
+                for (int j = 0; j < campos.Count(); j++)
+                {
+                    if(datosIndicadoresCRM[i].CanalId== campos[j].CanalId)
+                    {
+                        campos[j].Cantidad = datosIndicadoresCRM[i].Cantidad;
+                    }
+                }
+            } 
+            foreach (Indicadores campo in campos)
+            {
+                StringBuilder xamlHeaderTemplate = new StringBuilder();
+                xamlHeaderTemplate.AppendLine(@"<Grid xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""  Background=""" + campo.Color + @""" Margin=""0,5,0,0"">");
+                xamlHeaderTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""*""/>");
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""97""/>");
+                xamlHeaderTemplate.AppendLine(@"<ColumnDefinition Width=""*""/>");
+                xamlHeaderTemplate.AppendLine(@"</Grid.ColumnDefinitions>");
+
+                xamlHeaderTemplate.AppendLine(@"<Grid.RowDefinitions >");
+                xamlHeaderTemplate.AppendLine(@"<RowDefinition Height=""30""/>");
+                xamlHeaderTemplate.AppendLine(@"<RowDefinition Height=""25""/>");
+                xamlHeaderTemplate.AppendLine(@"<RowDefinition Height=""25""/>");
+                xamlHeaderTemplate.AppendLine(@"</Grid.RowDefinitions>");
+
+                string ruta = "../Assets/correoIndi.png";
+                xamlHeaderTemplate.AppendLine(@"<TextBlock Text = """+campo.Titulo+@""" Grid.Row = ""0""   FontSize = ""20""  Grid.Column = ""1"" TextAlignment = ""Center"" Foreground = ""White"" />");
+                xamlHeaderTemplate.AppendLine(@"<Image Grid.Row = ""0"" Grid.Column = ""0"" Grid.RowSpan = ""3""   Source = """+ruta+@"""  Height = ""auto"" />");
+                if(campo.CanalId=="6")
+                    xamlHeaderTemplate.AppendLine(@"<TextBlock Text = """ + cacularTotalIndi(campos) + @"""  FontSize = ""20"" Grid.Row = ""1"" Grid.Column = ""1"" TextAlignment = ""Center""  Foreground = ""White"" />"); 
+                else
+                    xamlHeaderTemplate.AppendLine(@"<TextBlock Text = """+campo.Cantidad+@"""  FontSize = ""20"" Grid.Row = ""1"" Grid.Column = ""1"" TextAlignment = ""Center""  Foreground = ""White"" />");
+                xamlHeaderTemplate.AppendLine(@"</Grid>");
+                Grid Compilado = new Grid();
+                Compilado = Windows.UI.Xaml.Markup.XamlReader.Load(xamlHeaderTemplate.ToString()) as Grid;
+                indicadores.Children.Add(Compilado);
+            }
+        }
+        public int cacularTotalIndi(List<Indicadores> campos)
+        {
+            int total = 0;
+            for (int j = 0; j < campos.Count(); j++)
+            {
+                if (campos[j].CanalId!="6")
+                {
+                   total += Convert.ToInt32( campos[j].Cantidad);
+                }
+            }
+
+            return total; 
+        }
+        public async void MostrarMensajeAsync(string titulo, string mensaje)
+        {
+            //progressRing.IsActive = false;
+            if (mensaje != null)
+            {
+                var dialog = new MessageDialog(mensaje, titulo);
+                await dialog.ShowAsync();
             }
         }
     }

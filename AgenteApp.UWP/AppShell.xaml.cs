@@ -136,17 +136,31 @@ namespace NavigationMenuSample
                     Label = "Receso",
                     DestPage = typeof(RecesoPage)
                 },
-                 new NavMenuItem()
+                /* new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
                     Image="../Assets/im12.png",
                     Label = "Reconocimiento de voz",
                     DestPage = typeof(ReconocimientoVozPage)
+                },*/
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Image="../Assets/im12.png",
+                    Label = "Calidad",
+                    DestPage = typeof(BasicPage)
+                },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Contact,
+                    Image="../Assets/im13.png",
+                    Label = "Asistencias y permisos",
+                    DestPage = typeof(BasicPage)
                 },
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
-                    Image="../Assets/im13.png",
+                    Image="../Assets/im14.png",
                     Label = "Cerrar sesion",
                     DestPage = typeof(CerrarSesionPage)
                 }

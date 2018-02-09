@@ -10,25 +10,25 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
             <TextBlock Text="Inicio de sesión" FontSize="36" Margin="4" TextAlignment="Center"/>
-            <TextBlock x:Name="mensajeBlockText" Text="Mensaje" FontSize="20" Margin="50" Foreground="Red" TextAlignment="Center"/>
-            <Image Name="captureImage" HorizontalAlignment="Center" Height="300" VerticalAlignment="Top" Width="150" Visibility="Collapsed" />
+            <TextBlock x:Name="mensajeBlockText" Text="Mensaje" FontSize="20" Margin="50" Foreground="Red" TextAlignment="Center" Visibility="Collapsed"/>
+            <Image Name="captureImage" HorizontalAlignment="Center" Height="162" VerticalAlignment="Top" Width="150" Margin="0,0,0,0" />
             <TextBlock Text="Ingrese sus credenciales a continuación" Margin="0,0,0,20"
                TextWrapping="Wrap" Width="400"
                TextAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-            <TextBox x:Name="nombreUsuarioTextBox" PlaceholderText="Usuario" Margin="8" Width="250" />
+            <TextBox x:Name="nombreUsuarioTextBox" GotFocus="nombreUsuarioTextBox_GotFocus" LostFocus="nombreUsuarioTextBox_LosingFocus" PlaceholderText="Usuario" Margin="8" Width="250" />
             <PasswordBox  x:Name="contrasenaPasswordBox"  PlaceholderText="Contraseña" Margin="8" Width="250" />
 
             <Button x:Name="iniciarSesionButton" Content="Iniciar sesión" Background="#ff9900" Foreground="White"
         Click="iniciarSesionButton_Click" Width="110" HorizontalAlignment="Center" Margin="0,20"/>
             <Button x:Name="captureBtn" Content="Reconocimiento facial" Background="#ff9900" Foreground="White"
-        Click="captureBtn_Click" Width="200" HorizontalAlignment="Center" Margin="0,0"/>
+        Click="captureBtn_Click" Width="200" HorizontalAlignment="Center" Margin="0,0" Visibility="Collapsed"/>
             <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
             <Border x:Name="bannerBorder" Background="#6b6b6b"
                Margin="0,20" Height="100" >
                 <TextBlock x:Name="textoBanerTextBlock" Text="Bastiaan Software Center" Foreground="White"
              Margin="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
             </Border>
-            
+
 
         </StackPanel>
     </Grid>

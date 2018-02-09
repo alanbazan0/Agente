@@ -257,5 +257,35 @@ namespace AgenteApp.Repositorios
             }
             return datos;
         }
+        public async Task<Resultado<List<Indicadores>>> consultarConfIndicadores(string idCliente, int version)
+        {
+            Resultado<List<Indicadores>> datos = new Resultado<List<Indicadores>>();
+
+            DireccionBase = Constantes.DIRECCION_BASE;
+            Url = "/BastiaanSoftwareCenter/php/repositorios/CRM.php";
+            AgregarParametro("accion", "consultarConfIndicadores");
+            AgregarParametro("version", version.ToString());
+            AgregarParametro("idCliente", idCliente);
+            try
+            {
+                using (var cliente = new HttpClient())
+                {
+                    cliente.BaseAddress = new Uri(DireccionBase);
+                    List<KeyValuePair<string, string>> parametros = GetParametros();
+                    var contenido = new FormUrlEncodedContent(parametros);
+                    var resultado = await cliente.PostAsync(Url, contenido);
+                    string resultadoContenido = await resultado.Content.ReadAsStringAsync();
+                    resultadoContenido = Utilidades.UTF8_to_ISO(resultadoContenido);
+                    datos = JsonConvert.DeserializeObject<Resultado<List<Indicadores>>>(resultadoContenido);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Out.WriteLine(ex.Message);
+
+            }
+            return datos;
+        }
+
     }
 }
