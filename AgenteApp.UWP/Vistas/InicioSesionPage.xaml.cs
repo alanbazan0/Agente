@@ -51,6 +51,7 @@ namespace AgenteApp.UWP
             this.InitializeComponent();
             mensajeBlockText.Text = "";
             presentador = new InicioSesionPresentador(this);
+            textoBanerTextBlock.Text = "Bastiaan People & Software Center";
         }
 
         public string NombreUsuario { get { return nombreUsuarioTextBox.Text; } set { nombreUsuarioTextBox.Text = value; } }

@@ -25,7 +25,7 @@
             <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
             <Border x:Name="bannerBorder" Background="#6b6b6b"
                Margin="0,20" Height="100" >
-                <TextBlock x:Name="textoBanerTextBlock" Text="Bastiaan Software Center" Foreground="White"
+                <TextBlock x:Name="textoBanerTextBlock" Text="" Foreground="White"
              Margin="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
             </Border>
 
