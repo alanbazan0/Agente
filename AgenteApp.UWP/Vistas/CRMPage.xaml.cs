@@ -175,7 +175,7 @@ namespace NavigationMenuSample.Views
             {
                 CampoGrid campo = campos[i];
                 xamlHeaderTemplate.AppendLine(@"<Border  Grid.Column=""" + i.ToString() + @""" CornerRadius=""0"" BorderBrush=""Black"" Background=""#ff9900"" BorderThickness=""0 0 0 0"">");
-                xamlHeaderTemplate.AppendLine(@"<TextBlock Text=""" + campo.titulo + @""" Foreground=""White"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
+                xamlHeaderTemplate.AppendLine(@"<TextBlock Text=""" + campo.titulo + @""" Foreground=""White"" MaxLines=""2"" TextAlignment=""" + campo.alineacion + @""" TextWrapping=""WrapWholeWords""/>");
                 xamlHeaderTemplate.AppendLine(@"</Border>");
             }
             xamlHeaderTemplate.AppendLine(@"</Grid>");
@@ -185,7 +185,7 @@ namespace NavigationMenuSample.Views
 
             StringBuilder xamlItemTemplate = new StringBuilder();
             xamlItemTemplate.AppendLine(@"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">");
-            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""  ScrollViewer.VerticalScrollBarVisibility=""Visible""  >");
+            xamlItemTemplate.AppendLine(@"<Grid Padding = ""0"" Margin = ""0"" ScrollViewer.HorizontalScrollBarVisibility=""Visible""   ScrollViewer.VerticalScrollBarVisibility=""Visible""  >");
             xamlItemTemplate.AppendLine(@"<Grid.ColumnDefinitions>");
             foreach (CampoGrid campo in campos)
             {
@@ -196,8 +196,8 @@ namespace NavigationMenuSample.Views
             {
                 CampoGrid campo = campos[i];
                 xamlItemTemplate.AppendLine(@"<Border  Grid.Column=""" + i.ToString() + @""" CornerRadius=""0"" BorderBrush=""Black"" BorderThickness=""0 0 0 0"">");
-                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.orden + @"}"" Foreground=""Black"" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
-                xamlItemTemplate.AppendLine(@"</Border>");
+                xamlItemTemplate.AppendLine(@"<TextBlock Text=""{Binding C" + campo.orden + @"}"" Foreground=""Black"" TextAlignment=""" + campo.alineacion + @""" MaxLines=""2"" TextWrapping=""WrapWholeWords""/>");
+                xamlItemTemplate.AppendLine(@"</Border>"); 
             }
             xamlItemTemplate.AppendLine(@"</Grid>");
             xamlItemTemplate.AppendLine(@"</DataTemplate>");
@@ -223,8 +223,7 @@ namespace NavigationMenuSample.Views
                                                                 && (a as IComponente).Componente.campoId == campo.campoId)
                                     .Select(a => a)
                                     .First();
-            string alias = "C" + campo.orden.ToString();
-
+            string alias = "C" + campo.orden.ToString();           
             (componente as IComponente).Valor = (string)registro.GetType().GetProperty(alias).GetValue(registro, null);
 
 

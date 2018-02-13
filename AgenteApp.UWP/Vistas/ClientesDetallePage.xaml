@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#ff9900">
             <AppBarButton Icon="Find" Label="Consultar cliente" Foreground="White" Click="AppBarButton_Click"/>
             <AppBarButton Icon="Up" Label="Alta de cliente" Foreground="White" Click="AppBarAltaClienteButton_Click"/>
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>

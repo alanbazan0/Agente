@@ -204,6 +204,7 @@
     <Content Include="Assets\img2.png" />
     <Content Include="Assets\img3.png" />
     <Content Include="Assets\img4.png" />
+    <Content Include="Assets\sombra.png" />
     <Content Include="Recursos\Imagenes\asistente.png" />
     <Content Include="Recursos\Imagenes\btnAsistente.svg" />
     <Content Include="Properties\Default.rd.xml" />

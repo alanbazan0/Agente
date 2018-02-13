@@ -9,6 +9,7 @@
     <Import_RootNamespace>AgenteApp</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Clases\FormatoStringMIles.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\LinphoneWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\ModoVentana.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Resultado.cs" />
@@ -41,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoRecesos.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\Portabilidad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modelos\TipoTelefono.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AppShellPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CerrarSesionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\ClientesDetallePresentador .cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
@@ -51,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\TipificacionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\TransferenciaPresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repositorios\AppShellRepositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid2Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CamposGrid1Repositorio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repositorios\CerrarSesionRepositorio.cs" />
@@ -80,6 +83,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\InicioSesionPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\MenuPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAltaCorreo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAppShell.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICerrarSesion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IClientesVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IAgenteVista.cs" />

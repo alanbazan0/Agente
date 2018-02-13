@@ -27,6 +27,12 @@ using Linphone;
 using Windows.System.Threading;
 using Windows.ApplicationModel.Core;
 using AgenteApp.UWP.Vistas;
+using AgenteApp.Vistas;
+using AgenteApp.Presentadores;
+using System.IO;
+using Windows.UI.Xaml.Media.Imaging;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Graphics.Imaging;
 
 namespace NavigationMenuSample
 {
@@ -34,7 +40,7 @@ namespace NavigationMenuSample
     /// The "chrome" layer of the app that provides top-level navigation with
     /// proper keyboarding navigation.
     /// </summary>
-    public sealed partial class AppShell :  Page
+    public sealed partial class AppShell :  Page,IAppShell
     {
         private bool isPaddingAdded = false;
         // Declare the top level nav items
@@ -168,7 +174,20 @@ namespace NavigationMenuSample
 
         public static AppShell Current = null;
         private static Usuario usa;
-
+        public AppShellPresentador presentador;
+        public Boolean entro=false;
+        private DispatcherTimer tiempoSesion;
+        int seg = 0;
+        int segAcum = 0;
+        int segConex = 0;
+        int min = 0;
+        int minAcum = 0;
+        int minConex = 0;
+        int hor = 0;
+        int horAcum = 0;
+        int horConex = 0;
+        int segunds = 0;
+        int segundos = 0;
         /// <summary>
         /// Initializes a new instance of the AppShell, sets the static 'Current' reference,
         /// adds callbacks for Back requests and changes in the SplitView's DisplayMode, and
@@ -181,7 +200,7 @@ namespace NavigationMenuSample
         {            
             
             this.InitializeComponent();
-
+            
             this.Loaded += (sender, args) =>
             {
                 Current = this;
@@ -207,12 +226,53 @@ namespace NavigationMenuSample
 
             NavMenuList.ItemsSource = navlist;
 
-           
 
-
+            tiempoSesion = new DispatcherTimer();
+            tiempoSesion.Tick += dispatcherTimer_Tick2;
+            tiempoSesion.Interval = new TimeSpan(0, 0, 1);
+            tiempoSesion.Start();
 
         }
-
+        void dispatcherTimer_Tick2(object sender, object e)
+        {
+            mostrarTime();
+        }
+        private void mostrarTime()
+        {
+            if (minAcum == 60)
+            {
+                horAcum += 1;
+                minAcum = 0;
+            }
+            if (segAcum == 60)
+            {
+                minAcum += 1;
+                segAcum = 0;
+            }
+            segAcum += 1;
+            String Sseg = "0";
+            if (segAcum < 10)
+            { Sseg += segAcum.ToString(); }
+            else
+            {
+                Sseg = segAcum.ToString();
+            }
+            String Smin = "0";
+            if (minAcum < 10)
+            { Smin += minAcum.ToString(); }
+            else
+            {
+                Smin = minAcum.ToString();
+            }
+            String Shor = "0";
+            if (horAcum < 10)
+            { Shor += horAcum.ToString(); }
+            else
+            {
+                Shor = horAcum.ToString();
+            }
+            Tiempo.Text = Shor + ":" + Smin + ":" + Sseg;
+        }
         public Frame AppFrame { get { return this.frame; } }
 
         /// <summary>
@@ -235,6 +295,7 @@ namespace NavigationMenuSample
                 AppFrame.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
                 margin = TogglePaneButton.Margin;
                 TogglePaneButton.Margin = new Thickness(margin.Left, margin.Top + extraPadding, margin.Right, margin.Bottom);
+
             }
         }
         //metodo donde viene a caer despues del llamado de Frame.Navegate
@@ -296,7 +357,6 @@ namespace NavigationMenuSample
             Window.Current.Content = shell;
             Usuario usuario = (Usuario)e.Parameter;
             usa = usuario;
-
             if (shell.AppFrame.Content == null)
             {
                 // When the navigation stack isn't restored, navigate to the first page
@@ -307,6 +367,11 @@ namespace NavigationMenuSample
             
             // Ensure the current window is active
             Window.Current.Activate();
+            /*Nombre.Text = usa.Nombre;
+            if(usa.Image!=null)
+                Foto.Source = usa.Image;
+            Tiempo.Text = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("%MM") + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+            */
         }
 
 
@@ -408,7 +473,6 @@ namespace NavigationMenuSample
             
             var item = (NavMenuItem)((NavMenuListView)sender).ItemFromContainer(listViewItem);
             item.Arguments = usa;
-
             if (item != null)
             {
                 item.IsSelected = true;
@@ -433,10 +497,18 @@ namespace NavigationMenuSample
 
                     //Page destPage = (Page) Activator.CreateInstance(item.DestPage);
                     //this.AppFrame.Content = destPage;
-                    String a = this.TogglePaneButton.IsChecked.ToString();                    
+                    String a = this.TogglePaneButton.IsChecked.ToString();
+
+                    /*Nombre.Text = usa.Nombre;
+                    Tiempo.Text= DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("%MM") + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                    if (usa.Image != null)
+                        Foto.Source = usa.Image;
+                    Tiempo.Text = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("%MM") + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+                    */
+
                     CloseNavePane();
 
-
+                  
                 }
             }
             
@@ -482,6 +554,14 @@ namespace NavigationMenuSample
                 if (container != null) container.IsTabStop = false;
                 NavMenuList.SetSelectedItem(container);
                 if (container != null) container.IsTabStop = true;
+
+
+               /* Nombre.Text = usa.Nombre;
+                if (usa.Image != null)
+                    Foto.Source = usa.Image;
+                Tiempo.Text = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("%MM") + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+               */
+
             }
         }
 
@@ -492,6 +572,8 @@ namespace NavigationMenuSample
             get;
             private set;
         }
+        public object Base64 { get; private set; }
+        public object PixelFormats { get; private set; }
 
         /// <summary>
         /// An event to notify listeners when the hamburger button may occlude other content in the app.
@@ -507,6 +589,12 @@ namespace NavigationMenuSample
         {
             TogglePaneButton.IsChecked = true;
             NavPaneDivider.Visibility = Visibility.Visible;
+
+            /*Nombre.Text = usa.Nombre;
+            if (usa.Image != null)
+                Foto.Source = usa.Image;
+            Tiempo.Text = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("%MM") + DateTime.Now.Day.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+            */
         }
         public void CloseNavePane()
         {
@@ -577,6 +665,7 @@ namespace NavigationMenuSample
                 // handler(this, this.TogglePaneButtonRect);
                 handler.DynamicInvoke(this, this.TogglePaneButtonRect);
             }
+
         }
 
         /// <summary>
@@ -587,6 +676,7 @@ namespace NavigationMenuSample
         /// <param name="args"></param>
         private void NavMenuItemContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
+            presentador = new AppShellPresentador(this);
             if (!args.InRecycleQueue && args.Item != null && args.Item is NavMenuItem)
             {
                 args.ItemContainer.SetValue(AutomationProperties.NameProperty, ((NavMenuItem)args.Item).Label);
@@ -595,8 +685,48 @@ namespace NavigationMenuSample
             {
                 args.ItemContainer.ClearValue(AutomationProperties.NameProperty);
             }
+            Nombre.Text = usa.Nombre;
+
+            if (!entro)
+            {
+                entro = true;
+                if (usa.Image != null)
+                    Foto.Source = usa.Image;
+                else
+                    presentador.consultarFotoUsuario(usa.Id);                
+            }
+
+            int mes = DateTime.Now.Month;
+            string mesS = "";
+            if (mes < 9)
+                mesS = "0" + mes;
+            else
+                mesS = ""+ mes;
+
+            int dia = DateTime.Now.Day;
+            string diaS = "";
+            if (dia < 9)
+                diaS = "0" + dia;
+            else
+                diaS = "" + dia;
+            FechaI.Text = DateTime.Now.Year.ToString() +"/"+ mesS + "/"+ diaS;
+
         }
 
+        public async void mostrarFotoUsuarioAsync(string imagen)
+        {
+            var bytes = Convert.FromBase64String(imagen);
+             var buf = bytes.AsBuffer();
+             var stream = buf.AsStream();    
 
+            var image = stream.AsRandomAccessStream();
+
+            var decoder = await BitmapDecoder.CreateAsync(image);
+            image.Seek(0);
+
+            var output = new WriteableBitmap((int)decoder.PixelHeight, (int)decoder.PixelWidth);
+            await output.SetSourceAsync(image);
+            Foto.Source=output;
+        }
     }
 }

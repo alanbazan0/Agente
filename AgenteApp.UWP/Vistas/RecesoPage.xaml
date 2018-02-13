@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Loaded="Grid_Loaded">
-        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#ff9900" Margin="0">
             <AppBarButton Icon="Message" Label="Enviar sms" Foreground="White"/>
             <AppBarButton Icon="ClosePane" Label="Cerrar" Foreground="White" Click="AppCerrarButton_Click"/>
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
