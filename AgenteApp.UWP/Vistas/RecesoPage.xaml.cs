@@ -51,6 +51,11 @@ namespace NavigationMenuSample.Views
         private DispatcherTimer acomuladoTimer;
         private DispatcherTimer conexionTimer;
 
+
+        Stopwatch StopWatch; 
+        Stopwatch acomuladoStopWatch;
+        Stopwatch conexionStopWatch;
+
         String estatusAgente="";
         String duracionReceso = "";
         String fechaGuardada = "";
@@ -190,6 +195,15 @@ namespace NavigationMenuSample.Views
             conexionTimer.Tick += dispatcherTimer_Tick3;
             conexionTimer.Interval = new TimeSpan(0, 0, 1);
             conexionTimer.Start();
+
+            StopWatch = new Stopwatch();
+            StopWatch.Start();
+
+            acomuladoStopWatch = new Stopwatch();
+            acomuladoStopWatch.Start();
+
+            conexionStopWatch = new Stopwatch();
+            conexionStopWatch.Start();
         }
         void dispatcherTimer_Tick(object sender, object e)
         {
@@ -315,7 +329,7 @@ namespace NavigationMenuSample.Views
 
         private void timepoCOnexionTick()
         {
-            if (minConex == 60)
+            /*if (minConex == 60)
             {
                 horConex += 1;
                 minConex = 0;
@@ -346,8 +360,16 @@ namespace NavigationMenuSample.Views
             else
             {
                 Shor = horConex.ToString();
+            }*/
+            //tiempoConexion.Text = Shor + ":" + Smin + ":" + Sseg;
+
+            if (StopWatch.IsRunning)
+            {
+                TimeSpan ts = StopWatch.Elapsed;
+                
+                tiempoConexion.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours+horConex, ts.Minutes+ minConex, ts.Seconds+segConex);
+                horConex = 0; minConex = 0; segConex = 0;
             }
-            tiempoConexion.Text = Shor + ":" + Smin + ":" + Sseg;
         }
 
         private void ShowTime()

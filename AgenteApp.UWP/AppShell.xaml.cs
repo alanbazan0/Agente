@@ -33,6 +33,7 @@ using System.IO;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Graphics.Imaging;
+using System.Threading;
 
 namespace NavigationMenuSample
 {
@@ -177,17 +178,12 @@ namespace NavigationMenuSample
         public AppShellPresentador presentador;
         public Boolean entro=false;
         private DispatcherTimer tiempoSesion;
+        ThreadPoolTimer timer;
+        Stopwatch myStopWatch;
         int seg = 0;
         int segAcum = 0;
-        int segConex = 0;
-        int min = 0;
         int minAcum = 0;
-        int minConex = 0;
-        int hor = 0;
         int horAcum = 0;
-        int horConex = 0;
-        int segunds = 0;
-        int segundos = 0;
         /// <summary>
         /// Initializes a new instance of the AppShell, sets the static 'Current' reference,
         /// adds callbacks for Back requests and changes in the SplitView's DisplayMode, and
@@ -226,52 +222,58 @@ namespace NavigationMenuSample
 
             NavMenuList.ItemsSource = navlist;
 
-
             tiempoSesion = new DispatcherTimer();
-            tiempoSesion.Tick += dispatcherTimer_Tick2;
-            tiempoSesion.Interval = new TimeSpan(0, 0, 1);
+            tiempoSesion.Tick +=dispatcherTimer_Tick2;
+            tiempoSesion.Interval = new TimeSpan(0,0,1);
             tiempoSesion.Start();
 
+            myStopWatch = new Stopwatch();
+            myStopWatch.Start();
         }
-        void dispatcherTimer_Tick2(object sender, object e)
+        async void dispatcherTimer_Tick2(object sender, object e)
         {
-            mostrarTime();
+           mostrarTime();
         }
         private void mostrarTime()
         {
-            if (minAcum == 60)
+            /* if (minAcum == 60)
+             {
+                 horAcum += 1;
+                 minAcum = 0;
+             }
+             if (segAcum == 60)
+             {
+                 minAcum += 1;
+                 segAcum = 0;
+             }
+             segAcum += 1;
+             String Sseg = "0";
+             if (segAcum < 10)
+             { Sseg += segAcum.ToString(); }
+             else
+             {
+                 Sseg = segAcum.ToString();
+             }
+             String Smin = "0";
+             if (minAcum < 10)
+             { Smin += minAcum.ToString(); }
+             else
+             {
+                 Smin = minAcum.ToString();
+             }
+             String Shor = "0";
+             if (horAcum < 10)
+             { Shor += horAcum.ToString(); }
+             else
+             {
+                 Shor = horAcum.ToString();
+             }
+            Tiempo.Text = Shor + ":" + Smin + ":" + Sseg;*/
+            if (myStopWatch.IsRunning)
             {
-                horAcum += 1;
-                minAcum = 0;
+                TimeSpan ts = myStopWatch.Elapsed;
+                Tiempo.Text = string.Format("{0:00}:{1:00}:{2:00}",ts.Hours, ts.Minutes, ts.Seconds);
             }
-            if (segAcum == 60)
-            {
-                minAcum += 1;
-                segAcum = 0;
-            }
-            segAcum += 1;
-            String Sseg = "0";
-            if (segAcum < 10)
-            { Sseg += segAcum.ToString(); }
-            else
-            {
-                Sseg = segAcum.ToString();
-            }
-            String Smin = "0";
-            if (minAcum < 10)
-            { Smin += minAcum.ToString(); }
-            else
-            {
-                Smin = minAcum.ToString();
-            }
-            String Shor = "0";
-            if (horAcum < 10)
-            { Shor += horAcum.ToString(); }
-            else
-            {
-                Shor = horAcum.ToString();
-            }
-            Tiempo.Text = Shor + ":" + Smin + ":" + Sseg;
         }
         public Frame AppFrame { get { return this.frame; } }
 
@@ -684,32 +686,36 @@ namespace NavigationMenuSample
             else
             {
                 args.ItemContainer.ClearValue(AutomationProperties.NameProperty);
+
+
             }
-            Nombre.Text = usa.Nombre;
+            
 
             if (!entro)
             {
+                Nombre.Text = usa.Nombre;                
                 entro = true;
                 if (usa.Image != null)
                     Foto.Source = usa.Image;
                 else
-                    presentador.consultarFotoUsuario(usa.Id);                
+                    presentador.consultarFotoUsuario(usa.Id);             
+            
+
+                int mes = DateTime.Now.Month;
+                string mesS = "";
+                if (mes < 9)
+                    mesS = "0" + mes;
+                else
+                    mesS = ""+ mes;
+
+                int dia = DateTime.Now.Day;
+                string diaS = "";
+                if (dia < 9)
+                    diaS = "0" + dia;
+                else
+                    diaS = "" + dia;
+                FechaI.Text = DateTime.Now.Year.ToString() +"/"+ mesS + "/"+ diaS;
             }
-
-            int mes = DateTime.Now.Month;
-            string mesS = "";
-            if (mes < 9)
-                mesS = "0" + mes;
-            else
-                mesS = ""+ mes;
-
-            int dia = DateTime.Now.Day;
-            string diaS = "";
-            if (dia < 9)
-                diaS = "0" + dia;
-            else
-                diaS = "" + dia;
-            FechaI.Text = DateTime.Now.Year.ToString() +"/"+ mesS + "/"+ diaS;
 
         }
 
