@@ -365,10 +365,12 @@ namespace NavigationMenuSample.Views
 
             if (StopWatch.IsRunning)
             {
+                
                 TimeSpan ts = StopWatch.Elapsed;
                 
-                tiempoConexion.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours+horConex, ts.Minutes+ minConex, ts.Seconds+segConex);
-                horConex = 0; minConex = 0; segConex = 0;
+                
+                tiempoConexion.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours+horConex, ts.Minutes+ minConex, ts.Seconds+segConex);
+                //horConex = 0; minConex = 0; segConex = 0;
             }
         }
 
