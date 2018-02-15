@@ -41,10 +41,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#ff9900">
-            <AppBarButton Icon="AddFriend" x:Name="btConferencia" Label="Conferencia" Foreground="White" Click="Conferenciar" />
-            <AppBarButton Icon="Go" x:Name="btTrasnferir" Label="Tranferir llamada" Foreground="White" Click="Transferir"/>
-            <AppBarButton Icon="HangUp" x:Name="btColgar" Label="Colgar llamada" Foreground="White" Click="Colgar"/>
-            <AppBarButton Icon="Pause" x:Name="btPausa" Label="Pausar llamada" Foreground="White" Click="Pausar"/>
+            <AppBarButton Icon="AddFriend" x:Name="btConferencia" Label="Conferencia" Foreground="White"  />
+            <AppBarButton Icon="Go" x:Name="btTrasnferir" Label="Tranferir llamada" Foreground="White" />
+            <AppBarButton Icon="HangUp" x:Name="btColgar" Label="Colgar llamada" Foreground="White" />
+            <AppBarButton Icon="Pause" x:Name="btPausa" Label="Pausar llamada" Foreground="White" />
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
             <AppBarSeparator Foreground="White"/>-->
             <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
