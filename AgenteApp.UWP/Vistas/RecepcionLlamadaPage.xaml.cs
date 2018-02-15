@@ -33,7 +33,8 @@ namespace NavigationMenuSample.Views
         RecepcionLlamadaPresentador presentador;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
-        SoftphoneEmbebed telefono;
+        public SoftphoneEmbebed telefono;
+        private CoreListener Listener;
         public string numTelefonico;
         int seg = 0;
         int min = 0;
@@ -49,6 +50,7 @@ namespace NavigationMenuSample.Views
         string ip;
         string idhardware;
         Boolean pausado = false;
+        Boolean iniciado = false;
         Call LlamadaPausada;
         List<Call> llamadaConferencia;
         Parametros ParametroLocal;
@@ -58,11 +60,11 @@ namespace NavigationMenuSample.Views
         string IdCrm = "";
         string NombreCliente = "";
         public Parametros Parametro { get => ParametroLocal; set { } }
-        private CoreListener Listener;
 
         public RecepcionLlamadaPage()
         {
             this.InitializeComponent();
+           this.Unloaded += App_Suspending;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
 
@@ -71,6 +73,7 @@ namespace NavigationMenuSample.Views
             telefono = new SoftphoneEmbebed();
             ParametroLocal = new Parametros();
             invitados = new List<Usuario>();
+            
             llamadaConferencia = new List<Call>();
             usuario = null;
             dispatcherTimer = new DispatcherTimer();
@@ -79,16 +82,11 @@ namespace NavigationMenuSample.Views
             HeaderTextBlock.Text = "Llamada entrante - Disponible";
             tFechaextBox.Text = FechaLlamadaTextBox.Text = GetDateString();
             obtenerInformacion();
-            try
-            {
-                Listener = Factory.Instance.CreateCoreListener();
-                Listener.OnRegistrationStateChanged = OnRegistration;
-                Listener.OnCallStateChanged = OnCall;
-                Listener.OnCallStatsUpdated = OnStats;
-                telefono.LinphoneCore.AddListener(Listener);
-            }
-            catch { }
+        }
 
+        private void App_Suspending(Object sender, RoutedEventArgs e)
+        {
+           telefono.LinphoneCore.RemoveListener(Listener);
         }
 
         private void OnGlobal(Core lc, GlobalState gstate, string message)
@@ -358,8 +356,10 @@ namespace NavigationMenuSample.Views
         {
             base.OnNavigatedFrom(e);
             usuario = (Usuario)e.Parameter;
-            onRegister(e);
-            ConsultarSupervisores();
+           
+                onRegister(e);
+                ConsultarSupervisores();
+
             //ConsultarUsuarios();
         }
 
@@ -367,7 +367,13 @@ namespace NavigationMenuSample.Views
         {
             try
             {
-
+               
+                Listener = Factory.Instance.CreateCoreListener();
+                Listener.OnRegistrationStateChanged = OnRegistration;
+                Listener.OnCallStateChanged = OnCall;
+                Listener.OnCallStatsUpdated = OnStats;
+                telefono.LinphoneCore.AddListener(Listener);
+                iniciado = true;
                 ParametroLocal.IdParamtro = usuario.Id;
                 ParametroLocal.DireccionIp = ip;
                 ParametroLocal.NumeroMaquina = idhardware;
@@ -377,7 +383,7 @@ namespace NavigationMenuSample.Views
                 telefono.LinphoneCore.AddAuthInfo(authInfo);
 
                 var proxyConfig = telefono.LinphoneCore.CreateProxyConfig();
-                var identity = Factory.Instance.CreateAddress("sip:sample@domain.tld");
+                var identity = Factory.Instance.CreateAddress("sip:" + usuario.Extension + "sample@domain.tld");
                 identity.Username = usuario.Extension;
                 identity.Domain = Constantes.DIRECCION_ELAXTIC;
                 proxyConfig.Edit();
@@ -417,8 +423,6 @@ namespace NavigationMenuSample.Views
                 pageTitleContainer.Visibility = Visibility.Collapsed;
                 bottombar.Visibility = Visibility.Collapsed;
             }
-
-
         }
 
         void dispatcherTimer_Tick(object sender, object e)

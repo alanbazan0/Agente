@@ -9,11 +9,13 @@
     <Import_RootNamespace>AgenteApp</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Clases\LinphoneOutWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\LinphoneWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\ModoVentana.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Resultado.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\ResultadoCliente.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\SoftphoneEmbebed.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Clases\SoftphoneOutEmbebed.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Utilerias.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Clases\Utilidades.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Componentes\IComponente.cs" />
@@ -46,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CorreoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CRMPresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\LlamarPredictivoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecepcionLlamadaPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\FormularioPresentador.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICRM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IFormulario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\ILlamarPredictivoVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IMenuVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IParametrosVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IRecepcionLlamadaVista.cs" />
