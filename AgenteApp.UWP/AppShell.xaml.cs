@@ -689,15 +689,15 @@ namespace NavigationMenuSample
 
 
             }
-            
+
 
             if (!entro)
             {
-                Nombre.Text = usa.Nombre;                
+                Nombre.Text = usa.Nombre;
                 entro = true;
                 if (usa.Image != null)
                     Foto.Source = usa.Image;
-                else
+                else if (usa.TipoInicio.Equals("LF"))
                     presentador.consultarFotoUsuario(usa.Id);             
             
 
