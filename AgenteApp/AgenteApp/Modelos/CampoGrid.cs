@@ -15,6 +15,7 @@ namespace AgenteApp.Modelos
         public string tipoDato { get; set; }
         public string tamano { get; set; }
         public string tamanoCampo { get; set; }
-        
+        public string alineacion { get; set; }
+        public string miles { get; set; }
     }
 }

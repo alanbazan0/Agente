@@ -44,6 +44,7 @@ namespace AgenteApp.UWP
         private IRandomAccessStream stream;
         private Stream imgStream;
         public Usuario usuario;
+        BitmapImage bimage;
         private byte[] imageCompare;
         string moveImage = "";
         public InicioSesionPage()
@@ -51,6 +52,7 @@ namespace AgenteApp.UWP
             this.InitializeComponent();
             mensajeBlockText.Text = "";
             presentador = new InicioSesionPresentador(this);
+            textoBanerTextBlock.Text = "Bastiaan People & Software Center";
         }
 
         public string NombreUsuario { get { return nombreUsuarioTextBox.Text; } set { nombreUsuarioTextBox.Text = value; } }
@@ -151,11 +153,12 @@ namespace AgenteApp.UWP
                     this.imageCompare = await Utilerias.GetBytesAsync(storeFile);
                     this.moveImage = Utilerias.asByteToString(this.imageCompare);
                     this.imgStream = await storeFile.OpenStreamForReadAsync();
-                    BitmapImage bimage = new BitmapImage();
+                    bimage = new BitmapImage();
                     stream = await storeFile.OpenAsync(FileAccessMode.Read);
 
 
                     bimage.SetSource(stream);
+                    usuario.Image = bimage;
                     captureImage.Source = bimage;
                     captureImage.Visibility = Visibility.Visible;
                     SubirFotoComparar();

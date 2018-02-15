@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#6b6b6b" Margin="0">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Collapsed" HorizontalContentAlignment="Stretch" Background="#ff9900" Margin="0">
             <AppBarButton Icon="Save" Label="Guardar" Foreground="White" Click="AppGuardarClienteButton_Click"/>
             <AppBarButton x:Name="EliminaNum" Icon="Delete" Label="Eliminar numero" Foreground="White" Click="eliminarNum_Click"/>
             <AppBarButton x:Name="EliminaCorreo" Icon="Delete" Label="Eliminar correo" Foreground="White" Click="eliminarCorreo_Click"/>

@@ -5,10 +5,15 @@
     xmlns:ctl="using:NavigationMenuSample.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:AgenteApp.Clases"
     mc:Ignorable="d">
 
-
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <converters:FormatoStringMIles x:Key="milesFormato" StringFormat="{}{0:n}"/>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -47,8 +52,7 @@
                 <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
             </ctl:PageHeader.HeaderContent>
         </ctl:PageHeader>
-
-        <CommandBar x:Name="topbar" Foreground="White" Visibility="Visible" HorizontalContentAlignment="Stretch" Background="#6b6b6b">
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Visible" HorizontalContentAlignment="Stretch" Background="#ff9900">
             <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
             <AppBarSeparator Foreground="White"/>-->
             <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
@@ -145,58 +149,11 @@
 
                             </Grid>
                             <StackPanel x:Name="correosEntrada">
-                                <ListView x:Name="CRMListView" Margin="0,0,15,0" Height="250" IsItemClickEnabled="True" ItemClick="CRM1_ItemClick" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                <ListView x:Name="CRMListView" Margin="0,0,0,0" Height="500" IsItemClickEnabled="True" ItemClick="CRM1_ItemClick" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Visible">
                                     
                                 </ListView>
                             </StackPanel>
-                            <TextBlock Text="Seguimiento a tramites de cliente" TextAlignment="Start" FontSize="20"  Foreground="Black" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                            <StackPanel x:Name="correosSalida">
-                                <ListView x:Name="correosSalidaListView" Margin="0,0,15,0" IsItemClickEnabled="True"   >
-                                    <ListView.HeaderTemplate>
-                                        <DataTemplate>
-                                            <Grid  Padding="0" >
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="300" />
-                                                    <ColumnDefinition Width="200" />
-                                                </Grid.ColumnDefinitions>
-
-                                                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Tramite"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                                <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Estatus"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                                <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Descripción"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                                <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" >
-                                                    <TextBlock Text="Fecha"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                </Border>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.HeaderTemplate>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Padding="0" Margin="0,0,0,0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="200" />
-                                                    <ColumnDefinition Width="300" />
-                                                    <ColumnDefinition Width="200" />
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                </Grid.RowDefinitions>
-                                                <Image Grid.Column="0"  Source="../Assets/Contacto.png" Height="30" />
-                                                <TextBlock Grid.Column="1" FontSize="12" Text="{Binding Titulo}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                                <TextBlock Grid.Column="2" FontSize="12" Text="{Binding Fecha}" MaxLines="2" TextWrapping="WrapWholeWords"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </StackPanel>
+                            
                            
                         </StackPanel>
 

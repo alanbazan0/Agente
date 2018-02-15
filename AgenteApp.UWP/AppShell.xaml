@@ -19,6 +19,8 @@
     -->
 
     <Page.Resources>
+        
+        
         <DataTemplate x:Key="NavMenuItemTemplate" x:DataType="local:NavMenuItem">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -142,6 +144,7 @@
             <SplitView.Pane>
                 <Grid x:Name="PaneContentGrid" Background="#575652">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -154,22 +157,41 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- A custom ListView to display the items in the pane.  The automation Name is set in the ContainerContentChanging event. -->
+                    <StackPanel  Grid.ColumnSpan="3" Grid.Row="0" Margin="0,52,0,0">
+                        <Grid Background="#ff9900" Margin="0,2,0,0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="97"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image  x:Name = "Foto" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"   Source="../Assets/sombra.png" Height="auto" />
+                            <TextBlock x:Name = "Nombre" Text="Nombre de la persona"   FontSize="17"  Grid.Row="2" Grid.Column="0" TextAlignment="Center" Grid.ColumnSpan="3" Foreground="White"/>
+                            <TextBlock x:Name = "FechaI" Text="fecha"   FontSize="15"  Grid.Row="0" Grid.Column="0" TextAlignment="Center"  Foreground="White"/>
+                            <TextBlock x:Name = "Tiempo" Text="00:00:00"   FontSize="15"  Grid.Row="0" Grid.Column="2" TextAlignment="Center"  Foreground="White"/>
+                        </Grid>
+                    </StackPanel>
                     <controls:NavMenuListView x:Name="NavMenuList"
                                               Grid.ColumnSpan="3"
+                                              Grid.Row="1"
                                               TabIndex="3"
-                                              Margin="0,52,0,0"
                                               ContainerContentChanging="NavMenuItemContainerContentChanging"
                                               ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                                               ItemTemplate="{StaticResource NavMenuItemTemplate}"
                                               ItemInvoked="NavMenuList_ItemInvoked"/>
                     <Rectangle x:Name="NavPaneDivider"
-                               Grid.Row="1"
+                               Grid.Row="2"
                                Grid.ColumnSpan="3"
                                Height="1"
                                Fill="{ThemeResource SystemControlForegroundBaseLowBrush}"
                                Margin="16,0,16,6"/>
                     <Button x:Name="FeedbackNavPaneButton"
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Grid.Column="1"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
                             Content="&#xE76E;"
@@ -177,7 +199,7 @@
                             AutomationProperties.Name="Feedback"
                             ToolTipService.ToolTip="Feedback"/>
                     <Button x:Name="SettingsNavPaneButton"
-                            Grid.Row="2"
+                            Grid.Row="3"
                             Grid.Column="2"
                             Style="{StaticResource SplitViewPaneButtonStyle}"
                             Content="&#xE713;"
