@@ -46,7 +46,7 @@ namespace NavigationMenuSample.Views
         int segundos = 0;
 
         int segundosConexion = 0;
-
+        int segundosTotalesConex = 0;
         private DispatcherTimer dispatcherTimer;
         private DispatcherTimer acomuladoTimer;
         private DispatcherTimer conexionTimer;
@@ -89,6 +89,7 @@ namespace NavigationMenuSample.Views
             set
             {
                 int tiempoAcomulado = 0;
+                Boolean entro = true;
                 TimeSpan t;
                 for (int i = 0; i < value.LongCount(); i++)
                 {
@@ -102,14 +103,19 @@ namespace NavigationMenuSample.Views
                     value[i].Orden = "" + (i + 1);
                     value[i].TiempoAcomulado = tiempo;
 
-                    if (value[i].IdReceso.Equals("SBSC"))
+                    if (value[i].IdReceso.Equals("SBSC") && entro)
                     {
+                        segundosTotalesConex = 0;
                         horaInicio.Text=value[i].HoraInicial;
                         TimeSpan ts = Convert.ToDateTime(DateTime.Now.ToString()) - Convert.ToDateTime(value[i].HoraInicial);
+                        segundosTotalesConex = Convert.ToInt32( ts.TotalSeconds);
                         string tc = string.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
                         segConex = ts.Seconds; minConex = ts.Minutes; horConex = ts.Hours;
                         tiempoConexion.Text = tc;
-                        
+                        entro=false;
+                        StopWatch.Reset();
+                        StopWatch.Start();
+
                     }
                 }
                 timerAcomulado.Text=string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
@@ -365,10 +371,15 @@ namespace NavigationMenuSample.Views
 
             if (StopWatch.IsRunning)
             {
+
                 TimeSpan ts = StopWatch.Elapsed;
-                
-                tiempoConexion.Text = string.Format("{0:00}:{1:00}:{2:00}", ts.Hours+horConex, ts.Minutes+ minConex, ts.Seconds+segConex);
+                int segundosAcomuladosCOnexion = Convert.ToInt32(ts.TotalSeconds);
+
+                TimeSpan ts2 = TimeSpan.FromSeconds(segundosTotalesConex + segundosAcomuladosCOnexion);
+
+                tiempoConexion.Text = string.Format("{0:00}:{1:00}:{2:00}", ts2.Hours, ts2.Minutes, ts2.Seconds);
                 horConex = 0; minConex = 0; segConex = 0;
+                
             }
         }
 

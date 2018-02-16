@@ -47,6 +47,7 @@ namespace AgenteApp.UWP
         BitmapImage bimage;
         private byte[] imageCompare;
         string moveImage = "";
+        public string tipoInicio = "";
         public InicioSesionPage()
         {
             this.InitializeComponent();
@@ -98,7 +99,7 @@ namespace AgenteApp.UWP
         {
             progressRing.IsActive = false;
             //insertamos sesion de trabajo
-           
+            usuario.TipoInicio = tipoInicio;
            // InsertarSesionTrabajo();
             this.Frame.Navigate(typeof(AppShell), usuario);
         }
@@ -177,6 +178,7 @@ namespace AgenteApp.UWP
         }
         private void activarModoInicio()
         {
+            tipoInicio = usuario.TipoInicio;
             if (usuario.TipoInicio.Equals("LF"))
                 captureBtn.Visibility = Visibility.Visible;
         }
