@@ -11,6 +11,7 @@ namespace AgenteApp.Clases
     public class SoftphoneEmbebed 
     {
         public Core LinphoneCore { get; set; }
+        public CoreListener listener { get; set; }
         public SoftphoneEmbebed()
         {
             try
@@ -19,7 +20,7 @@ namespace AgenteApp.Clases
                 LinphoneWrapper.setNativeLogHandler();
 
                 Core.SetLogLevelMask(0xFF);
-                CoreListener listener = Factory.Instance.CreateCoreListener();
+                listener = Factory.Instance.CreateCoreListener();
                 listener.OnGlobalStateChanged = OnGlobal;
                 LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
                 LinphoneCore.NetworkReachable = true;

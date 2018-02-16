@@ -50,6 +50,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\AgentePresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CorreoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\CRMPresentador.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentadores\LlamadasPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\LlamarPredictivoPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecepcionLlamadaPresentador.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentadores\RecesoPresentador.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ICRM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IFormulario.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IInicioSesionVista.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Vistas\ILlamadaVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\ILlamarPredictivoVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IMenuVista.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Vistas\IParametrosVista.cs" />

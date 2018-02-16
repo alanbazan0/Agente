@@ -44,6 +44,7 @@ namespace NavigationMenuSample
     public sealed partial class AppShell :  Page,IAppShell
     {
         private bool isPaddingAdded = false;
+        public SoftphoneEmbebed SoftPhoneInstance;
         // Declare the top level nav items
         private List<NavMenuItem> navlist = new List<NavMenuItem>(
             new[]
@@ -53,7 +54,7 @@ namespace NavigationMenuSample
                     Symbol = Symbol.Phone,
                     Image="../Assets/img1.png",
                     Label = "llamada entrante",
-                    DestPage = typeof(RecepcionLlamadaPage)
+                    DestPage = typeof(LlamadasPage)
                 },
                 new NavMenuItem()
                 {
@@ -196,7 +197,7 @@ namespace NavigationMenuSample
         {            
             
             this.InitializeComponent();
-            
+            SoftPhoneInstance = new SoftphoneEmbebed();
             this.Loaded += (sender, args) =>
             {
                 Current = this;
@@ -363,7 +364,14 @@ namespace NavigationMenuSample
             {
                 // When the navigation stack isn't restored, navigate to the first page
                 // suppressing the initial entrance animation.
-                shell.AppFrame.Navigate(typeof(RecepcionLlamadaPage), usuario, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                var parametrosLE = new { softphone = SoftPhoneInstance, usuario = usuario };
+                //if(usuario.Id=="IQUINTANA")                
+                    shell.AppFrame.Navigate(typeof(LlamadasPage), parametrosLE, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                //else if(usuario.Id == "LBADILLO")
+                //    shell.AppFrame.Navigate(typeof(LlamarPredictivoPage), parametrosLE, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+                //else
+                //    shell.AppFrame.Navigate(typeof(LlamadasPage), parametrosLE, new Windows.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+
             }
 
             
@@ -492,6 +500,21 @@ namespace NavigationMenuSample
                             item.Arguments = usa;
                             this.AppFrame.Navigate(item.DestPage, item.Arguments);
                             break;
+                        case "llamada entrante":
+                            var parametrosLE = new { softphone = SoftPhoneInstance, usuario = usa };
+                            item.Arguments = parametrosLE;
+                            this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                            break;
+                        case "Llamar(Predictivo/CallBack)":
+                            var parametrosLM = new { softphone = SoftPhoneInstance, usuario = usa };
+                            item.Arguments = parametrosLM;
+                            this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                            break;
+                        case "Cerrar sesion":
+                            SoftPhoneInstance.LinphoneCore.TerminateAllCalls();
+                            SoftPhoneInstance.OnResume();
+                            this.AppFrame.Navigate(item.DestPage, item.Arguments);
+                            break;                        
                         default:
                             this.AppFrame.Navigate(item.DestPage, item.Arguments);
                             break;

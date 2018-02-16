@@ -18,19 +18,19 @@ using Windows.UI.Xaml.Navigation;
 using System.Collections.Generic;
 using Windows.Networking.Connectivity;
 
+// La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=234238
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace NavigationMenuSample.Views
+namespace AgenteApp.UWP.Vistas
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Una página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
     /// </summary>
-    public sealed partial class RecepcionLlamadaPage : Page, IRecepcionLlamadaVista
+    public sealed partial class LlamadasPage : Page, ILlamadaVista
     {
+
         Usuario usuario;
         List<Usuario> invitados;
-        RecepcionLlamadaPresentador presentador;
+        LlamadasPresentador presentador;
         private DispatcherTimer dispatcherTimer;
         Portabilidad portabilidadParametros;
         public SoftphoneEmbebed telefono;
@@ -60,31 +60,31 @@ namespace NavigationMenuSample.Views
         string NombreCliente = "";
         public Parametros Parametro { get => ParametroLocal; set { } }
 
-        public RecepcionLlamadaPage()
+        public LlamadasPage()
         {
             this.InitializeComponent();
-           //this.Unloaded += App_Suspending;
+            //this.Unloaded += App_Suspending;
             this.NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled;
             this.Loaded += CommandBarPage_Loaded;
 
             //correosPresentador = new CorreoPresentador(this);
-            presentador = new RecepcionLlamadaPresentador(this);
+            presentador = new LlamadasPresentador(this);
             ParametroLocal = new Parametros();
             invitados = new List<Usuario>();
-            
+
             llamadaConferencia = new List<Call>();
             usuario = null;
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            HeaderTextBlock.Text = "Llamada entrante - Disponible";
+            HeaderTextBlock.Text = "Llamadas universal - Disponible";
             tFechaextBox.Text = FechaLlamadaTextBox.Text = GetDateString();
             obtenerInformacion();
         }
 
         private void App_Suspending(Object sender, RoutedEventArgs e)
         {
-           telefono.LinphoneCore.RemoveListener(telefono.listener);
+            telefono.LinphoneCore.RemoveListener(telefono.listener);
         }
 
         private void OnGlobal(Core lc, GlobalState gstate, string message)
@@ -131,7 +131,7 @@ namespace NavigationMenuSample.Views
             }
             else
             {
-                HeaderTextBlock.Text = "Llamada entrante - Disponible";
+                HeaderTextBlock.Text = "Llamadas universal - Disponible";
                 ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                 dispatcherTimer.Stop();
                 LimpiarDatos();
@@ -153,9 +153,9 @@ namespace NavigationMenuSample.Views
                 if (call.State == CallState.IncomingReceived)
                 {
                     telefono.LinphoneCore.AcceptCall(call);
-                    HeaderTextBlock.Text = "Llamada entrante - En llamada";                   
+                    HeaderTextBlock.Text = "Llamadas universal - En llamada";
                     LimpiarDatos();
-                    numTelefonico = txtNoTelOrigen.Text = ttxtNumeroTelefono.Text = NoTelTextBox.Text = call.RemoteAddress.DisplayName;                   
+                    numTelefonico = txtNoTelOrigen.Text = ttxtNumeroTelefono.Text = NoTelTextBox.Text = call.RemoteAddress.DisplayName;
                     ttEstatustextBox.Text = estatusTextBox.Text = "Contestada";
                     tHoratextBox.Text = HoraLlamadaTextBox.Text = GetTimeString();
                     dispatcherTimer.Start();
@@ -181,7 +181,7 @@ namespace NavigationMenuSample.Views
                     if (call.State == CallState.StreamsRunning)
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
-                        HeaderTextBlock.Text = "Llamada entrante - Disponible";
+                        HeaderTextBlock.Text = "Llamadas universal - Disponible";
                         ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
                         LimpiarDatos();
@@ -193,7 +193,7 @@ namespace NavigationMenuSample.Views
                     if (LlamadaPausada.State == CallState.Paused || LlamadaPausada.State == CallState.StreamsRunning)
                     {
                         telefono.LinphoneCore.TerminateAllCalls();
-                        HeaderTextBlock.Text = "Llamada entrante - Disponible";
+                        HeaderTextBlock.Text = "Llamadas universal - Disponible";
                         ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                         dispatcherTimer.Stop();
                         //LimpiarDatos();
@@ -203,7 +203,7 @@ namespace NavigationMenuSample.Views
                 else
                 {
                     telefono.LinphoneCore.TerminateAllCalls();
-                    HeaderTextBlock.Text = "Llamada entrante - Disponible";
+                    HeaderTextBlock.Text = "Llamadas universal - Disponible";
                     ttxtTiempoLlamada.Text = HoraLlamadaTextBox.Text = "00:00:00";
                     dispatcherTimer.Stop();
                     LimpiarDatos();
@@ -232,7 +232,7 @@ namespace NavigationMenuSample.Views
                 if (LlamadaPausada.State == CallState.StreamsRunning)
                 {
                     telefono.LinphoneCore.PauseCall(LlamadaPausada);
-                    HeaderTextBlock.Text = "Llamada entrante - Pausa";
+                    HeaderTextBlock.Text = "Llamadas universal - Pausa";
                     btPausa.Label = "Reanudar llamada";
                     enPausa = true;
                     pseg = 0;
@@ -244,7 +244,7 @@ namespace NavigationMenuSample.Views
                 else if (LlamadaPausada.State == CallState.Paused)
                 {
                     telefono.LinphoneCore.ResumeCall(LlamadaPausada);
-                    HeaderTextBlock.Text = "Llamada entrante - En llamada";
+                    HeaderTextBlock.Text = "Llamadas universal - En llamada";
                     btPausa.Label = "Pausar llamada";
                     enPausa = false;
                     LlamadaPausada = null;
@@ -278,7 +278,7 @@ namespace NavigationMenuSample.Views
                 if (call.State == CallState.StreamsRunning)
                 {
                     telefono.LinphoneCore.TransferCall(call, ttxtNumeroATranferir.Text);
-                    HeaderTextBlock.Text = "Llamada entrante - Diponible";
+                    HeaderTextBlock.Text = "Llamadas universal - Diponible";
                 }
             }
 
@@ -304,7 +304,7 @@ namespace NavigationMenuSample.Views
             {
                 btTrasnferir.Visibility = Visibility.Collapsed;
                 btConferencia.Visibility = Visibility.Collapsed;
-                
+
             }
         }
 
@@ -338,7 +338,7 @@ namespace NavigationMenuSample.Views
                             IdCrm = value[i].ValorParametro;
                             break;
                         case "@NOMCOMPLETO@":
-                           ttxtNombreCompletoconf.Text = ttxtNombreCompleto.Text= NombreCliente = value[i].ValorParametro;
+                            ttxtNombreCompletoconf.Text = ttxtNombreCompleto.Text = NombreCliente = value[i].ValorParametro;
                             break;
                     }
                 }
@@ -511,7 +511,7 @@ namespace NavigationMenuSample.Views
             {
                 Shor = phor.ToString();
             }
-            HeaderTextBlock.Text = "Llamada entrante - Pausa - " + Shor + ":" + Smin + ":" + Sseg;
+            HeaderTextBlock.Text = "Llamadas universal - Pausa - " + Shor + ":" + Smin + ":" + Sseg;
             psegunds += 1;
         }
 
@@ -545,7 +545,7 @@ namespace NavigationMenuSample.Views
             FlyInvitadosListView.ItemsSource = null;
             SupervisoresListView.ItemsSource = null;
             lbCoincidencias.Foreground = new SolidColorBrush(Colors.White);
-            
+
         }
 
         private string GetTimeString()
@@ -909,7 +909,7 @@ namespace NavigationMenuSample.Views
                     ConferenceParams conf = telefono.LinphoneCore.CreateConferenceParams();
                     telefono.LinphoneCore.CreateConferenceWithParams(conf);
                     //Pausar("", null);
-                    HeaderTextBlock.Text = "Llamada entrante - Conferencia";
+                    HeaderTextBlock.Text = "Llamadas universal - Conferencia";
                 }
             }
         }
@@ -929,7 +929,7 @@ namespace NavigationMenuSample.Views
                 }
                 telefono.LinphoneCore.AddAllToConference();
                 enPausa = false;
-                HeaderTextBlock.Text = "Llamada entrante - Conferencia";
+                HeaderTextBlock.Text = "Llamadas universal - Conferencia";
             }
         }
 
@@ -980,31 +980,11 @@ namespace NavigationMenuSample.Views
                 {
                     f.Hide();
                 }
-                //if (telefono.LinphoneCore.CallsNb == 0)
-                //{
-
-                //}
-                //else
-                //{
-                //    int secuencia = InvitadosListView.Items.Count;
-
-                //            invitados.Add(
-                //              new Usuario()
-                //              {
-                //                  Nombre = (string)usuarioConferencia.GetType().GetProperty("Nombre").GetValue(usuarioConferencia, null),
-                //                  Puesto = (string)usuarioConferencia.GetType().GetProperty("Puesto").GetValue(usuarioConferencia, null),
-                //                  Extension = (string)usuarioConferencia.GetType().GetProperty("Extension").GetValue(usuarioConferencia, null),
-                //                  Id = Convert.ToString(secuencia + 1)
-                //              }
-                //              );
-                //            InvitadosListView.ItemsSource = null;
-                //            InvitadosListView.ItemsSource = invitados;
-                //            telefono.LinphoneCore.Invite(txtNotelefonico.Text);
-
-                //}
+                
             }
 
         }
 
     }
+
 }

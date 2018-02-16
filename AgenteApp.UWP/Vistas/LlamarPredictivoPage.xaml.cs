@@ -35,7 +35,7 @@ namespace NavigationMenuSample.Views
         LlamarPredictivoPresentador presentador;
         private DispatcherTimer dispatcherTimer;
         private SoftphoneEmbebed telefonoOut;
-        private CoreListener Listener;
+
         Call LlamadaPausada;
         List<Call> llamadaConferencia;
         string numTelefonico;
@@ -55,10 +55,14 @@ namespace NavigationMenuSample.Views
         public LlamarPredictivoPage()
         {
             this.InitializeComponent();
-           // this.Loaded += CommandBarPage_Loaded;
-           this.Unloaded += App_Suspending;
-            presentador = new LlamarPredictivoPresentador(this);
-            telefonoOut = new SoftphoneEmbebed();
+            // this.Loaded += CommandBarPage_Loaded;
+            //this.Unloaded += App_Suspending;
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            HeaderTextBlock.Text = "Llamada entrante - Disponible";
+            tFechaextBox.Text = txtTiempoLlamada.Text = GetDateString();
+            presentador = new LlamarPredictivoPresentador(this);           
             llamadaConferencia = new List<Call>();
            
             
@@ -67,7 +71,7 @@ namespace NavigationMenuSample.Views
 
         private void App_Suspending(Object sender, RoutedEventArgs e)
         {
-            telefonoOut.LinphoneCore.RemoveListener(Listener);
+            telefonoOut.LinphoneCore.RemoveListener(telefonoOut.listener);
         }
 
 
@@ -655,10 +659,11 @@ namespace NavigationMenuSample.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            usuario = (Usuario)e.Parameter;
-           
-                onRegister(e);
-                ConsultarSupervisores();
+            var parametros = e.Parameter;
+            usuario = (Usuario)parametros.GetType().GetProperty("usuario").GetValue(parametros, null);
+            telefonoOut = (SoftphoneEmbebed)parametros.GetType().GetProperty("softphone").GetValue(parametros, null); ;
+            onRegister(e);
+            ConsultarSupervisores();
 
             //ConsultarUsuarios();
         }
@@ -667,12 +672,12 @@ namespace NavigationMenuSample.Views
         {
             try
             {
-                
-                Listener = Factory.Instance.CreateCoreListener();
-                Listener.OnRegistrationStateChanged = OnRegistrationOut;
-                Listener.OnCallStateChanged = OnCallOut;
-                Listener.OnCallStatsUpdated = OnStatsOut;
-                telefonoOut.LinphoneCore.AddListener(Listener);
+
+                telefonoOut.listener = Factory.Instance.CreateCoreListener();
+                telefonoOut.listener.OnRegistrationStateChanged = OnRegistrationOut;
+                telefonoOut.listener.OnCallStateChanged = OnCallOut;
+                telefonoOut.listener.OnCallStatsUpdated = OnStatsOut;
+                telefonoOut.LinphoneCore.AddListener(telefonoOut.listener);
 
                 iniciado = true;
                 extension = txtExtesion.Text = tNoExttextBox.Text  = usuario.ExtensionOutbound;
@@ -700,6 +705,13 @@ namespace NavigationMenuSample.Views
                 string error = ex.Message;
             }
 
+        }
+
+        private string GetDateString()
+        {
+            DateTime dateTime = DateTime.Now;
+            string text = dateTime.ToString("dd/MM/yyyy");// + "-" + dateTime.TimeOfDay.ToString();
+            return text;
         }
     }
 }
