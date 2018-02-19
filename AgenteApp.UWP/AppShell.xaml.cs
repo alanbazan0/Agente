@@ -53,7 +53,7 @@ namespace NavigationMenuSample
                 {
                     Symbol = Symbol.Phone,
                     Image="../Assets/img1.png",
-                    Label = "llamada entrante",
+                    Label = "llamadas (Entrada/salida)",
                     DestPage = typeof(LlamadasPage)
                 },
                 new NavMenuItem()
@@ -116,20 +116,20 @@ namespace NavigationMenuSample
                     Label = "Call back",
                     DestPage = typeof(BasicPage)
                 },             
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.Contact,
-                    Image="../Assets/im8.png",
-                    Label = "Llamar(Predictivo/CallBack)",
-                    DestPage = typeof(LlamarPredictivoPage)
-                },
-                new NavMenuItem()
-                {
-                    Symbol = Symbol.Contact,
-                    Image="../Assets/im9.png",
-                    Label = "Llamar(Manualmente)",
-                    DestPage = typeof(LlamarManualmentePage)
-                },
+                //new NavMenuItem()
+                //{
+                //    Symbol = Symbol.Contact,
+                //    Image="../Assets/im8.png",
+                //    Label = "Llamar(Predictivo/CallBack)",
+                //    DestPage = typeof(LlamarPredictivoPage)
+                //},
+                //new NavMenuItem()
+                //{
+                //    Symbol = Symbol.Contact,
+                //    Image="../Assets/im9.png",
+                //    Label = "Llamar(Manualmente)",
+                //    DestPage = typeof(LlamarManualmentePage)
+                //},
                  new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
