@@ -720,7 +720,7 @@ namespace NavigationMenuSample
                 entro = true;
                 if (usa.Image != null)
                     Foto.Source = usa.Image;
-                else if (usa.TipoInicio.Equals("LF"))
+                else if (usa.TipoInicio.Equals("LF") || usa.TipoInicio.Equals("SI"))
                     presentador.consultarFotoUsuario(usa.Id);             
             
 
