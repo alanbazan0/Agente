@@ -16,12 +16,13 @@
                TextWrapping="Wrap" Width="400"
                TextAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
             <TextBox x:Name="nombreUsuarioTextBox" GotFocus="nombreUsuarioTextBox_GotFocus" LostFocus="nombreUsuarioTextBox_LosingFocus" PlaceholderText="Usuario" Margin="8" Width="250" />
-            <PasswordBox  x:Name="contrasenaPasswordBox"  PlaceholderText="Contraseña" Margin="8" Width="250" />
+            <ComboBox x:Name="comboInicioSesion" HorizontalAlignment="Center" SelectionChanged="comboInicioSesion_SelectionChanged" PlaceholderText="Tipo de sesion" Width="250"   />
+            <PasswordBox  x:Name="contrasenaPasswordBox"  PlaceholderText="Contraseña" Margin="8" Width="250" Visibility="Collapsed"/>
 
             <Button x:Name="iniciarSesionButton" Content="Iniciar sesión" Background="#ff9900" Foreground="White"
-        Click="iniciarSesionButton_Click" Width="110" HorizontalAlignment="Center" Margin="0,20"/>
-            <Button x:Name="captureBtn" Content="Reconocimiento facial" Background="#ff9900" Foreground="White"
-        Click="captureBtn_Click" Width="200" HorizontalAlignment="Center" Margin="0,0" Visibility="Collapsed"/>
+        Click="iniciarSesionButton_Click" Width="110" HorizontalAlignment="Center" Margin="0,20" Visibility="Collapsed"/>
+            <!--<Button x:Name="captureBtn" Content="Reconocimiento facial" Background="#ff9900" Foreground="White"
+        Click="captureBtn_Click" Width="200" HorizontalAlignment="Center" Margin="0,0" Visibility="Collapsed"/>-->
             <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
             <Border x:Name="bannerBorder" Background="#6b6b6b"
                Margin="0,20" Height="100" >

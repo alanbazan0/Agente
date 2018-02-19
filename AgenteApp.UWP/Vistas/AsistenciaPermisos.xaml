@@ -1,0 +1,225 @@
+﻿<Page
+    x:Class="NavigationMenuSample.Views.AsistenciaPermisos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AgenteApp.UWP.Vistas"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctl="using:NavigationMenuSample.Controls"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+        <CommandBar x:Name="topbar" Foreground="White" Visibility="Visible" HorizontalContentAlignment="Stretch" Background="#ff9900" Margin="0">
+            <AppBarButton Icon="Message" Label="Enviar sms" Foreground="White"/>
+            <AppBarButton Icon="ClosePane" Label="Cerrar" Foreground="White" />
+            <!--<AppBarButton Icon="Save" Label="Guardar tipificación" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>-->
+            <!--<AppBarToggleButton Icon="Sort" Label="Sort" Foreground="White"/>-->
+            <!--Iconos https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.symbol-->
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Save" Label="Guardar tipificación"/>
+                <AppBarButton Icon="Mail" Label="Bandeja decorreos"/>
+                <AppBarButton Icon="Message"  Label="SMS"/>
+                <AppBarButton Icon="Cancel" Label="Colgar llamada"/>
+                <AppBarButton Icon="Document" Label="Solicitud de receso"/>
+                <AppBarButton Icon="ReShare" Label="Sincronizar softphone"/>
+                <AppBarButton Icon="PreviewLink" Label="Formulario de retipificación"/>
+                <AppBarButton Icon="Pause" Label="Hold"/>
+                <AppBarButton Icon="Refresh" Label="Reconectar"/>
+                <AppBarButton Icon="Redo" Label="Reanudar llamada"/>
+                <AppBarButton Icon="DisconnectDrive" Label="Llamada cortada"/>
+                <AppBarButton Icon="PhoneBook" Label="Recuperar datos de llamadas"/>
+
+            </CommandBar.SecondaryCommands>
+            <CommandBar.Content>
+                <ctl:PageHeader>
+                    <ctl:PageHeader.HeaderContent>
+                        <TextBlock x:Name="HeaderTextBlock" Text="ASISTENCIAS Y PERMISOS" Style="{StaticResource PageTitleTextBlockStyle}"/>
+                    </ctl:PageHeader.HeaderContent>
+                </ctl:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+        <ctl:PageHeader x:Name="pageTitleContainer" Visibility="Collapsed">
+            <ctl:PageHeader.HeaderContent>
+                <TextBlock x:Name="AltHeaderTextBlock" Text="Commandbar Page" Style="{StaticResource PageTitleTextBlockStyle}"/>
+            </ctl:PageHeader.HeaderContent>
+        </ctl:PageHeader>
+        <StackPanel Margin="0,50,0,0">
+
+            <Grid Margin="15,0,0,0" >
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="310"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <TextBlock TextWrapping="Wrap" FontSize="15" Grid.Column="0"  Text="Fecha de entrada" Margin="0,0,0,0"/>
+                <DatePicker x:Name="fechaI" Grid.Column="1" Width="200"/>
+                <TextBlock TextWrapping="Wrap" FontSize="15" Text="Fecha de salida"   Grid.Column="2" Margin="0,0,0,0" />
+                <DatePicker x:Name="fechaf" Grid.Column="3"  Width="200"/>
+
+
+                <Button x:Name = "btnSolicitar"    Click="SolicitarPermiso_Click"     Grid.Column="3" Grid.Row="2" Background="#ff9900" Foreground="White" Content="Solicitar permiso"      HorizontalAlignment="Right"         Width="220"  Margin="15,5,0,0"/>
+
+            </Grid>
+            <Grid  Padding="0" Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#6b6b6b" BorderThickness="0 0 0 0" >
+                    <TextBlock Text=""  FontSize="10"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                </Border>
+            </Grid>
+            <TextBlock TextWrapping="Wrap" FontSize="20" Grid.Column="0" Grid.Row="1" Text="Asistencias" Margin="15,0,0,0"/>
+            <ListView x:Name="asistenciasListView" Height="300" Grid.Row="1">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid  Padding="0" Margin="15,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="No"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Fecha entrada"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                <TextBlock Text="Hora entrada"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="Fecha salida"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Hora salida"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                <TextBlock Text="Tiempo total"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="Total recesos"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="7" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Total recesos"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="8" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Tiempo de recesos"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="9" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Tiempo efectivo de trabajo"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0" Margin="15,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Orden}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="1" Text="{Binding DescTipoReceso}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="2" Text="{Binding FechaInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="3" Text="{Binding HoraInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="4" Text="{Binding FechaFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="5" Text="{Binding HoraFin}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="6" Text="{Binding TiempoAcomulado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <TextBlock TextWrapping="Wrap" FontSize="20" Grid.Column="0"  Text="Permisos" Margin="15,50,0,0"/>
+            <ListView x:Name="permisosListView" Height="300" >
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid  Padding="0" Margin="15,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="No"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Fecha permisos"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                <TextBlock Text="Hora entrada"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                <TextBlock Text="Hora salida"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                <TextBlock Text="Tipo de permiso"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                            <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                <TextBlock Text="Comentario"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0" Margin="15,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Orden}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="1" Text="{Binding DescTipoReceso}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="2" Text="{Binding FechaInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="3" Text="{Binding HoraInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="4" Text="{Binding FechaFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Grid.Column="5" Text="{Binding HoraFin}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <ProgressRing x:Name="progressRing" Height="50" Width="50" Foreground="#6b6b6b"/>
+            </StackPanel>
+
+        </StackPanel>
+        <TimePicker HorizontalAlignment="Left" Margin="1146,-62,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Page>
+

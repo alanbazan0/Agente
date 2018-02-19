@@ -29,10 +29,16 @@ namespace AgenteApp.Presenters
                     //vista.MostrarMenu(usuario);
                 }
                 else
+                {
                     vista.MostrarMensaje("La combinación de usuario y contraseña es incorrecta.");
+                    vista.limpiarComponentes();
+                }
             }
             else
+            {
                 vista.MostrarMensaje(resultado.mensajeError);
+                vista.limpiarComponentes();
+            }
         }
 
         public async void DatosSesion()
@@ -69,10 +75,16 @@ namespace AgenteApp.Presenters
                     ChecarEstatus(res);
                 }
                 else
+                {
                     vista.MostrarMensaje("El usuario no existe, favor de verificar.");
+                    vista.activarComponentes();
+                }
             }
             else
+            {
                 vista.MostrarMensaje(resultado.mensajeError);
+                vista.activarComponentes();
+            }
         }
 
         public async void InsertarSesionTrabajo()
@@ -121,6 +133,7 @@ namespace AgenteApp.Presenters
                             //Error Intrusion de seguridad compra no autorizada
                             //aviso3();
                             vista.MostrarMensaje("Intrusion de seguridad.");
+                            vista.activarComponentes();
                             ElimitarFaceTemp(idTabla);
                             break;
                         case "AL":
@@ -133,12 +146,14 @@ namespace AgenteApp.Presenters
                             //Error: Template no obtenido, le falta nitidez a la foto. Favor de tomar la foto nuevamente.
                             //aviso4();
                             vista.MostrarMensaje("Falta nitidez a la foto, favor de intentar nuevamente");
+                            vista.activarComponentes();
                             ElimitarFaceTemp(idTabla);
                             break;
                         case "NOI":
                             //Error: Rostro no identificado. Favor de intentar nuevamente.
                             //aviso7();
                             vista.MostrarMensaje("Rostro no identificado. Favor de intentar nuevamente.");
+                            vista.activarComponentes();
                             ElimitarFaceTemp(idTabla);
                             break;
                         default:

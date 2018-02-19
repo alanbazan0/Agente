@@ -48,12 +48,20 @@ namespace AgenteApp.UWP
         private byte[] imageCompare;
         string moveImage = "";
         public string tipoInicio = "";
+        //captureBtn.Visibility = Visibility.Visible;
+        List<String> tipoSesion = new List<String>();
+
+       
         public InicioSesionPage()
         {
             this.InitializeComponent();
             mensajeBlockText.Text = "";
             presentador = new InicioSesionPresentador(this);
             textoBanerTextBlock.Text = "Bastiaan People & Software Center";
+            // Put some colors to the list
+            tipoSesion.Add("Reconocimiento facial");
+            tipoSesion.Add("Contraseña");
+            //tipoSesion.Add("Blue");
         }
 
         public string NombreUsuario { get { return nombreUsuarioTextBox.Text; } set { nombreUsuarioTextBox.Text = value; } }
@@ -106,8 +114,18 @@ namespace AgenteApp.UWP
 
         private void iniciarSesionButton_Click(object sender, RoutedEventArgs e)
         {
-            mensajeBlockText.Text = "";
-            IniciarSesion();
+            if (comboInicioSesion.SelectedValue.ToString().Equals("Reconocimiento facial"))
+            {
+                captureBtn();
+                nombreUsuarioTextBox.IsEnabled = false;
+                comboInicioSesion.IsEnabled = false;
+                iniciarSesionButton.IsEnabled = false;
+            }
+            else
+            {
+                mensajeBlockText.Text = "";
+                IniciarSesion();
+            }
         }
 
         public void obtenerInformacion()
@@ -138,8 +156,34 @@ namespace AgenteApp.UWP
         {
             presentador.InsertarSesionTrabajo();
         }
+        private async void captureBtn()
+        {
+            if (nombreUsuarioTextBox.Text != string.Empty)
+            {
+                CameraCaptureUI capture = new CameraCaptureUI();
+                capture.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+                capture.PhotoSettings.CroppedAspectRatio = new Size(3, 5);
+                capture.PhotoSettings.MaxResolution = CameraCaptureUIMaxPhotoResolution.HighestAvailable;
+                storeFile = await capture.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                if (storeFile != null)
+                {
+                    this.imageCompare = await Utilerias.GetBytesAsync(storeFile);
+                    this.moveImage = Utilerias.asByteToString(this.imageCompare);
+                    this.imgStream = await storeFile.OpenStreamForReadAsync();
+                    bimage = new BitmapImage();
+                    stream = await storeFile.OpenAsync(FileAccessMode.Read);
 
-        
+
+                    bimage.SetSource(stream);
+                    usuario.Image = bimage;
+                    captureImage.Source = bimage;
+                    captureImage.Visibility = Visibility.Visible;
+                    SubirFotoComparar();
+                }
+            }
+        }
+
+
         private async void captureBtn_Click(object sender, RoutedEventArgs e)
         {
             if (nombreUsuarioTextBox.Text != string.Empty)
@@ -179,8 +223,20 @@ namespace AgenteApp.UWP
         private void activarModoInicio()
         {
             tipoInicio = usuario.TipoInicio;
-            if (usuario.TipoInicio.Equals("LF"))
-                captureBtn.Visibility = Visibility.Visible;
+            if (usuario.TipoInicio.Equals("SI"))
+            {//acomodar aqui el selected en reconocimiento facial por default
+                comboInicioSesion.ItemsSource = tipoSesion;
+                comboInicioSesion.SelectedIndex = 0;
+                iniciarSesionButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                
+                contrasenaPasswordBox.Visibility = Visibility.Visible;
+                contrasenaPasswordBox.Focus(FocusState.Keyboard);
+                iniciarSesionButton.Visibility = Visibility.Visible;
+                comboInicioSesion.Visibility = Visibility.Collapsed;
+            }
         }
         private void nombreUsuarioTextBox_LosingFocus(object sender, RoutedEventArgs e)
         {
@@ -203,8 +259,44 @@ namespace AgenteApp.UWP
 
         private void nombreUsuarioTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (captureBtn.Visibility == Visibility.Visible)
-                captureBtn.Visibility = Visibility.Collapsed;
+           // if (captureBtn.Visibility == Visibility.Visible)
+            //    captureBtn.Visibility = Visibility.Collapsed;
+            contrasenaPasswordBox.Password = "";
+            contrasenaPasswordBox.PlaceholderText = "Contraseña";
+            contrasenaPasswordBox.Visibility = Visibility.Collapsed;
+            iniciarSesionButton.Visibility = Visibility.Collapsed;
+            comboInicioSesion.Visibility = Visibility.Visible;
+            comboInicioSesion.ItemsSource = null;
+        }
+
+        private void comboInicioSesion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox.SelectedValue != null)
+            {
+                if (comboBox.SelectedValue.ToString().Equals("Contraseña"))
+                    contrasenaPasswordBox.Visibility = Visibility.Visible;
+                
+                else
+                {
+                    contrasenaPasswordBox.Visibility = Visibility.Collapsed;
+                    contrasenaPasswordBox.Password = "";
+                    contrasenaPasswordBox.PlaceholderText = "Contraseña";
+                }
+            }
+        }
+
+        public void activarComponentes()
+        {
+
+            nombreUsuarioTextBox.IsEnabled = true;
+            comboInicioSesion.IsEnabled = true;
+            iniciarSesionButton.IsEnabled = true;
+
+        }
+
+        public void limpiarComponentes()
+        {
             contrasenaPasswordBox.Password = "";
             contrasenaPasswordBox.PlaceholderText = "Contraseña";
         }
