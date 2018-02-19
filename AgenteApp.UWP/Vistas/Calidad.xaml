@@ -69,26 +69,27 @@
         <StackPanel>
             <Grid Margin="15,50,0,0" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="310"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="110"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <VariableSizedWrapGrid Grid.Row="0"  Orientation="Horizontal" Margin="5" Width="Auto"  ItemHeight="50" ItemWidth="300" Grid.RowSpan="1" >
-                    <TextBlock  Grid.Column="0"  Grid.Row="0" HorizontalAlignment="Left"  FontSize="15" Text="Nombre completo: " Width="125" />
-                    <TextBox x:Name="txtNombreCompleto" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Left"  FontSize="15" Text="" Height="35" Width="350" Margin="-150,0,0,0"/>
+                <TextBlock  Grid.Column="0"  Grid.Row="0" TextWrapping="Wrap" FontSize="15" Text="Fecha inicial: "  />
+                <DatePicker x:Name="fechaI" Grid.Column="1"/>
+                <TextBlock  Grid.Column="2"  Grid.Row="0" TextWrapping="Wrap" FontSize="15" Text="Fecha final: " />
+                <DatePicker x:Name="fechaF" Grid.Column="3" Width="250"/>
 
-                </VariableSizedWrapGrid>
-                <VariableSizedWrapGrid Grid.Row="1" x:Name="formularioComponentes"  Orientation="Horizontal" Margin="5" Width="auto"  ItemHeight="50" >
-
-                </VariableSizedWrapGrid>
-
+                <Button x:Name = "btnReplica"        Grid.Column="3" Grid.Row="2" Background="#ff9900" Foreground="White" Content="Derecho de replica" HorizontalAlignment="Right"           Margin="15,5,0,0"/>
+                <Button x:Name = "btnDeacuerdo"      Grid.Column="4" Grid.Row="2" Background="#ff9900" Foreground="White" Content="De acuerdo"         HorizontalAlignment="Right"         Margin="15,5,0,0"/>
 
             </Grid>
 
-            <StackPanel Margin="0,0,0,3">
+            <StackPanel Margin="0,15,0,3">
                 <Grid  Padding="0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -221,8 +222,68 @@
 
                                 </Grid>
                                 <StackPanel x:Name="correosEntrada">
-                                    <ListView x:Name="CRMListView" Margin="0,0,0,0" Height="500" IsItemClickEnabled="True"  ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                                    <ListView x:Name="calidadListView" Grid.Row="1">
+                                        <ListView.HeaderTemplate>
+                                            <DataTemplate>
+                                                <Grid  Padding="0" Margin="15,0,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                    </Grid.ColumnDefinitions>
 
+                                                    <Border  Grid.Column="0" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                                        <TextBlock Text="Folio"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>
+                                                    <Border  Grid.Column="1" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                                        <TextBlock Text="Fecha"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>
+                                                    <Border  Grid.Column="2" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                        <TextBlock Text="Usuario"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>
+                                                    <Border  Grid.Column="3" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                                        <TextBlock Text="Analisis"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>
+                                                    <Border  Grid.Column="4" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,34 0">
+                                                        <TextBlock Text="ID de llamada"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>
+                                                    <Border  Grid.Column="5" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Margin="0,0,-124,0">
+                                                        <TextBlock Text="calificacion"  FontSize="15" Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>
+                                                    <Border  Grid.Column="6" CornerRadius="0" BorderBrush="Black" Background="#ff9900" BorderThickness="0 0 0 0" Grid.ColumnSpan="2" Margin="0,0,36,0">
+                                                        <TextBlock Text="Estatus"  FontSize="15"  Foreground="White" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    </Border>                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.HeaderTemplate>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Padding="0" Margin="15,0,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                        <ColumnDefinition Width="150" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Orden}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding DescTipoReceso}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Grid.Column="2" Text="{Binding FechaInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Grid.Column="3" Text="{Binding HoraInicial}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Grid.Column="4" Text="{Binding FechaFinal}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Grid.Column="5" Text="{Binding HoraFin}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                    <TextBlock Grid.Column="6" Text="{Binding TiempoAcomulado}" MaxLines="2" TextWrapping="WrapWholeWords"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </StackPanel>
 

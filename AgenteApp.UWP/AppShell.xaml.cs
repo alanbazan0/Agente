@@ -156,14 +156,14 @@ namespace NavigationMenuSample
                     Symbol = Symbol.Contact,
                     Image="../Assets/im12.png",
                     Label = "Calidad",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(Calidad)
                 },
                 new NavMenuItem()
                 {
                     Symbol = Symbol.Contact,
                     Image="../Assets/im13.png",
                     Label = "Asistencias y permisos",
-                    DestPage = typeof(BasicPage)
+                    DestPage = typeof(AsistenciaPermisos)
                 },
                  new NavMenuItem()
                 {
