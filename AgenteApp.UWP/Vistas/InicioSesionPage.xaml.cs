@@ -114,7 +114,12 @@ namespace AgenteApp.UWP
 
         private void iniciarSesionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (comboInicioSesion.SelectedValue.ToString().Equals("Reconocimiento facial"))
+            if (usuario.TipoInicio.Equals("NO"))
+            {
+                mensajeBlockText.Text = "";
+                IniciarSesion();
+            }
+            else if (comboInicioSesion.SelectedValue.ToString().Equals("Reconocimiento facial"))
             {
                 captureBtn();
                 nombreUsuarioTextBox.IsEnabled = false;
@@ -126,6 +131,7 @@ namespace AgenteApp.UWP
                 mensajeBlockText.Text = "";
                 IniciarSesion();
             }
+
         }
 
         public void obtenerInformacion()
