@@ -64,9 +64,6 @@ namespace NavigationMenuSample.Views
             tFechaextBox.Text = txtTiempoLlamada.Text = GetDateString();
             presentador = new LlamarPredictivoPresentador(this);           
             llamadaConferencia = new List<Call>();
-           
-            
-
         }
 
         private void App_Suspending(Object sender, RoutedEventArgs e)
@@ -153,7 +150,6 @@ namespace NavigationMenuSample.Views
         {
             //ConsultarIdLlamada(NoExtensionTextBox.Text);
             //ConsultarClientes(noTelefonico);
-
         }
 
         private void Colgar(object sender, RoutedEventArgs e)
@@ -308,8 +304,6 @@ namespace NavigationMenuSample.Views
             tCiudadTextBox.Text  = "";
             FlyInvitadosListView.ItemsSource = null;
             SupervisoresListView.ItemsSource = null;
-
-
         }
 
         void dispatcherTimer_Tick(object sender, object e)
@@ -551,28 +545,6 @@ namespace NavigationMenuSample.Views
                 {
                     f.Hide();
                 }
-                //if (telefonoOut.LinphoneCore.CallsNb == 0)
-                //{
-
-                //}
-                //else
-                //{
-                //    int secuencia = InvitadosListView.Items.Count;
-
-                //            invitados.Add(
-                //              new Usuario()
-                //              {
-                //                  Nombre = (string)usuarioConferencia.GetType().GetProperty("Nombre").GetValue(usuarioConferencia, null),
-                //                  Puesto = (string)usuarioConferencia.GetType().GetProperty("Puesto").GetValue(usuarioConferencia, null),
-                //                  Extension = (string)usuarioConferencia.GetType().GetProperty("Extension").GetValue(usuarioConferencia, null),
-                //                  Id = Convert.ToString(secuencia + 1)
-                //              }
-                //              );
-                //            InvitadosListView.ItemsSource = null;
-                //            InvitadosListView.ItemsSource = invitados;
-                //            telefonoOut.LinphoneCore.Invite(txtNotelefonico.Text);
-
-                //}
             }
 
         }
@@ -661,8 +633,8 @@ namespace NavigationMenuSample.Views
             base.OnNavigatedFrom(e);
             var parametros = e.Parameter;
             usuario = (Usuario)parametros.GetType().GetProperty("usuario").GetValue(parametros, null);
-            telefonoOut = (SoftphoneEmbebed)parametros.GetType().GetProperty("softphone").GetValue(parametros, null); ;
-            onRegister(e);
+            //telefonoOut = (SoftphoneEmbebed)parametros.GetType().GetProperty("softphone").GetValue(parametros, null); ;
+            //onRegister(e);
             ConsultarSupervisores();
 
             //ConsultarUsuarios();

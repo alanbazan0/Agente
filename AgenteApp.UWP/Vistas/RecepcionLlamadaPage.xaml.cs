@@ -355,8 +355,8 @@ namespace NavigationMenuSample.Views
             base.OnNavigatedFrom(e);
             var parametros = e.Parameter;
             usuario = (Usuario)parametros.GetType().GetProperty("usuario").GetValue(parametros, null);
-            telefono = (SoftphoneEmbebed)parametros.GetType().GetProperty("softphone").GetValue(parametros, null); ;
-            onRegister(e);
+            //telefono = (SoftphoneEmbebed)parametros.GetType().GetProperty("softphone").GetValue(parametros, null); ;
+            //onRegister(e);
             ConsultarSupervisores();
 
             //ConsultarUsuarios();
