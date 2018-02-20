@@ -166,25 +166,32 @@ namespace AgenteApp.UWP
         {
             if (nombreUsuarioTextBox.Text != string.Empty)
             {
-                CameraCaptureUI capture = new CameraCaptureUI();
-                capture.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
-                capture.PhotoSettings.CroppedAspectRatio = new Size(3, 5);
-                capture.PhotoSettings.MaxResolution = CameraCaptureUIMaxPhotoResolution.HighestAvailable;
-                storeFile = await capture.CaptureFileAsync(CameraCaptureUIMode.Photo);
-                if (storeFile != null)
+                try
                 {
-                    this.imageCompare = await Utilerias.GetBytesAsync(storeFile);
-                    this.moveImage = Utilerias.asByteToString(this.imageCompare);
-                    this.imgStream = await storeFile.OpenStreamForReadAsync();
-                    bimage = new BitmapImage();
-                    stream = await storeFile.OpenAsync(FileAccessMode.Read);
+                    CameraCaptureUI capture = new CameraCaptureUI();
+                    capture.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+                    capture.PhotoSettings.CroppedAspectRatio = new Size(3, 5);
+                    capture.PhotoSettings.MaxResolution = CameraCaptureUIMaxPhotoResolution.HighestAvailable;
+                    storeFile = await capture.CaptureFileAsync(CameraCaptureUIMode.Photo);
+                    if (storeFile != null)
+                    {
+                        this.imageCompare = await Utilerias.GetBytesAsync(storeFile);
+                        this.moveImage = Utilerias.asByteToString(this.imageCompare);
+                        this.imgStream = await storeFile.OpenStreamForReadAsync();
+                        bimage = new BitmapImage();
+                        stream = await storeFile.OpenAsync(FileAccessMode.Read);
 
 
-                    bimage.SetSource(stream);
-                    usuario.Image = bimage;
-                    captureImage.Source = bimage;
-                    captureImage.Visibility = Visibility.Visible;
-                    SubirFotoComparar();
+                        bimage.SetSource(stream);
+                        usuario.Image = bimage;
+                        captureImage.Source = bimage;
+                        captureImage.Visibility = Visibility.Visible;
+                        SubirFotoComparar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MostrarMensaje("Error al abrir la camara. " + ex.Message);
                 }
             }
         }
